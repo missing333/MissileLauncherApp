@@ -1,0 +1,52 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- These settings headers are only used on tablets. -->
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$GeneralPreferenceFragment"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/pref_header_general" />
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$Group1PreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_group1" />
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$Group2PreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_group2" />
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$Group3PreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_group3" />
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$Group4PreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_group4" />
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$Group5PreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_group5" />
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$Group6PreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_group6" />
+
+    <header
+        android:fragment="com.missilelauncher.overlaytestv1.SettingsActivity$Group7PreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_group7" />
+
+    <header
+        android:key="appVersion"
+        android:title="@string/version"
+        android:summary="@string/versionNum"/>
+
+
+
+</preference-headers>
