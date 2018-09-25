@@ -248,7 +248,7 @@ public class FloatingWindow extends Service {
 
     public void getDimensions(){
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = getSharedPreferences("SettingsActivity", 0);
         //on/off toggle example Boolean notifPref = sharedPref.getBoolean("notifications_new_message", true);
 
         numZones = sharedPref.getInt("numGroups",7);
@@ -443,6 +443,7 @@ public class FloatingWindow extends Service {
                     appArray[row][col].setX(col * screenWidth/numAppCols);
                     appArray[row][col].setY(row * screenHeight/numAppRows);
                     appArray[row][col].setIcon(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
+                    
                 }
 
     }
