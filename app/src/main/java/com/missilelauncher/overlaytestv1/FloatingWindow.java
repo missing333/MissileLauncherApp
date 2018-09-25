@@ -28,6 +28,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -187,7 +188,7 @@ public class FloatingWindow extends Service {
                                     tl.removeAllViews();
                                     t.setText("Group "+ group);
                                     setContentsPositionG4();
-                                    tl.addView(app1,tableParams);
+                                    /*tl.addView(app1,tableParams);
                                     tableParams.addRule(RelativeLayout.RIGHT_OF,app1.getId());
                                     tl.setLayoutParams(tableParams);
                                     tl.addView(app2,tableParams);
@@ -196,7 +197,7 @@ public class FloatingWindow extends Service {
                                     tl.addView(app3,tableParams);
                                     Log.v("app","app1 x: "+app1.getX()+", y: "+app1.getY());
                                     Log.v("app","app2 x: "+app2.getX()+", y: "+app2.getY());
-                                    Log.v("app","app3 x: "+app3.getX()+", y: "+app3.getY());
+                                    Log.v("app","app3 x: "+app3.getX()+", y: "+app3.getY());*/
                                     break;
                                 case 5:
                                     tl.removeAllViews();
@@ -392,7 +393,7 @@ public class FloatingWindow extends Service {
 
         int maxWidth = (int) (zoneXSize*.4);
 
-        app1 = new ImageView(this);
+        /*app1 = new ImageView(this);
         app1.setImageDrawable(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
         app1.setMaxHeight(maxWidth);
         app1.setMaxWidth(maxWidth);
@@ -408,7 +409,20 @@ public class FloatingWindow extends Service {
         app3.setImageResource(R.mipmap.ic_launcher_round);
         app3.setMaxHeight(maxWidth);
         app3.setMaxWidth(maxWidth);
-        app3.setId(43);
+        app3.setId(43);*/
+
+        GridLayout gridContainer = new GridLayout(this);
+        gridContainer.setColumnCount(numAppCols);
+        gridContainer.setUseDefaultMargins(true);
+        gridContainer.setPadding(0, 0, 0, 0);
+        tl.addView(gridContainer);
+        for(int i = 0; i < 12; i++)
+        {
+            ImageView img = new ImageView(this);
+            img.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_notifications_black_24dp));
+            gridContainer.addView(img, Math.max(0, gridContainer.getChildCount()));
+        }
+
     }
 
     public void setScreenSize(Context context) {
@@ -443,7 +457,7 @@ public class FloatingWindow extends Service {
                     appArray[row][col].setX(col * screenWidth/numAppCols);
                     appArray[row][col].setY(row * screenHeight/numAppRows);
                     appArray[row][col].setIcon(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
-                    
+
                 }
 
     }
