@@ -63,28 +63,10 @@
         app:layout_constraintTop_toBottomOf="@+id/start" />
 
     <TextView
-        android:id="@+id/numAppRowsText"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="right|center_vertical"
-        android:text="Rows for Apps"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numGroupsText" />
-
-    <TextView
         android:id="@+id/numAppColsText"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="right|center_vertical"
@@ -92,7 +74,7 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numAppRowsText" />
+        app:layout_constraintTop_toBottomOf="@+id/numGroupsText" />
 
     <Spinner
         android:id="@+id/groupSpinner"
@@ -106,26 +88,14 @@
         app:layout_constraintTop_toBottomOf="@+id/start" />
 
     <Spinner
-        android:id="@+id/appRowSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/groupSpinner" />
-
-    <Spinner
         android:id="@+id/appColSpinner"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/appRowSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/groupSpinner" />
 
     <TextView
         android:id="@+id/configText2"

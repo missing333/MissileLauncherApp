@@ -20,6 +20,7 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.MotionEventCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -28,7 +29,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,7 +44,7 @@ import android.widget.Toast;
  * Created by mmissildine on 9/20/2018.
  */
 
-public class FloatingWindow extends Service {
+public class FloatingWindow extends Service{
 
 
     private WindowManager wm;
@@ -75,6 +79,7 @@ public class FloatingWindow extends Service {
     private int lastGroup;
     private int[] lastAppTouched;
     public AppInfo appArray[][];
+    private GridLayout gridContainer;
 
 
     @Nullable
@@ -130,7 +135,7 @@ public class FloatingWindow extends Service {
 
 
         tl = new TableLayout(this);
-        tl.setBackgroundColor(Color.argb(55,0,0,0));
+        tl.setBackgroundColor(Color.argb(25,0,0,0));
 
         ll.setOnTouchListener(new View.OnTouchListener(){
 
@@ -188,16 +193,6 @@ public class FloatingWindow extends Service {
                                     tl.removeAllViews();
                                     t.setText("Group "+ group);
                                     setContentsPositionG4();
-                                    /*tl.addView(app1,tableParams);
-                                    tableParams.addRule(RelativeLayout.RIGHT_OF,app1.getId());
-                                    tl.setLayoutParams(tableParams);
-                                    tl.addView(app2,tableParams);
-                                    tableParams.addRule(RelativeLayout.RIGHT_OF,app2.getId());
-                                    tl.setLayoutParams(tableParams);
-                                    tl.addView(app3,tableParams);
-                                    Log.v("app","app1 x: "+app1.getX()+", y: "+app1.getY());
-                                    Log.v("app","app2 x: "+app2.getX()+", y: "+app2.getY());
-                                    Log.v("app","app3 x: "+app3.getX()+", y: "+app3.getY());*/
                                     break;
                                 case 5:
                                     tl.removeAllViews();
@@ -214,17 +209,56 @@ public class FloatingWindow extends Service {
                             }
                         }
                         else{
-                            int[] coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
-                            t.setText("App " + coords[0] + ", " + coords[1]);
+                            //This is where I choose the app by position.
+                            //int[] coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
+                            //t.setText("App " + coords[0] + ", " + coords[1]);
+
+                            gridContainer.setOnTouchListener(new GridView.OnTouchListener(){
+
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+                                    int index = event.getActionIndex();
+                                    int pointerId = event.getPointerId(index);
+                                    int action = MotionEventCompat.getActionMasked(event);
+
+                                    switch(action) {
+                                        case (MotionEvent.ACTION_MOVE) :
+                                            Log.d("grid","Coordinates = (" + String.valueOf(event.getRawX())+ " , "+ String.valueOf(event.getRawY())+ ")");
+                                            Log.d("grid","Area covered = " + event.getSize());
+                                            Log.d("grid","getPressure() = " + event.getPressure());
+                                            //Log.d("grid","Axis Pressure = " + event.AXIS_PRESSURE);
+
+                                            return true;
+                                        case (MotionEvent.ACTION_UP) :
+                                            Log.d("grid","Coordinates = (" + String.valueOf(event.getRawX())+ " , "+ String.valueOf(event.getRawY())+ ")");
+                                            Log.d("grid","Area covered = " + event.getSize());
+                                            Log.d("grid","getPressure() = " + event.getPressure());
+                                            //Log.d("grid","Axis Pressure = " + event.AXIS_PRESSURE);
+
+                                            return true;
+                                        case (MotionEvent.ACTION_DOWN) :
+                                            //Toast.makeText(MainActivity.this, "Image Position testing", Toast.LENGTH_SHORT).show();
+                                            Log.d("grid","Coordinates = (" + String.valueOf(event.getRawX())+ " , "+ String.valueOf(event.getRawY())+ ")");
+                                            Log.d("grid","Area covered = " + event.getSize());
+                                            Log.d("grid","getPressure() = " + event.getPressure());
+                                            //Log.d("grid","Axis Pressure = " + event.AXIS_PRESSURE);
+
+                                            return true;
+                                        case (MotionEvent.ACTION_OUTSIDE) :
+                                            Log.d("grid","Movement occurred outside bounds of current screen element");
+                                            return true;
+                                        default :
+                                            return false;
+                                    }
+                                }
+
+                            });
+
                         }
 
-
-                        gl.setLayoutParams(relativeParams);
                         tl.setLayoutParams(relativeParams);
                         gl.removeView(tl);
                         gl.addView(tl,relativeParams);
-
-                        //Log.v("touch","Move detected.");
                         break;
 
                     case MotionEvent.ACTION_UP:
@@ -235,8 +269,6 @@ public class FloatingWindow extends Service {
                         catch (Exception e){
                             Log.v("touch",e.getMessage());
                         }
-                        //wait(3000);
-                        //Toast.makeText(FloatingWindow.this,"View will return shortly.",Toast.LENGTH_LONG).show();
 
                     default:
                         break;
@@ -250,7 +282,6 @@ public class FloatingWindow extends Service {
     public void getDimensions(){
 
         SharedPreferences sharedPref = getSharedPreferences("SettingsActivity", 0);
-        //on/off toggle example Boolean notifPref = sharedPref.getBoolean("notifications_new_message", true);
 
         numZones = sharedPref.getInt("numGroups",7);
         numAppRows = sharedPref.getInt("numAppRows", 10);
@@ -272,7 +303,7 @@ public class FloatingWindow extends Service {
         parameters.y = -screenHeight/10;
         parameters.gravity = Gravity.END;
         gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,WindowManager.LayoutParams.TYPE_PHONE,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        relativeParams = new RelativeLayout.LayoutParams((int) (screenWidth/1.5), screenHeight/2);
+        relativeParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         tparameters = new WindowManager.LayoutParams(screenWidth/3, screenHeight/3,WindowManager.LayoutParams.TYPE_PHONE,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
 
@@ -389,9 +420,9 @@ public class FloatingWindow extends Service {
 
     private void setContentsPositionG4(){
         tableParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        tableParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        tableParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        int maxWidth = (int) (zoneXSize*.4);
+        int maxWidth = (int) (zoneXSize*.6);
 
         /*app1 = new ImageView(this);
         app1.setImageDrawable(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
@@ -411,17 +442,51 @@ public class FloatingWindow extends Service {
         app3.setMaxWidth(maxWidth);
         app3.setId(43);*/
 
-        GridLayout gridContainer = new GridLayout(this);
+        gridContainer = new GridLayout(this);
         gridContainer.setColumnCount(numAppCols);
         gridContainer.setUseDefaultMargins(true);
-        gridContainer.setPadding(0, 0, 0, 0);
+        int padding = 18;
+        gridContainer.setPadding(padding, padding, padding, padding);
         tl.addView(gridContainer);
-        for(int i = 0; i < 12; i++)
-        {
-            ImageView img = new ImageView(this);
+        for(int i = 0; i < 12; i++) {
+            final ImageView img = new ImageView(this);
             img.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_notifications_black_24dp));
+            //img.setBackgroundResource(R.drawable.ic_notifications_black_24dp);  //for button
+            img.setMinimumHeight(maxWidth);
+            img.setMinimumWidth(maxWidth);
+            img.setId(i);
             gridContainer.addView(img, Math.max(0, gridContainer.getChildCount()));
+            Log.v("grid",i + " child coords are: " + gridContainer.getChildAt(i).getX() + ", " + + gridContainer.getChildAt(i).getY());
         }
+
+
+
+    }
+
+    public class MyTouchListener implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch(event.getAction()){
+                case MotionEvent.ACTION_UP:
+                    vibrate();
+                    Log.v ("vib","I am vibrating right now");
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    vibrate();
+                    Log.v ("vib","I am vibrating right now");
+                    break;
+                case MotionEvent.ACTION_HOVER_ENTER:
+                    vibrate();
+                    Log.v ("vib","I am vibrating right now");
+                    break;
+                case 4:
+                    vibrate();
+                    Log.v ("vib","I am vibrating right now");
+                    break;
+            }
+            return true;
+        }
+
 
     }
 
