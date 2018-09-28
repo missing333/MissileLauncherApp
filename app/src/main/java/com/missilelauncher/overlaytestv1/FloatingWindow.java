@@ -13,11 +13,13 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.MotionEventCompat;
@@ -33,6 +35,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -50,20 +53,19 @@ public class FloatingWindow extends Service{
     private WindowManager wm;
     private LinearLayout ll;
     private RelativeLayout gl;
-    private TableLayout tl;
+    private RelativeLayout tl;
     public int statusBarOffset;
     public int screenWidth;
     public int screenHeight;
-    private WindowManager.LayoutParams tparameters;
     private RelativeLayout.LayoutParams relativeParams;
-    private RelativeLayout.LayoutParams tableParams;
     private WindowManager.LayoutParams gparameters;
     private WindowManager.LayoutParams parameters;
-    public int numZones = 7;
-    public int numAppRows = 12;
-    public int numAppCols = 8;
+    public int numZones;
+    public int numAppRows;
+    public int numAppCols;
     public int zoneXSize;
     public int zoneYSize;
+    public int maxAppSize;
     private TextView t;
     private ImageView g1;
     private ImageView g2;
@@ -72,14 +74,10 @@ public class FloatingWindow extends Service{
     private ImageView g5;
     private ImageView g6;
     private ImageView g7;
-    private ImageView g8;
-    private ImageView g9;
-    private ImageView g0;
-    private ImageView app1, app2, app3;
     private int lastGroup;
     private int[] lastAppTouched;
     public AppInfo appArray[][];
-    private GridLayout gridContainer;
+    private int[] coords;
 
 
     @Nullable
@@ -132,10 +130,10 @@ public class FloatingWindow extends Service{
         gl.setBackgroundColor(Color.argb(155,0,0,0));
         gl.setLayoutParams(relativeParams);
 
-
-
-        tl = new TableLayout(this);
+        tl = new RelativeLayout(this);
         tl.setBackgroundColor(Color.argb(25,0,0,0));
+
+        coords = new int[]{-99, -99};
 
         ll.setOnTouchListener(new View.OnTouchListener(){
 
@@ -146,7 +144,7 @@ public class FloatingWindow extends Service{
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             public boolean onTouch(View arg0, MotionEvent event){
 
-                switch (event.getAction()){
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         x = updatedParameters.x;
                         y = updatedParameters.y;
@@ -155,10 +153,10 @@ public class FloatingWindow extends Service{
                         lastGroup = -99;
                         lastAppTouched[0] = -99;
                         lastAppTouched[1] = -99;
-                        Log.v("touch","Touch detected.");
+                        Log.v("touch", "Touch detected.");
                         gl.removeAllViews();
                         getDimensions();
-                        wm.addView(gl,gparameters);
+                        wm.addView(gl, gparameters);
                         gl.addView(t);
                         gl.addView(g1);
                         gl.addView(g2);
@@ -174,100 +172,60 @@ public class FloatingWindow extends Service{
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
 
                         //////user touching Groups or Apps?
-                        if ( event.getRawX() > screenWidth * .8) {
+                        if (event.getRawX() > screenWidth * .8) {
                             int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
                             switch (group) {
                                 case 1:
                                     tl.removeAllViews();
-                                    t.setText("Group "+ group);
+                                    t.setText("Group " + group);
                                     break;
                                 case 2:
                                     tl.removeAllViews();
-                                    t.setText("Group "+ group);
+                                    t.setText("Group " + group);
                                     break;
                                 case 3:
                                     tl.removeAllViews();
-                                    t.setText("Group "+ group);
+                                    t.setText("Group " + group);
                                     break;
                                 case 4:
                                     tl.removeAllViews();
-                                    t.setText("Group "+ group);
+                                    t.setText("Group " + group);
                                     setContentsPositionG4();
                                     break;
                                 case 5:
                                     tl.removeAllViews();
-                                    t.setText("Group "+ group);
+                                    t.setText("Group " + group);
+                                    setContentsPositionG5();
                                     break;
                                 case 6:
                                     tl.removeAllViews();
-                                    t.setText("Group "+ group);
+                                    t.setText("Group " + group);
                                     break;
                                 case 7:
                                     tl.removeAllViews();
-                                    t.setText("Group "+ group);
+                                    t.setText("Group " + group);
                                     break;
                             }
-                        }
-                        else{
+                        } else {
                             //This is where I choose the app by position.
-                            //int[] coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
-                            //t.setText("App " + coords[0] + ", " + coords[1]);
+                            coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
+                            t.setText("App " + coords[0] + ", " + coords[1]);
 
-                            gridContainer.setOnTouchListener(new GridView.OnTouchListener(){
-
-                                @Override
-                                public boolean onTouch(View v, MotionEvent event) {
-                                    int index = event.getActionIndex();
-                                    int pointerId = event.getPointerId(index);
-                                    int action = MotionEventCompat.getActionMasked(event);
-
-                                    switch(action) {
-                                        case (MotionEvent.ACTION_MOVE) :
-                                            Log.d("grid","Coordinates = (" + String.valueOf(event.getRawX())+ " , "+ String.valueOf(event.getRawY())+ ")");
-                                            Log.d("grid","Area covered = " + event.getSize());
-                                            Log.d("grid","getPressure() = " + event.getPressure());
-                                            //Log.d("grid","Axis Pressure = " + event.AXIS_PRESSURE);
-
-                                            return true;
-                                        case (MotionEvent.ACTION_UP) :
-                                            Log.d("grid","Coordinates = (" + String.valueOf(event.getRawX())+ " , "+ String.valueOf(event.getRawY())+ ")");
-                                            Log.d("grid","Area covered = " + event.getSize());
-                                            Log.d("grid","getPressure() = " + event.getPressure());
-                                            //Log.d("grid","Axis Pressure = " + event.AXIS_PRESSURE);
-
-                                            return true;
-                                        case (MotionEvent.ACTION_DOWN) :
-                                            //Toast.makeText(MainActivity.this, "Image Position testing", Toast.LENGTH_SHORT).show();
-                                            Log.d("grid","Coordinates = (" + String.valueOf(event.getRawX())+ " , "+ String.valueOf(event.getRawY())+ ")");
-                                            Log.d("grid","Area covered = " + event.getSize());
-                                            Log.d("grid","getPressure() = " + event.getPressure());
-                                            //Log.d("grid","Axis Pressure = " + event.AXIS_PRESSURE);
-
-                                            return true;
-                                        case (MotionEvent.ACTION_OUTSIDE) :
-                                            Log.d("grid","Movement occurred outside bounds of current screen element");
-                                            return true;
-                                        default :
-                                            return false;
-                                    }
-                                }
-
-                            });
 
                         }
 
                         tl.setLayoutParams(relativeParams);
                         gl.removeView(tl);
-                        gl.addView(tl,relativeParams);
+                        gl.addView(tl, relativeParams);
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        Log.v("touch","Touch no longer detected.");
-                        try{
+                        Log.v("touch", "Touch no longer detected.");
+                        Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
+                        try {
                             wm.removeView(gl);
-                        }
-                        catch (Exception e){
-                            Log.v("touch",e.getMessage());
+                        } catch (Exception e) {
+                            Log.v("touch", e.getMessage());
                         }
 
                     default:
@@ -291,10 +249,11 @@ public class FloatingWindow extends Service{
         Log.v("prefs","numAppCols = " + numAppCols);
 
         statusBarOffset = getStatusBarHeight();
-        setScreenSize(FloatingWindow.this);
+        setScreenSize();
 
-        zoneXSize = (int) (screenWidth / numZones);
-        zoneYSize = (int) (screenHeight / numZones);
+        zoneXSize = screenWidth / numZones;
+        zoneYSize = screenHeight / numZones;
+        maxAppSize = (int) (zoneXSize * .5);
 
         int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2 * .04);
         int activationHeight = (int) Math.round(screenHeight * .45);
@@ -303,16 +262,15 @@ public class FloatingWindow extends Service{
         parameters.y = -screenHeight/10;
         parameters.gravity = Gravity.END;
         gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,WindowManager.LayoutParams.TYPE_PHONE,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        relativeParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        relativeParams = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-        tparameters = new WindowManager.LayoutParams(screenWidth/3, screenHeight/3,WindowManager.LayoutParams.TYPE_PHONE,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
 
         setIconSizePos();
         appArray = new AppInfo[numAppCols+numAppRows+1][numAppCols+numAppRows+1];
         initAppArray();
 
         t.setX((float) (screenWidth * .40));
-        t.setY((float) (screenHeight * .15));
+        t.setY((float) (screenHeight * .05));
     }
 
     private void swapRowsCols(int r, int c){
@@ -324,10 +282,14 @@ public class FloatingWindow extends Service{
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         int vibTime = 100;// Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(vibTime, VibrationEffect.DEFAULT_AMPLITUDE));
+            if (v != null) {
+                v.vibrate(VibrationEffect.createOneShot(vibTime, VibrationEffect.DEFAULT_AMPLITUDE));
+            }
         }else{
             //deprecated in API 26
-            v.vibrate(vibTime);
+            if (v != null) {
+                v.vibrate(vibTime);
+            }
         }
     }
 
@@ -346,16 +308,17 @@ public class FloatingWindow extends Service{
     private void setIconSizePos(){
         int xpos = (int) (screenWidth - zoneXSize*1.3);
         int ypos = -statusBarOffset;
-        int maxWidth = (int) (zoneXSize*.8);
+        int maxSize = (int) (zoneXSize*.8);
+
         g1 = new ImageView(this);
         g1.setImageResource(R.mipmap.g1);
         g1.setX(xpos);
         g1.setY(ypos + zoneYSize * 0);
         Log.v("icons","g1 x pos: " + g1.getX());
         Log.v("icons","g1 y pos: " + g1.getY());
-        g1.setMaxHeight(maxWidth);
-        g1.setMaxWidth(maxWidth);
-        g1.setId(1);
+        g1.setMaxHeight(maxSize);
+        g1.setMaxWidth(maxSize);
+        //g1.setId(1);
 
         g2 = new ImageView(this);
         g2.setImageResource(R.mipmap.g1);
@@ -363,9 +326,9 @@ public class FloatingWindow extends Service{
         g2.setY(ypos + zoneYSize * 1);
         Log.v("icons","g2 x pos: " + g2.getX());
         Log.v("icons","g2 y pos: " + g2.getY());
-        g2.setMaxHeight(maxWidth);
-        g2.setMaxWidth(maxWidth);
-        g2.setId(2);
+        g2.setMaxHeight(maxSize);
+        g2.setMaxWidth(maxSize);
+        //g2.setId(2);
 
         g3 = new ImageView(this);
         g3.setImageResource(R.mipmap.g1);
@@ -373,9 +336,9 @@ public class FloatingWindow extends Service{
         g3.setY(ypos + zoneYSize * 2);
         Log.v("icons","g3 x pos: " + g3.getX());
         Log.v("icons","g3 y pos: " + g3.getY());
-        g3.setMaxHeight(maxWidth);
-        g3.setMaxWidth(maxWidth);
-        g3.setId(3);
+        g3.setMaxHeight(maxSize);
+        g3.setMaxWidth(maxSize);
+        //g3.setId(3);
 
         g4 = new ImageView(this);
         g4.setImageResource(R.mipmap.g1);
@@ -383,9 +346,9 @@ public class FloatingWindow extends Service{
         g4.setY(ypos + zoneYSize * 3);
         Log.v("icons","g4 x pos: " + g4.getX());
         Log.v("icons","g4 y pos: " + g4.getY());
-        g4.setMaxHeight(maxWidth);
-        g4.setMaxWidth(maxWidth);
-        g4.setId(4);
+        g4.setMaxHeight(maxSize);
+        g4.setMaxWidth(maxSize);
+        //g4.setId(4);
 
         g5 = new ImageView(this);
         g5.setImageResource(R.mipmap.g1);
@@ -393,9 +356,9 @@ public class FloatingWindow extends Service{
         g5.setY(ypos + zoneYSize * 4);
         Log.v("icons","g5 x pos: " + g5.getX());
         Log.v("icons","g5 y pos: " + g5.getY());
-        g5.setMaxHeight(maxWidth);
-        g5.setMaxWidth(maxWidth);
-        g5.setId(5);
+        g5.setMaxHeight(maxSize);
+        g5.setMaxWidth(maxSize);
+        //g5.setId(5);
 
         g6 = new ImageView(this);
         g6.setImageResource(R.mipmap.g1);
@@ -403,9 +366,9 @@ public class FloatingWindow extends Service{
         g6.setY(ypos + zoneYSize * 5);
         Log.v("icons","g6 x pos: " + g6.getX());
         Log.v("icons","g6 y pos: " + g6.getY());
-        g6.setMaxHeight(maxWidth);
-        g6.setMaxWidth(maxWidth);
-        g6.setId(6);
+        g6.setMaxHeight(maxSize);
+        g6.setMaxWidth(maxSize);
+        //g6.setId(6);
 
         g7 = new ImageView(this);
         g7.setImageResource(R.mipmap.g1);
@@ -413,100 +376,57 @@ public class FloatingWindow extends Service{
         g7.setY(ypos + zoneYSize * 6);
         Log.v("icons","g7 x pos: " + g7.getX());
         Log.v("icons","g7 y pos: " + g7.getY());
-        g7.setMaxHeight(maxWidth);
-        g7.setMaxWidth(maxWidth);
-        g7.setId(7);
+        g7.setMaxHeight(maxSize);
+        g7.setMaxWidth(maxSize);
+        //g7.setId(7);
     }
 
     private void setContentsPositionG4(){
-        tableParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        tableParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        for (int row = 1; row < numAppRows+1; row ++){
 
-        int maxWidth = (int) (zoneXSize*.6);
+            for (int col = 1; col < numAppCols+1; col++)
+            {
+                ImageButton app = new ImageButton(this);
+                app.setBackground(appArray[row][col].icon);
+                app.setX(appArray[row][col].x);
+                app.setY(appArray[row][col].y);
+                tl.addView(app);
 
-        /*app1 = new ImageView(this);
-        app1.setImageDrawable(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
-        app1.setMaxHeight(maxWidth);
-        app1.setMaxWidth(maxWidth);
-        app1.setId(41);
-
-        app2 = new ImageView(this);
-        app2.setImageResource(R.mipmap.ic_launcher);
-        app2.setMaxHeight(maxWidth);
-        app2.setMaxWidth(maxWidth);
-        app2.setId(42);
-
-        app3 = new ImageView(this);
-        app3.setImageResource(R.mipmap.ic_launcher_round);
-        app3.setMaxHeight(maxWidth);
-        app3.setMaxWidth(maxWidth);
-        app3.setId(43);*/
-
-        gridContainer = new GridLayout(this);
-        gridContainer.setColumnCount(numAppCols);
-        gridContainer.setUseDefaultMargins(true);
-        int padding = 18;
-        gridContainer.setPadding(padding, padding, padding, padding);
-        tl.addView(gridContainer);
-        for(int i = 0; i < 12; i++) {
-            final ImageView img = new ImageView(this);
-            img.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_notifications_black_24dp));
-            //img.setBackgroundResource(R.drawable.ic_notifications_black_24dp);  //for button
-            img.setMinimumHeight(maxWidth);
-            img.setMinimumWidth(maxWidth);
-            img.setId(i);
-            gridContainer.addView(img, Math.max(0, gridContainer.getChildCount()));
-            Log.v("grid",i + " child coords are: " + gridContainer.getChildAt(i).getX() + ", " + + gridContainer.getChildAt(i).getY());
-        }
-
-
-
-    }
-
-    public class MyTouchListener implements View.OnTouchListener {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch(event.getAction()){
-                case MotionEvent.ACTION_UP:
-                    vibrate();
-                    Log.v ("vib","I am vibrating right now");
-                    break;
-                case MotionEvent.ACTION_DOWN:
-                    vibrate();
-                    Log.v ("vib","I am vibrating right now");
-                    break;
-                case MotionEvent.ACTION_HOVER_ENTER:
-                    vibrate();
-                    Log.v ("vib","I am vibrating right now");
-                    break;
-                case 4:
-                    vibrate();
-                    Log.v ("vib","I am vibrating right now");
-                    break;
             }
-            return true;
         }
-
 
     }
 
-    public void setScreenSize(Context context) {
-        int x, y, orientation = context.getResources().getConfiguration().orientation;
+
+    private void setContentsPositionG5(){
+
+        for (int row = 1; row < numAppRows+1; row ++){
+
+            for (int col = 1; col < numAppCols+1; col++)
+            {
+                ImageView app = new ImageView(this);
+                //app.setScaleType(ImageView.ScaleType.CENTER);
+                app.setBackground(appArray[row][col].icon);
+                app.setX(appArray[row][col].x);
+                app.setY(appArray[row][col].y);
+                tl.addView(app);
+
+            }
+        }
+    }
+
+    public void setScreenSize() {
+        int x, y;
         Display display = wm.getDefaultDisplay();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            Point screenSize = new Point();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                display.getRealSize(screenSize);
-                x = screenSize.x;
-                y = screenSize.y;
-            } else {
-                display.getSize(screenSize);
-                x = screenSize.x;
-                y = screenSize.y;
-            }
+        Point screenSize = new Point();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            display.getRealSize(screenSize);
+            x = screenSize.x;
+            y = screenSize.y;
         } else {
-            x = display.getWidth();
-            y = display.getHeight();
+            display.getSize(screenSize);
+            x = screenSize.x;
+            y = screenSize.y;
         }
 
         screenWidth = x;
@@ -515,21 +435,24 @@ public class FloatingWindow extends Service{
 
 
     private void initAppArray(){
-        for (int row = 0; row < numAppCols+numAppRows+1; row ++)
+        for (int row = 0; row < numAppCols+numAppRows+1; row ++){
+
             for (int col = 0; col < numAppCols+numAppRows+1; col++)
                 {
                     appArray[row][col] = new AppInfo();
-                    appArray[row][col].setX(col * screenWidth/numAppCols);
-                    appArray[row][col].setY(row * screenHeight/numAppRows);
+                    appArray[row][col].setX(col * screenWidth/(numAppCols+2));
+                    appArray[row][col].setY(row * screenHeight/(numAppRows+2));
                     appArray[row][col].setIcon(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
 
                 }
 
+        }
     }
 
     int checkGroup (int x, int y){
         for (int groupNum = 1; groupNum <= numZones ; groupNum++){
             if ((y < (zoneYSize * groupNum))){
+                Log.v("group","pointer coords are : " + x +", " +y);
                 Log.v("group","lastGroup is: " + lastGroup);
                 Log.v("group","Group found is: " + groupNum);
                 if(groupNum != lastGroup){
@@ -542,36 +465,23 @@ public class FloatingWindow extends Service{
         return -99; //cant find any group
     }
 
+    @NonNull
     private int[] checkWhichAppSelected(int rawX, int rawY){
         int x, y;
-        int touchIndexX = (rawX/(screenWidth/numAppCols));
-        int touchIndexY = (rawY/(screenHeight/numAppRows));
+        int touchIndexX = (rawX/(screenWidth/(numAppCols+2)));
+        int touchIndexY = (rawY/(screenHeight/(numAppRows+2)));
 
-        AppInfo prevPos = appArray[touchIndexX][touchIndexY];
-        AppInfo nextPos = appArray[touchIndexX+1][touchIndexY+1];
+        x = Math.round(touchIndexX);
+        y = Math.round(touchIndexY);
 
-        if(rawX - prevPos.x > nextPos.x - rawX){
-            x = touchIndexX;
-        }
-        else{
-            x = touchIndexX+1;
-        }
         if(x != lastAppTouched[0]){
             lastAppTouched[0] = x;
             vibrate();
-        }
-
-        if(rawY - prevPos.y > nextPos.y - rawY){
-            y = touchIndexY;
-        }
-        else{
-            y = touchIndexY+1;
         }
         if(y != lastAppTouched[1]){
             lastAppTouched[1] = y;
             vibrate();
         }
-        int[] r = {x,y};
-        return r;
+        return new int[]{x,y};
     }
 }

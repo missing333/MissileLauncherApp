@@ -11,15 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="Configuration"
         android:textColor="@color/colorAccent"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,7 +72,26 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numGroupsText" />
+        app:layout_constraintTop_toBottomOf="@+id/numGroupsText"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/numAppRows"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="right|center_vertical"
+        android:text="Rows of Apps"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numAppColsText"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp" />
 
     <Spinner
         android:id="@+id/groupSpinner"
@@ -95,25 +112,35 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/groupSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/groupSpinner"
+        android:layout_marginLeft="8dp" />
+
+    <Spinner
+        android:id="@+id/appRowSpinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/appColSpinner"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/configText2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="Select Apps for each Group"
         android:textColor="@color/colorAccent"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numAppColsText" />
+        app:layout_constraintTop_toBottomOf="@+id/numAppRows" />
 
 </android.support.constraint.ConstraintLayout>

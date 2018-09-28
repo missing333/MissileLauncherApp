@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         //int[] sizes = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
         Spinner numGroupSpinner = (Spinner) findViewById(R.id.groupSpinner);
         Spinner numAppColsSpinner = (Spinner) findViewById(R.id.appColSpinner);
+        Spinner numAppRowsSpinner = (Spinner) findViewById(R.id.appRowSpinner);
 
         //Creating the ArrayAdapter instance having the bank name list
         ArrayAdapter aa = new ArrayAdapter(this,R.layout.list_text_view, sizes);
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         numGroupSpinner.setAdapter(aa);
 
         int spinnerPosition;
+        numGroupSpinner.setAdapter(aa);
         spinnerPosition = aa.getPosition(sharedPref.getInt("numGroups",7)+"");
         numGroupSpinner.setSelection(spinnerPosition);
         numGroupSpinner.setOnItemSelectedListener(this);
@@ -57,6 +59,10 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         spinnerPosition = aa.getPosition(sharedPref.getInt("numAppCols",9)+"");
         numAppColsSpinner.setSelection(spinnerPosition);
         numAppColsSpinner.setOnItemSelectedListener(this);
+        numAppRowsSpinner.setAdapter(aa);
+        spinnerPosition = aa.getPosition(sharedPref.getInt("numAppRows",11)+"");
+        numAppRowsSpinner.setSelection(spinnerPosition);
+        numAppRowsSpinner.setOnItemSelectedListener(this);
 
         b = (Button) findViewById(R.id.start);
 
@@ -88,8 +94,8 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        parent.getItemAtPosition(position);
         position++;
-        parent.getItemAtPosition(position-1);
         parent.setOnItemSelectedListener(this);
         if (parent.toString().contains("groupSpinner")){
             prefEditor.putInt("numGroups",position).commit();
