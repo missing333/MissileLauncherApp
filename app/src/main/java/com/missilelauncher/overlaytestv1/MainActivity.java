@@ -18,9 +18,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import static java.sql.Types.INTEGER;
@@ -29,15 +31,19 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
     private Button b;
     public SharedPreferences.Editor prefEditor;
+    private View btnGo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         SharedPreferences sharedPref = getSharedPreferences("SettingsActivity", 0);
         prefEditor = sharedPref.edit();
 
         setContentView(R.layout.activity_main);
+
 
         String[] sizes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"};
         //int[] sizes = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
@@ -64,7 +70,20 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         numAppRowsSpinner.setSelection(spinnerPosition);
         numAppRowsSpinner.setOnItemSelectedListener(this);
 
-        b = (Button) findViewById(R.id.start);
+
+        ///////////////////start groups section//////////////////////////////////////
+
+
+        btnGo = findViewById(R.id.G1);
+
+        //set listener for Button event
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SelectedItemsActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
