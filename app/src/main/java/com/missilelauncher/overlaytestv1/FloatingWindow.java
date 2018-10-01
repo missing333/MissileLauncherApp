@@ -2,44 +2,30 @@ package com.missilelauncher.overlaytestv1;
 
 import android.annotation.TargetApi;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.view.MotionEventCompat;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,7 +62,7 @@ public class FloatingWindow extends Service{
     private ImageView g7;
     private int lastGroup;
     private int[] lastAppTouched;
-    public AppInfo appArray[][];
+    public AppInfo appPositions[][];
     private int[] coords;
 
 
@@ -161,6 +147,7 @@ public class FloatingWindow extends Service{
                                 case 1:
                                     tl.removeAllViews();
                                     t.setText("Group " + group);
+                                    setContentsPositionG1();
                                     break;
                                 case 2:
                                     tl.removeAllViews();
@@ -192,8 +179,7 @@ public class FloatingWindow extends Service{
                         } else {
                             //This is where I choose the app by position.
                             coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
-                            t.setText("App " + coords[0] + ", " + coords[1]);
-
+                            t.setText(appPositions[coords[0]][coords[1]].label);
 
                         }
 
@@ -204,7 +190,13 @@ public class FloatingWindow extends Service{
 
                     case MotionEvent.ACTION_UP:
                         Log.v("touch", "Touch no longer detected.");
-                        Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
+                        if (appPositions[coords[0]][coords[1]].launchIntent != null){
+                            Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
+                            startActivity(launchApp);
+                        }
+
                         try {
                             wm.removeView(gl);
                         } catch (Exception e) {
@@ -249,7 +241,7 @@ public class FloatingWindow extends Service{
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
         setIconSizePos();
-        appArray = new AppInfo[numAppCols+numAppRows+1][numAppCols+numAppRows+1];
+        appPositions = new AppInfo[numAppCols+numAppRows+1][numAppCols+numAppRows+1];
         initAppArray();
 
         t.setX((float) (screenWidth * .40));
@@ -364,15 +356,42 @@ public class FloatingWindow extends Service{
         //g7.setId(7);
     }
 
+    private void setContentsPositionG1(){
+
+        int index = 0;
+
+        for (int row = 1; row < numAppRows+1; row ++){
+            for (int col = numAppCols; col > 0 ; col--)
+            {
+
+                try {
+                    if (index < SelectedItemsActivity.G1SelectedApps.size()){
+                        AppInfo a = SelectedItemsActivity.G1SelectedApps.get(index);
+                        ImageButton appIcon = new ImageButton(this);
+                        appIcon.setBackground(a.icon);
+                        appIcon.setX(col * screenWidth/(numAppCols+2));
+                        appIcon.setY(row * screenHeight/(numAppRows+2));
+                        appPositions[col][row].setLabel(a.label);
+                        appPositions[col][row].setLaunchIntent(a.launchIntent);
+                        tl.addView(appIcon);
+                    }
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
     private void setContentsPositionG4(){
         for (int row = 1; row < numAppRows+1; row ++){
 
             for (int col = 1; col < numAppCols+1; col++)
             {
                 ImageButton app = new ImageButton(this);
-                app.setBackground(appArray[row][col].icon);
-                app.setX(appArray[row][col].x);
-                app.setY(appArray[row][col].y);
+                app.setBackground(appPositions[row][col].icon);
+                app.setX(appPositions[row][col].x);
+                app.setY(appPositions[row][col].y);
                 tl.addView(app);
 
             }
@@ -389,9 +408,9 @@ public class FloatingWindow extends Service{
             {
                 ImageView app = new ImageView(this);
                 //app.setScaleType(ImageView.ScaleType.CENTER);
-                app.setBackground(appArray[row][col].icon);
-                app.setX(appArray[row][col].x);
-                app.setY(appArray[row][col].y);
+                app.setBackground(appPositions[row][col].icon);
+                app.setX(appPositions[row][col].x);
+                app.setY(appPositions[row][col].y);
                 tl.addView(app);
 
             }
@@ -422,10 +441,11 @@ public class FloatingWindow extends Service{
 
             for (int col = 0; col < numAppCols+numAppRows+1; col++)
                 {
-                    appArray[row][col] = new AppInfo();
-                    appArray[row][col].setX(col * screenWidth/(numAppCols+2));
-                    appArray[row][col].setY(row * screenHeight/(numAppRows+2));
-                    appArray[row][col].setIcon(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
+                    appPositions[row][col] = new AppInfo();
+                    appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
+                    appPositions[row][col].setY(row * screenHeight/(numAppRows+2));
+                    appPositions[row][col].setLaunchIntent(null);
+                    //appPositions[row][col].setIcon(AppInfo.getActivityIcon(this,"com.android.chrome","com.google.android.apps.chrome.Main"));
 
                 }
 

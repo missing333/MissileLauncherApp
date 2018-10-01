@@ -26,7 +26,7 @@ public class SelectedItemsActivity extends AppCompatActivity {
 
     private TextView textView;
     private GridView gridView;
-    public ArrayList<AppInfo> G1SelectedApps;
+    public static ArrayList<AppInfo> G1SelectedApps;
     public AppInfo[] appArray;
 
     @SuppressLint("SetTextI18n")

@@ -14,7 +14,7 @@ public class AppInfo {
     CharSequence packageName;
     Drawable icon;
     String versionName;
-    Intent launchIntent;
+    Intent launchIntent = null;
     int versionCode;
     int x;
     int y;
