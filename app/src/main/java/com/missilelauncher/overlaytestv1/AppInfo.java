@@ -7,11 +7,15 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.util.Log;
 
 public class AppInfo {
     CharSequence label;
     CharSequence packageName;
     Drawable icon;
+    String versionName;
+    Intent launchIntent;
+    int versionCode;
     int x;
     int y;
     int launchCount;
@@ -40,6 +44,10 @@ public class AppInfo {
         this.launchCount = launchCount;
     }
 
+    public void setLaunchIntent(Intent launchIntent) {
+        this.launchIntent = launchIntent;
+    }
+
     public static Drawable getActivityIcon(Context context, String packageName, String activityName) {
         PackageManager pm = context.getPackageManager();
         Intent intent = new Intent();
@@ -49,4 +57,7 @@ public class AppInfo {
         return resolveInfo.loadIcon(pm);
     }
 
+    public void prettyPrint() {
+        //Log.v("group",label + "\t\t\t" + packageName + "\t\t" + versionName + "\t" + versionCode + "\t\t" + launchIntent);
+    }
 }

@@ -88,23 +88,6 @@ public class FloatingWindow extends Service{
 
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        swapRowsCols(numAppRows,numAppCols);
-        getDimensions();
-        wm.updateViewLayout(ll,parameters);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    @Override
     public void onCreate() {
         super.onCreate();
 
@@ -484,4 +467,23 @@ public class FloatingWindow extends Service{
         }
         return new int[]{x,y};
     }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        swapRowsCols(numAppRows,numAppCols);
+        getDimensions();
+        wm.updateViewLayout(ll,parameters);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
+
+

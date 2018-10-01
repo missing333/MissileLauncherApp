@@ -15,23 +15,23 @@ import java.util.List;
 public class GridViewAdapter extends BaseAdapter {
 
     private Activity activity;
-    private String[] strings;
+    private AppInfo[] appArray;
     public List selectedPositions;
 
-    public GridViewAdapter(String[] strings, Activity activity) {
-        this.strings = strings;
+    public GridViewAdapter(AppInfo[] appList, Activity activity) {
+        this.appArray = appList;
         this.activity = activity;
         selectedPositions = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return strings.length;
+        return appArray.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return strings[position];
+        return appArray[position];
     }
 
     @Override
@@ -42,8 +42,7 @@ public class GridViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         GridItemView customView = (convertView == null) ? new GridItemView(activity) : (GridItemView) convertView;
-        customView.display(strings[position], selectedPositions.contains(position));
-
+        customView.display(appArray[position].label.toString(), appArray[position].icon, selectedPositions.contains(position));
         return customView;
     }
 }
