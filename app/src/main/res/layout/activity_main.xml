@@ -153,4 +153,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/configText2" />
 
+    <Button
+        android:id="@+id/G2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Group 2"
+        app:layout_constraintStart_toEndOf="@+id/G1"
+        app:layout_constraintTop_toBottomOf="@+id/configText2" />
+
+    <Button
+        android:id="@+id/G3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Group 3"
+        app:layout_constraintStart_toEndOf="@+id/G2"
+        app:layout_constraintTop_toBottomOf="@+id/configText2" />
+
+    <Button
+        android:id="@+id/G4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Group 4"
+        app:layout_constraintStart_toEndOf="@+id/G3"
+        app:layout_constraintTop_toBottomOf="@+id/configText2" />
+
+    <Button
+        android:id="@+id/G5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Group 5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/G1" />
+
+    <Button
+        android:id="@+id/G6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Group 6"
+        app:layout_constraintStart_toEndOf="@+id/G5"
+        app:layout_constraintTop_toBottomOf="@+id/G1" />
+
+    <Button
+        android:id="@+id/G7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Group 7"
+        app:layout_constraintStart_toEndOf="@+id/G6"
+        app:layout_constraintTop_toBottomOf="@+id/G1" />
+
 </android.support.constraint.ConstraintLayout>

@@ -141,7 +141,7 @@ public class FloatingWindow extends Service{
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
 
                         //////user touching Groups or Apps?
-                        if (event.getRawX() > screenWidth * .8) {
+                        if (event.getRawX() > screenWidth * .85) {
                             int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
                             switch (group) {
                                 case 1:
@@ -152,10 +152,12 @@ public class FloatingWindow extends Service{
                                 case 2:
                                     tl.removeAllViews();
                                     t.setText("Group " + group);
+                                    setContentsPositionG2();
                                     break;
                                 case 3:
                                     tl.removeAllViews();
                                     t.setText("Group " + group);
+                                    setContentsPositionG3();
                                     break;
                                 case 4:
                                     tl.removeAllViews();
@@ -170,10 +172,12 @@ public class FloatingWindow extends Service{
                                 case 6:
                                     tl.removeAllViews();
                                     t.setText("Group " + group);
+                                    setContentsPositionG6();
                                     break;
                                 case 7:
                                     tl.removeAllViews();
                                     t.setText("Group " + group);
+                                    setContentsPositionG7();
                                     break;
                             }
                         } else {
@@ -190,9 +194,9 @@ public class FloatingWindow extends Service{
 
                     case MotionEvent.ACTION_UP:
                         Log.v("touch", "Touch no longer detected.");
-                        //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
-                        if (appPositions[coords[0]][coords[1]].launchIntent != null){
+                        Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
+                        if (appPositions[coords[0]][coords[1]].launchIntent != null && event.getRawX() < screenWidth * .85){
                             Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
                             startActivity(launchApp);
                         }
@@ -232,11 +236,20 @@ public class FloatingWindow extends Service{
 
         int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2 * .04);
         int activationHeight = (int) Math.round(screenHeight * .45);
-        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,WindowManager.LayoutParams.TYPE_PHONE,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+
+        int overlayType;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
+        else {
+            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+        
+        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         parameters.x = 0;
         parameters.y = -screenHeight/10;
         parameters.gravity = Gravity.END;
-        gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,WindowManager.LayoutParams.TYPE_PHONE,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         relativeParams = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
@@ -365,8 +378,8 @@ public class FloatingWindow extends Service{
             {
 
                 try {
-                    if (index < SelectedItemsActivity.G1SelectedApps.size()){
-                        AppInfo a = SelectedItemsActivity.G1SelectedApps.get(index);
+                    if (index < G1SelectedItems.G1SelectedApps.size()){
+                        AppInfo a = G1SelectedItems.G1SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
@@ -382,40 +395,170 @@ public class FloatingWindow extends Service{
             }
         }
     }
-    
-    private void setContentsPositionG4(){
+
+    private void setContentsPositionG2(){
+
+        int index = 0;
+
         for (int row = 1; row < numAppRows+1; row ++){
-
-            for (int col = 1; col < numAppCols+1; col++)
+            for (int col = numAppCols; col > 0 ; col--)
             {
-                ImageButton app = new ImageButton(this);
-                app.setBackground(appPositions[row][col].icon);
-                app.setX(appPositions[row][col].x);
-                app.setY(appPositions[row][col].y);
-                tl.addView(app);
 
+                try {
+                    if (index < G2SelectedItems.G2SelectedApps.size()){
+                        AppInfo a = G2SelectedItems.G2SelectedApps.get(index);
+                        ImageButton appIcon = new ImageButton(this);
+                        appIcon.setBackground(a.icon);
+                        appIcon.setX(col * screenWidth/(numAppCols+2));
+                        appIcon.setY(row * screenHeight/(numAppRows+2));
+                        appPositions[col][row].setLabel(a.label);
+                        appPositions[col][row].setLaunchIntent(a.launchIntent);
+                        tl.addView(appIcon);
+                    }
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
-
     }
 
+    private void setContentsPositionG3(){
+
+        int index = 0;
+
+        for (int row = 1; row < numAppRows+1; row ++){
+            for (int col = numAppCols; col > 0 ; col--)
+            {
+
+                try {
+                    if (index < G3SelectedItems.G3SelectedApps.size()){
+                        AppInfo a = G3SelectedItems.G3SelectedApps.get(index);
+                        ImageButton appIcon = new ImageButton(this);
+                        appIcon.setBackground(a.icon);
+                        appIcon.setX(col * screenWidth/(numAppCols+2));
+                        appIcon.setY(row * screenHeight/(numAppRows+2));
+                        appPositions[col][row].setLabel(a.label);
+                        appPositions[col][row].setLaunchIntent(a.launchIntent);
+                        tl.addView(appIcon);
+                    }
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    private void setContentsPositionG4(){
+
+        int index = 0;
+
+        for (int row = 1; row < numAppRows+1; row ++){
+            for (int col = numAppCols; col > 0 ; col--)
+            {
+
+                try {
+                    if (index < G4SelectedItems.G4SelectedApps.size()){
+                        AppInfo a = G4SelectedItems.G4SelectedApps.get(index);
+                        ImageButton appIcon = new ImageButton(this);
+                        appIcon.setBackground(a.icon);
+                        appIcon.setX(col * screenWidth/(numAppCols+2));
+                        appIcon.setY(row * screenHeight/(numAppRows+2));
+                        appPositions[col][row].setLabel(a.label);
+                        appPositions[col][row].setLaunchIntent(a.launchIntent);
+                        tl.addView(appIcon);
+                    }
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     private void setContentsPositionG5(){
 
+        int index = 0;
+
         for (int row = 1; row < numAppRows+1; row ++){
-
-            for (int col = 1; col < numAppCols+1; col++)
+            for (int col = numAppCols; col > 0 ; col--)
             {
-                ImageView app = new ImageView(this);
-                //app.setScaleType(ImageView.ScaleType.CENTER);
-                app.setBackground(appPositions[row][col].icon);
-                app.setX(appPositions[row][col].x);
-                app.setY(appPositions[row][col].y);
-                tl.addView(app);
 
+                try {
+                    if (index < G5SelectedItems.G5SelectedApps.size()){
+                        AppInfo a = G5SelectedItems.G5SelectedApps.get(index);
+                        ImageButton appIcon = new ImageButton(this);
+                        appIcon.setBackground(a.icon);
+                        appIcon.setX(col * screenWidth/(numAppCols+2));
+                        appIcon.setY(row * screenHeight/(numAppRows+2));
+                        appPositions[col][row].setLabel(a.label);
+                        appPositions[col][row].setLaunchIntent(a.launchIntent);
+                        tl.addView(appIcon);
+                    }
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
+
+    private void setContentsPositionG6(){
+
+        int index = 0;
+
+        for (int row = 1; row < numAppRows+1; row ++){
+            for (int col = numAppCols; col > 0 ; col--)
+            {
+
+                try {
+                    if (index < G6SelectedItems.G6SelectedApps.size()){
+                        AppInfo a = G6SelectedItems.G6SelectedApps.get(index);
+                        ImageButton appIcon = new ImageButton(this);
+                        appIcon.setBackground(a.icon);
+                        appIcon.setX(col * screenWidth/(numAppCols+2));
+                        appIcon.setY(row * screenHeight/(numAppRows+2));
+                        appPositions[col][row].setLabel(a.label);
+                        appPositions[col][row].setLaunchIntent(a.launchIntent);
+                        tl.addView(appIcon);
+                    }
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void setContentsPositionG7(){
+
+        int index = 0;
+
+        for (int row = 1; row < numAppRows+1; row ++){
+            for (int col = numAppCols; col > 0 ; col--)
+            {
+
+                try {
+                    if (index < G7SelectedItems.G7SelectedApps.size()){
+                        AppInfo a = G7SelectedItems.G7SelectedApps.get(index);
+                        ImageButton appIcon = new ImageButton(this);
+                        appIcon.setBackground(a.icon);
+                        appIcon.setX(col * screenWidth/(numAppCols+2));
+                        appIcon.setY(row * screenHeight/(numAppRows+2));
+                        appPositions[col][row].setLabel(a.label);
+                        appPositions[col][row].setLaunchIntent(a.launchIntent);
+                        tl.addView(appIcon);
+                    }
+                    index++;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     public void setScreenSize() {
         int x, y;
@@ -442,6 +585,7 @@ public class FloatingWindow extends Service{
             for (int col = 0; col < numAppCols+numAppRows+1; col++)
                 {
                     appPositions[row][col] = new AppInfo();
+                    appPositions[row][col].label = "";
                     appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
                     appPositions[row][col].setY(row * screenHeight/(numAppRows+2));
                     appPositions[row][col].setLaunchIntent(null);

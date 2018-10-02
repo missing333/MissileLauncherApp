@@ -1,15 +1,8 @@
 package com.missilelauncher.overlaytestv1;
 
-import android.Manifest;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,20 +11,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
-import static java.sql.Types.INTEGER;
 
 public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
 
     private Button b;
     public SharedPreferences.Editor prefEditor;
-    private View btnGo;
+    private View B1, B2, B3, B4, B5, B6, B7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +60,82 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         ///////////////////start groups section//////////////////////////////////////
 
 
-        btnGo = findViewById(R.id.G1);
-
+        B1 = findViewById(R.id.G1);
         //set listener for Button event
-        btnGo.setOnClickListener(new View.OnClickListener() {
+        B1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectedItemsActivity.class);
+                Intent intent = new Intent(MainActivity.this, G1SelectedItems.class);
+                startActivity(intent);
+            }
+        });
+
+        B2 = findViewById(R.id.G2);
+        //set listener for Button event
+        B2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, G2SelectedItems.class);
+                startActivity(intent);
+            }
+        });
+
+        B2 = findViewById(R.id.G2);
+        //set listener for Button event
+        B2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, G2SelectedItems.class);
+                startActivity(intent);
+            }
+        });
+
+        B3 = findViewById(R.id.G3);
+        //set listener for Button event
+        B3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, G3SelectedItems.class);
+                startActivity(intent);
+            }
+        });
+
+        B4 = findViewById(R.id.G4);
+        //set listener for Button event
+        B4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, G4SelectedItems.class);
+                startActivity(intent);
+            }
+        });
+
+        B5 = findViewById(R.id.G5);
+        //set listener for Button event
+        B5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, G5SelectedItems.class);
+                startActivity(intent);
+            }
+        });
+
+        B6 = findViewById(R.id.G6);
+        //set listener for Button event
+        B6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, G6SelectedItems.class);
+                startActivity(intent);
+            }
+        });
+
+        B7 = findViewById(R.id.G7);
+        //set listener for Button event
+        B7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, G7SelectedItems.class);
                 startActivity(intent);
             }
         });

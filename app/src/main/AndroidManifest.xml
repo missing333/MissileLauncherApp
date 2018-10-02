@@ -26,7 +26,13 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
-        <activity android:name=".SelectedItemsActivity" />
+        <activity android:name=".G1SelectedItems" />
+        <activity android:name=".G2SelectedItems" />
+        <activity android:name=".G4SelectedItems" />
+        <activity android:name=".G5SelectedItems" />
+        <activity android:name=".G6SelectedItems" />
+        <activity android:name=".G7SelectedItems" />
+        <activity android:name=".G3SelectedItems" />
     </application>
 
 </manifest>

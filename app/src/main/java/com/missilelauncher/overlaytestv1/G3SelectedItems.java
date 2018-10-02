@@ -22,57 +22,60 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectedItemsActivity extends AppCompatActivity {
+public class G3SelectedItems extends AppCompatActivity {
 
     private TextView textView;
     private GridView gridView;
-    public static ArrayList<AppInfo> G1SelectedApps;
+    public static ArrayList<AppInfo> G3SelectedApps;
     public AppInfo[] appArray;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final int group = 3;
 
         appArray = getPackages().toArray(new AppInfo[0]);
 
         setContentView(R.layout.group_picking);
-        Button b = findViewById(R.id.saveButton);
+        Button g3b = findViewById(R.id.saveButton);
         gridView = (GridView) findViewById(R.id.gridView);
 
-        G1SelectedApps = new ArrayList<AppInfo>();
+        G3SelectedApps = new ArrayList<AppInfo>();
 
         final GridViewAdapter adapter = new GridViewAdapter(appArray, this);
         gridView.setAdapter(adapter);
+        adapter.groupIndex = group;
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                int selectedIndex = adapter.selectedPositions.indexOf(position);
+                int selectedIndex = adapter.listOfLists[group].indexOf(position);
                 if (selectedIndex > -1) {
-                    adapter.selectedPositions.remove(selectedIndex);
+                    adapter.listOfLists[group].remove(selectedIndex);
                     ((GridItemView) v).display(false);
-                    G1SelectedApps.remove((AppInfo) parent.getItemAtPosition(position));
+                    G3SelectedApps.remove((AppInfo) parent.getItemAtPosition(position));
                 } else {
-                    adapter.selectedPositions.add(position);
+                    adapter.listOfLists[group].add(position);
                     ((GridItemView) v).display(true);
-                    G1SelectedApps.add((AppInfo) parent.getItemAtPosition(position));
+                    G3SelectedApps.add((AppInfo) parent.getItemAtPosition(position));
                 }
             }
         });
 
 
-
-        b.setOnClickListener(new View.OnClickListener() {
+        g3b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPref = getSharedPreferences("SettingsActivity", 0);
                 SharedPreferences.Editor prefEditor = sharedPref.edit();
-                for (int i = 0; i< G1SelectedApps.size(); i++){
-                    Log.v("apps","App " + i +": " + G1SelectedApps.get(i).label);
+
+                for (int i = 0; i< G3SelectedApps.size(); i++){
+                    Log.v("g1 apps","App " + i +": " + G3SelectedApps.get(i).label);
                 }
-                Toast.makeText(SelectedItemsActivity.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SelectedItemsActivity.this, MainActivity.class);
+                Toast.makeText(G3SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(G3SelectedItems.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -91,7 +94,7 @@ public class SelectedItemsActivity extends AppCompatActivity {
 
 
         //this returned the list to the other activity.
-        //intent.putStringArrayListExtra("SELECTED_LETTER", G1SelectedApps);
+        //intent.putStringArrayListExtra("SELECTED_LETTER", G7SelectedApps);
 
 
         //This method gets the data from intent sent from another class/activity
