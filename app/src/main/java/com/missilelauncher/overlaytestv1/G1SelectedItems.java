@@ -119,7 +119,7 @@ public class G1SelectedItems extends AppCompatActivity {
         gIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
     }
