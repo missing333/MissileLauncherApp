@@ -194,7 +194,7 @@ public class FloatingWindow extends Service{
 
                     case MotionEvent.ACTION_UP:
                         Log.v("touch", "Touch no longer detected.");
-                        Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
                         if (appPositions[coords[0]][coords[1]].launchIntent != null && event.getRawX() < screenWidth * .85){
                             Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
@@ -244,7 +244,7 @@ public class FloatingWindow extends Service{
         else {
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
-        
+
         parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         parameters.x = 0;
         parameters.y = -screenHeight/10;
@@ -257,7 +257,7 @@ public class FloatingWindow extends Service{
         appPositions = new AppInfo[numAppCols+numAppRows+1][numAppCols+numAppRows+1];
         initAppArray();
 
-        t.setX((float) (screenWidth * .40));
+        t.setX((float) (screenWidth * .30));
         t.setY((float) (screenHeight * .05));
     }
 
@@ -382,6 +382,9 @@ public class FloatingWindow extends Service{
                         AppInfo a = G1SelectedItems.G1SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
+                        appIcon.setMaxHeight(40);
+                        appIcon.setMaxWidth(40);
+                        appIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
                         appIcon.setY(row * screenHeight/(numAppRows+2));
                         appPositions[col][row].setLabel(a.label);
@@ -409,6 +412,9 @@ public class FloatingWindow extends Service{
                         AppInfo a = G2SelectedItems.G2SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
+                        appIcon.setMaxHeight(40);
+                        appIcon.setMaxWidth(40);
+                        appIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
                         appIcon.setY(row * screenHeight/(numAppRows+2));
                         appPositions[col][row].setLabel(a.label);
@@ -436,6 +442,9 @@ public class FloatingWindow extends Service{
                         AppInfo a = G3SelectedItems.G3SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
+                        appIcon.setMaxHeight(40);
+                        appIcon.setMaxWidth(40);
+                        appIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
                         appIcon.setY(row * screenHeight/(numAppRows+2));
                         appPositions[col][row].setLabel(a.label);
@@ -464,6 +473,9 @@ public class FloatingWindow extends Service{
                         AppInfo a = G4SelectedItems.G4SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
+                        appIcon.setMaxHeight(40);
+                        appIcon.setMaxWidth(40);
+                        appIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
                         appIcon.setY(row * screenHeight/(numAppRows+2));
                         appPositions[col][row].setLabel(a.label);
@@ -491,6 +503,9 @@ public class FloatingWindow extends Service{
                         AppInfo a = G5SelectedItems.G5SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
+                        appIcon.setMaxHeight(40);
+                        appIcon.setMaxWidth(40);
+                        appIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
                         appIcon.setY(row * screenHeight/(numAppRows+2));
                         appPositions[col][row].setLabel(a.label);
@@ -518,6 +533,9 @@ public class FloatingWindow extends Service{
                         AppInfo a = G6SelectedItems.G6SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
+                        appIcon.setMaxHeight(40);
+                        appIcon.setMaxWidth(40);
+                        appIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
                         appIcon.setY(row * screenHeight/(numAppRows+2));
                         appPositions[col][row].setLabel(a.label);
@@ -545,6 +563,9 @@ public class FloatingWindow extends Service{
                         AppInfo a = G7SelectedItems.G7SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
                         appIcon.setBackground(a.icon);
+                        appIcon.setMaxHeight(40);
+                        appIcon.setMaxWidth(40);
+                        appIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         appIcon.setX(col * screenWidth/(numAppCols+2));
                         appIcon.setY(row * screenHeight/(numAppRows+2));
                         appPositions[col][row].setLabel(a.label);
@@ -623,11 +644,13 @@ public class FloatingWindow extends Service{
 
         if(x != lastAppTouched[0]){
             lastAppTouched[0] = x;
-            vibrate();
+            if (appPositions[x][y].launchIntent != null)
+                vibrate();
         }
         if(y != lastAppTouched[1]){
             lastAppTouched[1] = y;
-            vibrate();
+            if (appPositions[x][y].launchIntent != null)
+                vibrate();
         }
         return new int[]{x,y};
     }

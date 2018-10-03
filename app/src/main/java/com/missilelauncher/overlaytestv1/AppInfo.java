@@ -57,7 +57,10 @@ public class AppInfo {
         return resolveInfo.loadIcon(pm);
     }
 
-    public void prettyPrint() {
+    public String prettyPrint() {
         //Log.v("group",label + "\t\t\t" + packageName + "\t\t" + versionName + "\t" + versionCode + "\t\t" + launchIntent);
+        String r = "appName: " + label + ", " + "launchIntent: " + launchIntent;
+        return r;
     }
+
 }

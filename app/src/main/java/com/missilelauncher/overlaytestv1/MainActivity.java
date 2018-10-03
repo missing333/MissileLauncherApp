@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         setContentView(R.layout.activity_main);
 
 
+        String[] groupSizes = {"1", "2", "3", "4", "5", "6", "7"};
         String[] sizes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"};
         //int[] sizes = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
         Spinner numGroupSpinner = (Spinner) findViewById(R.id.groupSpinner);
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         Spinner numAppRowsSpinner = (Spinner) findViewById(R.id.appRowSpinner);
 
         //Creating the ArrayAdapter instance having the bank name list
-        ArrayAdapter aa = new ArrayAdapter(this,R.layout.list_text_view, sizes);
+        ArrayAdapter aa = new ArrayAdapter(this,R.layout.list_text_view, groupSizes);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         numGroupSpinner.setAdapter(aa);
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         spinnerPosition = aa.getPosition(sharedPref.getInt("numGroups",7)+"");
         numGroupSpinner.setSelection(spinnerPosition);
         numGroupSpinner.setOnItemSelectedListener(this);
+        aa = new ArrayAdapter(this,R.layout.list_text_view, sizes);
         numAppColsSpinner.setAdapter(aa);
         spinnerPosition = aa.getPosition(sharedPref.getInt("numAppCols",9)+"");
         numAppColsSpinner.setSelection(spinnerPosition);

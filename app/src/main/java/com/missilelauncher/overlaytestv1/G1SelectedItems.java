@@ -9,15 +9,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,8 @@ public class G1SelectedItems extends AppCompatActivity {
     private GridView gridView;
     public static ArrayList<AppInfo> G1SelectedApps;
     public AppInfo[] appArray;
+    SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
+    public static ArrayList<String> saveList;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -35,17 +42,45 @@ public class G1SelectedItems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final int group = 1;
 
-        appArray = getPackages().toArray(new AppInfo[0]);
-
         setContentView(R.layout.group_picking);
-        Button g1b = findViewById(R.id.saveButton);
+        TextView gName = (TextView) findViewById(R.id.gName);
+        ImageButton gIcon = (ImageButton) findViewById(R.id.gIcon);
+
+
+
+        appArray = getPackages().toArray(new AppInfo[0]);
+        saveList = sh.getFavorites(getApplicationContext(),group);
+        if (saveList == null){
+            saveList = new ArrayList<>(0);
+        }
+
+        Button b = findViewById(R.id.saveButton);
         gridView = (GridView) findViewById(R.id.gridView);
 
-        G1SelectedApps = new ArrayList<AppInfo>();
 
         final GridViewAdapter adapter = new GridViewAdapter(appArray, this);
         gridView.setAdapter(adapter);
+        GridItemView gv = new GridItemView(getApplicationContext());
         adapter.groupIndex = group;
+
+        G1SelectedApps = new ArrayList<AppInfo>(0);
+        if(appArray.length > 0 && saveList != null){
+            for (int i=0;i<appArray.length;i++) {
+                //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
+                gv.display( appArray[i].label.toString(),appArray[i].icon, false);
+                for (int f=0;f<saveList.size();f++) {
+                    //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
+                    if(appArray[i].packageName.equals(saveList.get(f))){
+                        adapter.listOfLists[group].add(i);
+                        G1SelectedApps.add(appArray[i]);
+                        adapter.getView(i, gv ,gridView );
+                        gv.display( appArray[i].label.toString(),appArray[i].icon, true);
+                    }
+                }
+            }
+        }
+
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -56,20 +91,21 @@ public class G1SelectedItems extends AppCompatActivity {
                     adapter.listOfLists[group].remove(selectedIndex);
                     ((GridItemView) v).display(false);
                     G1SelectedApps.remove((AppInfo) parent.getItemAtPosition(position));
+                    saveList.remove((String) ((AppInfo) parent.getItemAtPosition(position)).packageName);
                 } else {
                     adapter.listOfLists[group].add(position);
                     ((GridItemView) v).display(true);
                     G1SelectedApps.add((AppInfo) parent.getItemAtPosition(position));
+                    saveList.add((String) ((AppInfo) parent.getItemAtPosition(position)).packageName);
                 }
             }
         });
 
 
-        g1b.setOnClickListener(new View.OnClickListener() {
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPref = getSharedPreferences("SettingsActivity", 0);
-                SharedPreferences.Editor prefEditor = sharedPref.edit();
+                sh.saveFavorites(getApplicationContext(), saveList ,group );
 
                 for (int i = 0; i< G1SelectedApps.size(); i++){
                     Log.v("g1 apps","App " + i +": " + G1SelectedApps.get(i).label);
@@ -80,42 +116,13 @@ public class G1SelectedItems extends AppCompatActivity {
             }
         });
 
-
-        /*
-        textView = new TextView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        textView.setLayoutParams(params);
-        textView.setPadding(10, 10, 10, 10);
-        textView.setTypeface(null, Typeface.BOLD);
-        textView.setText("You selected: ");
-        setContentView(textView);
-        */
-
-
-        //this returned the list to the other activity.
-        //intent.putStringArrayListExtra("SELECTED_LETTER", G7SelectedApps);
-
-
-        //This method gets the data from intent sent from another class/activity
-        //getIntentData();
-    }
-
-/*    @SuppressLint("SetTextI18n")
-    public void getIntentData() {
-        ArrayList<String> stringArrayList = getIntent().getStringArrayListExtra("SELECTED_LETTER");
-
-        assert stringArrayList != null;
-        if (stringArrayList.size() > 0) {
-            for (int i = 0; i < stringArrayList.size(); i++) {
-                if (i < stringArrayList.size() - 1) {
-                    textView.setText(textView.getText() + stringArrayList.get(i) + ", ");
-                } else {
-                    textView.setText(textView.getText() + stringArrayList.get(i) +".");
-                }
+        gIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
             }
-        }
-    }*/
+        });
+    }
 
 
     private ArrayList<AppInfo> getPackages() {

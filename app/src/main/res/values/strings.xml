@@ -89,5 +89,6 @@
     <string name="pref_group7">Group 7 Settings</string>
     <string name="pref_groupEnabled">Enable This Group</string>
     <string name="pref_groupAppsInGroup">Select Apps for this Group</string>
+    <string name="save_this_group">Save These Settings</string>
 
 </resources>

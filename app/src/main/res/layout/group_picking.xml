@@ -10,13 +10,50 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:id="@+id/gName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group Name:  "
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:selectAllOnFocus="false" />
+
+            <ImageButton
+                android:id="@+id/gIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:cropToPadding="false"
+                android:maxWidth="50dp"
+                android:maxHeight="50dp"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/missile_launcher" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@color/colorAccent"
-            android:text="Save Selected Apps to this Group"
+            android:text="@string/save_this_group"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +69,7 @@
             android:clipToPadding="true"
             android:fitsSystemWindows="true"
             android:stretchMode="columnWidth"
-            android:visibility="visible">
-
-
-        </GridView>
+            android:visibility="visible"/>
 
     </LinearLayout>
 
