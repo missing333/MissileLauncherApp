@@ -101,8 +101,7 @@ public class G3SelectedItems extends AppCompatActivity {
                     Log.v("g1 apps","App " + i +": " + G3SelectedApps.get(i).label);
                 }
                 Toast.makeText(G3SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(G3SelectedItems.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

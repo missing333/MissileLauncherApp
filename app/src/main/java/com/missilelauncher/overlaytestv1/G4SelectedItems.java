@@ -101,8 +101,7 @@ public class G4SelectedItems extends AppCompatActivity {
                     Log.v("g4 apps","App " + i +": " + G4SelectedApps.get(i).prettyPrint());
                 }
                 Toast.makeText(G4SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(G4SelectedItems.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

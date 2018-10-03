@@ -23,13 +23,12 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         SharedPreferences sharedPref = getSharedPreferences("SettingsActivity", 0);
         prefEditor = sharedPref.edit();
 
         setContentView(R.layout.activity_main);
 
+        prefEditor.putInt("transparency",55 );
 
         String[] groupSizes = {"1", "2", "3", "4", "5", "6", "7"};
         String[] sizes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"};
@@ -143,6 +142,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         });
 
 
+
     }
 
     @Override
@@ -190,6 +190,13 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        prefEditor.putInt("transparency",0 );
 
     }
 }

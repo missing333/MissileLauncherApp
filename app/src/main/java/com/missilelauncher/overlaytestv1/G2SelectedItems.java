@@ -101,8 +101,7 @@ public class G2SelectedItems extends AppCompatActivity {
                     Log.v("g1 apps","App " + i +": " + G2SelectedApps.get(i).label);
                 }
                 Toast.makeText(G2SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(G2SelectedItems.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
