@@ -103,7 +103,7 @@ public class FloatingWindow extends Service{
         tl = new RelativeLayout(this);
         tl.setBackgroundColor(Color.argb(25,0,0,0));
 
-        coords = new int[]{-99, -99};
+        coords = new int[]{-1, -1};
 
         ll.setOnTouchListener(new View.OnTouchListener(){
 
@@ -197,10 +197,13 @@ public class FloatingWindow extends Service{
                         Log.v("touch", "Touch no longer detected.");
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
-                        if (appPositions[coords[0]][coords[1]].launchIntent != null && event.getRawX() < screenWidth * .85){
-                            Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
-                            startActivity(launchApp);
+                        if (coords[0] != -1 || coords[1] !=-1){
+                            if (appPositions[coords[0]][coords[1]].launchIntent != null && event.getRawX() < screenWidth * .85){
+                                Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
+                                startActivity(launchApp);
+                            }
                         }
+
 
                         try {
                             wm.removeView(gl);
@@ -476,6 +479,10 @@ public class FloatingWindow extends Service{
     private void setContentsPositionG4(){
 
         int index = 0;
+        Log.v("display apps","Index: " + index +" , G4 List Size: " + G4SelectedItems.G4SelectedApps.size());
+        WindowManager.LayoutParams appIconParams = new WindowManager.LayoutParams();
+        appIconParams.width = (int) appSize;
+        appIconParams.height = (int) appSize;
 
         for (int row = 1; row < numAppRows+1; row ++){
             for (int col = numAppCols; col > 0 ; col--)
@@ -485,10 +492,9 @@ public class FloatingWindow extends Service{
                     if (index < G4SelectedItems.G4SelectedApps.size()){
                         AppInfo a = G4SelectedItems.G4SelectedApps.get(index);
                         ImageButton appIcon = new ImageButton(this);
+                        Log.v("display apps","App Icon " + index +": " + a.icon);
+                        Log.v("display apps","Adding App " + index +" to Grid: " + G4SelectedItems.G4SelectedApps.get(index).label);
                         appIcon.setBackground(a.icon);
-                        WindowManager.LayoutParams appIconParams = new WindowManager.LayoutParams();
-                        appIconParams.width = (int) appSize;
-                        appIconParams.height = (int) appSize;
                         appIcon.setLayoutParams(appIconParams);
                         appIcon.setMaxHeight(appSize);
                         appIcon.setMaxWidth(appSize);
@@ -499,10 +505,11 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
                     }
-                    index++;
                 } catch (Exception e) {
+                    Log.v("display apps","App Icon " + index +": Failure");
                     e.printStackTrace();
                 }
+                index++;
             }
         }
     }
