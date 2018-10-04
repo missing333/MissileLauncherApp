@@ -16,6 +16,7 @@ import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.solver.widgets.ConstraintWidget;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -73,6 +74,10 @@ public class FloatingWindow extends Service{
         return null;
     }
 
+    public void setTransparency(int t){
+        ll.setBackgroundColor(Color.argb(getSharedPreferences("SettingsActivity", 0).getInt("transparency",55 ),0,200,200));
+        wm.updateViewLayout(ll,parameters);
+    }
 
     @Override
     public void onCreate() {
@@ -90,7 +95,7 @@ public class FloatingWindow extends Service{
 
 
         ll = new LinearLayout(this);
-        ll.setBackgroundColor(Color.argb(66,0,200,200));
+        ll.setBackgroundColor(Color.argb(getSharedPreferences("SettingsActivity", 0).getInt("transparency",55 ),0,200,200));
         wm.addView(ll,parameters);
 
         /////////////////////////////done with activation area/////////////////////////
@@ -261,7 +266,7 @@ public class FloatingWindow extends Service{
         appPositions = new AppInfo[numAppCols+numAppRows+1][numAppCols+numAppRows+1];
         initAppArray();
 
-        t.setX((float) (screenWidth * .30));
+        t.setX((float) (screenWidth * .10));
         t.setY((float) (screenHeight * .05));
     }
 
@@ -301,23 +306,29 @@ public class FloatingWindow extends Service{
         int xpos = (int) (screenWidth - zoneXSize*1.3);
         int ypos = -statusBarOffset;
         int maxSize = (int) (zoneXSize*.8);
+        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(60,60 );
+
+        for (int i=0;i<numZones;i++){
+
+        }
 
         g1 = new ImageView(this);
-        g1.setImageResource(R.mipmap.g1);
+        //g1.setImageResource(R.mipmap.g1);
+        //g1.setImageResource(R.mipmap.star);
+        g1.setImageResource(R.drawable.missile_launcher_icon_nobg);
         g1.setX(xpos);
         g1.setY(ypos + zoneYSize * 0);
-        Log.v("icons","g1 x pos: " + g1.getX());
-        Log.v("icons","g1 y pos: " + g1.getY());
+        Log.v("icons","g1 x pos: " + g1.getX()+ ", "+ g1.getY());
         g1.setMaxHeight(maxSize);
         g1.setMaxWidth(maxSize);
         //g1.setId(1);
 
         g2 = new ImageView(this);
         g2.setImageResource(R.mipmap.g1);
+        //g2.setImageResource(R.mipmap.star);
         g2.setX(xpos);
         g2.setY(ypos + zoneYSize * 1);
-        Log.v("icons","g2 x pos: " + g2.getX());
-        Log.v("icons","g2 y pos: " + g2.getY());
+        Log.v("icons","g2 x pos: " + g2.getX()+ ", "+ g2.getY());
         g2.setMaxHeight(maxSize);
         g2.setMaxWidth(maxSize);
         //g2.setId(2);
@@ -326,18 +337,17 @@ public class FloatingWindow extends Service{
         g3.setImageResource(R.mipmap.g1);
         g3.setX(xpos);
         g3.setY(ypos + zoneYSize * 2);
-        Log.v("icons","g3 x pos: " + g3.getX());
-        Log.v("icons","g3 y pos: " + g3.getY());
+        Log.v("icons","g3 x pos: " + g3.getX()+ ", "+ g3.getY());
         g3.setMaxHeight(maxSize);
         g3.setMaxWidth(maxSize);
         //g3.setId(3);
 
         g4 = new ImageView(this);
         g4.setImageResource(R.mipmap.g1);
+        //g4.setImageResource(R.drawable.missile_launcher_icon_nobg);
         g4.setX(xpos);
         g4.setY(ypos + zoneYSize * 3);
-        Log.v("icons","g4 x pos: " + g4.getX());
-        Log.v("icons","g4 y pos: " + g4.getY());
+        Log.v("icons","g4 x pos: " + g4.getX()+ ", "+ g4.getY());
         g4.setMaxHeight(maxSize);
         g4.setMaxWidth(maxSize);
         //g4.setId(4);
@@ -346,8 +356,7 @@ public class FloatingWindow extends Service{
         g5.setImageResource(R.mipmap.g1);
         g5.setX(xpos);
         g5.setY(ypos + zoneYSize * 4);
-        Log.v("icons","g5 x pos: " + g5.getX());
-        Log.v("icons","g5 y pos: " + g5.getY());
+        Log.v("icons","g5 x pos: " + g5.getX()+ ", "+ g5.getY());
         g5.setMaxHeight(maxSize);
         g5.setMaxWidth(maxSize);
         //g5.setId(5);
@@ -356,8 +365,7 @@ public class FloatingWindow extends Service{
         g6.setImageResource(R.mipmap.g1);
         g6.setX(xpos);
         g6.setY(ypos + zoneYSize * 5);
-        Log.v("icons","g6 x pos: " + g6.getX());
-        Log.v("icons","g6 y pos: " + g6.getY());
+        Log.v("icons","g6 x pos: " + g6.getX()+ ", "+ g6.getY());
         g6.setMaxHeight(maxSize);
         g6.setMaxWidth(maxSize);
         //g6.setId(6);
@@ -366,8 +374,7 @@ public class FloatingWindow extends Service{
         g7.setImageResource(R.mipmap.g1);
         g7.setX(xpos);
         g7.setY(ypos + zoneYSize * 6);
-        Log.v("icons","g7 x pos: " + g7.getX());
-        Log.v("icons","g7 y pos: " + g7.getY());
+        Log.v("icons","g7 x pos: " + g7.getX()+ ", "+ g7.getY());
         g7.setMaxHeight(maxSize);
         g7.setMaxWidth(maxSize);
         //g7.setId(7);
@@ -399,10 +406,15 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
                     }
-                    index++;
+                    else{
+                        appPositions[col][row].setLabel("");
+                        appPositions[col][row].setLaunchIntent(null);
+                    }
                 } catch (Exception e) {
+                    Log.v("display apps","App Icon " + index +": Failure");
                     e.printStackTrace();
                 }
+                index++;
             }
         }
     }
@@ -433,10 +445,15 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
                     }
-                    index++;
+                    else{
+                        appPositions[col][row].setLabel("");
+                        appPositions[col][row].setLaunchIntent(null);
+                    }
                 } catch (Exception e) {
+                    Log.v("display apps","App Icon " + index +": Failure");
                     e.printStackTrace();
                 }
+                index++;
             }
         }
     }
@@ -467,10 +484,15 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
                     }
-                    index++;
+                    else{
+                        appPositions[col][row].setLabel("");
+                        appPositions[col][row].setLaunchIntent(null);
+                    }
                 } catch (Exception e) {
+                    Log.v("display apps","App Icon " + index +": Failure");
                     e.printStackTrace();
                 }
+                index++;
             }
         }
     }
@@ -479,7 +501,7 @@ public class FloatingWindow extends Service{
     private void setContentsPositionG4(){
 
         int index = 0;
-        Log.v("display apps","Index: " + index +" , G4 List Size: " + G4SelectedItems.G4SelectedApps.size());
+        //Log.v("display apps","Index: " + index +" , G4 List Size: " + G4SelectedItems.G4SelectedApps.size());
         WindowManager.LayoutParams appIconParams = new WindowManager.LayoutParams();
         appIconParams.width = (int) appSize;
         appIconParams.height = (int) appSize;
@@ -504,6 +526,10 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLabel(a.label);
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
+                    }
+                    else{
+                        appPositions[col][row].setLabel("");
+                        appPositions[col][row].setLaunchIntent(null);
                     }
                 } catch (Exception e) {
                     Log.v("display apps","App Icon " + index +": Failure");
@@ -540,10 +566,15 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
                     }
-                    index++;
+                    else{
+                        appPositions[col][row].setLabel("");
+                        appPositions[col][row].setLaunchIntent(null);
+                    }
                 } catch (Exception e) {
+                    Log.v("display apps","App Icon " + index +": Failure");
                     e.printStackTrace();
                 }
+                index++;
             }
         }
     }
@@ -574,10 +605,15 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
                     }
-                    index++;
+                    else{
+                        appPositions[col][row].setLabel("");
+                        appPositions[col][row].setLaunchIntent(null);
+                    }
                 } catch (Exception e) {
+                    Log.v("display apps","App Icon " + index +": Failure");
                     e.printStackTrace();
                 }
+                index++;
             }
         }
     }
@@ -607,6 +643,10 @@ public class FloatingWindow extends Service{
                         appPositions[col][row].setLabel(a.label);
                         appPositions[col][row].setLaunchIntent(a.launchIntent);
                         tl.addView(appIcon);
+                    }
+                    else{
+                        appPositions[col][row].setLabel("");
+                        appPositions[col][row].setLaunchIntent(null);
                     }
                     index++;
                 } catch (Exception e) {

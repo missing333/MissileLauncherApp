@@ -197,6 +197,11 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onPause() {
         super.onPause();
         prefEditor.putInt("transparency",0 );
-
+        FloatingWindow fw = new FloatingWindow();
+        try {
+            fw.setTransparency(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

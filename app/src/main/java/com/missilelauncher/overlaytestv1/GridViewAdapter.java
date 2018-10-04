@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,13 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        GridItemView customView = (convertView == null) ? new GridItemView(activity) : (GridItemView) convertView;
+        GridItemView customView; //= (convertView == null) ? new GridItemView(activity) : (GridItemView) convertView;
+
+        if (convertView == null) {
+            customView = new GridItemView(activity);
+        } else {
+            customView = (GridItemView) convertView;
+        }
         customView.display(appArray[position].label.toString(), appArray[position].icon, listOfLists[groupIndex].contains(position));
         return customView;
     }

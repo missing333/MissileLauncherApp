@@ -6,6 +6,7 @@ package com.missilelauncher.overlaytestv1;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -24,12 +25,18 @@ public class GridItemView extends FrameLayout {
     }
 
     public void display(String text, Drawable icon, boolean isSelected) {
+        LayoutParams gp = new LayoutParams(50,50 );
+        gp.gravity = Gravity.CENTER;
+        iconView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
         iconView.setImageDrawable(icon);
+
         textView.setText(text);
         display(isSelected);
     }
 
     public void display(boolean isSelected) {
         textView.setBackgroundResource(isSelected ? R.drawable.primary_light_square: R.drawable.gray_square);
+
     }
 }
