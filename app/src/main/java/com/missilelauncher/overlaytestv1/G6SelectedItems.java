@@ -9,15 +9,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,18 +34,44 @@ import java.util.List;
 
 public class G6SelectedItems extends AppCompatActivity {
 
-    private TextView textView;
     private GridView gridView;
     public static ArrayList<AppInfo> G6SelectedApps;
     public AppInfo[] appArray;
     SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor;
     public static ArrayList<String> saveList;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final int group = 6;
+
+        sharedPrefs = getSharedPreferences("SettingsActivity",0 );
+        editor = sharedPrefs.edit();
+
+        setContentView(R.layout.group_picking);
+
+        final EditText gName = (EditText) findViewById(R.id.editName);
+        gName.setText(sharedPrefs.getString("G6 Name","" ));
+        gName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,int count){
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,int after){
+            }
+
+            @Override
+            public void afterTextChanged(Editable s){
+                editor.putString("G6 Name", s.toString()).commit();
+            }
+        });
+
+        ImageButton gIcon = (ImageButton) findViewById(R.id.gIcon);
+        gIcon.setVisibility(View.GONE);
+
 
         appArray = getPackages().toArray(new AppInfo[0]);
         Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
@@ -47,7 +81,6 @@ public class G6SelectedItems extends AppCompatActivity {
             saveList = new ArrayList<>(0);
         }
 
-        setContentView(R.layout.group_picking);
         Button b = findViewById(R.id.saveButton);
         gridView = (GridView) findViewById(R.id.gridView);
 
@@ -100,16 +133,22 @@ public class G6SelectedItems extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sh.saveFavorites(getApplicationContext(), saveList ,group );
+                editor.putString("Name of G6", gName.getText().toString()).commit();
 
                 for (int i = 0; i< G6SelectedApps.size(); i++){
-                    Log.v("g1 apps","App " + i +": " + G6SelectedApps.get(i).label);
+                    Log.v("G6 apps","App " + i +": " + G6SelectedApps.get(i).label);
                 }
                 Toast.makeText(G6SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
 
+        gIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
 

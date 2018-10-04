@@ -13,10 +13,13 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -31,23 +34,43 @@ import java.util.List;
 
 public class G1SelectedItems extends AppCompatActivity {
 
-    private TextView textView;
     private GridView gridView;
     public static ArrayList<AppInfo> G1SelectedApps;
     public AppInfo[] appArray;
     SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor;
     public static ArrayList<String> saveList;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final int group = 1;
 
-        setContentView(R.layout.group_picking);
-        TextView gName = (TextView) findViewById(R.id.gName);
-        ImageButton gIcon = (ImageButton) findViewById(R.id.gIcon);
+        sharedPrefs = getSharedPreferences("SettingsActivity",0 );
+        editor = sharedPrefs.edit();
 
+        setContentView(R.layout.group_picking);
+
+        final EditText gName = (EditText) findViewById(R.id.editName);
+        gName.setText(sharedPrefs.getString("G1 Name","" ));
+        gName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,int count){
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,int after){
+            }
+
+            @Override
+            public void afterTextChanged(Editable s){
+                editor.putString("G1 Name", s.toString()).commit();
+            }
+        });
+
+        ImageButton gIcon = (ImageButton) findViewById(R.id.gIcon);
+        gIcon.setVisibility(View.GONE);
 
 
         appArray = getPackages().toArray(new AppInfo[0]);
@@ -110,6 +133,7 @@ public class G1SelectedItems extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sh.saveFavorites(getApplicationContext(), saveList ,group );
+                editor.putString("Name of G1", gName.getText().toString()).commit();
 
                 for (int i = 0; i< G1SelectedApps.size(); i++){
                     Log.v("g1 apps","App " + i +": " + G1SelectedApps.get(i).label);

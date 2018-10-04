@@ -150,37 +150,37 @@ public class FloatingWindow extends Service{
                             switch (group) {
                                 case 1:
                                     tl.removeAllViews();
-                                    t.setText("Group " + group);
+                                    t.setText(sharedPref.getString("G1 Name","Group 1" ));
                                     setContentsPositionG1();
                                     break;
                                 case 2:
                                     tl.removeAllViews();
-                                    t.setText("Group " + group);
+                                    t.setText(sharedPref.getString("G2 Name","Group 2" ));
                                     setContentsPositionG2();
                                     break;
                                 case 3:
                                     tl.removeAllViews();
-                                    t.setText("Group " + group);
+                                    t.setText(sharedPref.getString("G3 Name","Group 3" ));
                                     setContentsPositionG3();
                                     break;
                                 case 4:
                                     tl.removeAllViews();
-                                    t.setText("Group " + group);
+                                    t.setText(sharedPref.getString("G4 Name","Group 4" ));
                                     setContentsPositionG4();
                                     break;
                                 case 5:
                                     tl.removeAllViews();
-                                    t.setText("Group " + group);
+                                    t.setText(sharedPref.getString("G5 Name","Group 5" ));
                                     setContentsPositionG5();
                                     break;
                                 case 6:
                                     tl.removeAllViews();
-                                    t.setText("Group " + group);
+                                    t.setText(sharedPref.getString("G6 Name","Group 6" ));
                                     setContentsPositionG6();
                                     break;
                                 case 7:
                                     tl.removeAllViews();
-                                    t.setText("Group " + group);
+                                    t.setText(sharedPref.getString("G7 Name","Group 7" ));
                                     setContentsPositionG7();
                                     break;
                             }

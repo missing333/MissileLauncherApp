@@ -17,9 +17,6 @@ import com.google.gson.reflect.TypeToken;
 public class SharedListPreferencesHelper {
 
     public static final String PREFS_NAME = "SettingsActivity";
-    public static final String FAVORITES = "Product_Favorite";
-
-
 
     // This four methods are used for maintaining favorites.
     public static void saveFavorites(Context context, ArrayList<String> favorites, int group) {
@@ -28,13 +25,6 @@ public class SharedListPreferencesHelper {
 
         settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
         editor = settings.edit();
-
-        /*Log.v("json", "saveGroup " +"G" +group+": "+ favorites);
-        Gson gson = new Gson();
-        Type type = new TypeToken<AppInfo>(){}.getType();
-        String jsonFavorites = gson.toJson(favorites);  // not working
-        Log.v("json", "saveGroup " +"G" +group+": "+ jsonFavorites);
-        editor.putString("G"+group, jsonFavorites);*/
 
         int size = settings.getInt(group+"_size", 0);
 
@@ -53,39 +43,12 @@ public class SharedListPreferencesHelper {
         editor.apply();
     }
 
-/*    public void addFavorite(Context context, Product product) {
-        List<Product> favorites = getFavorites(context);
-        if (favorites == null)
-            favorites = new ArrayList<Product>();
-        favorites.add(product);
-        saveFavorites(context, favorites);
-    }
-
-    public void removeFavorite(Context context, Product product) {
-        ArrayList<Product> favorites = getFavorites(context);
-        if (favorites != null) {
-            favorites.remove(product);
-            saveFavorites(context, favorites);
-        }
-    }*/
 
     public ArrayList<String> getFavorites(Context context, int group) {
         SharedPreferences settings;
         List<String> favorites;
 
         settings = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
-
-        /*if (settings.contains("G"+group)) {
-            String jsonFavorites = settings.getString("G"+group, null);
-            Log.v("json", "getGroup " +"G" +group+": "+ jsonFavorites);
-            Gson gson = new Gson();
-            AppInfo favoriteItems = gson.fromJson(jsonFavorites,
-                    AppInfo.class);
-
-            favorites = Arrays.asList(favoriteItems);
-            favorites = new ArrayList<>(favorites);
-        } else
-            return null;*/
 
         int size = settings.getInt(group+"_size", 0);
 
@@ -94,7 +57,6 @@ public class SharedListPreferencesHelper {
             favorites.add(settings.getString("G"+group+"_"+i, null));
             Log.v("Prefs","G"+group+"_"+i +" Getting: "+ favorites.get(i));
         }
-
 
         return (ArrayList<String>) favorites;
     }
