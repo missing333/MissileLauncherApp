@@ -25,6 +25,8 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class G1SelectedItems extends AppCompatActivity {
@@ -49,6 +51,8 @@ public class G1SelectedItems extends AppCompatActivity {
 
 
         appArray = getPackages().toArray(new AppInfo[0]);
+        Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
+
         saveList = sh.getFavorites(getApplicationContext(),group);
         if (saveList == null){
             saveList = new ArrayList<>(0);
