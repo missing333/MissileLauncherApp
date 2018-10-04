@@ -15,7 +15,7 @@
         android:paddingBottom="8dp"
         android:text="test"
         android:textColor="@android:color/white"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/appIcon"

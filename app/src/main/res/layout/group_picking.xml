@@ -44,7 +44,7 @@
                 android:maxHeight="50dp"
                 android:padding="10dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/missile_launcher" />
+                app:srcCompat="@mipmap/ic_launcher_round" />
         </LinearLayout>
 
         <Button

@@ -60,6 +60,7 @@ public class FloatingWindow extends Service{
     private ImageView g5;
     private ImageView g6;
     private ImageView g7;
+    private ImageView[] g;
     private int lastGroup;
     private int[] lastAppTouched;
     public AppInfo appPositions[][];
@@ -91,6 +92,7 @@ public class FloatingWindow extends Service{
         t.setGravity(Gravity.CENTER);
         lastAppTouched = new int[2];
 
+        g = new ImageView[10];
         getDimensions();
 
 
@@ -133,13 +135,9 @@ public class FloatingWindow extends Service{
                         getDimensions();
                         wm.addView(gl, gparameters);
                         gl.addView(t);
-                        gl.addView(g1);
-                        gl.addView(g2);
-                        gl.addView(g3);
-                        gl.addView(g4);
-                        gl.addView(g5);
-                        gl.addView(g6);
-                        gl.addView(g7);
+                        for (int i=0;i<numZones;i++){
+                            gl.addView(g[i]);
+                        }
                         break;
 
                     case MotionEvent.ACTION_MOVE:
@@ -303,81 +301,16 @@ public class FloatingWindow extends Service{
 
 
     private void setIconSizePos(){
-        int xpos = (int) (screenWidth - zoneXSize*1.3);
         int ypos = -statusBarOffset;
-        int maxSize = (int) (zoneXSize*.8);
-        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(60,60 );
+        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(400,400 );
 
         for (int i=0;i<numZones;i++){
-
+            g[i] = new ImageView(this);
+            g[i].setImageResource(R.drawable.ic_star_black_50dp);
+            groupIconParams.setMarginStart(screenWidth-zoneXSize);
+            g[i].setLayoutParams(groupIconParams);
+            g[i].setY((float) (ypos + zoneYSize * i ));
         }
-
-        g1 = new ImageView(this);
-        //g1.setImageResource(R.mipmap.g1);
-        //g1.setImageResource(R.mipmap.star);
-        g1.setImageResource(R.drawable.missile_launcher_icon_nobg);
-        g1.setX(xpos);
-        g1.setY(ypos + zoneYSize * 0);
-        Log.v("icons","g1 x pos: " + g1.getX()+ ", "+ g1.getY());
-        g1.setMaxHeight(maxSize);
-        g1.setMaxWidth(maxSize);
-        //g1.setId(1);
-
-        g2 = new ImageView(this);
-        g2.setImageResource(R.mipmap.g1);
-        //g2.setImageResource(R.mipmap.star);
-        g2.setX(xpos);
-        g2.setY(ypos + zoneYSize * 1);
-        Log.v("icons","g2 x pos: " + g2.getX()+ ", "+ g2.getY());
-        g2.setMaxHeight(maxSize);
-        g2.setMaxWidth(maxSize);
-        //g2.setId(2);
-
-        g3 = new ImageView(this);
-        g3.setImageResource(R.mipmap.g1);
-        g3.setX(xpos);
-        g3.setY(ypos + zoneYSize * 2);
-        Log.v("icons","g3 x pos: " + g3.getX()+ ", "+ g3.getY());
-        g3.setMaxHeight(maxSize);
-        g3.setMaxWidth(maxSize);
-        //g3.setId(3);
-
-        g4 = new ImageView(this);
-        g4.setImageResource(R.mipmap.g1);
-        //g4.setImageResource(R.drawable.missile_launcher_icon_nobg);
-        g4.setX(xpos);
-        g4.setY(ypos + zoneYSize * 3);
-        Log.v("icons","g4 x pos: " + g4.getX()+ ", "+ g4.getY());
-        g4.setMaxHeight(maxSize);
-        g4.setMaxWidth(maxSize);
-        //g4.setId(4);
-
-        g5 = new ImageView(this);
-        g5.setImageResource(R.mipmap.g1);
-        g5.setX(xpos);
-        g5.setY(ypos + zoneYSize * 4);
-        Log.v("icons","g5 x pos: " + g5.getX()+ ", "+ g5.getY());
-        g5.setMaxHeight(maxSize);
-        g5.setMaxWidth(maxSize);
-        //g5.setId(5);
-
-        g6 = new ImageView(this);
-        g6.setImageResource(R.mipmap.g1);
-        g6.setX(xpos);
-        g6.setY(ypos + zoneYSize * 5);
-        Log.v("icons","g6 x pos: " + g6.getX()+ ", "+ g6.getY());
-        g6.setMaxHeight(maxSize);
-        g6.setMaxWidth(maxSize);
-        //g6.setId(6);
-
-        g7 = new ImageView(this);
-        g7.setImageResource(R.mipmap.g1);
-        g7.setX(xpos);
-        g7.setY(ypos + zoneYSize * 6);
-        Log.v("icons","g7 x pos: " + g7.getX()+ ", "+ g7.getY());
-        g7.setMaxHeight(maxSize);
-        g7.setMaxWidth(maxSize);
-        //g7.setId(7);
     }
 
     private void setContentsPositionG1(){
@@ -531,7 +464,7 @@ public class FloatingWindow extends Service{
         int index = 0;
         int thisGroup = 4;
         int numAppsInGroup;
-        try{ numAppsInGroup = G2SelectedItems.G2SelectedApps.size(); }catch (Exception e){numAppsInGroup = 0;}
+        try{ numAppsInGroup = G4SelectedItems.G4SelectedApps.size(); }catch (Exception e){numAppsInGroup = 0;}
         int rowsNeeded = (numAppsInGroup/numAppCols) + 1;
         int nearestRow = (thisGroup * zoneYSize/(screenHeight/(numAppRows+2)));
         int row = nearestRow-1;
@@ -562,7 +495,7 @@ public class FloatingWindow extends Service{
                 }
                 index++;
                 if (index >= numAppsInGroup){
-                    row = numAppRows+11;
+                    return;
                 }
             }
             if (nearestRow + rowsNeeded > numAppRows){
@@ -678,7 +611,7 @@ public class FloatingWindow extends Service{
         try{ numAppsInGroup = G7SelectedItems.G7SelectedApps.size(); }catch (Exception e){numAppsInGroup = 0;}
         int rowsNeeded = (numAppsInGroup/numAppCols) + 1;
         int nearestRow = (thisGroup * zoneYSize/(screenHeight/(numAppRows+2)));
-        int row = nearestRow-1;
+        int row = nearestRow-2;
 
         while (row < numAppRows+1){
             for (int col = numAppCols; col > 0 ; col--)
@@ -811,14 +744,15 @@ public class FloatingWindow extends Service{
 
         swapRowsCols(numAppRows,numAppCols);
         getDimensions();
+        setIconSizePos();
         wm.updateViewLayout(ll,parameters);
-
+/*
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 }
 
