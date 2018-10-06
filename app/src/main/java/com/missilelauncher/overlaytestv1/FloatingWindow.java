@@ -464,23 +464,32 @@ public class FloatingWindow extends Service{
     private void setIconSizePos(int marginLeft){
         RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(maxAppSize,maxAppSize);
 
+        numZones = sharedPref.getInt("numGroups",7);
+
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
             g[i].setImageResource(R.drawable.ic_star_black_50dp);
             groupIconParams.setMarginStart(marginLeft);
             g[i].setLayoutParams(groupIconParams);
-            g[i].setY((float) (  zoneYSize * i ));
+            g[i].setY((float) (  zoneYSize * i )+statusBarOffset);
         }
     }
 
     private void setContentsPositionGroup(int group, int ltr){
 
+        numAppCols = sharedPref.getInt("numAppCols", 6);
+        numAppRows = sharedPref.getInt("numAppRows", 10);
         int index = 0;
+        int rowOffset = 0;
+        if (group == 1)
+            {rowOffset = 1;}
+        else if (group == 7)
+            {rowOffset = -1;}
         try {
             int numAppsInGroup = groupAppList[group].size();;
             int rowsNeeded = (numAppsInGroup/numAppCols);
             int nearestRow = (group * zoneYSize/(screenHeight/(numAppRows+2)))-1;
-            int row = nearestRow;
+            int row = nearestRow+rowOffset;
 
             for(AppInfo item:groupAppList[group]){
                 item.setLaunchCount(sharedPref.getInt(item.label.toString(),0 ));
@@ -653,6 +662,8 @@ public class FloatingWindow extends Service{
         int temp = numAppRows;
         numAppRows = numAppCols;
         numAppCols = temp;
+        sharedPref.edit().putInt("numAppRows",numAppRows).commit();
+        sharedPref.edit().putInt("numAppCols",numAppCols).commit();
         Log.v("orientation","Rows: " +numAppRows + ", Cols: "+numAppCols);
         wm.removeView(ll);
         wm.removeView(lhs);
