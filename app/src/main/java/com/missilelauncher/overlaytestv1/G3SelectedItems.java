@@ -186,4 +186,7 @@ public class G3SelectedItems extends AppCompatActivity {
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
     }
+    public void setG3Apps(ArrayList<AppInfo> app){
+        G3SelectedApps = app;
+    }
 }

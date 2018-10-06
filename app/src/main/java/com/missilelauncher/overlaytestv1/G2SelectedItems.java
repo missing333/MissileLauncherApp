@@ -186,4 +186,7 @@ public class G2SelectedItems extends AppCompatActivity {
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
     }
+    public void setG2Apps(ArrayList<AppInfo> app){
+        G2SelectedApps = app;
+    }
 }

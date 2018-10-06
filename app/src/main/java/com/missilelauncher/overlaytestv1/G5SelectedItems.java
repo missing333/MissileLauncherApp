@@ -186,4 +186,7 @@ public class G5SelectedItems extends AppCompatActivity {
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
     }
+    public void setG5Apps(ArrayList<AppInfo> app){
+        G5SelectedApps = app;
+    }
 }

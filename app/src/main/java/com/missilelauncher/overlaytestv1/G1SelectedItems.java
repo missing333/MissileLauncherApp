@@ -37,10 +37,10 @@ public class G1SelectedItems extends AppCompatActivity {
     private GridView gridView;
     public static ArrayList<AppInfo> G1SelectedApps;
     public AppInfo[] appArray;
-    SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
-    SharedPreferences sharedPrefs;
-    SharedPreferences.Editor editor;
+    public SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
     public static ArrayList<String> saveList;
+    public SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +73,6 @@ public class G1SelectedItems extends AppCompatActivity {
         gIcon.setVisibility(View.GONE);
 
 
-        appArray = getPackages().toArray(new AppInfo[0]);
-        Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
-
-        saveList = sh.getFavorites(getApplicationContext(),group);
-        if (saveList == null){
-            saveList = new ArrayList<>(0);
-        }
-
         Button b = findViewById(R.id.saveButton);
         gridView = (GridView) findViewById(R.id.gridView);
 
@@ -90,6 +82,13 @@ public class G1SelectedItems extends AppCompatActivity {
         GridItemView gv = new GridItemView(getApplicationContext());
         adapter.groupIndex = group;
 
+        appArray = getPackages().toArray(new AppInfo[0]);
+        Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
+
+        saveList = sh.getFavorites(getApplicationContext(),group);
+        if (saveList == null){
+            saveList = new ArrayList<>(0);
+        }
         G1SelectedApps = new ArrayList<AppInfo>(0);
         if(appArray.length > 0 && saveList != null){
             for (int i=0;i<appArray.length;i++) {
@@ -152,7 +151,7 @@ public class G1SelectedItems extends AppCompatActivity {
     }
 
 
-    private ArrayList<AppInfo> getPackages() {
+    public ArrayList<AppInfo> getPackages() {
         ArrayList<AppInfo> apps = getInstalledApps(false); /* false = no system packages */
         final int max = apps.size();
         for (int i=0; i<max; i++) {
@@ -185,5 +184,9 @@ public class G1SelectedItems extends AppCompatActivity {
         }
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
+    }
+
+    public void setG1Apps(ArrayList<AppInfo> app){
+        G1SelectedApps = app;
     }
 }

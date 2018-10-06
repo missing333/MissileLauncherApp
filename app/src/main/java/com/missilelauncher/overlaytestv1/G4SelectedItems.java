@@ -186,4 +186,7 @@ public class G4SelectedItems extends AppCompatActivity {
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
     }
+    public void setG4Apps(ArrayList<AppInfo> app){
+        G4SelectedApps = app;
+    }
 }

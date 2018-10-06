@@ -186,4 +186,7 @@ public class G7SelectedItems extends AppCompatActivity {
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
     }
+    public void setG7Apps(ArrayList<AppInfo> app){
+        G7SelectedApps = app;
+    }
 }
