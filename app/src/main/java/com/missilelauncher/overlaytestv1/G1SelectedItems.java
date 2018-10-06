@@ -37,10 +37,10 @@ public class G1SelectedItems extends AppCompatActivity {
     private GridView gridView;
     public static ArrayList<AppInfo> G1SelectedApps;
     public AppInfo[] appArray;
-    public SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
-    public static ArrayList<String> saveList;
-    public SharedPreferences sharedPrefs;
+    SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
+    SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
+    public static ArrayList<String> saveList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,9 @@ public class G1SelectedItems extends AppCompatActivity {
         gIcon.setVisibility(View.GONE);
 
 
+        appArray = getPackages().toArray(new AppInfo[0]);
+        Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
+
         Button b = findViewById(R.id.saveButton);
         gridView = (GridView) findViewById(R.id.gridView);
 
@@ -82,8 +85,6 @@ public class G1SelectedItems extends AppCompatActivity {
         GridItemView gv = new GridItemView(getApplicationContext());
         adapter.groupIndex = group;
 
-        appArray = getPackages().toArray(new AppInfo[0]);
-        Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
 
         saveList = sh.getFavorites(getApplicationContext(),group);
         if (saveList == null){

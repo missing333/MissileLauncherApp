@@ -203,8 +203,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
             }
         }
 
-        ArrayList<AppInfo> appArray = res;
-        Collections.sort(appArray, AppInfo.appNameComparator);
+        Collections.sort(res, AppInfo.appNameComparator);
         SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
 
         groupAppList = new ArrayList[10];
@@ -222,13 +221,13 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
                 saveList = new ArrayList<>(0);
             }
             groupAppList[g] = new ArrayList<AppInfo>(0);
-            if(appArray.size() > 0 && saveList != null){
-                for (int i=0;i<appArray.size();i++) {
+            if(res.size() > 0 && saveList != null){
+                for (int i=0;i<res.size();i++) {
                     //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
                     for (int f=0;f<saveList.size();f++) {
                         //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
-                        if(appArray.get(i).packageName.equals(saveList.get(f))){
-                            groupAppList[g].add(appArray.get(i));
+                        if(res.get(i).packageName.equals(saveList.get(f))){
+                            groupAppList[g].add(res.get(i));
                         }
                     }
                 }
