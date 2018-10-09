@@ -186,4 +186,7 @@ public class G6SelectedItems extends AppCompatActivity {
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
     }
+    public void setG6Apps(ArrayList<AppInfo> app){
+        G6SelectedApps = app;
+    }
 }
