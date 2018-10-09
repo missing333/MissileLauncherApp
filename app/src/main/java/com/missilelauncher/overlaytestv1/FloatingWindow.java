@@ -1,6 +1,7 @@
 package com.missilelauncher.overlaytestv1;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +14,11 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -42,6 +45,7 @@ public class FloatingWindow extends Service{
 
     private WindowManager wm;
     private SharedPreferences sharedPref;
+    private SharedPreferences settingsPrefs;
     private LinearLayout ll;
     private LinearLayout lhs;
     private RelativeLayout gl;
@@ -81,16 +85,21 @@ public class FloatingWindow extends Service{
         wm.updateViewLayout(ll,parameters);
     }
 
+    public void stopMe(){
+        stopSelf();
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         sharedPref = getSharedPreferences("SettingsActivity", 0);
+        settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
-        numZones = sharedPref.getInt("numGroups",7);
-        numAppRows = sharedPref.getInt("numAppRows", 10);
-        numAppCols = sharedPref.getInt("numAppCols", 8);
+        numZones = settingsPrefs.getInt("numGroups",7);
+        numAppRows = settingsPrefs.getInt("numAppRows", 10);
+        numAppCols = settingsPrefs.getInt("numAppCols", 6);
         Log.v("prefs","numGroups = " + numZones);
         Log.v("prefs","numAppRows = " + numAppRows);
         Log.v("prefs","numAppCols = " + numAppCols);
@@ -175,7 +184,7 @@ public class FloatingWindow extends Service{
                             switch (group) {
                                 case 1:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G1 Name","Group 1" ));
+                                    t.setText(settingsPrefs.getString("groupName1","Group 1 not settings" ));
                                     setContentsPositionGroup(1, 0);
                                     break;
                                 case 2:
@@ -418,7 +427,7 @@ public class FloatingWindow extends Service{
         relativeParams = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        appPositions = new AppInfo[numAppCols+numAppRows+1][numAppCols+numAppRows+1];
+        appPositions = new AppInfo[numAppCols+numAppRows+10][numAppCols+numAppRows+10];
         initAppArray();
 
         t.setX((float) (screenWidth * .2));
@@ -464,7 +473,7 @@ public class FloatingWindow extends Service{
     private void setIconSizePos(int marginLeft){
         RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(maxAppSize,maxAppSize);
 
-        numZones = sharedPref.getInt("numGroups",7);
+        numZones = settingsPrefs.getInt("numGroups",7);
 
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
@@ -477,8 +486,8 @@ public class FloatingWindow extends Service{
 
     private void setContentsPositionGroup(int group, int ltr){
 
-        numAppCols = sharedPref.getInt("numAppCols", 6);
-        numAppRows = sharedPref.getInt("numAppRows", 10);
+        numAppCols = settingsPrefs.getInt("numAppCols", 6);
+        numAppRows = settingsPrefs.getInt("numAppRows", 10);
         int index = 0;
         int rowOffset = 0;
         if (group == 1)
@@ -596,8 +605,8 @@ public class FloatingWindow extends Service{
 
 
     private void initAppArray(){
-        for (int row = 0; row < numAppCols+numAppRows+1; row ++){
-            for (int col = 0; col < numAppCols+numAppRows+1; col++){
+        for (int row = 0; row < numAppCols+numAppRows+4; row ++){
+            for (int col = 0; col < numAppCols+numAppRows+4; col++){
                 appPositions[row][col] = new AppInfo();
                 appPositions[row][col].label = "";
                 appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
@@ -662,14 +671,42 @@ public class FloatingWindow extends Service{
         int temp = numAppRows;
         numAppRows = numAppCols;
         numAppCols = temp;
-        sharedPref.edit().putInt("numAppRows",numAppRows).commit();
-        sharedPref.edit().putInt("numAppCols",numAppCols).commit();
+        settingsPrefs.edit().putInt("numAppRows",numAppRows).commit();
+        settingsPrefs.edit().putInt("numAppCols",numAppCols).commit();
         Log.v("orientation","Rows: " +numAppRows + ", Cols: "+numAppCols);
         wm.removeView(ll);
         wm.removeView(lhs);
         getDimensions();
         wm.addView(ll,parameters);
         wm.addView(lhs, lhsparameters);
+    }
+
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            Notification.Builder builder = new Notification.Builder(this, "333")
+                    .setContentTitle(getString(R.string.app_name))
+                    .setContentText("MissileLauncher")
+                    .setAutoCancel(true);
+
+            Notification notification = builder.build();
+            startForeground(1, notification);
+
+        } else {
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                    .setContentTitle(getString(R.string.app_name))
+                    .setContentText("MissileLauncher")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setAutoCancel(true);
+
+            Notification notification = builder.build();
+
+            startForeground(1, notification);
+        }
+        return START_NOT_STICKY;
     }
 }
 

@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.preference.Preference.OnPreferenceClickListener;
 
 import java.util.List;
 
@@ -184,8 +185,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("example_list"));
+
+
+
+
         }
 
         @Override
@@ -270,6 +274,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_group1);
             setHasOptionsMenu(true);
 
+            bindPreferenceSummaryToValue(findPreference("groupName1"));
+
+            Preference p1 = (Preference) findPreference("group1AppList");
+            p1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),G1SelectedItems.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design

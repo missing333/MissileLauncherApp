@@ -1,31 +1,9 @@
 package com.missilelauncher.overlaytestv1;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ChangedPackages;
-import android.content.pm.FeatureInfo;
-import android.content.pm.InstrumentationInfo;
-import android.content.pm.PackageInstaller;
-import android.content.pm.PermissionGroupInfo;
-import android.content.pm.PermissionInfo;
-import android.content.pm.ProviderInfo;
-import android.content.pm.ResolveInfo;
-import android.content.pm.ServiceInfo;
-import android.content.pm.SharedLibraryInfo;
-import android.content.pm.VersionedPackage;
-import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.pm.PackageInfo;
@@ -38,7 +16,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,7 +29,7 @@ import static com.missilelauncher.overlaytestv1.G7SelectedItems.G7SelectedApps;
 
 public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
 
-    private Button b;
+    private Button start, stop, config;
     public SharedPreferences.Editor prefEditor;
     private View B1, B2, B3, B4, B5, B6, B7;
     private ArrayList<AppInfo>[] groupAppList;
@@ -65,6 +42,29 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         prefEditor = sharedPref.edit();
 
         setContentView(R.layout.activity_main);
+
+        stop = findViewById(R.id.stop);
+        config = findViewById(R.id.config);
+
+        config.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: make this work
+                Log.d("app", "Pressing Stop Service button");
+                FloatingWindow fw = new FloatingWindow();
+                fw.stopMe();
+                //boolean b = fw.stopService(new Intent(MainActivity.this, FloatingWindow.class));
+                stopService(new Intent(MainActivity.this, FloatingWindow.class));
+            }
+        });
 
         prefEditor.putInt("transparency",55 );
 
@@ -247,17 +247,24 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onStart() {
         super.onStart();
 
-        b = (Button) findViewById(R.id.start);
+        start = (Button) findViewById(R.id.start);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
-            b.setVisibility(View.VISIBLE);
+            start.setVisibility(View.VISIBLE);
         } else {
-            b.setVisibility(View.GONE);
+            start.setVisibility(View.GONE);
             Log.v("ol", "Ready to draw overlays");
-            G1SelectedItems g1 = new G1SelectedItems();
-            startService(new Intent(MainActivity.this, FloatingWindow.class));
+
+            //startService(new Intent(MainActivity.this, FloatingWindow.class));
+            Intent myService = new Intent(this, FloatingWindow.class);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(myService);
+            } else {
+                startService(myService);
+            }
         }
 
-        b.setOnClickListener(new View.OnClickListener() {
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
@@ -296,11 +303,5 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onPause() {
         super.onPause();
         prefEditor.putInt("transparency",0 );
-        FloatingWindow fw = new FloatingWindow();
-        try {
-            fw.setTransparency(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

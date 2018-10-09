@@ -9,10 +9,10 @@
     <TextView
         android:id="@+id/configText"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_height="31dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Configuration"
         android:textColor="@color/colorAccent"
@@ -20,21 +20,32 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/config" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Stop MissileLauncher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start" />
 
     <Button
         android:id="@+id/start"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="86dp"
-        android:layout_marginEnd="100dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="100dp"
         android:text="@string/permissionPrompt"
         android:textColorLink="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configText"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
     <android.support.constraint.Guideline
@@ -48,17 +59,15 @@
         android:id="@+id/numGroupsText"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="right|center_vertical"
         android:text="Number of Groups"
         android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
+        app:layout_constraintTop_toBottomOf="@+id/configText" />
 
     <TextView
         android:id="@+id/numAppColsText"
@@ -98,11 +107,10 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
+        app:layout_constraintTop_toBottomOf="@+id/configText" />
 
     <Spinner
         android:id="@+id/appColSpinner"
@@ -218,5 +226,17 @@
         android:text="Group 7"
         app:layout_constraintStart_toEndOf="@+id/G6"
         app:layout_constraintTop_toBottomOf="@+id/G1" />
+
+    <Button
+        android:id="@+id/config"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stop" />
 
 </android.support.constraint.ConstraintLayout>

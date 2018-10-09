@@ -8,7 +8,7 @@
     <com.missilelauncher.overlaytestv1.NumberPickerPreference
         android:key="numAppCols"
         android:title="Number of App Columns"
-        android:defaultValue="8" />
+        android:defaultValue="6" />
 
     <com.missilelauncher.overlaytestv1.NumberPickerPreference
         android:key="numAppRows"
