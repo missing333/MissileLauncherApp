@@ -554,15 +554,17 @@ public class FloatingWindow extends Service{
 
     private void setIconSizePos(int marginLeft){
         RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(maxAppSize,maxAppSize);
-
+        int yOffset = 0;
         numZones = settingsPrefs.getInt("numGroups",7);
+        if (portrait)
+        {yOffset = statusBarOffset;}
 
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
             g[i].setImageResource(R.drawable.ic_star_black_50dp);
             groupIconParams.setMarginStart(marginLeft);
             g[i].setLayoutParams(groupIconParams);
-            g[i].setY((float) (  zoneYSize * i )+statusBarOffset);
+            g[i].setY((float) (  zoneYSize * i )+yOffset);
         }
     }
 
@@ -572,10 +574,13 @@ public class FloatingWindow extends Service{
         numAppRows = settingsPrefs.getInt("numAppRows", 10);
         int index = 0;
         int rowOffset = 0;
+        int colOffset = 0;
         if (group == 1)
             {rowOffset = 1;}
         else if (group == 7)
             {rowOffset = -1;}
+        if (numAppRows<numAppCols)
+            {colOffset = 1;}
         try {
             int numAppsInGroup = groupAppList[group].size();;
             int rowsNeeded = (numAppsInGroup/numAppCols);
@@ -591,7 +596,7 @@ public class FloatingWindow extends Service{
 
             while (row < numAppRows+1){
                 if (ltr == 0){
-                    for (int col = numAppCols; col > 0 ; col--){
+                    for (int col = numAppCols-colOffset; col > 0 ; col--){
 
                         //populate apps from right to left
                         if (index < numAppsInGroup){
@@ -618,7 +623,7 @@ public class FloatingWindow extends Service{
 
                 }
                 else{
-                    for (int col = 1; col < numAppCols+1 ; col++){
+                    for (int col = 1+colOffset; col < numAppCols+1 ; col++){
 
                         //populate apps from left to right
                         if (index < numAppsInGroup){
@@ -718,11 +723,10 @@ public class FloatingWindow extends Service{
     @NonNull
     private int[] checkWhichAppSelected(int rawX, int rawY){
         int x, y;
-        int touchIndexX = (rawX/(screenWidth/(numAppCols+2)));
-        int touchIndexY = (rawY/(screenHeight/(numAppRows+2)));
-
-        x = Math.round(touchIndexX);
-        y = Math.round(touchIndexY);
+        int appXSize = (screenWidth/(numAppCols+2));
+        int appYSize = (screenHeight/(numAppRows+2));
+        x = Math.round((rawX+(appXSize/3))/appXSize);
+        y = Math.round((rawY-(appYSize/3))/appYSize);
 
         if(x != lastAppTouched[0]){
             lastAppTouched[0] = x;
