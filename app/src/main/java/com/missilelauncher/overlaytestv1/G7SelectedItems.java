@@ -52,25 +52,7 @@ public class G7SelectedItems extends AppCompatActivity {
 
         setContentView(R.layout.group_picking);
 
-        final EditText gName = (EditText) findViewById(R.id.editName);
-        gName.setText(sharedPrefs.getString("G7 Name","" ));
-        gName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,int count){
-            }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,int after){
-            }
-
-            @Override
-            public void afterTextChanged(Editable s){
-                editor.putString("G7 Name", s.toString()).commit();
-            }
-        });
-
-        ImageButton gIcon = (ImageButton) findViewById(R.id.gIcon);
-        gIcon.setVisibility(View.GONE);
 
 
         appArray = getPackages().toArray(new AppInfo[0]);
@@ -133,7 +115,6 @@ public class G7SelectedItems extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sh.saveFavorites(getApplicationContext(), saveList ,group );
-                editor.putString("Name of G7", gName.getText().toString()).commit();
 
                 for (int i = 0; i< G7SelectedApps.size(); i++){
                     Log.v("G7 apps","App " + i +": " + G7SelectedApps.get(i).label);
@@ -143,12 +124,7 @@ public class G7SelectedItems extends AppCompatActivity {
             }
         });
 
-        gIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
 
 

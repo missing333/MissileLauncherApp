@@ -47,6 +47,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
+            FloatingWindow fw = new FloatingWindow();
+            fw.updateLHS();
+            fw.updateRHS();
+
             String stringValue = value.toString();
 
             if (preference instanceof ListPreference) {
@@ -83,11 +87,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     }
                 }
 
+            } else if (preference instanceof NumberPickerPreference){
+                // For all other preferences, set the summary to the value's
+                // simple string representation.
+                preference.setSummary((Integer) value);
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
+
+
             return true;
         }
     };
@@ -185,12 +195,18 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_list"));
 
+            /*
+            bindPreferenceSummaryToValue(findPreference("numGroups"));
+            bindPreferenceSummaryToValue(findPreference("numAppCols"));
+            bindPreferenceSummaryToValue(findPreference("numAppRows"));
+*/
 
 
 
         }
+
+
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
@@ -201,6 +217,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+
     }
 
     /**
@@ -234,37 +251,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
-
-
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class DataSyncPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_data_sync);
-            setHasOptionsMenu(true);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
-    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class Group1PreferenceFragment extends PreferenceFragment {
@@ -306,9 +292,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_group1);
+            addPreferencesFromResource(R.xml.pref_group2);
             setHasOptionsMenu(true);
+            bindPreferenceSummaryToValue(findPreference("groupName2"));
 
+            Preference p2 = (Preference) findPreference("group2AppList");
+            p2.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),G2SelectedItems.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
@@ -331,9 +327,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_group1);
+            addPreferencesFromResource(R.xml.pref_group3);
             setHasOptionsMenu(true);
+            bindPreferenceSummaryToValue(findPreference("groupName3"));
 
+            Preference p3 = (Preference) findPreference("group3AppList");
+            p3.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),G3SelectedItems.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
@@ -355,9 +361,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_group1);
+            addPreferencesFromResource(R.xml.pref_group4);
             setHasOptionsMenu(true);
+            bindPreferenceSummaryToValue(findPreference("groupName4"));
 
+            Preference p4 = (Preference) findPreference("group4AppList");
+            p4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),G4SelectedItems.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
@@ -379,9 +395,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_group1);
+            addPreferencesFromResource(R.xml.pref_group5);
             setHasOptionsMenu(true);
+            bindPreferenceSummaryToValue(findPreference("groupName5"));
 
+            Preference p5 = (Preference) findPreference("group5AppList");
+            p5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),G5SelectedItems.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
@@ -403,9 +429,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_group1);
+            addPreferencesFromResource(R.xml.pref_group6);
             setHasOptionsMenu(true);
+            bindPreferenceSummaryToValue(findPreference("groupName6"));
 
+            Preference p6 = (Preference) findPreference("group6AppList");
+            p6.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),G6SelectedItems.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
@@ -427,9 +463,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_group1);
+            addPreferencesFromResource(R.xml.pref_group7);
             setHasOptionsMenu(true);
+            bindPreferenceSummaryToValue(findPreference("groupName7"));
 
+            Preference p7 = (Preference) findPreference("group7AppList");
+            p7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),G7SelectedItems.class);
+                    startActivity(intent);
+                    return false;
+                }
+            });
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design

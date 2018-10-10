@@ -92,5 +92,7 @@
     <string name="save_this_group">Save These Settings</string>
     <string name="appicon">appIcon</string>
     <string name="group_name">Group Name:</string>
+    <string name="enable_missilelauncher">Enable MissileLauncher</string>
+    <string name="settings">Settings</string>
 
 </resources>

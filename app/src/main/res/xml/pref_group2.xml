@@ -2,20 +2,18 @@
 
     <!-- A 'parent' preference, which enables/disables child preferences (below)
          when checked/unchecked. -->
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="group2Enabled"
-        android:title="@string/pref_groupEnabled" />
+    <EditTextPreference
+        android:defaultValue="Group 2"
+        android:key="groupName2"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Group 2 Name: " />
 
-    <!-- Allows the user to choose a ringtone in the 'notification' category. -->
-    <!-- NOTE: This preference will be enabled only when the checkbox above is checked. -->
-    <!-- NOTE: RingtonePreference's summary should be set to its value by the activity code. -->
-    <RingtonePreference
-        android:defaultValue="content://settings/system/notification_sound"
-        android:dependency="group2Enabled"
+    <Preference
         android:key="group2AppList"
-        android:ringtoneType="notification"
-        android:title="@string/pref_groupAppsInGroup"/>
+        android:showDefault="true"
+        android:showSilent="true"
+        android:title="@string/pref_groupAppsInGroup" />
 
 
 </PreferenceScreen>

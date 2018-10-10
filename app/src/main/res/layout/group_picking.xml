@@ -10,43 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
-
-            <TextView
-                android:id="@+id/gName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/group_name"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/editName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textCapWords"
-                android:selectAllOnFocus="false" />
-
-            <ImageButton
-                android:id="@+id/gIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:cropToPadding="false"
-                android:maxWidth="50dp"
-                android:maxHeight="50dp"
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/ic_launcher_round" />
-        </LinearLayout>
-
         <Button
             android:id="@+id/saveButton"
             android:layout_width="match_parent"

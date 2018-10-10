@@ -80,14 +80,71 @@ public class FloatingWindow extends Service{
         return null;
     }
 
-    public void setTransparency(int t){
-        ll.setBackgroundColor(Color.argb(getSharedPreferences("SettingsActivity", 0).getInt("transparency",55 ),0,200,200));
+    public void updateRHS(){
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
+        int activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
+        int transparency = settingsPrefs.getInt("rhsTransparency", 25);
+        int overlayType;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
+        else {
+            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+
+        boolean on = settingsPrefs.getBoolean("rhs",true );
+        if (!on) {
+            activationWidth = 0;
+            activationHeight = 0;
+            transparency = 0;
+        }
+        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        parameters.x = 0;
+        parameters.y = -screenHeight/10;
+        parameters.gravity = Gravity.END;
+        ll.setBackgroundColor(Color.argb(transparency,0,200,200));
         wm.updateViewLayout(ll,parameters);
     }
 
+
+    public void updateLHS(){
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
+        int activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        int transparency = settingsPrefs.getInt("lhsTransparency", 25);
+        int overlayType;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
+        else {
+            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+
+        boolean on = settingsPrefs.getBoolean("lhs",true );
+        if (!on) {
+            activationWidth = 0;
+            activationHeight = 0;
+            transparency = 0;
+        }
+        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsparameters.x = 0;
+        lhsparameters.y = -screenHeight/10;
+        lhsparameters.gravity = Gravity.START;
+        lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
+        wm.updateViewLayout(lhs,lhsparameters);
+    }
+
+
+
     public void stopMe(){
+        stopForeground(true);
         stopSelf();
     }
+
+
 
     @Override
     public void onCreate() {
@@ -112,6 +169,33 @@ public class FloatingWindow extends Service{
 
 
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        ll = new LinearLayout(this);
+        lhs = new LinearLayout(this);
+
+        int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
+        int activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
+        int transparency = settingsPrefs.getInt("rhsTransparency", 25);
+        int overlayType;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
+        else {
+            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+
+        activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
+        activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        transparency = settingsPrefs.getInt("lhsTransparency", 25);
+
+        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsparameters.x = 0;
+        lhsparameters.y = -screenHeight/10;
+        lhsparameters.gravity = Gravity.START;
+        lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
+
+        wm.addView(ll,parameters);
+        wm.addView(lhs,lhsparameters);
 
         t = new TextView(this);
         t.setText("");
@@ -124,12 +208,6 @@ public class FloatingWindow extends Service{
         getDimensions();
 
 
-        ll = new LinearLayout(this);
-        lhs = new LinearLayout(this);
-        ll.setBackgroundColor(Color.argb(getSharedPreferences("SettingsActivity", 0).getInt("transparency",55 ),0,200,200));
-        lhs.setBackgroundColor(Color.argb(getSharedPreferences("SettingsActivity", 0).getInt("transparency",55 ),0,200,200));
-        wm.addView(ll,parameters);
-        wm.addView(lhs,lhsparameters);
 
         /////////////////////////////done with activation area/////////////////////////
 
@@ -156,6 +234,8 @@ public class FloatingWindow extends Service{
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        updateLHS();
+                        updateRHS();
                         x = updatedParameters.x;
                         y = updatedParameters.y;
                         touchedX = event.getRawX();
@@ -184,37 +264,37 @@ public class FloatingWindow extends Service{
                             switch (group) {
                                 case 1:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName1","Group 1 not settings" ));
+                                    t.setText(settingsPrefs.getString("groupName1","Group 1" ));
                                     setContentsPositionGroup(1, 0);
                                     break;
                                 case 2:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G2 Name","Group 2" ));
+                                    t.setText(settingsPrefs.getString("groupName2","Group 2" ));
                                     setContentsPositionGroup(2, 0);
                                     break;
                                 case 3:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G3 Name","Group 3" ));
+                                    t.setText(settingsPrefs.getString("groupName3","Group 3" ));
                                     setContentsPositionGroup(3, 0);
                                     break;
                                 case 4:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G4 Name","Group 4" ));
+                                    t.setText(settingsPrefs.getString("groupName4","Group 4" ));
                                     setContentsPositionGroup(4, 0);
                                     break;
                                 case 5:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G5 Name","Group 5" ));
+                                    t.setText(settingsPrefs.getString("groupName5","Group 5" ));
                                     setContentsPositionGroup(5, 0);
                                     break;
                                 case 6:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G6 Name","Group 6" ));
+                                    t.setText(settingsPrefs.getString("groupName6","Group 6" ));
                                     setContentsPositionGroup(6, 0);
                                     break;
                                 case 7:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G7 Name","Group 7" ));
+                                    t.setText(settingsPrefs.getString("groupName7","Group 7" ));
                                     setContentsPositionGroup(7, 0);
                                     break;
                             }
@@ -275,6 +355,8 @@ public class FloatingWindow extends Service{
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        updateLHS();
+                        updateRHS();
                         x = updatedParameters.x;
                         y = updatedParameters.y;
                         touchedX = event.getRawX();
@@ -303,37 +385,37 @@ public class FloatingWindow extends Service{
                             switch (group) {
                                 case 1:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G1 Name","Group 1" ));
+                                    t.setText(settingsPrefs.getString("groupName1","Group 1" ));
                                     setContentsPositionGroup(1, 1);
                                     break;
                                 case 2:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G2 Name","Group 2" ));
+                                    t.setText(settingsPrefs.getString("groupName2","Group 2" ));
                                     setContentsPositionGroup(2, 1);
                                     break;
                                 case 3:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G3 Name","Group 3" ));
+                                    t.setText(settingsPrefs.getString("groupName3","Group 3" ));
                                     setContentsPositionGroup(3, 1);
                                     break;
                                 case 4:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G4 Name","Group 4" ));
+                                    t.setText(settingsPrefs.getString("groupName4","Group 4" ));
                                     setContentsPositionGroup(4, 1);
                                     break;
                                 case 5:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G5 Name","Group 5" ));
+                                    t.setText(settingsPrefs.getString("groupName5","Group 5" ));
                                     setContentsPositionGroup(5, 1);
                                     break;
                                 case 6:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G6 Name","Group 6" ));
+                                    t.setText(settingsPrefs.getString("groupName6","Group 6" ));
                                     setContentsPositionGroup(6, 1);
                                     break;
                                 case 7:
                                     tl.removeAllViews();
-                                    t.setText(sharedPref.getString("G7 Name","Group 7" ));
+                                    t.setText(settingsPrefs.getString("groupName7","Group 7" ));
                                     setContentsPositionGroup(7, 1);
                                     break;
                             }
@@ -392,6 +474,10 @@ public class FloatingWindow extends Service{
         statusBarOffset = getStatusBarHeight();
         setScreenSize();
 
+        numZones = settingsPrefs.getInt("numZones", 7);
+        numAppCols = settingsPrefs.getInt("numAppCols", 6);
+        numAppRows = settingsPrefs.getInt("numAppRows", 10);
+
         zoneXSize = screenWidth / numZones;
         zoneYSize = screenHeight / numZones;
         Log.d("screen","Screen Width: "+screenWidth+", zoneXSize: "+zoneXSize);
@@ -415,14 +501,10 @@ public class FloatingWindow extends Service{
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
 
-        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        parameters.x = 0;
-        parameters.y = -screenHeight/10;
-        parameters.gravity = Gravity.END;
-        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight/10;
-        lhsparameters.gravity = Gravity.START;
+        updateRHS();
+        updateLHS();
+//        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+//        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         relativeParams = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
@@ -684,6 +766,17 @@ public class FloatingWindow extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent.getAction().equals("Start")) {
+            Log.i("start", "Received Start Foreground Intent ");
+            // your start service code
+        }
+        else if (intent.getAction().equals( "Stop" )) {
+            Log.i("stop", "Received Stop Foreground Intent");
+            //your end servce code
+            stopForeground(true);
+            stopSelf();
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             Notification.Builder builder = new Notification.Builder(this, "333")
@@ -707,6 +800,12 @@ public class FloatingWindow extends Service{
             startForeground(1, notification);
         }
         return START_NOT_STICKY;
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        wm.removeView(ll);
+        wm.removeView(lhs);
     }
 }
 
