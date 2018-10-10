@@ -48,8 +48,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             FloatingWindow fw = new FloatingWindow();
-            fw.updateLHS();
-            fw.updateRHS();
 
             String stringValue = value.toString();
 

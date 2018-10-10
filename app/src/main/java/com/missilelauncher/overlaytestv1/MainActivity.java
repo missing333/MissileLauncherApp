@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
         setContentView(R.layout.activity_main);
 
-        stop = findViewById(R.id.stop);
         config = findViewById(R.id.config);
         enableToggle = findViewById(R.id.enableService);
 
@@ -60,8 +60,12 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
                     startIntent.setAction("Start");
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        Log.v("app","Starting Foreground Service");
+                        Toast.makeText(getApplication(),"Starting as Foreground Service." ,Toast.LENGTH_SHORT ).show();
                         startForegroundService(startIntent);
                     } else {
+                        Log.v("app","Starting regular Service");
+                        Toast.makeText(getApplication(),"Starting as regular Service." ,Toast.LENGTH_SHORT ).show();
                         startService(startIntent);
                     }
                 }
@@ -161,8 +165,12 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
             startIntent.setAction("Start");
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Log.v("app","Starting Foreground Service");
+                Toast.makeText(this,"Starting as Foreground Service." ,Toast.LENGTH_SHORT ).show();
                 startForegroundService(startIntent);
             } else {
+                Log.v("app","Starting regular Service");
+                Toast.makeText(this,"Starting as regular Service." ,Toast.LENGTH_SHORT ).show();
                 startService(startIntent);
             }
         }
