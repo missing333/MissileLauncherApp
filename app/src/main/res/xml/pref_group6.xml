@@ -9,6 +9,13 @@
         android:singleLine="true"
         android:title="Group 6 Name: " />
 
+    <ListPreference
+        android:defaultValue="Most Used"
+        android:entries="@array/sort_options"
+        android:entryValues="@array/sort_options"
+        android:key="sortG6"
+        android:title="Sorting Method for this Group" />
+
     <Preference
         android:key="group6AppList"
         android:showDefault="true"

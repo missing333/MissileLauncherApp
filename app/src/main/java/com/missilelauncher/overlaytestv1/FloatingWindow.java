@@ -44,7 +44,6 @@ public class FloatingWindow extends Service{
 
 
     private WindowManager wm;
-    private SharedPreferences sharedPref;
     private SharedPreferences settingsPrefs;
     private LinearLayout ll;
     private LinearLayout lhs;
@@ -139,20 +138,12 @@ public class FloatingWindow extends Service{
 
 
 
-    public void stopMe(){
-        stopForeground(true);
-        stopSelf();
-    }
-
-
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        sharedPref = getSharedPreferences("SettingsActivity", 0);
         settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final SharedPreferences.Editor editor = sharedPref.edit();
+        final SharedPreferences.Editor editor = settingsPrefs.edit();
 
         numZones = settingsPrefs.getInt("numGroups",7);
         numAppRows = settingsPrefs.getInt("numAppRows", 10);
@@ -317,9 +308,9 @@ public class FloatingWindow extends Service{
                         if (coords[0] != -1 || coords[1] !=-1){
                             AppInfo a = appPositions[coords[0]][coords[1]];
                             if (a.launchIntent != null && event.getRawX() < screenWidth * .85){
-                                editor.putInt(a.label.toString(), sharedPref.getInt(a.label.toString(), 0)+1);
+                                editor.putInt(a.label.toString()+"_launchCount", settingsPrefs.getInt(a.label.toString()+"_launchCount", 0)+1);
                                 editor.commit();
-                                Log.v("launchCount", "LaunchCount for "+a.label+" is: " +sharedPref.getInt(a.label.toString(), 0));
+                                Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
                                 Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
                                 try {
                                     startActivity(launchApp);
@@ -438,9 +429,9 @@ public class FloatingWindow extends Service{
                         if (coords[0] != -1 || coords[1] !=-1){
                             AppInfo a = appPositions[coords[0]][coords[1]];
                             if (a.launchIntent != null && event.getRawX() < screenWidth * .85){
-                                editor.putInt(a.label.toString(), sharedPref.getInt(a.label.toString(), 0)+1);
+                                editor.putInt(a.label.toString()+"_launchCount", settingsPrefs.getInt(a.label.toString()+"_launchCount", 0)+1);
                                 editor.commit();
-                                Log.v("launchCount", "LaunchCount for "+a.label+" is: " +sharedPref.getInt(a.label.toString(), 0));
+                                Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
                                 Intent launchApp = null;
                                 launchApp = appPositions[coords[0]][coords[1]].launchIntent;
                                 try {
@@ -561,7 +552,7 @@ public class FloatingWindow extends Service{
 
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
-            g[i].setImageResource(R.drawable.ic_star_black_50dp);
+            g[i].setImageResource(R.drawable.ring_50dp);
             groupIconParams.setMarginStart(marginLeft);
             g[i].setLayoutParams(groupIconParams);
             g[i].setY((float) (  zoneYSize * i )+yOffset);
@@ -588,10 +579,20 @@ public class FloatingWindow extends Service{
             int row = nearestRow+rowOffset;
 
             for(AppInfo item:groupAppList[group]){
-                item.setLaunchCount(sharedPref.getInt(item.label.toString(),0 ));
+                item.setLaunchCount(settingsPrefs.getInt(item.label.toString()+"_launchCount",0 ));
             }
 
-            Collections.sort(groupAppList[group], AppInfo.appLaunchCount);
+
+            String sort = settingsPrefs.getString("sortG"+group,"Most Used" );
+            //Log.v("sort", "Sorting Group "+group+" SHOULD BE: " +sort);
+            if (sort.equals("Most Used")){
+                //Log.v("sort", "Sorting Group "+group+" by Most Used.");
+                Collections.sort(groupAppList[group], AppInfo.appLaunchCount);
+
+            }else {
+                //Log.v("sort", "Sorting Group "+group+" by Alphabetical.");
+                Collections.sort(groupAppList[group], AppInfo.appNameComparator);
+            }
 
 
             while (row < numAppRows+1){

@@ -47,7 +47,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
-            FloatingWindow fw = new FloatingWindow();
 
             String stringValue = value.toString();
 
@@ -259,6 +258,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             setHasOptionsMenu(true);
 
             bindPreferenceSummaryToValue(findPreference("groupName1"));
+            bindPreferenceSummaryToValue(findPreference("sortG1"));
 
             Preference p1 = (Preference) findPreference("group1AppList");
             p1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -293,6 +293,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_group2);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("groupName2"));
+            bindPreferenceSummaryToValue(findPreference("sortG2"));
 
             Preference p2 = (Preference) findPreference("group2AppList");
             p2.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -328,6 +329,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_group3);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("groupName3"));
+            bindPreferenceSummaryToValue(findPreference("sortG3"));
 
             Preference p3 = (Preference) findPreference("group3AppList");
             p3.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -362,6 +364,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_group4);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("groupName4"));
+            bindPreferenceSummaryToValue(findPreference("sortG4"));
 
             Preference p4 = (Preference) findPreference("group4AppList");
             p4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -396,6 +399,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_group5);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("groupName5"));
+            bindPreferenceSummaryToValue(findPreference("sortG5"));
 
             Preference p5 = (Preference) findPreference("group5AppList");
             p5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -430,6 +434,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_group6);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("groupName6"));
+            bindPreferenceSummaryToValue(findPreference("sortG6"));
 
             Preference p6 = (Preference) findPreference("group6AppList");
             p6.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -464,6 +469,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_group7);
             setHasOptionsMenu(true);
             bindPreferenceSummaryToValue(findPreference("groupName7"));
+            bindPreferenceSummaryToValue(findPreference("sortG7"));
 
             Preference p7 = (Preference) findPreference("group7AppList");
             p7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
