@@ -317,6 +317,7 @@ public class FloatingWindow extends Service{
                                 editor.commit();
                                 Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
                                 Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
+                                launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 try {
                                     startActivity(launchApp);
                                 } catch (Exception e) {
@@ -439,6 +440,7 @@ public class FloatingWindow extends Service{
                                 Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
                                 Intent launchApp = null;
                                 launchApp = appPositions[coords[0]][coords[1]].launchIntent;
+                                launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 try {
 
                                     startActivity(launchApp);

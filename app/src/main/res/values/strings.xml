@@ -89,10 +89,11 @@
     <string name="pref_group7">Group 7 Settings</string>
     <string name="pref_groupEnabled">Enable This Group</string>
     <string name="pref_groupAppsInGroup">Select Apps for this Group</string>
-    <string name="save_this_group">Save These Settings</string>
+    <string name="save_this_group">Save Selected Apps</string>
     <string name="appicon">appIcon</string>
     <string name="group_name">Group Name:</string>
     <string name="enable_missilelauncher">Enable MissileLauncher</string>
     <string name="settings">Settings</string>
+    <string name="show_ungrouped_apps_only">Show UnGrouped Apps Only</string>
 
 </resources>

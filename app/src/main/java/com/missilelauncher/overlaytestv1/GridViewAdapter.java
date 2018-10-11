@@ -70,4 +70,6 @@ public class GridViewAdapter extends BaseAdapter {
         customView.display(appArray[position].label.toString(), appArray[position].icon, listOfLists[groupIndex].contains(position));
         return customView;
     }
+
+
 }

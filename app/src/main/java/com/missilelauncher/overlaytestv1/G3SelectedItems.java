@@ -19,9 +19,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class G3SelectedItems extends AppCompatActivity {
@@ -41,11 +44,13 @@ public class G3SelectedItems extends AppCompatActivity {
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
     public static ArrayList<String> saveList;
+    final int group = 3;
+    GridViewAdapter adapter;
+    public AppInfo[] uncategorizedAppArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final int group = 3;
 
         sharedPrefs = getSharedPreferences("SettingsActivity",0 );
         editor = sharedPrefs.edit();
@@ -64,28 +69,33 @@ public class G3SelectedItems extends AppCompatActivity {
         Button b = findViewById(R.id.saveButton);
         gridView = (GridView) findViewById(R.id.gridView);
 
-
-        final GridViewAdapter adapter = new GridViewAdapter(appArray, this);
-        gridView.setAdapter(adapter);
-        GridItemView gv = new GridItemView(getApplicationContext());
-        adapter.groupIndex = group;
-
-        G3SelectedApps = new ArrayList<AppInfo>(0);
-        if(appArray.length > 0 && saveList != null){
-            for (int i=0;i<appArray.length;i++) {
-                //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
-                gv.display( appArray[i].label.toString(),appArray[i].icon, false);
-                for (int f=0;f<saveList.size();f++) {
-                    //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
-                    if(appArray[i].packageName.equals(saveList.get(f))){
-                        adapter.listOfLists[group].add(i);
-                        G3SelectedApps.add(appArray[i]);
-                        adapter.getView(i, gv ,gridView );
-                        gv.display( appArray[i].label.toString(),appArray[i].icon, true);
-                    }
-                }
-            }
+        Switch uca = findViewById(R.id.uncategoriezedButton);
+        if (uca.isChecked()){
+            ArrayList<AppInfo> allUncategoriezedApps = new ArrayList<AppInfo>(Arrays.asList(appArray));
+            allUncategoriezedApps = getUncategoriezedApps(allUncategoriezedApps,group );
+            uncategorizedAppArray = allUncategoriezedApps.toArray(new AppInfo[allUncategoriezedApps.size()]);
+            displayGrid(uncategorizedAppArray);
+        }else{
+            displayGrid(appArray);
         }
+
+        uca.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (compoundButton.isChecked()) {
+                    ArrayList<AppInfo> allUncategoriezedApps = new ArrayList<AppInfo>(Arrays.asList(appArray));
+                    allUncategoriezedApps = getUncategoriezedApps(allUncategoriezedApps,group );
+                    uncategorizedAppArray = allUncategoriezedApps.toArray(new AppInfo[allUncategoriezedApps.size()]);
+                    displayGrid(uncategorizedAppArray);
+
+                } else {
+                    displayGrid(appArray);
+                }
+
+
+            }
+        });
 
 
 
@@ -161,5 +171,62 @@ public class G3SelectedItems extends AppCompatActivity {
     }
     public void setG3Apps(ArrayList<AppInfo> app){
         G3SelectedApps = app;
+    }
+
+    public ArrayList<AppInfo> getUncategoriezedApps (ArrayList<AppInfo> allApps, Integer group){
+        Log.v("uncategorizing", allApps.size() + " apps to start");
+        ArrayList<String> saveList;
+        Iterator<AppInfo> iterator;
+        AppInfo a;
+        for (int g=1;g<=7;g++){
+
+            if (g != group){
+                iterator = allApps.iterator();
+                saveList = sh.getFavorites(getApplicationContext(),g);
+                if(allApps.size() > 0 && saveList != null){
+                    while (iterator.hasNext()) {
+                        a = iterator.next();
+                        for (int f=0;f<saveList.size();f++) {
+                            if(a.packageName.equals(saveList.get(f))){
+                                Log.v("uncategorizing", "Removing " + a.label + " from G" + group);
+                                iterator.remove();
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+        Log.v("uncategorizing", allApps.size() + " apps to end");
+        return allApps;
+    }
+
+    void displayGrid(AppInfo[] appArray){
+        adapter = new GridViewAdapter(appArray, this);
+        gridView.setAdapter(adapter);
+        GridItemView gv = new GridItemView(getApplicationContext());
+        adapter.groupIndex = group;
+
+        saveList = sh.getFavorites(getApplicationContext(),group);
+        if (saveList == null){
+            saveList = new ArrayList<>(0);
+        }
+        G3SelectedApps = new ArrayList<AppInfo>(0);
+        if(appArray.length > 0 && saveList != null){
+            for (int i=0;i<appArray.length;i++) {
+                //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
+                gv.display( appArray[i].label.toString(),appArray[i].icon, false);
+                for (int f=0;f<saveList.size();f++) {
+                    //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
+                    if(appArray[i].packageName.equals(saveList.get(f))){
+                        adapter.listOfLists[group].add(i);
+                        G3SelectedApps.add(appArray[i]);
+                        adapter.getView(i, gv ,gridView );
+                        gv.display( appArray[i].label.toString(),appArray[i].icon, true);
+                    }
+                }
+            }
+        }
     }
 }

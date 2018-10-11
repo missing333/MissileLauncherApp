@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.missilelauncher.overlaytestv1.G1SelectedItems.G1SelectedApps;
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -202,4 +204,5 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onPause() {
         super.onPause();
     }
+
 }

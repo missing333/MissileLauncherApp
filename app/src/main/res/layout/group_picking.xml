@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="top">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="top|start"
         android:orientation="vertical">
 
         <Button
@@ -22,17 +23,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Switch
+            android:id="@+id/uncategoriezedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="15dp"
+            android:text="@string/show_ungrouped_apps_only" />
+
         <GridView
             android:id="@+id/gridView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numColumns="auto_fit"
-            android:gravity="center"
-            android:columnWidth="100dp"
+            android:layout_weight="1"
             android:clipToPadding="true"
+            android:columnWidth="100dp"
             android:fitsSystemWindows="true"
+            android:gravity="top|center"
+            android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
-            android:visibility="visible"/>
+            android:visibility="visible"></GridView>
+
 
     </LinearLayout>
 
