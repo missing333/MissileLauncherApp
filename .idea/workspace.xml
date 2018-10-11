@@ -18,7 +18,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_add_white_50dp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java" afterDir="false" />
     </list>
@@ -88,8 +87,8 @@
       <file leaf-file-name="FloatingWindow.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="665" column="43" selection-start-line="665" selection-start-column="43" selection-end-line="665" selection-end-column="43" />
+            <state relative-caret-position="246">
+              <caret line="790" column="55" lean-forward="true" selection-start-line="790" selection-start-column="55" selection-end-line="790" selection-end-column="55" />
               <folding>
                 <element signature="docComment;class#FloatingWindow#0" />
                 <element signature="e#2355#2364#0" />
@@ -2521,7 +2520,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="device.picker.selection" value="Pixel_XL_API_25" />
+    <property name="device.picker.selection" value="92601282" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -2849,12 +2848,12 @@
       <option name="project" value="LOCAL" />
       <updated>1539295243991</updated>
     </task>
-    <task id="LOCAL-00007" summary="added left side activation zone">
-      <created>1538808549014</created>
+    <task id="LOCAL-00007" summary="added button to quick Edit this group">
+      <created>1539297973501</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1538808549015</updated>
+      <updated>1539297973501</updated>
     </task>
     <task id="LOCAL-00008" summary="auto-load saved groups on install">
       <created>1538808585456</created>
@@ -2877,7 +2876,7 @@
       <option name="project" value="LOCAL" />
       <updated>1539044727560</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2949,7 +2948,8 @@
     <MESSAGE value="changed icon from star to circle.  &#10;added sorting to groups" />
     <MESSAGE value="added list options to Preferences for cols, rows." />
     <MESSAGE value="added option to show only uncategorized apps." />
-    <option name="LAST_COMMIT_MESSAGE" value="added option to show only uncategorized apps." />
+    <MESSAGE value="added button to quick Edit this group" />
+    <option name="LAST_COMMIT_MESSAGE" value="added button to quick Edit this group" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3383,8 +3383,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="665" column="43" selection-start-line="665" selection-start-column="43" selection-end-line="665" selection-end-column="43" />
+        <state relative-caret-position="246">
+          <caret line="790" column="55" lean-forward="true" selection-start-line="790" selection-start-column="55" selection-end-line="790" selection-end-column="55" />
           <folding>
             <element signature="docComment;class#FloatingWindow#0" />
             <element signature="e#2355#2364#0" />

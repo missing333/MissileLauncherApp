@@ -726,16 +726,16 @@ public class FloatingWindow extends Service{
                             }
                             ImageButton appIcon = new ImageButton(this);
                             configImageButton(appIcon);
-                            appPositions[col][lastRow].setLabel("Edit this Group");
-                            appPositions[col][lastRow].setLaunchIntent(intent);
+                            appPositions[col][row].setLabel("Edit this Group");
+                            appPositions[col][row].setLaunchIntent(intent);
                             appIcon.setX(col * screenWidth/(numAppCols+2));
-                            appIcon.setY(lastRow * screenHeight/(numAppRows+2));
+                            appIcon.setY(row * screenHeight/(numAppRows+2));
                             appIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_add_white_50dp));
                             tl.addView(appIcon);
                         }
 
                         index++;
-                        if (index >= numAppsInGroup) {
+                        if (index > numAppsInGroup) {
                             lastRow = row;
                             row = numAppRows + 11;
                         }
@@ -784,16 +784,16 @@ public class FloatingWindow extends Service{
                             }
                             ImageButton appIcon = new ImageButton(this);
                             configImageButton(appIcon);
-                            appPositions[col][lastRow].setLabel("Edit this Group");
-                            appPositions[col][lastRow].setLaunchIntent(intent);
+                            appPositions[col][row].setLabel("Edit this Group");
+                            appPositions[col][row].setLaunchIntent(intent);
                             appIcon.setX(col * screenWidth/(numAppCols+2));
-                            appIcon.setY(lastRow * screenHeight/(numAppRows+2));
+                            appIcon.setY(row * screenHeight/(numAppRows+2));
                             appIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_add_white_50dp));
                             tl.addView(appIcon);
                         }
 
                         index++;
-                        if (index >= numAppsInGroup){
+                        if (index > numAppsInGroup){
                             lastRow = row;
                             row = numAppRows+11;
                         }
