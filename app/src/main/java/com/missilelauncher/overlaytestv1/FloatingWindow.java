@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -20,6 +21,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -71,6 +73,7 @@ public class FloatingWindow extends Service{
     private int[] coords;
     private ArrayList<AppInfo>[] groupAppList;
     private int appSize = 100;
+    int offset;
 
 
     @Nullable
@@ -145,9 +148,9 @@ public class FloatingWindow extends Service{
         settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         final SharedPreferences.Editor editor = settingsPrefs.edit();
 
-        numZones = settingsPrefs.getInt("numGroups",7);
-        numAppRows = settingsPrefs.getInt("numAppRows", 10);
-        numAppCols = settingsPrefs.getInt("numAppCols", 6);
+        numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
+        numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
+        numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
         Log.v("prefs","numGroups = " + numZones);
         Log.v("prefs","numAppRows = " + numAppRows);
         Log.v("prefs","numAppCols = " + numAppCols);
@@ -237,7 +240,12 @@ public class FloatingWindow extends Service{
                         Log.v("touch", "Touch detected.");
                         gl.removeAllViews();
                         getDimensions();
-                        setIconSizePos((int) (screenWidth-zoneXSize));
+                        if (!portrait){
+                            offset = zoneXSize * 2;
+                        }else {
+                            offset = zoneXSize;
+                        }
+                        setIconSizePos((int) (screenWidth-offset));
                         wm.addView(gl, gparameters);
                         gl.addView(t);
                         for (int i=0;i<numZones;i++){
@@ -465,13 +473,19 @@ public class FloatingWindow extends Service{
         statusBarOffset = getStatusBarHeight();
         setScreenSize();
 
-        numZones = settingsPrefs.getInt("numZones", 7);
-        numAppCols = settingsPrefs.getInt("numAppCols", 6);
-        numAppRows = settingsPrefs.getInt("numAppRows", 10);
+        numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
+        numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
+        numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
 
-        zoneXSize = screenWidth / numZones;
-        zoneYSize = screenHeight / numZones;
-        Log.d("screen","Screen Width: "+screenWidth+", zoneXSize: "+zoneXSize);
+        float dip = 50f;
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dip,
+                r.getDisplayMetrics()
+        );
+        zoneXSize = (int) px;
+        zoneYSize = (int) ((int) px*1.3);
         Log.d("screen","Screen Height: "+screenHeight+", zoneYSize: "+zoneYSize);
         if (numAppRows>numAppCols){
             maxAppSize = (int) (zoneXSize * .7);
@@ -479,10 +493,9 @@ public class FloatingWindow extends Service{
         else{
             maxAppSize = (int) (zoneXSize * .5);
         }
-
-
-        int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2 * .03);
-        int activationHeight = (int) Math.round(screenHeight * .5);
+        if (zoneYSize*numZones > screenHeight){
+            zoneYSize = screenHeight/numZones;
+        }
 
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -544,38 +557,45 @@ public class FloatingWindow extends Service{
 
 
     private void setIconSizePos(int marginLeft){
-        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(maxAppSize,maxAppSize);
+        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(zoneXSize,zoneYSize);
+        //TODO: push icons more to the right in portrait mode.  Gravity?  Relative?
+        numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
         int yOffset = 0;
-        numZones = settingsPrefs.getInt("numGroups",7);
-        if (portrait)
-        {yOffset = statusBarOffset;}
+        int ySizeNeeded = numZones * zoneYSize;
+        int marginTop = (screenHeight - ySizeNeeded) / 5;
+        if (portrait){
+            yOffset = statusBarOffset;
+            marginLeft+=zoneXSize;
+        }
 
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
             g[i].setImageResource(R.drawable.ring_50dp);
-            groupIconParams.setMarginStart(marginLeft);
+            groupIconParams.setMargins(marginLeft,marginTop,0,0);
             g[i].setLayoutParams(groupIconParams);
-            g[i].setY((float) (  zoneYSize * i )+yOffset);
+            g[i].setY((float) (  zoneYSize * i )+yOffset+marginTop);
         }
     }
 
     private void setContentsPositionGroup(int group, int ltr){
 
-        numAppCols = settingsPrefs.getInt("numAppCols", 6);
-        numAppRows = settingsPrefs.getInt("numAppRows", 10);
+        numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
+        numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
         int index = 0;
         int rowOffset = 0;
         int colOffset = 0;
-        if (group == 1)
+        if (group == 1 && numZones >= 7)
             {rowOffset = 1;}
         else if (group == 7)
             {rowOffset = -1;}
         if (numAppRows<numAppCols)
             {colOffset = 1;}
         try {
+            int ySizeNeeded = numZones * zoneYSize;
+            int marginTop = (screenHeight - ySizeNeeded) / 2;
             int numAppsInGroup = groupAppList[group].size();;
             int rowsNeeded = (numAppsInGroup/numAppCols);
-            int nearestRow = (group * zoneYSize/(screenHeight/(numAppRows+2)))-1;
+            int nearestRow = (((group * zoneYSize)+marginTop)/Math.round((screenHeight/(numAppRows+2))))-1;
             int row = nearestRow+rowOffset;
 
             for(AppInfo item:groupAppList[group]){
@@ -704,9 +724,11 @@ public class FloatingWindow extends Service{
         }
     }
 
-    int checkGroup (int x, int y){
+    private int checkGroup (int x, int y){
+        int ySizeNeeded = numZones * zoneYSize;
+        int marginTop = (screenHeight - ySizeNeeded) / 2;
         for (int groupNum = 1; groupNum <= numZones ; groupNum++){
-            if ((y < (zoneYSize * groupNum + getStatusBarHeight()))){
+            if ((y < ((zoneYSize * groupNum) +  marginTop))){
                 Log.v("group","pointer coords are : " + x +", " +y);
                 Log.v("group","lastGroup is: " + lastGroup);
                 Log.v("group","Group found is: " + groupNum);
@@ -758,8 +780,8 @@ public class FloatingWindow extends Service{
         int temp = numAppRows;
         numAppRows = numAppCols;
         numAppCols = temp;
-        settingsPrefs.edit().putInt("numAppRows",numAppRows).commit();
-        settingsPrefs.edit().putInt("numAppCols",numAppCols).commit();
+        settingsPrefs.edit().putString("numAppRows",numAppRows+"").commit();
+        settingsPrefs.edit().putString("numAppCols",numAppCols+"").commit();
         Log.v("orientation","Rows: " +numAppRows + ", Cols: "+numAppCols);
         wm.removeView(ll);
         wm.removeView(lhs);

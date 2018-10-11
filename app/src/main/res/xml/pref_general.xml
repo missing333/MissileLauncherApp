@@ -1,19 +1,25 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.missilelauncher.overlaytestv1.NumberPickerPreference
-        android:key="numGroups"
-        android:title="Number of Groups"
-        android:defaultValue="7" />
+    <ListPreference
+        android:defaultValue="3"
+        android:entries="@array/group_selection"
+        android:entryValues="@array/group_selection"
+        android:key="numZones"
+        android:title="Number of Groups" />
 
-    <com.missilelauncher.overlaytestv1.NumberPickerPreference
+    <ListPreference
+        android:defaultValue="6"
+        android:entries="@array/num_app_selector"
+        android:entryValues="@array/num_app_selector"
         android:key="numAppCols"
-        android:title="Number of App Columns"
-        android:defaultValue="6" />
+        android:title="Number of App Columns" />
 
-    <com.missilelauncher.overlaytestv1.NumberPickerPreference
+    <ListPreference
+        android:defaultValue="10"
+        android:entries="@array/num_app_selector"
+        android:entryValues="@array/num_app_selector"
         android:key="numAppRows"
-        android:title="Number of App Rows"
-        android:defaultValue="10" />
+        android:title="Number of App Rows" />
 
     <SwitchPreference
         android:defaultValue="true"
