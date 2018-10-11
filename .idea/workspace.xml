@@ -9,7 +9,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="uncateg" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
@@ -18,22 +17,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="phase 1 of getting settings to work.">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/GroupMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_add_white_50dp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G1SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G1SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G2SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G2SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G3SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G3SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G4SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G4SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G5SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G5SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G6SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G6SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G7SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G7SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/GridViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/GridViewAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -92,20 +79,42 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="41" selection-end-column="46" />
+            <state relative-caret-position="459">
+              <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="84" selection-end-column="86" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="group_picking.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml">
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+      <file leaf-file-name="FloatingWindow.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="665" column="43" selection-start-line="665" selection-start-column="43" selection-end-line="665" selection-end-column="43" />
+              <folding>
+                <element signature="docComment;class#FloatingWindow#0" />
+                <element signature="e#2355#2364#0" />
+                <element signature="e#2454#3803#0" />
+                <element signature="e#3810#5178#0" />
+                <element signature="e#8285#8331#0" />
+                <element signature="e#12959#13077#0" />
+                <element signature="class#14673:21015" />
+                <element signature="e#14849#14895#0" />
+                <element signature="method#onTouch#0;class#14673:21015" />
+                <element signature="e#19289#19407#0" />
+                <element signature="e#21030#23660#0" />
+                <element signature="e#22341#22512#0" />
+                <element signature="e#23667#24177#0" />
+                <element signature="e#24184#24477#0" />
+                <element signature="e#30049#30428#0" />
+                <element signature="e#30435#30956#0" />
+                <element signature="e#25403#26448#0" />
+                <element signature="e#26449#27189#0" />
+                <element signature="e#27200#27721#0" />
+                <element signature="e#32236#32960#0" />
+                <element signature="e#32967#33998#0" />
+                <element signature="e#34005#35376#0" />
+                <element signature="e#35382#35495#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2431,7 +2440,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/num_app_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/GridViewAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/MainActivity.java" />
@@ -2444,6 +2452,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G6SelectedItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/G7SelectedItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java" />
       </list>
     </option>
   </component>
@@ -2486,6 +2495,12 @@
               <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
@@ -2827,12 +2842,12 @@
       <option name="project" value="LOCAL" />
       <updated>1539218610029</updated>
     </task>
-    <task id="LOCAL-00006" summary="sorting by alpha in app selection, sorting by launchcount in launcher!">
-      <created>1538691327466</created>
+    <task id="LOCAL-00006" summary="added option to show only uncategorized apps.">
+      <created>1539295243991</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1538691327466</updated>
+      <updated>1539295243991</updated>
     </task>
     <task id="LOCAL-00007" summary="added left side activation zone">
       <created>1538808549014</created>
@@ -2862,7 +2877,7 @@
       <option name="project" value="LOCAL" />
       <updated>1539044727560</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2884,11 +2899,11 @@
       <window_info anchor="bottom" id="Logcat" order="9" weight="0.52391076" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="4" />
-      <window_info anchor="bottom" id="Build" order="12" weight="0.41339" />
+      <window_info active="true" anchor="bottom" id="Build" order="12" visible="true" weight="0.41339" />
       <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32943678" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49944383" weight="0.54729015" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49944383" weight="0.35387886" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32943678" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="2" />
@@ -2898,7 +2913,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32943678" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Captures" order="7" weight="0.24972191" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26751947" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26751947" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32731137" />
       <window_info anchor="right" id="Gradle" order="8" />
       <window_info anchor="right" id="Theme Preview" order="6" />
@@ -2933,19 +2948,12 @@
     <MESSAGE value="fixed minor app positioning" />
     <MESSAGE value="changed icon from star to circle.  &#10;added sorting to groups" />
     <MESSAGE value="added list options to Preferences for cols, rows." />
-    <option name="LAST_COMMIT_MESSAGE" value="added list options to Preferences for cols, rows." />
+    <MESSAGE value="added option to show only uncategorized apps." />
+    <option name="LAST_COMMIT_MESSAGE" value="added option to show only uncategorized apps." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java</url>
-          <line>580</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="21" />
+      <option name="time" value="31" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -2974,18 +2982,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/missile_launcher_round.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/AppInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-          <folding>
-            <element signature="e#1031#1032#0" expanded="true" />
-            <element signature="e#1079#1080#0" expanded="true" />
-            <element signature="method#getActivityIcon#0;class#AppInfo#0" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
@@ -3228,41 +3224,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="148" column="74" selection-start-line="148" selection-start-column="70" selection-end-line="148" selection-end-column="74" />
-          <folding>
-            <element signature="docComment;class#FloatingWindow#0" />
-            <element signature="e#2355#2364#0" />
-            <element signature="e#2454#3803#0" />
-            <element signature="e#3810#5178#0" />
-            <element signature="class#8108:14634" />
-            <element signature="e#8285#8331#0" />
-            <element signature="method#onTouch#0;class#8108:14634" />
-            <element signature="e#12959#13077#0" />
-            <element signature="class#14673:21015" />
-            <element signature="e#14849#14895#0" />
-            <element signature="method#onTouch#0;class#14673:21015" />
-            <element signature="e#19289#19407#0" />
-            <element signature="e#21030#23660#0" />
-            <element signature="e#22341#22512#0" />
-            <element signature="e#23667#24177#0" />
-            <element signature="e#24184#24477#0" />
-            <element signature="e#24483#25528#0" />
-            <element signature="e#25534#30042#0" />
-            <element signature="e#30049#30428#0" />
-            <element signature="e#30435#30956#0" />
-            <element signature="e#30963#31484#0" />
-            <element signature="e#31490#32230#0" />
-            <element signature="e#32236#32960#0" />
-            <element signature="e#32967#33998#0" />
-            <element signature="e#34005#35376#0" />
-            <element signature="e#35382#35495#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -3393,13 +3354,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="41" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
@@ -3407,6 +3361,55 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="84" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/AppInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="18" />
+          <folding>
+            <element signature="method#getActivityIcon#0;class#AppInfo#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="665" column="43" selection-start-line="665" selection-start-column="43" selection-end-line="665" selection-end-column="43" />
+          <folding>
+            <element signature="docComment;class#FloatingWindow#0" />
+            <element signature="e#2355#2364#0" />
+            <element signature="e#2454#3803#0" />
+            <element signature="e#3810#5178#0" />
+            <element signature="e#8285#8331#0" />
+            <element signature="e#12959#13077#0" />
+            <element signature="class#14673:21015" />
+            <element signature="e#14849#14895#0" />
+            <element signature="method#onTouch#0;class#14673:21015" />
+            <element signature="e#19289#19407#0" />
+            <element signature="e#21030#23660#0" />
+            <element signature="e#22341#22512#0" />
+            <element signature="e#23667#24177#0" />
+            <element signature="e#24184#24477#0" />
+            <element signature="e#30049#30428#0" />
+            <element signature="e#30435#30956#0" />
+            <element signature="e#25403#26448#0" />
+            <element signature="e#26449#27189#0" />
+            <element signature="e#27200#27721#0" />
+            <element signature="e#32236#32960#0" />
+            <element signature="e#32967#33998#0" />
+            <element signature="e#34005#35376#0" />
+            <element signature="e#35382#35495#0" />
+          </folding>
         </state>
       </provider>
     </entry>
