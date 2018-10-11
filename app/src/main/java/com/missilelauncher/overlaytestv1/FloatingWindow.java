@@ -54,7 +54,7 @@ public class FloatingWindow extends Service{
     public int statusBarOffset;
     public int screenWidth;
     public int screenHeight;
-    private boolean portrait = true;
+    private boolean portrait;
     private RelativeLayout.LayoutParams relativeParams;
     private WindowManager.LayoutParams gparameters;
     private WindowManager.LayoutParams parameters;
@@ -74,6 +74,7 @@ public class FloatingWindow extends Service{
     private ArrayList<AppInfo>[] groupAppList;
     private int appSize = 100;
     int offset;
+    private Configuration config;
 
 
     @Nullable
@@ -154,12 +155,8 @@ public class FloatingWindow extends Service{
         Log.v("prefs","numGroups = " + numZones);
         Log.v("prefs","numAppRows = " + numAppRows);
         Log.v("prefs","numAppCols = " + numAppCols);
-        Configuration config = new Configuration();
-        if (config.orientation == Configuration.ORIENTATION_PORTRAIT){
-            portrait = true;
-        }else {
-            portrait = false;
-        }
+
+        portrait = true;
 
 
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -516,7 +513,7 @@ public class FloatingWindow extends Service{
         appPositions = new AppInfo[numAppCols+numAppRows+10][numAppCols+numAppRows+10];
         initAppArray();
 
-        t.setX((float) (screenWidth * .2));
+        t.setX((float) (screenWidth * .15));
         t.setY((float) (screenHeight * .01));
 
         groupAppList = new ArrayList[10];
@@ -555,10 +552,13 @@ public class FloatingWindow extends Service{
         return result;
     }
 
-
     private void setIconSizePos(int marginLeft){
-        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(zoneXSize,zoneYSize);
-        //TODO: push icons more to the right in portrait mode.  Gravity?  Relative?
+        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+        if (marginLeft>0 ){
+            groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        }else
+            groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
         numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
         int yOffset = 0;
         int ySizeNeeded = numZones * zoneYSize;
@@ -571,7 +571,7 @@ public class FloatingWindow extends Service{
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
             g[i].setImageResource(R.drawable.ring_50dp);
-            groupIconParams.setMargins(marginLeft,marginTop,0,0);
+            groupIconParams.setMargins(0,marginTop,0,0);
             g[i].setLayoutParams(groupIconParams);
             g[i].setY((float) (  zoneYSize * i )+yOffset+marginTop);
         }
@@ -584,12 +584,13 @@ public class FloatingWindow extends Service{
         int index = 0;
         int rowOffset = 0;
         int colOffset = 0;
-        if (group == 1 && numZones >= 7)
+        if (!portrait && group == 1 && numZones >= 7)
             {rowOffset = 1;}
-        else if (group == 7)
+        else if (!portrait && group == 7)
             {rowOffset = -1;}
-        if (numAppRows<numAppCols)
-            {colOffset = 1;}
+        if (numAppRows<numAppCols){
+            //colOffset = 1;
+        }
         try {
             int ySizeNeeded = numZones * zoneYSize;
             int marginTop = (screenHeight - ySizeNeeded) / 2;
@@ -750,6 +751,10 @@ public class FloatingWindow extends Service{
         int appYSize = (screenHeight/(numAppRows+2));
         x = Math.round((rawX+(appXSize/3))/appXSize);
         y = Math.round((rawY-(appYSize/3))/appYSize);
+
+        if (!portrait){
+            //x--;
+        }
 
         if(x != lastAppTouched[0]){
             lastAppTouched[0] = x;
