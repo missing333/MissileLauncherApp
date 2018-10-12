@@ -1,14 +1,11 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.util.Log;
 
 import java.util.Comparator;
 

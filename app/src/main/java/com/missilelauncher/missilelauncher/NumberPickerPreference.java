@@ -1,4 +1,4 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 import android.content.Context;
 import android.content.res.TypedArray;

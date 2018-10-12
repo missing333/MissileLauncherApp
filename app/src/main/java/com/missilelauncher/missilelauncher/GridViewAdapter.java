@@ -1,4 +1,4 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 /**
  * Created by mmissildine on 9/28/2018.
@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;

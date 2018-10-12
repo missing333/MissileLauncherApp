@@ -1,4 +1,4 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -12,17 +12,12 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.preference.Preference.OnPreferenceClickListener;
 
 import java.util.List;
 
@@ -258,7 +253,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("groupName1"));
             bindPreferenceSummaryToValue(findPreference("sortG1"));
 
-            Preference p1 = (Preference) findPreference("group1AppList");
+            Preference p1 = findPreference("group1AppList");
             p1.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -293,7 +288,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("groupName2"));
             bindPreferenceSummaryToValue(findPreference("sortG2"));
 
-            Preference p2 = (Preference) findPreference("group2AppList");
+            Preference p2 = findPreference("group2AppList");
             p2.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -329,7 +324,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("groupName3"));
             bindPreferenceSummaryToValue(findPreference("sortG3"));
 
-            Preference p3 = (Preference) findPreference("group3AppList");
+            Preference p3 = findPreference("group3AppList");
             p3.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -364,7 +359,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("groupName4"));
             bindPreferenceSummaryToValue(findPreference("sortG4"));
 
-            Preference p4 = (Preference) findPreference("group4AppList");
+            Preference p4 = findPreference("group4AppList");
             p4.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -399,7 +394,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("groupName5"));
             bindPreferenceSummaryToValue(findPreference("sortG5"));
 
-            Preference p5 = (Preference) findPreference("group5AppList");
+            Preference p5 = findPreference("group5AppList");
             p5.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -434,7 +429,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("groupName6"));
             bindPreferenceSummaryToValue(findPreference("sortG6"));
 
-            Preference p6 = (Preference) findPreference("group6AppList");
+            Preference p6 = findPreference("group6AppList");
             p6.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -469,7 +464,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("groupName7"));
             bindPreferenceSummaryToValue(findPreference("sortG7"));
 
-            Preference p7 = (Preference) findPreference("group7AppList");
+            Preference p7 = findPreference("group7AppList");
             p7.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {

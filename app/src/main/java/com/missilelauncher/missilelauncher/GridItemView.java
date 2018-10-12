@@ -1,4 +1,4 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 /**
  * Created by mmissildine on 9/28/2018.
@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.missilelauncher.missilelauncher.R;
+
 public class GridItemView extends FrameLayout {
 
     private ImageView iconView;
@@ -20,8 +22,8 @@ public class GridItemView extends FrameLayout {
     public GridItemView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.item_grid, this);
-        iconView = (ImageView) getRootView().findViewById(R.id.appIcon);
-        textView = (TextView) getRootView().findViewById(R.id.text);
+        iconView = getRootView().findViewById(R.id.appIcon);
+        textView = getRootView().findViewById(R.id.text);
     }
 
     public void display(String text, Drawable icon, boolean isSelected) {

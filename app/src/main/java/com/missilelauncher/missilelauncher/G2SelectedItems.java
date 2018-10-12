@@ -1,37 +1,25 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 /**
  * Created by mmissildine on 9/28/2018.
  */
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,8 +29,6 @@ public class G2SelectedItems extends AppCompatActivity {
     public static ArrayList<AppInfo> G2SelectedApps;
     public AppInfo[] appArray;
     SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
-    SharedPreferences sharedPrefs;
-    SharedPreferences.Editor editor;
     public static ArrayList<String> saveList;
     final int group = 2;
     GridViewAdapter adapter;
@@ -52,14 +38,11 @@ public class G2SelectedItems extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedPrefs = getSharedPreferences("SettingsActivity",0 );
-        editor = sharedPrefs.edit();
-
         setContentView(R.layout.group_picking);
 
 
         appArray = getPackages().toArray(new AppInfo[0]);
-        Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
+        Arrays.sort(appArray, AppInfo.appNameComparator);
 
         saveList = sh.getFavorites(getApplicationContext(),group);
         if (saveList == null){
@@ -67,12 +50,12 @@ public class G2SelectedItems extends AppCompatActivity {
         }
 
         Button b = findViewById(R.id.saveButton);
-        gridView = (GridView) findViewById(R.id.gridView);
+        gridView = findViewById(R.id.gridView);
 
         Switch uca = findViewById(R.id.uncategoriezedButton);
         if (uca.isChecked()){
             ArrayList<AppInfo> allUncategoriezedApps = new ArrayList<AppInfo>(Arrays.asList(appArray));
-            allUncategoriezedApps = getUncategoriezedApps(allUncategoriezedApps,group );
+            allUncategoriezedApps = getUncategorizedApps(allUncategoriezedApps,group );
             uncategorizedAppArray = allUncategoriezedApps.toArray(new AppInfo[allUncategoriezedApps.size()]);
             displayGrid(uncategorizedAppArray);
         }else{
@@ -85,7 +68,7 @@ public class G2SelectedItems extends AppCompatActivity {
 
                 if (compoundButton.isChecked()) {
                     ArrayList<AppInfo> allUncategoriezedApps = new ArrayList<AppInfo>(Arrays.asList(appArray));
-                    allUncategoriezedApps = getUncategoriezedApps(allUncategoriezedApps,group );
+                    allUncategoriezedApps = getUncategorizedApps(allUncategoriezedApps,group );
                     uncategorizedAppArray = allUncategoriezedApps.toArray(new AppInfo[allUncategoriezedApps.size()]);
                     displayGrid(uncategorizedAppArray);
 
@@ -107,8 +90,8 @@ public class G2SelectedItems extends AppCompatActivity {
                 if (selectedIndex > -1) {
                     adapter.listOfLists[group].remove(selectedIndex);
                     ((GridItemView) v).display(false);
-                    G2SelectedApps.remove((AppInfo) parent.getItemAtPosition(position));
-                    saveList.remove((String) ((AppInfo) parent.getItemAtPosition(position)).packageName);
+                    G2SelectedApps.remove(parent.getItemAtPosition(position));
+                    saveList.remove(((AppInfo) parent.getItemAtPosition(position)).packageName);
                 } else {
                     adapter.listOfLists[group].add(position);
                     ((GridItemView) v).display(true);
@@ -122,7 +105,7 @@ public class G2SelectedItems extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sh.saveFavorites(getApplicationContext(), saveList ,group );
+                SharedListPreferencesHelper.saveFavorites(getApplicationContext(), saveList ,group );
 
                 for (int i = 0; i< G2SelectedApps.size(); i++){
                     Log.v("G2 apps","App " + i +": " + G2SelectedApps.get(i).label);
@@ -173,7 +156,7 @@ public class G2SelectedItems extends AppCompatActivity {
         G2SelectedApps = app;
     }
 
-    public ArrayList<AppInfo> getUncategoriezedApps (ArrayList<AppInfo> allApps, Integer group){
+    public ArrayList<AppInfo> getUncategorizedApps(ArrayList<AppInfo> allApps, Integer group){
         Log.v("uncategorizing", allApps.size() + " apps to start");
         ArrayList<String> saveList;
         Iterator<AppInfo> iterator;

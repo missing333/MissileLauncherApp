@@ -1,33 +1,22 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 /**
  * Created by mmissildine on 9/28/2018.
  */
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,16 +24,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class G4SelectedItems extends AppCompatActivity {
+public class G7SelectedItems extends AppCompatActivity {
 
     private GridView gridView;
-    public static ArrayList<AppInfo> G4SelectedApps;
+    public static ArrayList<AppInfo> G7SelectedApps;
     public AppInfo[] appArray;
     SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor;
     public static ArrayList<String> saveList;
-    final int group = 4;
+    final int group = 7;
     GridViewAdapter adapter;
     public AppInfo[] uncategorizedAppArray;
 
@@ -57,9 +46,8 @@ public class G4SelectedItems extends AppCompatActivity {
 
         setContentView(R.layout.group_picking);
 
-
         appArray = getPackages().toArray(new AppInfo[0]);
-        Collections.sort(Arrays.asList(appArray), AppInfo.appNameComparator);
+        Arrays.sort(appArray, AppInfo.appNameComparator);
 
         saveList = sh.getFavorites(getApplicationContext(),group);
         if (saveList == null){
@@ -67,7 +55,7 @@ public class G4SelectedItems extends AppCompatActivity {
         }
 
         Button b = findViewById(R.id.saveButton);
-        gridView = (GridView) findViewById(R.id.gridView);
+        gridView = findViewById(R.id.gridView);
 
         Switch uca = findViewById(R.id.uncategoriezedButton);
         if (uca.isChecked()){
@@ -107,12 +95,12 @@ public class G4SelectedItems extends AppCompatActivity {
                 if (selectedIndex > -1) {
                     adapter.listOfLists[group].remove(selectedIndex);
                     ((GridItemView) v).display(false);
-                    G4SelectedApps.remove((AppInfo) parent.getItemAtPosition(position));
-                    saveList.remove((String) ((AppInfo) parent.getItemAtPosition(position)).packageName);
+                    G7SelectedApps.remove(parent.getItemAtPosition(position));
+                    saveList.remove(((AppInfo) parent.getItemAtPosition(position)).packageName);
                 } else {
                     adapter.listOfLists[group].add(position);
                     ((GridItemView) v).display(true);
-                    G4SelectedApps.add((AppInfo) parent.getItemAtPosition(position));
+                    G7SelectedApps.add((AppInfo) parent.getItemAtPosition(position));
                     saveList.add((String) ((AppInfo) parent.getItemAtPosition(position)).packageName);
                 }
             }
@@ -122,15 +110,16 @@ public class G4SelectedItems extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sh.saveFavorites(getApplicationContext(), saveList ,group );
+                SharedListPreferencesHelper.saveFavorites(getApplicationContext(), saveList ,group );
 
-                for (int i = 0; i< G4SelectedApps.size(); i++){
-                    Log.v("G4 apps","App " + i +": " + G4SelectedApps.get(i).label);
+                for (int i = 0; i< G7SelectedApps.size(); i++){
+                    Log.v("G7 apps","App " + i +": " + G7SelectedApps.get(i).label);
                 }
-                Toast.makeText(G4SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(G7SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
+
 
     }
 
@@ -169,8 +158,8 @@ public class G4SelectedItems extends AppCompatActivity {
         Log.v("group","Number of Apps Found: " + res.size() );
         return res;
     }
-    public void setG4Apps(ArrayList<AppInfo> app){
-        G4SelectedApps = app;
+    public void setG7Apps(ArrayList<AppInfo> app){
+        G7SelectedApps = app;
     }
 
     public ArrayList<AppInfo> getUncategoriezedApps (ArrayList<AppInfo> allApps, Integer group){
@@ -212,7 +201,7 @@ public class G4SelectedItems extends AppCompatActivity {
         if (saveList == null){
             saveList = new ArrayList<>(0);
         }
-        G4SelectedApps = new ArrayList<AppInfo>(0);
+        G7SelectedApps = new ArrayList<AppInfo>(0);
         if(appArray.length > 0 && saveList != null){
             for (int i=0;i<appArray.length;i++) {
                 //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
@@ -221,7 +210,7 @@ public class G4SelectedItems extends AppCompatActivity {
                     //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
                     if(appArray[i].packageName.equals(saveList.get(f))){
                         adapter.listOfLists[group].add(i);
-                        G4SelectedApps.add(appArray[i]);
+                        G7SelectedApps.add(appArray[i]);
                         adapter.getView(i, gv ,gridView );
                         gv.display( appArray[i].label.toString(),appArray[i].icon, true);
                     }

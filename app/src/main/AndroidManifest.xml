@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.missilelauncher.overlaytestv1">
+    package="com.missilelauncher.missilelauncher">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/fg_missile_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.missilelauncher.missilelauncher.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,18 +21,18 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".FloatingWindow" />
+        <service android:name="com.missilelauncher.missilelauncher.FloatingWindow" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.missilelauncher.missilelauncher.SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
-        <activity android:name=".G1SelectedItems" />
-        <activity android:name=".G2SelectedItems" />
-        <activity android:name=".G4SelectedItems" />
-        <activity android:name=".G5SelectedItems" />
-        <activity android:name=".G6SelectedItems" />
-        <activity android:name=".G7SelectedItems" />
-        <activity android:name=".G3SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G1SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G2SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G4SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G5SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G6SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G7SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G3SelectedItems" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
@@ -21,11 +22,13 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -37,7 +40,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
 
 /**
  * Created by mmissildine on 9/20/2018.
@@ -76,6 +78,7 @@ public class FloatingWindow extends Service{
     private int appSize = 100;
     int offset;
     private Configuration config;
+    private boolean leftSideNavigationBar, rightSideNavigationBar;
 
 
     @Nullable
@@ -83,64 +86,6 @@ public class FloatingWindow extends Service{
     public IBinder onBind(Intent intent) {
         return null;
     }
-
-    public void updateRHS(){
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
-        int activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
-        int transparency = settingsPrefs.getInt("rhsTransparency", 25);
-        int overlayType;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        }
-        else {
-            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
-        }
-
-        boolean on = settingsPrefs.getBoolean("rhs",true );
-        if (!on) {
-            activationWidth = 0;
-            activationHeight = 0;
-            transparency = 0;
-        }
-        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        parameters.x = 0;
-        parameters.y = -screenHeight/10;
-        parameters.gravity = Gravity.END;
-        ll.setBackgroundColor(Color.argb(transparency,0,200,200));
-        wm.updateViewLayout(ll,parameters);
-    }
-
-
-    public void updateLHS(){
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
-        int activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
-        int transparency = settingsPrefs.getInt("lhsTransparency", 25);
-        int overlayType;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        }
-        else {
-            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
-        }
-
-        boolean on = settingsPrefs.getBoolean("lhs",true );
-        if (!on) {
-            activationWidth = 0;
-            activationHeight = 0;
-            transparency = 0;
-        }
-        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight/10;
-        lhsparameters.gravity = Gravity.START;
-        lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
-        wm.updateViewLayout(lhs,lhsparameters);
-    }
-
 
 
     @Override
@@ -153,19 +98,23 @@ public class FloatingWindow extends Service{
         numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
         numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
         numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
+        editor.putString("landscapeNumAppRows", numAppCols+"");
+        editor.putString("landscapeNumAppCols", numAppRows+"");
         Log.v("prefs","numGroups = " + numZones);
         Log.v("prefs","numAppRows = " + numAppRows);
         Log.v("prefs","numAppCols = " + numAppCols);
 
         portrait = true;
+        leftSideNavigationBar = false;
+        rightSideNavigationBar = false;
 
 
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         ll = new LinearLayout(this);
         lhs = new LinearLayout(this);
 
-        int activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
-        int activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
         int transparency = settingsPrefs.getInt("rhsTransparency", 25);
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -176,8 +125,8 @@ public class FloatingWindow extends Service{
         }
         parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
 
-        activationWidth = (int) Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
-        activationHeight = (int) Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
+        activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
         transparency = settingsPrefs.getInt("lhsTransparency", 25);
 
         lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
@@ -243,7 +192,7 @@ public class FloatingWindow extends Service{
                         }else {
                             offset = zoneXSize;
                         }
-                        setIconSizePos((int) (screenWidth-offset));
+                        setIconSizePos(screenWidth-offset);
                         wm.addView(gl, gparameters);
                         gl.addView(t);
                         for (int i=0;i<numZones;i++){
@@ -256,7 +205,7 @@ public class FloatingWindow extends Service{
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
 
                         //////user touching Groups or Apps?
-                        if (event.getRawX() > screenWidth - zoneXSize) {
+                        if (event.getRawX() > gl.getWidth() - zoneXSize ) {
                             int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
                             switch (group) {
                                 case 1:
@@ -378,7 +327,14 @@ public class FloatingWindow extends Service{
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
 
                         //////user touching Groups or Apps?
-                        if (event.getRawX() < zoneXSize*.8) {
+
+                        int leftBarOffset;
+                        if (leftSideNavigationBar){
+                            leftBarOffset = zoneXSize;
+                        }else{
+                            leftBarOffset = 0;
+                        }
+                        if (event.getRawX() < (zoneXSize*.8)+leftBarOffset) {
                             int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
                             switch (group) {
                                 case 1:
@@ -473,10 +429,8 @@ public class FloatingWindow extends Service{
         statusBarOffset = getStatusBarHeight();
         setScreenSize();
 
-        numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
-        numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
-        numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
 
+        //size of Group Icons
         float dip = 50f;
         Resources r = getResources();
         float px = TypedValue.applyDimension(
@@ -485,17 +439,21 @@ public class FloatingWindow extends Service{
                 r.getDisplayMetrics()
         );
         zoneXSize = (int) px;
-        zoneYSize = (int) ((int) px*1.3);
-        Log.d("screen","Screen Height: "+screenHeight+", zoneYSize: "+zoneYSize);
-        if (numAppRows>numAppCols){
-            maxAppSize = (int) (zoneXSize * .7);
-        }
-        else{
-            maxAppSize = (int) (zoneXSize * .5);
-        }
+        zoneYSize = (int) ((int) px*1.3);  //1.3 is for a little extra margin on top & bottom of icon
+        //if zoneYsize is too big to fit all icons on the screen, reduce their size.
         if (zoneYSize*numZones > screenHeight){
             zoneYSize = screenHeight/numZones;
         }
+
+        Log.d("screen","Screen Height: "+screenHeight+", zoneYSize: "+zoneYSize);
+        if (portrait){
+            maxAppSize = (int) (zoneXSize * .7);     //app icon size a little bigger in Portrait mode.
+        }
+        else{
+            maxAppSize = (int) (zoneXSize * .5);    //app icon size a little smaller in Landscape mode.
+        }
+
+
 
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -509,7 +467,12 @@ public class FloatingWindow extends Service{
         updateLHS();
 //        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
 //        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        if (!portrait && hasNavBar(getResources())){
+            gparameters = new WindowManager.LayoutParams(screenWidth-zoneXSize,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        }else{
+            gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        }
+
         relativeParams = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
@@ -572,20 +535,12 @@ public class FloatingWindow extends Service{
         int x, y;
         Display display = wm.getDefaultDisplay();
         Point screenSize = new Point();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            display.getRealSize(screenSize);
-            x = screenSize.x;
-            y = screenSize.y;
-        } else {
-            display.getSize(screenSize);
-            x = screenSize.x;
-            y = screenSize.y;
-        }
-
+        display.getRealSize(screenSize);
+        x = screenSize.x;
+        y = screenSize.y;
         screenWidth = x;
         screenHeight = y - statusBarOffset;
     }
-
 
     private void setIconSizePos(int marginLeft){
         RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -645,26 +600,23 @@ public class FloatingWindow extends Service{
 
     private void setContentsPositionGroup(int group, int ltr){
 
-        numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
-        numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
         int index = 0;
         int rowOffset = 0;
         int colOffset = 0;
+        if (!portrait && (leftSideNavigationBar || rightSideNavigationBar)){
+            colOffset = 1;
+        }
         if (!portrait && group == 1 && numZones >= 7)
         {rowOffset = 1;}
         else if (!portrait && group == 7)
         {rowOffset = -1;}
-        if (numAppRows<numAppCols){
-            //colOffset = 1;
-        }
         try {
             int ySizeNeeded = numZones * zoneYSize;
             int marginTop = (screenHeight - ySizeNeeded) / 2;
-            int numAppsInGroup = groupAppList[group].size();;
+            int numAppsInGroup = groupAppList[group].size();
             int rowsNeeded = (numAppsInGroup/numAppCols);
             int nearestRow = (((group * zoneYSize)+marginTop)/Math.round((screenHeight/(numAppRows+2))))-1;
             int row = nearestRow+rowOffset;
-            int lastRow=0;
 
             for(AppInfo item:groupAppList[group]){
                 item.setLaunchCount(settingsPrefs.getInt(item.label.toString()+"_launchCount",0 ));
@@ -736,14 +688,13 @@ public class FloatingWindow extends Service{
 
                         index++;
                         if (index > numAppsInGroup) {
-                            lastRow = row;
                             row = numAppRows + 11;
                         }
                     }
 
                 }
                 else{
-                    for (int col = 1+colOffset; col < numAppCols+1 ; col++){
+                    for (int col = 1; col < numAppCols+1 ; col++){
 
                         //populate apps from left to right
                         if (index < numAppsInGroup){
@@ -794,7 +745,6 @@ public class FloatingWindow extends Service{
 
                         index++;
                         if (index > numAppsInGroup){
-                            lastRow = row;
                             row = numAppRows+11;
                         }
                     }
@@ -840,6 +790,11 @@ public class FloatingWindow extends Service{
         return new int[]{x,y};
     }
 
+    public boolean hasNavBar (Resources resources)
+    {
+        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
+        return id > 0 && resources.getBoolean(id);      //this apparently does NOT work in emulators...
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -848,16 +803,29 @@ public class FloatingWindow extends Service{
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            numAppCols = Integer.parseInt(settingsPrefs.getString("landscapeNumAppCols", "10"));
+            numAppRows = Integer.parseInt(settingsPrefs.getString("landscapeNumAppRows", "6"));
             portrait = false;
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
             //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+            numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
+            numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
             portrait = true;
         }
-        int temp = numAppRows;
-        numAppRows = numAppCols;
-        numAppCols = temp;
-        settingsPrefs.edit().putString("numAppRows",numAppRows+"").commit();
-        settingsPrefs.edit().putString("numAppCols",numAppCols+"").commit();
+
+        if (hasNavBar(getResources())){
+            Log.d("navbar","we HAVE a navbar!");
+            leftSideNavigationBar = Build.VERSION.SDK_INT > Build.VERSION_CODES.N
+                    && ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+                    .getDefaultDisplay().getRotation() == Surface.ROTATION_270;
+            rightSideNavigationBar = Build.VERSION.SDK_INT > Build.VERSION_CODES.N
+                    && ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+                    .getDefaultDisplay().getRotation() == Surface.ROTATION_90;
+        }else{
+            leftSideNavigationBar = false;
+            rightSideNavigationBar = false;
+        }
+
         Log.v("orientation","Rows: " +numAppRows + ", Cols: "+numAppCols);
         wm.removeView(ll);
         wm.removeView(lhs);
@@ -903,6 +871,62 @@ public class FloatingWindow extends Service{
             startForeground(1, notification);
         }
         return START_NOT_STICKY;
+    }
+
+    public void updateRHS(){
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
+        int transparency = settingsPrefs.getInt("rhsTransparency", 25);
+        int overlayType;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
+        else {
+            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+
+        boolean on = settingsPrefs.getBoolean("rhs",true );
+        if (!on) {
+            activationWidth = 0;
+            activationHeight = 0;
+            transparency = 0;
+        }
+        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        parameters.x = 0;
+        parameters.y = -screenHeight/10;
+        parameters.gravity = Gravity.END;
+        ll.setBackgroundColor(Color.argb(transparency,0,200,200));
+        wm.updateViewLayout(ll,parameters);
+    }
+
+    public void updateLHS(){
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        int transparency = settingsPrefs.getInt("lhsTransparency", 25);
+        int overlayType;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
+        else {
+            overlayType = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+
+        boolean on = settingsPrefs.getBoolean("lhs",true );
+        if (!on) {
+            activationWidth = 0;
+            activationHeight = 0;
+            transparency = 0;
+        }
+        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsparameters.x = 0;
+        lhsparameters.y = -screenHeight/10;
+        lhsparameters.gravity = Gravity.START;
+        lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
+        wm.updateViewLayout(lhs,lhsparameters);
     }
 
     public void onDestroy() {

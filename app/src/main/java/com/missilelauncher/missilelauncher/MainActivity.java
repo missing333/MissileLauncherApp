@@ -1,57 +1,34 @@
-package com.missilelauncher.overlaytestv1;
+package com.missilelauncher.missilelauncher;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.provider.Settings;
-import android.provider.SyncStateContract;
-import android.support.v4.app.ServiceCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-import static com.missilelauncher.overlaytestv1.G1SelectedItems.G1SelectedApps;
-import static com.missilelauncher.overlaytestv1.G2SelectedItems.G2SelectedApps;
-import static com.missilelauncher.overlaytestv1.G3SelectedItems.G3SelectedApps;
-import static com.missilelauncher.overlaytestv1.G4SelectedItems.G4SelectedApps;
-import static com.missilelauncher.overlaytestv1.G5SelectedItems.G5SelectedApps;
-import static com.missilelauncher.overlaytestv1.G6SelectedItems.G6SelectedApps;
-import static com.missilelauncher.overlaytestv1.G7SelectedItems.G7SelectedApps;
 
-public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
-
-    private Button start, stop, config;
-    private Switch enableToggle;
-    public SharedPreferences.Editor prefEditor;
-    private View B1, B2, B3, B4, B5, B6, B7;
-    private ArrayList<AppInfo>[] groupAppList;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPref = getSharedPreferences("SettingsActivity", 0);
-        prefEditor = sharedPref.edit();
-
         setContentView(R.layout.activity_main);
 
-        config = findViewById(R.id.config);
-        enableToggle = findViewById(R.id.enableService);
+        Button config = findViewById(R.id.config);
+        Switch enableToggle = findViewById(R.id.enableService);
 
         enableToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -90,7 +67,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
 
         ////////set all previous applists if available
-        ArrayList<AppInfo> res = new ArrayList<AppInfo>();
+        ArrayList<AppInfo> res = new ArrayList<>();
         PackageManager packageManager = getPackageManager();
         List<PackageInfo> packs = packageManager.getInstalledPackages(0);
         for(int i=0;i<packs.size();i++) {
@@ -115,22 +92,22 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         Collections.sort(res, AppInfo.appNameComparator);
         SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
 
-        groupAppList = new ArrayList[10];
-        groupAppList[1] = G1SelectedApps;
-        groupAppList[2] = G2SelectedApps;
-        groupAppList[3] = G3SelectedApps;
-        groupAppList[4] = G4SelectedApps;
-        groupAppList[5] = G5SelectedApps;
-        groupAppList[6] = G6SelectedApps;
-        groupAppList[7] = G7SelectedApps;
+        ArrayList[] groupAppList = new ArrayList[10];
+        groupAppList[1] = G1SelectedItems.G1SelectedApps;
+        groupAppList[2] = G2SelectedItems.G2SelectedApps;
+        groupAppList[3] = G3SelectedItems.G3SelectedApps;
+        groupAppList[4] = G4SelectedItems.G4SelectedApps;
+        groupAppList[5] = G5SelectedItems.G5SelectedApps;
+        groupAppList[6] = G6SelectedItems.G6SelectedApps;
+        groupAppList[7] = G7SelectedItems.G7SelectedApps;
 
         for (int g=1;g<7+1;g++){
             ArrayList saveList = sh.getFavorites(getApplicationContext(),g);
             if (saveList == null){
                 saveList = new ArrayList<>(0);
             }
-            groupAppList[g] = new ArrayList<AppInfo>(0);
-            if(res.size() > 0 && saveList != null){
+            groupAppList[g] = new ArrayList<>(0);
+            if(res.size() > 0 ){
                 for (int i=0;i<res.size();i++) {
                     //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
                     for (int f=0;f<saveList.size();f++) {
@@ -156,7 +133,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onStart() {
         super.onStart();
 
-        start = (Button) findViewById(R.id.start);
+        Button start = findViewById(R.id.start);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
             start.setVisibility(View.VISIBLE);
         } else {
@@ -168,15 +145,17 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Log.v("app","Starting Foreground Service");
-                Toast.makeText(this,"Starting as Foreground Service." ,Toast.LENGTH_SHORT ).show();
+                //Toast.makeText(this,"Starting as Foreground Service." ,Toast.LENGTH_SHORT ).show();
                 startForegroundService(startIntent);
             } else {
                 Log.v("app","Starting regular Service");
-                Toast.makeText(this,"Starting as regular Service." ,Toast.LENGTH_SHORT ).show();
+                //Toast.makeText(this,"Starting as regular Service." ,Toast.LENGTH_SHORT ).show();
                 startService(startIntent);
             }
         }
 
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,25 +163,9 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
                 startActivity(myIntent);
             }
         });
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        parent.getItemAtPosition(position);
-        position++;
-        parent.setOnItemSelectedListener(this);
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+        }else{
+            start.setVisibility(View.GONE);
+        }
     }
 
 }
