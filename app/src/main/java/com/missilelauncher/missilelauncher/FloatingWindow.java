@@ -11,7 +11,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
@@ -22,7 +21,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -36,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +57,7 @@ public class FloatingWindow extends Service{
     private boolean portrait;
     private RelativeLayout.LayoutParams relativeParams;
     private WindowManager.LayoutParams gparameters;
-    private WindowManager.LayoutParams parameters;
+    private WindowManager.LayoutParams rhsparameters;
     private WindowManager.LayoutParams lhsparameters;
     public int numZones;
     public int numAppRows;
@@ -113,9 +110,10 @@ public class FloatingWindow extends Service{
         ll = new LinearLayout(this);
         lhs = new LinearLayout(this);
 
-        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
-        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
-        int transparency = settingsPrefs.getInt("rhsTransparency", 25);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        int transparency = settingsPrefs.getInt("lhsTransparency", 25);
+        int ypos = settingsPrefs.getInt("lhsYPos", 50)-50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -123,19 +121,14 @@ public class FloatingWindow extends Service{
         else {
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
-        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-
-        activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
-        activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
-        transparency = settingsPrefs.getInt("lhsTransparency", 25);
-
+        rhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight/10;
+        lhsparameters.y = -screenHeight*ypos/100;
         lhsparameters.gravity = Gravity.START;
         lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
 
-        wm.addView(ll,parameters);
+        wm.addView(ll, rhsparameters);
         wm.addView(lhs,lhsparameters);
 
         t = new TextView(this);
@@ -165,7 +158,7 @@ public class FloatingWindow extends Service{
 
         ll.setOnTouchListener(new View.OnTouchListener(){
 
-            private WindowManager.LayoutParams updatedParameters = parameters;
+            private WindowManager.LayoutParams updatedParameters = rhsparameters;
             int x, y;
             float touchedX, touchedY;
 
@@ -293,7 +286,7 @@ public class FloatingWindow extends Service{
 
         lhs.setOnTouchListener(new View.OnTouchListener(){
 
-            private WindowManager.LayoutParams updatedParameters = parameters;
+            private WindowManager.LayoutParams updatedParameters = rhsparameters;
             int x, y;
             float touchedX, touchedY;
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -465,7 +458,7 @@ public class FloatingWindow extends Service{
 
         updateRHS();
         updateLHS();
-//        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+//        rhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
 //        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         if (!portrait && hasNavBar(getResources())){
             gparameters = new WindowManager.LayoutParams(screenWidth-zoneXSize,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
@@ -830,7 +823,7 @@ public class FloatingWindow extends Service{
         wm.removeView(ll);
         wm.removeView(lhs);
         getDimensions();
-        wm.addView(ll,parameters);
+        wm.addView(ll, rhsparameters);
         wm.addView(lhs, lhsparameters);
     }
 
@@ -876,9 +869,10 @@ public class FloatingWindow extends Service{
     public void updateRHS(){
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("rhsWidth", 3)/100;
-        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("rhsHeight", 45)/100);
-        int transparency = settingsPrefs.getInt("rhsTransparency", 25);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        int transparency = settingsPrefs.getInt("lhsTransparency", 25);
+        int ypos = settingsPrefs.getInt("lhsYPos", 50)-50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -893,12 +887,12 @@ public class FloatingWindow extends Service{
             activationHeight = 0;
             transparency = 0;
         }
-        parameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        parameters.x = 0;
-        parameters.y = -screenHeight/10;
-        parameters.gravity = Gravity.END;
+        rhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        rhsparameters.x = 0;
+        rhsparameters.y = -screenHeight*ypos/100;
+        rhsparameters.gravity = Gravity.END;
         ll.setBackgroundColor(Color.argb(transparency,0,200,200));
-        wm.updateViewLayout(ll,parameters);
+        wm.updateViewLayout(ll, rhsparameters);
     }
 
     public void updateLHS(){
@@ -907,6 +901,7 @@ public class FloatingWindow extends Service{
         int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
         int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
+        int ypos = settingsPrefs.getInt("lhsYPos", 50)-50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -923,7 +918,7 @@ public class FloatingWindow extends Service{
         }
         lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight/10;
+        lhsparameters.y = -screenHeight*ypos/100;
         lhsparameters.gravity = Gravity.START;
         lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
         wm.updateViewLayout(lhs,lhsparameters);

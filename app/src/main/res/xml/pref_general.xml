@@ -24,54 +24,34 @@
     <SwitchPreference
         android:defaultValue="true"
         android:key="lhs"
-        android:summary="Enable or Disable Left Activation Area"
         android:title="Left Side Activation Area" />
-
-    <SeekBarPreference
-        android:dependency="lhs"
-        android:key="lhsWidth"
-        android:title="Width of Left Area"
-        android:max="10"
-        android:defaultValue="3" />
-
-    <SeekBarPreference
-        android:dependency="lhs"
-        android:key="lhsHeight"
-        android:title="Height of Left Area"
-        android:max="100"
-        android:defaultValue="45" />
-
-    <SeekBarPreference
-        android:dependency="lhs"
-        android:key="lhsTransparency"
-        android:title="Transparency of Left Area"
-        android:max="255"
-        android:defaultValue="25" />
 
     <SwitchPreference
         android:defaultValue="true"
         android:key="rhs"
-        android:summary="Enable or Disable Right Activation Area"
         android:title="Right Side Activation Area" />
 
     <SeekBarPreference
-        android:dependency="rhs"
-        android:key="rhsWidth"
-        android:title="Width of Right Area"
+        android:key="lhsWidth"
+        android:title="Width of Activation Area"
         android:max="10"
         android:defaultValue="3" />
 
     <SeekBarPreference
-        android:dependency="rhs"
-        android:key="rhsHeight"
-        android:title="Height of Right Area"
+        android:key="lhsHeight"
+        android:title="Height of Activation Area"
         android:max="100"
         android:defaultValue="45" />
 
     <SeekBarPreference
-        android:dependency="rhs"
-        android:key="rhsTransparency"
-        android:title="Transparency of Right Area"
+        android:key="lhsYPos"
+        android:title="Position of Activation Area"
+        android:max="100"
+        android:defaultValue="40" />
+
+    <SeekBarPreference
+        android:key="lhsTransparency"
+        android:title="Transparency of Activation Area"
         android:max="255"
         android:defaultValue="25" />
 
