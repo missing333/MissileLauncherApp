@@ -65,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        init();
+    }
+
+    void init(){
 
         ////////set all previous applists if available
         ArrayList<AppInfo> res = new ArrayList<>();
@@ -126,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
         new G5SelectedItems().setG5Apps(groupAppList[5]);
         new G6SelectedItems().setG6Apps(groupAppList[6]);
         new G7SelectedItems().setG7Apps(groupAppList[7]);
-
     }
 
     @Override
