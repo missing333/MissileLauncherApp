@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -28,11 +29,19 @@
             android:label="@string/title_activity_settings"></activity>
         <activity android:name="com.missilelauncher.missilelauncher.G1SelectedItems" />
         <activity android:name="com.missilelauncher.missilelauncher.G2SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G3SelectedItems" />
         <activity android:name="com.missilelauncher.missilelauncher.G4SelectedItems" />
         <activity android:name="com.missilelauncher.missilelauncher.G5SelectedItems" />
         <activity android:name="com.missilelauncher.missilelauncher.G6SelectedItems" />
         <activity android:name="com.missilelauncher.missilelauncher.G7SelectedItems" />
-        <activity android:name="com.missilelauncher.missilelauncher.G3SelectedItems" />
+
+        <receiver android:name=".DeviceBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
+
+
 
 </manifest>
