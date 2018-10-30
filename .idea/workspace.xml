@@ -20,11 +20,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -83,40 +80,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FloatingWindow.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FloatingWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="32" lean-forward="true" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+            <state relative-caret-position="17">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
               <folding>
                 <element signature="docComment;class#FloatingWindow#0" />
-                <element signature="e#2355#2364#0" />
-                <element signature="class#5594:12340" />
-                <element signature="e#8285#8331#0" />
-                <element signature="method#onTouch#0;class#5594:12340" />
-                <element signature="e#12959#13077#0" />
-                <element signature="class#12154:18603" />
-                <element signature="e#14849#14895#0" />
-                <element signature="method#onTouch#0;class#12154:18603" />
-                <element signature="e#19289#19407#0" />
-                <element signature="e#18267#21401#0" />
-                <element signature="e#22341#22512#0" />
-                <element signature="e#23667#24177#0" />
-                <element signature="e#24184#24477#0" />
-                <element signature="e#30049#30428#0" />
-                <element signature="e#23127#23455#0" />
-                <element signature="e#25403#26448#0" />
-                <element signature="e#26449#27189#0" />
-                <element signature="e#27200#27721#0" />
-                <element signature="e#25762#34048#0" />
-                <element signature="e#32236#32960#0" />
-                <element signature="e#34851#35049#0" />
-                <element signature="e#35059#36658#0" />
-                <element signature="e#34005#35376#0" />
-                <element signature="e#37095#37123#0" expanded="true" />
-                <element signature="e#37468#37496#0" expanded="true" />
-                <element signature="e#35382#35495#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -138,18 +118,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="765">
               <caret line="45" column="32" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
-              <folding>
-                <element signature="e#2061#2081#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
+            <state relative-caret-position="34">
+              <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -157,7 +134,7 @@
       <file leaf-file-name="G1SelectedItems.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-119">
+            <state relative-caret-position="221">
               <caret line="31" column="71" selection-start-line="31" selection-start-column="71" selection-end-line="31" selection-end-column="71" />
               <folding>
                 <element signature="method#getPackages#0;class#G1SelectedItems#0" />
@@ -180,27 +157,10 @@
       <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-980">
+            <state relative-caret-position="1853">
               <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
               <folding>
-                <element signature="e#1576#3917#0" expanded="true" />
-                <element signature="e#2716#2745#0" expanded="true" />
-                <element signature="e#3916#3917#0" expanded="true" />
                 <element signature="method#isXLargeTablet#0;class#SettingsActivity#0" />
-                <element signature="e#8841#9179#0" expanded="true" />
-                <element signature="e#9178#9179#0" expanded="true" />
-                <element signature="e#10396#10734#0" expanded="true" />
-                <element signature="e#10733#10734#0" expanded="true" />
-                <element signature="e#11952#12290#0" expanded="true" />
-                <element signature="e#12289#12290#0" expanded="true" />
-                <element signature="e#13507#13845#0" expanded="true" />
-                <element signature="e#13844#13845#0" expanded="true" />
-                <element signature="e#15062#15400#0" expanded="true" />
-                <element signature="e#15399#15400#0" expanded="true" />
-                <element signature="e#16617#16955#0" expanded="true" />
-                <element signature="e#16954#16955#0" expanded="true" />
-                <element signature="e#18172#18510#0" expanded="true" />
-                <element signature="e#18509#18510#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -253,7 +213,7 @@
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="C:\Users\mmissildine\Dropbox\Android APKs\Keys\MissileLauncher Keys\MLKey" />
+    <option name="KEY_STORE_PATH" value="C:\Users\mmissildine\Dropbox\Apps\Android_Studio\key\MissileLauncher Keys\MLKey" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
     <option name="BUILD_TARGET_KEY" value="apk" />
@@ -2544,7 +2504,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G3SelectedItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G2SelectedItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java" />
@@ -2553,9 +2512,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_headers.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/group_selection_free.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -2573,9 +2533,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2585,40 +2542,15 @@
             </path>
             <path>
               <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="missilelauncher" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="xml" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2628,118 +2560,8 @@
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
     <property name="device.picker.selection" value="Pixel_XL_API_25" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../IconPicker/icondialog" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Dropbox/Apps/Android_Studio/key/MissileLauncher Keys/MLKey" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/missilelauncher/overlaytestv1/FloatingWindow.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2977,14 +2799,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539372600094</updated>
     </task>
-    <task id="LOCAL-00010" summary="phase 1 of getting settings to work.">
-      <created>1539044727560</created>
+    <task id="LOCAL-00010" summary="Added Y pos setting for Activation Area.&#10;Sync'ed left and right Activation Areas.">
+      <created>1539890713626</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1539044727560</updated>
+      <updated>1539890713626</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2998,43 +2820,42 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1858" height="1096" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" order="10" weight="0.32943678" />
-      <window_info id="Build Variants" order="5" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5005562" side_tool="true" weight="0.54729015" />
-      <window_info anchor="bottom" id="Logcat" order="9" weight="0.19872476" />
-      <window_info anchor="bottom" id="Dependency Viewer" weight="0.32943678" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="Designer" order="4" />
-      <window_info anchor="bottom" id="Build" order="12" weight="0.41339" />
-      <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32943678" />
-      <window_info id="Structure" order="1" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
-      <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49944383" weight="0.35387886" />
+      <window_info anchor="bottom" id="Android Profiler" order="10" show_stripe_button="false" weight="0.32943678" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32943678" />
-      <window_info anchor="bottom" id="Messages" order="15" weight="0.32837406" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="2" />
+      <window_info id="Build Variants" order="5" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Preview" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5005562" side_tool="true" weight="0.54729015" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49521786" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32943678" />
       <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Logcat" order="9" weight="0.19872476" />
       <window_info id="Captures" order="7" weight="0.24972191" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.26751947" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32731137" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Designer" order="4" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.26751947" />
+      <window_info anchor="bottom" id="Build" order="12" visible="true" weight="0.41339" />
       <window_info anchor="right" id="Gradle" order="8" />
+      <window_info id="Structure" order="1" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
+      <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49944383" weight="0.35387886" />
       <window_info id="Favorites" order="3" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Assistant" order="9" weight="0.3298109" />
+      <window_info anchor="bottom" id="Dependency Viewer" order="11" weight="0.32943678" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.32837406" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Preview" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32731137" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Gradle Console" order="13" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32943678" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -3060,7 +2881,8 @@
     <MESSAGE value="added button to quick Edit this group" />
     <MESSAGE value="fixed bug where EditGroup button didn't display when rows completely filled" />
     <MESSAGE value="renamed package.&#10;checking for navbar&#10;updates for landscape" />
-    <option name="LAST_COMMIT_MESSAGE" value="renamed package.&#10;checking for navbar&#10;updates for landscape" />
+    <MESSAGE value="Added Y pos setting for Activation Area.&#10;Sync'ed left and right Activation Areas." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Y pos setting for Activation Area.&#10;Sync'ed left and right Activation Areas." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3095,14 +2917,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/dot50p.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/dot50p.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/pref_group2.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3245,10 +3060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="760">
           <caret line="72" selection-start-line="72" selection-end-line="72" />
-          <folding>
-            <element signature="e#1296#1297#0" expanded="true" />
-            <element signature="e#1334#1335#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3256,13 +3067,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="46" column="24" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
-          <folding>
-            <element signature="e#2139#2148#0" expanded="true" />
-            <element signature="e#2617#3317#0" expanded="true" />
-            <element signature="e#2803#2812#0" expanded="true" />
-            <element signature="e#3316#3317#0" expanded="true" />
-            <element signature="method#getUncategoriezedApps#0;class#G4SelectedItems#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3270,9 +3074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="62" selection-start-line="62" selection-end-line="65" selection-end-column="9" />
-          <folding>
-            <element signature="method#getUncategoriezedApps#0;class#G5SelectedItems#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3280,9 +3081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="65" column="9" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
-          <folding>
-            <element signature="method#getUncategoriezedApps#0;class#G7SelectedItems#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3290,9 +3088,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="97" column="11" selection-start-line="97" selection-start-column="11" selection-end-line="97" selection-end-column="11" />
-          <folding>
-            <element signature="method#getUncategoriezedApps#0;class#G6SelectedItems#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3306,14 +3101,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupMethods.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="64" column="69" selection-start-line="64" selection-start-column="69" selection-end-line="64" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupMethods.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="27" column="71" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
@@ -3322,25 +3114,11 @@
           </folding>
         </state>
       </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G3SelectedItems.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1207">
           <caret line="95" column="24" lean-forward="true" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
-          <folding>
-            <element signature="method#getUncategoriezedApps#0;class#G3SelectedItems#0" />
-            <element signature="method#displayGrid#0;class#G3SelectedItems#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3348,10 +3126,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="30" column="71" selection-start-line="30" selection-start-column="71" selection-end-line="30" selection-end-column="71" />
-          <folding>
-            <element signature="method#getUncategorizedApps#0;class#G2SelectedItems#0" />
-            <element signature="method#displayGrid#0;class#G2SelectedItems#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3387,10 +3161,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
           <caret line="1511" selection-start-line="1511" selection-end-line="1511" />
-          <folding>
-            <element signature="e#7150#7151#0" expanded="true" />
-            <element signature="e#7183#7184#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3398,13 +3168,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
           <caret line="658" selection-start-line="658" selection-end-line="658" />
-          <folding>
-            <element signature="e#2629#2630#0" expanded="true" />
-            <element signature="e#2672#2673#0" expanded="true" />
-            <element signature="e#3056#3057#0" expanded="true" />
-            <element signature="e#3108#3109#0" expanded="true" />
-            <element signature="e#18962#18963#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3457,22 +3220,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="32" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
-          <folding>
-            <element signature="e#2061#2081#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
+        <state relative-caret-position="221">
           <caret line="31" column="71" selection-start-line="31" selection-start-column="71" selection-end-line="31" selection-end-column="71" />
           <folding>
             <element signature="method#getPackages#0;class#G1SelectedItems#0" />
@@ -3482,13 +3235,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/group_selection_free.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/group_selection_free.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/group_selection.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -3498,27 +3245,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-980">
+        <state relative-caret-position="1853">
           <caret line="131" column="35" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
           <folding>
-            <element signature="e#1576#3917#0" expanded="true" />
-            <element signature="e#2716#2745#0" expanded="true" />
-            <element signature="e#3916#3917#0" expanded="true" />
             <element signature="method#isXLargeTablet#0;class#SettingsActivity#0" />
-            <element signature="e#8841#9179#0" expanded="true" />
-            <element signature="e#9178#9179#0" expanded="true" />
-            <element signature="e#10396#10734#0" expanded="true" />
-            <element signature="e#10733#10734#0" expanded="true" />
-            <element signature="e#11952#12290#0" expanded="true" />
-            <element signature="e#12289#12290#0" expanded="true" />
-            <element signature="e#13507#13845#0" expanded="true" />
-            <element signature="e#13844#13845#0" expanded="true" />
-            <element signature="e#15062#15400#0" expanded="true" />
-            <element signature="e#15399#15400#0" expanded="true" />
-            <element signature="e#16617#16955#0" expanded="true" />
-            <element signature="e#16954#16955#0" expanded="true" />
-            <element signature="e#18172#18510#0" expanded="true" />
-            <element signature="e#18509#18510#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3530,37 +3260,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="32" lean-forward="true" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+        <state relative-caret-position="17">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
           <folding>
             <element signature="docComment;class#FloatingWindow#0" />
-            <element signature="e#2355#2364#0" />
-            <element signature="class#5594:12340" />
-            <element signature="e#8285#8331#0" />
-            <element signature="method#onTouch#0;class#5594:12340" />
-            <element signature="e#12959#13077#0" />
-            <element signature="class#12154:18603" />
-            <element signature="e#14849#14895#0" />
-            <element signature="method#onTouch#0;class#12154:18603" />
-            <element signature="e#19289#19407#0" />
-            <element signature="e#18267#21401#0" />
-            <element signature="e#22341#22512#0" />
-            <element signature="e#23667#24177#0" />
-            <element signature="e#24184#24477#0" />
-            <element signature="e#30049#30428#0" />
-            <element signature="e#23127#23455#0" />
-            <element signature="e#25403#26448#0" />
-            <element signature="e#26449#27189#0" />
-            <element signature="e#27200#27721#0" />
-            <element signature="e#25762#34048#0" />
-            <element signature="e#32236#32960#0" />
-            <element signature="e#34851#35049#0" />
-            <element signature="e#35059#36658#0" />
-            <element signature="e#34005#35376#0" />
-            <element signature="e#37095#37123#0" expanded="true" />
-            <element signature="e#37468#37496#0" expanded="true" />
-            <element signature="e#35382#35495#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
         </state>
       </provider>
     </entry>
