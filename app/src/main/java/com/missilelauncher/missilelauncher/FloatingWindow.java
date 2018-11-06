@@ -554,9 +554,8 @@ public class FloatingWindow extends Service{
 
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
-            //old - g[i].setImageResource(R.drawable.ring_50dp);
             int n = i+1;
-            int id = (int) settingsPrefs.getLong("iconID"+n,R.drawable.ring_50dp );
+            int id = (int) settingsPrefs.getLong("iconID"+n, R.drawable.ring_50dp );
             Drawable d = ContextCompat.getDrawable(this, id);
             g[i].setImageDrawable(d);
             groupIconParams.setMargins(0,marginTop,0,0);
@@ -650,6 +649,7 @@ public class FloatingWindow extends Service{
                             tl.addView(appIcon);
                         }
                         else{
+                            //this section adds the Edit Group button at the very end of the list.
                             Intent intent = null;
                             switch (group) {
                                 case 1:

@@ -44,16 +44,48 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     public Integer[] mThumbIds = {
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7
+            //media
+            R.drawable.ticket, R.drawable.reel,
+            R.drawable.play, R.drawable.play_circle_filled,
+            R.drawable.play_circle_outline, R.drawable.ic_music_video_black_24dp,
+            R.drawable.ic_movie_creation_black_24dp,R.drawable.ic_image_black_24dp,
+            R.drawable.ic_camera_alt_black_24dp,R.drawable.ic_audiotrack_black_24dp,
+
+            //social
+            R.drawable.ic_group_black_24dp, R.drawable.ic_group_work_black_24dp,
+            R.drawable.ic_share_black_24dp, R.drawable.ic_language_black_24dp,
+            R.drawable.ic_phone_black_24dp, R.drawable.ic_chat_black_24dp,
+            R.drawable.ic_email_black_40dp, R.drawable.ic_forum_black_24dp,
+
+            //games
+            R.drawable.ic_games_black_24dp,R.drawable.ic_videogame_asset_black_24dp,
+            R.drawable.ic_casino_black_24dp, R.drawable.ic_extension_black_24dp,
+
+            //reading
+            R.drawable.ic_book_black_24dp, R.drawable.ic_local_library_black_24dp,
+            R.drawable.ic_import_contacts_black_24dp,
+
+            //productivity
+            R.drawable.ic_insert_chart_black_24dp,R.drawable.ic_insert_invitation_black_24dp,
+            R.drawable.ic_keyboard_black_24dp, R.drawable.ic_location_city_black_24dp,
+
+            //personalization
+            R.drawable.ic_build_black_24dp,R.drawable.ic_tune_black_24dp,
+            R.drawable.ic_phonelink_setup_black_24dp, R.drawable.ic_settings_black_24dp,
+
+            //lifestyle
+            R.drawable.ic_beach_access_black_24dp,R.drawable.ic_brightness_3_black_24dp,
+            R.drawable.ic_brightness_low_black_24dp, R.drawable.ic_explore_black_24dp,
+             R.drawable.ic_home_black_24dp,
+
+            //other
+            R.drawable.ic_spa_black_24dp,
+            R.drawable.ic_favorite_black_24dp, R.drawable.ic_filter_vintage_black_40dp,
+            R.drawable.ic_star_black_50dp, R.drawable.ic_star_border_black_24dp,
+            R.drawable.ic_add_circle_outline_black_40dp, R.drawable.ic_add_circle_black_40,
+            R.drawable.ic_radio_button_unchecked_black_24dp, R.drawable.ic_adjust_black_24dp,
+            R.drawable.ic_lightbulb_outline_black_24dp, R.drawable.ic_flare_black_40dp,
+            R.drawable.missile_launcher_icon_nobg
+
     };
 }
