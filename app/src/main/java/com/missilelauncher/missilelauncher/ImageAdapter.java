@@ -76,7 +76,7 @@ public class ImageAdapter extends BaseAdapter {
             //lifestyle
             R.drawable.ic_beach_access_black_24dp,R.drawable.ic_brightness_3_black_24dp,
             R.drawable.ic_brightness_low_black_24dp, R.drawable.ic_explore_black_24dp,
-             R.drawable.ic_home_black_24dp,
+            R.drawable.ic_home_black_24dp,
 
             //other
             R.drawable.ic_spa_black_24dp,
