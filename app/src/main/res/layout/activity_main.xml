@@ -12,224 +12,50 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="24dp"
         android:checked="true"
         android:text="@string/enable_missilelauncher"
-        app:layout_constraintBottom_toTopOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/setPermissionBtn" />
+
+    <Switch
+        android:id="@+id/foregroundNotification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:checked="true"
+        android:text="@string/show_notification_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enableService" />
 
     <Button
-        android:id="@+id/start"
-        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/setPermissionBtn"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
-        android:layout_height="86dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="119dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/permissionPrompt"
         android:textColorLink="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@+id/config"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enableService"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
-    <!--<TextView
-        android:id="@+id/configText"
-        android:layout_width="0dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Configuration"
-        android:textColor="@color/colorAccent"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/config" />
-
-    <TextView
-        android:id="@+id/numGroupsText"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="right|center_vertical"
-        android:text="Number of Groups"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configText" />
-
-    <TextView
-        android:id="@+id/numAppColsText"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="right|center_vertical"
-        android:text="Columns for Apps"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numGroupsText"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="16dp" />
-
-    <TextView
-        android:id="@+id/numAppRows"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="right|center_vertical"
-        android:text="Rows of Apps"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numAppColsText"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="16dp" />
-
-    <Spinner
-        android:id="@+id/groupSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/configText" />
-
-    <Spinner
-        android:id="@+id/appColSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/groupSpinner"
-        android:layout_marginLeft="8dp" />
-
-    <Spinner
-        android:id="@+id/appRowSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/appColSpinner"
-        android:layout_marginLeft="8dp" />
-
-    <TextView
-        android:id="@+id/configText2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Select Apps for each Group"
-        android:textColor="@color/colorAccent"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numAppRows" />
-
-    <Button
-        android:id="@+id/G1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Group 1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configText2" />
-
-    <Button
-        android:id="@+id/G2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Group 2"
-        app:layout_constraintStart_toEndOf="@+id/G1"
-        app:layout_constraintTop_toBottomOf="@+id/configText2" />
-
-    <Button
-        android:id="@+id/G3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Group 3"
-        app:layout_constraintStart_toEndOf="@+id/G2"
-        app:layout_constraintTop_toBottomOf="@+id/configText2" />
-
-    <Button
-        android:id="@+id/G4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Group 4"
-        app:layout_constraintStart_toEndOf="@+id/G3"
-        app:layout_constraintTop_toBottomOf="@+id/configText2" />
-
-    <Button
-        android:id="@+id/G5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:text="Group 5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/G1" />
-
-    <Button
-        android:id="@+id/G6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:text="Group 6"
-        app:layout_constraintStart_toEndOf="@+id/G5"
-        app:layout_constraintTop_toBottomOf="@+id/G1" />
-
-    <Button
-        android:id="@+id/G7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:text="Group 7"
-        app:layout_constraintStart_toEndOf="@+id/G6"
-        app:layout_constraintTop_toBottomOf="@+id/G1" />-->
 
     <Button
         android:id="@+id/config"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/primary_square"
         android:text="@string/settings"
@@ -238,6 +64,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
+        app:layout_constraintTop_toBottomOf="@+id/foregroundNotification" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,9 @@
 package com.missilelauncher.missilelauncher;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences settingsPrefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,30 +32,81 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button config = findViewById(R.id.config);
-        Switch enableToggle = findViewById(R.id.enableService);
+        final Switch enableToggle = findViewById(R.id.enableService);
+        Switch enableForegroundNotif = findViewById(R.id.foregroundNotification);
 
         enableToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (compoundButton.isChecked()) {
-                    Intent startIntent = new Intent(getApplication(), FloatingWindow.class);
-                    startIntent.setAction("Start");
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        Log.v("app","Starting Foreground Service");
-                        Toast.makeText(getApplication(),"Starting as Foreground Service." ,Toast.LENGTH_SHORT ).show();
-                        startForegroundService(startIntent);
-                    } else {
-                        Log.v("app","Starting regular Service");
-                        Toast.makeText(getApplication(),"Starting as regular Service." ,Toast.LENGTH_SHORT ).show();
-                        startService(startIntent);
+                    if(Settings.canDrawOverlays(MainActivity.this)) {
+                        Intent startIntent = new Intent(getApplication(), FloatingWindow.class);
+                        startIntent.setAction("Start");
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            Log.v("app", "Starting Foreground Service");
+                            Toast.makeText(getApplication(), "Starting as Foreground Service.", Toast.LENGTH_SHORT).show();
+                            startForegroundService(startIntent);
+                        } else {
+                            Log.v("app", "Starting regular Service");
+                            Toast.makeText(getApplication(), "Starting as regular Service.", Toast.LENGTH_SHORT).show();
+                            startService(startIntent);
+                        }
+                    }
+                    else{
+                        Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                        startActivity(myIntent);
                     }
                 }
                 else {
                     Log.d("app", "Stopping Service");
+                    try {
+                        Intent stopIntent = new Intent(MainActivity.this, FloatingWindow.class);
+                        stopIntent.setAction("Stop");
+                        stopService(stopIntent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        enableForegroundNotif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                settingsPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                final SharedPreferences.Editor editor = settingsPrefs.edit();
+
+                Intent intent = new Intent(MainActivity.this, FloatingWindow.class);
+                Log.d("app", "Stopping Service");
+                try {
                     Intent stopIntent = new Intent(MainActivity.this, FloatingWindow.class);
                     stopIntent.setAction("Stop");
                     stopService(stopIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                intent.setAction("Start");
+                if (compoundButton.isChecked()) {       //user wants notification
+                    editor.putBoolean("foregroundNotif", true).commit();
+                    if (enableToggle.isChecked()) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            Log.v("app", "Starting Foreground Service");
+                            Toast.makeText(getApplication(), "Starting as Foreground Service.", Toast.LENGTH_SHORT).show();
+                            startForegroundService(intent);
+                        } else {
+                            Log.v("app", "Starting regular Service");
+                            Toast.makeText(getApplication(), "Starting as regular Service.", Toast.LENGTH_SHORT).show();
+                            startService(intent);
+                        }
+                    }
+
+                }
+                else {                                  //user doesn't want notification
+                    editor.putBoolean("foregroundNotif", false).commit();
+                    if (enableToggle.isChecked()) {
+                        startService(intent);
+                    }
                 }
             }
         });
@@ -136,11 +191,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Button start = findViewById(R.id.start);
+        Button setPermissionBtn = findViewById(R.id.setPermissionBtn);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
-            start.setVisibility(View.VISIBLE);
+            setPermissionBtn.setVisibility(View.VISIBLE);
         } else {
-            start.setVisibility(View.GONE);
+            setPermissionBtn.setVisibility(View.GONE);
             Log.v("ol", "Ready to draw overlays");
 
             Intent startIntent = new Intent(this, FloatingWindow.class);
@@ -159,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-        start.setOnClickListener(new View.OnClickListener() {
+            setPermissionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
@@ -167,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         }else{
-            start.setVisibility(View.GONE);
+            setPermissionBtn.setVisibility(View.GONE);
         }
     }
 

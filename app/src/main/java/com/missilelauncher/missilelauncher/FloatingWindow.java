@@ -846,29 +846,36 @@ public class FloatingWindow extends Service{
             stopSelf();
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        Log.d("notif", "starting to build notification");
 
-            Notification.Builder builder = new Notification.Builder(this, "333")
-                    .setContentTitle(getString(R.string.app_name))
-                    .setContentText("MissileLauncher")
-                    .setAutoCancel(true);
+        if( settingsPrefs.getBoolean("foregroundNotif", true)){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            Notification notification = builder.build();
-            startForeground(1, notification);
+                Notification.Builder builder = new Notification.Builder(this, "333")
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.foreground_text_message))
+                        .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
+                        .setAutoCancel(true);
 
-        } else {
+                Notification notification = builder.build();
+                startForeground(1, notification);
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                    .setContentTitle(getString(R.string.app_name))
-                    .setContentText("MissileLauncher")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setAutoCancel(true);
+            } else {
 
-            Notification notification = builder.build();
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.foreground_text_message))
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
+                        .setAutoCancel(true);
 
-            startForeground(1, notification);
+                Notification notification = builder.build();
+
+                startForeground(1, notification);
+            }
         }
-        return START_NOT_STICKY;
+
+        return START_STICKY;
     }
 
     public void updateRHS(){

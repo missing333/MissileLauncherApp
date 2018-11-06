@@ -84,8 +84,6 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.ic_star_black_50dp, R.drawable.ic_star_border_black_24dp,
             R.drawable.ic_add_circle_outline_black_40dp, R.drawable.ic_add_circle_black_40,
             R.drawable.ic_radio_button_unchecked_black_24dp, R.drawable.ic_adjust_black_24dp,
-            R.drawable.ic_lightbulb_outline_black_24dp, R.drawable.ic_flare_black_40dp,
-            R.drawable.missile_launcher_icon_nobg
-
+            R.drawable.ic_lightbulb_outline_black_24dp, R.drawable.ic_flare_black_40dp
     };
 }

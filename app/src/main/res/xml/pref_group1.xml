@@ -7,7 +7,7 @@
         android:key="group1Icon"
         android:showDefault="true"
         android:showSilent="true"
-        android:title="Select icon for this Group"/>
+        android:title="@string/pref_groupIcon"/>
 
     <EditTextPreference
         android:defaultValue="Group 1"
