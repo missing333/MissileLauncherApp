@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
@@ -553,7 +554,11 @@ public class FloatingWindow extends Service{
 
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
-            g[i].setImageResource(R.drawable.ring_50dp);
+            //old - g[i].setImageResource(R.drawable.ring_50dp);
+            int n = i+1;
+            int id = (int) settingsPrefs.getLong("iconID"+n,R.drawable.ring_50dp );
+            Drawable d = ContextCompat.getDrawable(this, id);
+            g[i].setImageDrawable(d);
             groupIconParams.setMargins(0,marginTop,0,0);
             g[i].setLayoutParams(groupIconParams);
             g[i].setY((float) (  zoneYSize * i )+yOffset+marginTop);

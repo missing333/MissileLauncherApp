@@ -3,7 +3,9 @@ package com.missilelauncher.missilelauncher;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -226,11 +229,33 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return false;
                 }
             });
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+
+            Preference icon = findPreference("group1Icon");
+            icon.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),GroupIconPicker.class);
+                    intent.putExtra("Group", 1);
+                    startActivity(intent);
+                    return false;
+                }
+            });
         }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+
+            Preference icon = findPreference("group1Icon");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                int id = (int) settingsPrefs.getLong("iconID1",R.drawable.ring_50dp );
+                Drawable d = ContextCompat.getDrawable(getContext(), id);
+                icon.setIcon(d);
+            }
+        }
+
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
@@ -261,10 +286,30 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return false;
                 }
             });
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+            Preference icon = findPreference("group2Icon");
+            icon.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),GroupIconPicker.class);
+                    intent.putExtra("Group", 2);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+
+            Preference icon = findPreference("group2Icon");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                int id = (int) settingsPrefs.getLong("iconID2",R.drawable.ring_50dp );
+                Drawable d = ContextCompat.getDrawable(getContext(), id);
+                icon.setIcon(d);
+            }
         }
 
         @Override
@@ -297,12 +342,32 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return false;
                 }
             });
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+
+            Preference icon = findPreference("group3Icon");
+            icon.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),GroupIconPicker.class);
+                    intent.putExtra("Group", 3);
+                    startActivity(intent);
+                    return false;
+                }
+            });
         }
 
+        @Override
+        public void onResume() {
+            super.onResume();
+
+
+            Preference icon = findPreference("group3Icon");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                int id = (int) settingsPrefs.getLong("iconID3",R.drawable.ring_50dp );
+                Drawable d = ContextCompat.getDrawable(getContext(), id);
+                icon.setIcon(d);
+            }
+        }
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
@@ -332,10 +397,30 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return false;
                 }
             });
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+            Preference icon = findPreference("group4Icon");
+            icon.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),GroupIconPicker.class);
+                    intent.putExtra("Group", 4);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+
+            Preference icon = findPreference("group4Icon");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                int id = (int) settingsPrefs.getLong("iconID4",R.drawable.ring_50dp );
+                Drawable d = ContextCompat.getDrawable(getContext(), id);
+                icon.setIcon(d);
+            }
         }
 
         @Override
@@ -367,10 +452,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return false;
                 }
             });
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+
+            Preference icon = findPreference("group5Icon");
+            icon.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),GroupIconPicker.class);
+                    intent.putExtra("Group", 5);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+
+            Preference icon = findPreference("group5Icon");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                int id = (int) settingsPrefs.getLong("iconID5",R.drawable.ring_50dp );
+                Drawable d = ContextCompat.getDrawable(getContext(), id);
+                icon.setIcon(d);
+            }
         }
 
         @Override
@@ -402,10 +508,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return false;
                 }
             });
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+
+            Preference icon = findPreference("group6Icon");
+            icon.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),GroupIconPicker.class);
+                    intent.putExtra("Group", 6);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+
+            Preference icon = findPreference("group6Icon");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                int id = (int) settingsPrefs.getLong("iconID6",R.drawable.ring_50dp );
+                Drawable d = ContextCompat.getDrawable(getContext(), id);
+                icon.setIcon(d);
+            }
         }
 
         @Override
@@ -437,10 +564,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return false;
                 }
             });
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+
+            Preference icon = findPreference("group7Icon");
+            icon.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(),GroupIconPicker.class);
+                    intent.putExtra("Group", 7);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+
+            Preference icon = findPreference("group7Icon");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                int id = (int) settingsPrefs.getLong("iconID7",R.drawable.ring_50dp );
+                Drawable d = ContextCompat.getDrawable(getContext(), id);
+                icon.setIcon(d);
+            }
         }
 
         @Override

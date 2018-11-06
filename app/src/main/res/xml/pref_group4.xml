@@ -2,6 +2,12 @@
 
     <!-- A 'parent' preference, which enables/disables child preferences (below)
          when checked/unchecked. -->
+    <Preference
+        android:key="group4Icon"
+        android:showDefault="true"
+        android:showSilent="true"
+        android:title="Select icon for this Group"/>
+
     <EditTextPreference
         android:defaultValue="Group 4"
         android:key="groupName4"
