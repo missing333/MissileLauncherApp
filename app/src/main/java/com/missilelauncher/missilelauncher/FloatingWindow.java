@@ -2,6 +2,8 @@ package com.missilelauncher.missilelauncher;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -838,6 +840,56 @@ public class FloatingWindow extends Service{
         if (intent.getAction().equals("Start")) {
             Log.i("start", "Received Start Foreground Intent ");
             // your start service code
+            Log.d("notif", "starting to build notification");
+
+            if( settingsPrefs.getBoolean("foregroundNotif", true)){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                /*Notification.Builder builder = new Notification.Builder(this, "333")
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.foreground_text_message))
+                        .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
+                        .setAutoCancel(true);
+
+                Notification notification = builder.build();*/
+
+
+                    int notifyID = 1;
+                    String CHANNEL_ID = "my_channel_01";// The id of the channel.
+                    CharSequence name = getString((R.string.app_name));// The user-visible name of the channel.
+                    int importance = NotificationManager.IMPORTANCE_MIN;
+                    NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+                    // Create a notification and set the notification channel.
+                    Notification notification = new Notification.Builder(getApplicationContext())
+                            .setContentTitle(getString(R.string.app_name))
+                            .setContentText(getString(R.string.foreground_text_message))
+                            .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
+                            .setChannelId(CHANNEL_ID)
+                            .build();
+
+                    NotificationManager mNotificationManager =
+                            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    mNotificationManager.createNotificationChannel(mChannel);
+
+                    // Issue the notification.
+                    mNotificationManager.notify(notifyID , notification);
+
+                    startForeground(1, notification);
+
+                } else {
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                            .setContentTitle(getString(R.string.app_name))
+                            .setContentText(getString(R.string.foreground_text_message))
+                            .setPriority(NotificationCompat.PRIORITY_MIN)
+                            .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
+                            .setAutoCancel(true);
+
+                    Notification notification = builder.build();
+
+                    startForeground(1, notification);
+                }
+            }
         }
         else if (intent.getAction().equals( "Stop" )) {
             Log.i("stop", "Received Stop Foreground Intent");
@@ -846,34 +898,7 @@ public class FloatingWindow extends Service{
             stopSelf();
         }
 
-        Log.d("notif", "starting to build notification");
 
-        if( settingsPrefs.getBoolean("foregroundNotif", true)){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-                Notification.Builder builder = new Notification.Builder(this, "333")
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText(getString(R.string.foreground_text_message))
-                        .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
-                        .setAutoCancel(true);
-
-                Notification notification = builder.build();
-                startForeground(1, notification);
-
-            } else {
-
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText(getString(R.string.foreground_text_message))
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
-                        .setAutoCancel(true);
-
-                Notification notification = builder.build();
-
-                startForeground(1, notification);
-            }
-        }
 
         return START_STICKY;
     }

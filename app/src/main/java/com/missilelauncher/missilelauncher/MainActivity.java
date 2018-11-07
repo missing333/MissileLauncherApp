@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button config = findViewById(R.id.config);
         final Switch enableToggle = findViewById(R.id.enableService);
-        Switch enableForegroundNotif = findViewById(R.id.foregroundNotification);
+        final Switch enableForegroundNotif = findViewById(R.id.foregroundNotification);
 
         enableToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     if(Settings.canDrawOverlays(MainActivity.this)) {
                         Intent startIntent = new Intent(getApplication(), FloatingWindow.class);
                         startIntent.setAction("Start");
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && enableForegroundNotif.isChecked()) {
                             Log.v("app", "Starting Foreground Service");
                             Toast.makeText(getApplication(), "Starting as Foreground Service.", Toast.LENGTH_SHORT).show();
                             startForegroundService(startIntent);
@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 else {                                  //user doesn't want notification
                     editor.putBoolean("foregroundNotif", false).commit();
                     if (enableToggle.isChecked()) {
+                        Log.v("app", "Starting regular Service");
+                        Toast.makeText(getApplication(), "Starting as regular Service.", Toast.LENGTH_SHORT).show();
                         startService(intent);
                     }
                 }
@@ -192,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         Button setPermissionBtn = findViewById(R.id.setPermissionBtn);
+        Switch enableNotif = findViewById(R.id.foregroundNotification);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
             setPermissionBtn.setVisibility(View.VISIBLE);
         } else {
@@ -201,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             Intent startIntent = new Intent(this, FloatingWindow.class);
             startIntent.setAction("Start");
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && enableNotif.isChecked()) {
                 Log.v("app","Starting Foreground Service");
                 //Toast.makeText(this,"Starting as Foreground Service." ,Toast.LENGTH_SHORT ).show();
                 startForegroundService(startIntent);
