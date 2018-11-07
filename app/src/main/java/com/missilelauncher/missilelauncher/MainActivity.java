@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         final Switch enableToggle = findViewById(R.id.enableService);
         final Switch enableForegroundNotif = findViewById(R.id.foregroundNotification);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            enableForegroundNotif.setVisibility(View.VISIBLE);
+        }
+        else{
+            enableForegroundNotif.setVisibility(View.GONE);
+        }
+
         enableToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -56,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                         startActivity(myIntent);
                     }
+                    enableForegroundNotif.setEnabled(true);
                 }
                 else {
                     Log.d("app", "Stopping Service");
@@ -66,9 +74,11 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    enableForegroundNotif.setEnabled(false);
                 }
             }
         });
+
 
         enableForegroundNotif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
