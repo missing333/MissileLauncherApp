@@ -757,8 +757,6 @@ public class FloatingWindow extends Service{
                 }
             }
 
-
-
         } catch (Exception e) {
             Log.e("error", "Exception thrown when trying to display apps.");
             e.printStackTrace();
@@ -845,15 +843,6 @@ public class FloatingWindow extends Service{
             if( settingsPrefs.getBoolean("foregroundNotif", true)){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                /*Notification.Builder builder = new Notification.Builder(this, "333")
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText(getString(R.string.foreground_text_message))
-                        .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
-                        .setAutoCancel(true);
-
-                Notification notification = builder.build();*/
-
-
                     int notifyID = 1;
                     String CHANNEL_ID = "my_channel_01";// The id of the channel.
                     CharSequence name = getString((R.string.app_name));// The user-visible name of the channel.
@@ -863,7 +852,7 @@ public class FloatingWindow extends Service{
                     Notification notification = new Notification.Builder(getApplicationContext())
                             .setContentTitle(getString(R.string.app_name))
                             .setContentText(getString(R.string.foreground_text_message))
-                            .setSmallIcon(R.drawable.white_minimal_ml_icon)
+                            .setSmallIcon(R.drawable.blank)
                             .setChannelId(CHANNEL_ID)
                             .build();
 
@@ -882,7 +871,7 @@ public class FloatingWindow extends Service{
                             .setContentTitle(getString(R.string.app_name))
                             .setContentText(getString(R.string.foreground_text_message))
                             .setPriority(NotificationCompat.PRIORITY_MIN)
-                            .setSmallIcon(R.drawable.white_minimal_ml_icon)
+                            .setSmallIcon(R.drawable.blank)
                             .setAutoCancel(true);
 
                     Notification notification = builder.build();
@@ -965,8 +954,6 @@ public class FloatingWindow extends Service{
         super.onDestroy();
         wm.removeView(ll);
         wm.removeView(lhs);
-
-        sendBroadcast(new Intent("StayinAlive"));
     }
 }
 

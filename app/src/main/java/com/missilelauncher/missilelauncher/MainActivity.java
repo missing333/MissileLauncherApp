@@ -34,13 +34,20 @@ public class MainActivity extends AppCompatActivity {
         Button config = findViewById(R.id.config);
         final Switch enableToggle = findViewById(R.id.enableService);
         final Switch enableForegroundNotif = findViewById(R.id.foregroundNotification);
+        settingsPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (settingsPrefs.getBoolean("foregroundNotif", true)){
+            enableForegroundNotif.setChecked(true);
+        }else{
+            enableForegroundNotif.setChecked(false);
+        }
+
+/*        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             enableForegroundNotif.setVisibility(View.VISIBLE);
         }
         else{
             enableForegroundNotif.setVisibility(View.GONE);
-        }
+        }*/
 
         enableToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         enableForegroundNotif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                settingsPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                 final SharedPreferences.Editor editor = settingsPrefs.edit();
 
                 Intent intent = new Intent(MainActivity.this, FloatingWindow.class);
@@ -208,6 +214,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
             setPermissionBtn.setVisibility(View.VISIBLE);
+            setPermissionBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                    startActivity(myIntent);
+                }
+            });
         } else {
             setPermissionBtn.setVisibility(View.GONE);
             Log.v("ol", "Ready to draw overlays");
@@ -227,17 +240,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            setPermissionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                startActivity(myIntent);
-            }
-        });
-        }else{
-            setPermissionBtn.setVisibility(View.GONE);
-        }
     }
 
 }
