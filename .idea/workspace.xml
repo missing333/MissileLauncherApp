@@ -18,9 +18,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/RestartServiceReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/white_minimal_ml_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -79,11 +81,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="71" column="53" lean-forward="true" selection-start-line="71" selection-start-column="53" selection-end-line="71" selection-end-column="53" />
+            <state relative-caret-position="322">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
               <folding>
                 <element signature="e#3306#3620#0" expanded="true" />
                 <element signature="e#3619#3620#0" expanded="true" />
@@ -95,8 +97,8 @@
       <file leaf-file-name="FloatingWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="845" column="16" selection-start-line="845" selection-start-column="16" selection-end-line="845" selection-end-column="69" />
+            <state relative-caret-position="462">
+              <caret line="968" column="45" selection-start-line="968" selection-start-column="34" selection-end-line="968" selection-end-column="45" />
               <folding>
                 <element signature="docComment;class#FloatingWindow#0" />
                 <element signature="e#2497#2506#0" />
@@ -120,7 +122,30 @@
                 <element signature="e#34886#36735#0" />
                 <element signature="e#38119#39537#0" />
                 <element signature="e#39543#40964#0" />
-                <element signature="e#40970#41083#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestartServiceReceiver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/RestartServiceReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -163,14 +188,13 @@
       <list>
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="valueResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>prefs</find>
       <find>is +</find>
       <find>position++</find>
       <find>todo</find>
@@ -200,6 +224,7 @@
       <find>notifi</find>
       <find>startFor</find>
       <find>starting as fore</find>
+      <find>ondes</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -2468,8 +2493,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_brightness_low_black_24dp.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ticket.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/reel.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/play_circle_outline.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/play_circle_filled.xml" />
@@ -2515,18 +2538,20 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/RestartServiceReceiver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="72" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="90" />
     <option name="y" value="2" />
-    <option name="width" value="1856" />
-    <option name="height" value="1086" />
+    <option name="width" value="2320" />
+    <option name="height" value="1358" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -2546,13 +2571,13 @@
             <path>
               <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
             <path>
               <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="missilelauncher" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
             <path>
               <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
@@ -2571,7 +2596,8 @@
     <property name="ExportApk.ApkPath" value="C:\git\Android_Studio\MissileLauncherApp\app" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.Flavors" value="" />
-    <property name="device.picker.selection" value="Pixel_XL_API_25" />
+    <property name="device.picker.selection" value="Pixel_2_XL_API_28" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="last_opened_file_path" value="$USER_HOME$/Dropbox/Apps/Android_Studio/key/MissileLauncher Keys/MLKey" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
@@ -2580,6 +2606,7 @@
       <recent name="com.missilelauncher.missilelauncher" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\git\Android_Studio\MissileLauncherApp\app\src\main\res\drawable" />
       <recent name="C:\git\Android_Studio\MissileLauncherApp\app\src\main\res\drawable-v24" />
       <recent name="C:\git\Android_Studio\MissileLauncherApp\app\src\main\res\layout" />
     </key>
@@ -2883,7 +2910,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541613321691</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fixed error with notification not showing in android O+">
+      <created>1541613793130</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1541613793130</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2896,7 +2930,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="2" width="1856" height="1086" extended-state="0" />
+    <frame x="55" y="-7" width="1488" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="10" weight="0.32943678" />
@@ -2910,11 +2944,11 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.49521786" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32943678" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="9" visible="true" weight="0.3093448" />
+      <window_info anchor="bottom" id="Logcat" order="9" weight="0.39724138" />
       <window_info id="Captures" order="7" weight="0.24972191" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="4" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.21213809" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.26680672" />
       <window_info anchor="bottom" id="Build" order="12" weight="0.41245973" />
       <window_info anchor="right" id="Gradle" order="8" />
       <window_info id="Structure" order="1" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
@@ -2981,27 +3015,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_brightness_3_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" selection-start-column="24" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_brightness_low_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_build_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_camera_alt_black_24dp.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -3363,10 +3376,43 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-26/android/widget/CompoundButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="216" column="13" selection-start-line="216" selection-start-column="13" selection-end-line="216" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/white_minimal_ml_icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="e#3306#3620#0" expanded="true" />
+            <element signature="e#3619#3620#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/RestartServiceReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="845" column="16" selection-start-line="845" selection-start-column="16" selection-end-line="845" selection-end-column="69" />
+        <state relative-caret-position="462">
+          <caret line="968" column="45" selection-start-line="968" selection-start-column="34" selection-end-line="968" selection-end-column="45" />
           <folding>
             <element signature="docComment;class#FloatingWindow#0" />
             <element signature="e#2497#2506#0" />
@@ -3390,26 +3436,17 @@
             <element signature="e#34886#36735#0" />
             <element signature="e#38119#39537#0" />
             <element signature="e#39543#40964#0" />
-            <element signature="e#40970#41083#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-26/android/widget/CompoundButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="216" column="13" selection-start-line="216" selection-start-column="13" selection-end-line="216" selection-end-column="13" />
-        </state>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="71" column="53" lean-forward="true" selection-start-line="71" selection-start-column="53" selection-end-line="71" selection-end-column="53" />
-          <folding>
-            <element signature="e#3306#3620#0" expanded="true" />
-            <element signature="e#3619#3620#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="152">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>

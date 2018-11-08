@@ -863,7 +863,7 @@ public class FloatingWindow extends Service{
                     Notification notification = new Notification.Builder(getApplicationContext())
                             .setContentTitle(getString(R.string.app_name))
                             .setContentText(getString(R.string.foreground_text_message))
-                            .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
+                            .setSmallIcon(R.drawable.white_minimal_ml_icon)
                             .setChannelId(CHANNEL_ID)
                             .build();
 
@@ -882,7 +882,7 @@ public class FloatingWindow extends Service{
                             .setContentTitle(getString(R.string.app_name))
                             .setContentText(getString(R.string.foreground_text_message))
                             .setPriority(NotificationCompat.PRIORITY_MIN)
-                            .setSmallIcon(R.drawable.missile_launcher_icon_nobg)
+                            .setSmallIcon(R.drawable.white_minimal_ml_icon)
                             .setAutoCancel(true);
 
                     Notification notification = builder.build();
@@ -965,6 +965,8 @@ public class FloatingWindow extends Service{
         super.onDestroy();
         wm.removeView(ll);
         wm.removeView(lhs);
+
+        sendBroadcast(new Intent("StayinAlive"));
     }
 }
 
