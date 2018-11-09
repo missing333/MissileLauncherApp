@@ -96,7 +96,7 @@
     <string name="enable_missilelauncher">Enable MissileLauncher</string>
     <string name="settings">Settings</string>
     <string name="show_ungrouped_apps_only">Show UnGrouped Apps Only</string>
-    <string name="foreground_text_message">This notification will make sure I keep working.</string>
+    <string name="foreground_text_message">This notification will make sure I keep working.  This notification can be removed in the app.</string>
     <string name="show_notification_text">Show Notification (app may stop working if this is disabled)</string>
 
 </resources>

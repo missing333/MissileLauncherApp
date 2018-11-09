@@ -37,6 +37,9 @@
         <activity android:name="com.missilelauncher.missilelauncher.G5SelectedItems" />
         <activity android:name="com.missilelauncher.missilelauncher.G6SelectedItems" />
         <activity android:name="com.missilelauncher.missilelauncher.G7SelectedItems" />
+        <activity android:name=".PlayStorePrompt"
+            android:theme="@style/AppTheme.Modal"
+            />
 
         <receiver android:name=".DeviceBootReceiver">
             <intent-filter>
