@@ -777,8 +777,8 @@ public class FloatingWindow extends Service{
         x = Math.round((rawX+(appXSize/3))/appXSize);
         y = Math.round((rawY-(appYSize/3))/appYSize);
 
-        if (!portrait){
-            //x--;
+        if (!portrait && leftSideNavigationBar){
+            x--;
         }
 
         if(x != lastAppTouched[0]){

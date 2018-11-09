@@ -18,14 +18,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/blank.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -87,8 +81,8 @@
       <file leaf-file-name="FloatingWindow.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="873" lean-forward="true" selection-start-line="873" selection-end-line="873" />
+            <state relative-caret-position="287">
+              <caret line="779" column="48" selection-start-line="779" selection-start-column="48" selection-end-line="779" selection-end-column="48" />
               <folding>
                 <element signature="docComment;class#FloatingWindow#0" />
                 <element signature="e#2577#2586#0" />
@@ -110,43 +104,12 @@
                 <element signature="e#23211#24409#0" />
                 <element signature="e#24415#25155#0" />
                 <element signature="e#25161#25682#0" />
-                <element signature="e#33977#34701#0" />
+                <element signature="e#25688#33971#0" />
                 <element signature="e#34707#34958#0" />
-                <element signature="e#34964#36813#0" />
+                <element signature="e#36820#39468#0" />
                 <element signature="e#39474#40892#0" />
                 <element signature="e#40898#42319#0" />
                 <element signature="e#42325#42438#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="57" column="35" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SharedListPreferencesHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SharedListPreferencesHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="37" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GroupIconPicker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="123" />
-              <folding>
-                <element signature="e#871#1522#0" expanded="true" />
-                <element signature="e#1521#1522#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2688,7 +2651,7 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
       <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -2953,10 +2916,17 @@
       <option name="project" value="LOCAL" />
       <updated>1541699924146</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Saving Group icons properly now">
+      <created>1541733191205</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1541733191205</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -2970,7 +2940,7 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="10" weight="0.32943678" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32943678" />
+      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.32893497" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Build Variants" order="5" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
@@ -2979,12 +2949,13 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.49521786" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32943678" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="9" visible="true" weight="0.4147031" />
+      <window_info anchor="bottom" id="Logcat" order="9" weight="0.4147031" />
       <window_info id="Captures" order="7" weight="0.24972191" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="4" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.20068729" />
       <window_info anchor="bottom" id="Build" order="12" weight="0.36663526" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32731137" />
       <window_info anchor="right" id="Gradle" order="8" />
       <window_info id="Structure" order="1" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
       <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
@@ -3018,7 +2989,6 @@
       <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32943678" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32731137" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49521786" />
       <window_info anchor="bottom" id="Build" order="12" weight="0.41245973" />
       <window_info anchor="bottom" id="Messages" order="15" weight="0.32837406" />
@@ -3032,7 +3002,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dynamic Group icon creation.&#10;changed icons to stars" />
     <MESSAGE value="sorting by alpha in app selection, sorting by launchcount in launcher!" />
     <MESSAGE value="added left side activation zone" />
     <MESSAGE value="auto-load saved groups on install" />
@@ -3057,18 +3026,11 @@
     <MESSAGE value="made foreground notification so service doesn't get destroyed" />
     <MESSAGE value="fixed error with notification not showing in android O+" />
     <MESSAGE value="implemented Broadcast Reciever to keep FloatingWindow alive when destroyed." />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented Broadcast Reciever to keep FloatingWindow alive when destroyed." />
+    <MESSAGE value="Saving Group icons properly now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saving Group icons properly now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java</url>
-          <line>805</line>
-          <properties />
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="39" />
     </breakpoint-manager>
   </component>
@@ -3390,13 +3352,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SharedListPreferencesHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="37" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1054">
@@ -3425,10 +3380,17 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+        <state relative-caret-position="153">
+          <caret line="57" column="35" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SharedListPreferencesHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="37" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -3443,17 +3405,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="57" column="35" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="55" />
+        <state relative-caret-position="34">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="873" lean-forward="true" selection-start-line="873" selection-end-line="873" />
+        <state relative-caret-position="287">
+          <caret line="779" column="48" selection-start-line="779" selection-start-column="48" selection-end-line="779" selection-end-column="48" />
           <folding>
             <element signature="docComment;class#FloatingWindow#0" />
             <element signature="e#2577#2586#0" />
@@ -3475,9 +3437,9 @@
             <element signature="e#23211#24409#0" />
             <element signature="e#24415#25155#0" />
             <element signature="e#25161#25682#0" />
-            <element signature="e#33977#34701#0" />
+            <element signature="e#25688#33971#0" />
             <element signature="e#34707#34958#0" />
-            <element signature="e#34964#36813#0" />
+            <element signature="e#36820#39468#0" />
             <element signature="e#39474#40892#0" />
             <element signature="e#40898#42319#0" />
             <element signature="e#42325#42438#0" />
