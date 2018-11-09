@@ -1,9 +1,11 @@
 package com.missilelauncher.missilelauncher;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,7 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -40,6 +43,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static com.missilelauncher.missilelauncher.GroupIconPicker.PREFS_NAME;
 
 /**
  * Created by mmissildine on 9/20/2018.
@@ -554,10 +559,11 @@ public class FloatingWindow extends Service{
             marginLeft+=zoneXSize;
         }
 
+        SharedPreferences settings = getApplicationContext().getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
         for (int i=0;i<numZones;i++){
             g[i] = new ImageView(this);
             int n = i+1;
-            int id = (int) settingsPrefs.getLong("iconID"+n, R.drawable.ring_50dp );
+            int id = (int) settings.getLong("iconID"+n, R.drawable.ring_50dp);
             Drawable d = ContextCompat.getDrawable(this, id);
             g[i].setImageDrawable(d);
             groupIconParams.setMargins(0,marginTop,0,0);
@@ -758,8 +764,8 @@ public class FloatingWindow extends Service{
             }
 
         } catch (Exception e) {
-            Log.e("error", "Exception thrown when trying to display apps.");
-            e.printStackTrace();
+            Log.e("error", "Usual Exception thrown when trying to display apps.");
+            //e.printStackTrace();
         }
     }
 
@@ -891,6 +897,7 @@ public class FloatingWindow extends Service{
 
         return START_STICKY;
     }
+
 
     public void updateRHS(){
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
