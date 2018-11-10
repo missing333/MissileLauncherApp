@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,9 @@ public class G1SelectedItems extends AppCompatActivity {
 
 
         setContentView(R.layout.group_picking);
+
+        SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        getSupportActionBar().setTitle(settingsPrefs.getString("groupName"+group, "Group "+group));
 
         appArray = getPackages().toArray(new AppInfo[0]);
         Arrays.sort(appArray, AppInfo.appNameComparator);

@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
         enableToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                final SharedPreferences.Editor editor = settingsPrefs.edit();
                 if (compoundButton.isChecked()) {
+                    editor.putBoolean("appEnabled", true).commit();
                     if(Settings.canDrawOverlays(MainActivity.this)) {
                         Intent startIntent = new Intent(getApplication(), FloatingWindow.class);
                         startIntent.setAction("Start");
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("app", "Stopping Service");
+                    editor.putBoolean("appEnabled", false).commit();
                     try {
                         Intent stopIntent = new Intent(MainActivity.this, FloatingWindow.class);
                         stopIntent.setAction("Stop");
