@@ -45,7 +45,7 @@
 
     <SeekBarPreference
         android:key="lhsYPos"
-        android:title="Position of Activation Area"
+        android:title="Slide Activation Area Up or Down"
         android:max="100"
         android:defaultValue="40" />
 

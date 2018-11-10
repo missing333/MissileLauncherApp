@@ -13,7 +13,9 @@
         android:key="groupName6"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Group 6 Name: " />
+        android:title="Group 6 Name: "
+        android:inputType="textCapWords"
+        android:capitalize="words" />
 
     <ListPreference
         android:defaultValue="Most Used"
