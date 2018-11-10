@@ -180,7 +180,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     // Implementation
                     if (key.equals("numZones") && Integer.parseInt(prefs.getString("numZones","3")) > 3 ){
                         if (isProInstalled(getContext())){
-                            Toast.makeText(getContext(), "Thanks for being PRO!!!!!!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), "Thanks for being PRO!!!!!!", Toast.LENGTH_SHORT).show();
                         }else{
                             prefs.edit().putString("numZones","3").commit();      //restore back down to 3 if they aren't Pro
                             startActivity(new Intent(getContext(), PlayStorePrompt.class));
@@ -189,9 +189,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
                     //this stops and restarts the activation areas
-                    Intent intent = null;
+                    Intent intent = new Intent(getContext(), FloatingWindow.class);
                     try {
-                        intent = new Intent(getContext(), FloatingWindow.class);
                         intent.setAction("Stop");
                         getContext().stopService(intent);
                     } catch (Exception e) {
