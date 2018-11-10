@@ -228,10 +228,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         protected boolean isProInstalled(Context context) {
             PackageManager manager = context.getPackageManager();
-            if (manager.checkSignatures(context.getPackageName(), "com.missing.missilelauncherpro")
-                    == PackageManager.SIGNATURE_MATCH) {
-                //Pro key installed, and signatures match
-                return true;
+            try {
+                if (manager.checkSignatures(context.getPackageName(), "com.missing.missilelauncherpro")
+                        == PackageManager.SIGNATURE_MATCH) {
+                    //Pro key installed, and signatures match
+                    return true;
+                }
+            } catch (Exception e) {
+                return false;
             }
             return false;
         }
