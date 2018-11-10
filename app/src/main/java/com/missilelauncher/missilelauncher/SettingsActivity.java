@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.media.Ringtone;
@@ -198,16 +199,29 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
                 public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
                     // Implementation
-                    if ( Integer.parseInt(prefs.getString("numZones","3")) > 3){
-                        Toast.makeText(getContext(), "CHECK FOR PRO KEY HERE!!!!!!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getContext(), PlayStorePrompt.class));
+                    if (key.equals("numZones") && Integer.parseInt(prefs.getString("numZones","3")) > 3 ){
+                        if (isProInstalled(getContext())){
+                            Toast.makeText(getContext(), "Thanks for being PRO!!!!!!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            prefs.edit().putString("numZones","3").commit();      //restore back down to 3 if they aren't Pro
+                            startActivity(new Intent(getContext(), PlayStorePrompt.class));
+                        }
                     }
-
                 }
             };
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             prefs.registerOnSharedPreferenceChangeListener(listener);
 
+        }
+
+        protected static boolean isProInstalled(Context context) {
+            PackageManager manager = context.getPackageManager();
+            if (manager.checkSignatures(context.getPackageName(), "com.missing.missilelauncherpro")
+                    == PackageManager.SIGNATURE_MATCH) {
+                //Pro key installed, and signatures match
+                return true;
+            }
+            return false;
         }
 
         @Override

@@ -856,8 +856,8 @@ public class FloatingWindow extends Service{
                     NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
                     // Create a notification and set the notification channel.
                     Notification notification = new Notification.Builder(getApplicationContext())
-                            .setContentTitle(getString(R.string.app_name))
-                            .setContentText(getString(R.string.foreground_text_message))
+                            .setContentTitle(getString(R.string.foreground_text_message1))
+                            .setContentText(getString(R.string.foreground_text_message2))
                             .setSmallIcon(R.drawable.blank)
                             .setChannelId(CHANNEL_ID)
                             .build();
@@ -874,8 +874,8 @@ public class FloatingWindow extends Service{
                 } else {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                            .setContentTitle(getString(R.string.app_name))
-                            .setContentText(getString(R.string.foreground_text_message))
+                            .setContentTitle(getString(R.string.foreground_text_message1))
+                            .setContentText(getString(R.string.foreground_text_message2))
                             .setPriority(NotificationCompat.PRIORITY_MIN)
                             .setSmallIcon(R.drawable.blank)
                             .setAutoCancel(true);

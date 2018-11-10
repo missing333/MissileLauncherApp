@@ -1,6 +1,6 @@
 <resources>
     <string name="version">MissileLauncher Version</string>
-    <string name="versionNum">1.0.11</string>
+    <string name="versionNum">1.0.12</string>
 
 
     <string name="app_name">MissileLauncher</string>
@@ -96,7 +96,8 @@
     <string name="enable_missilelauncher">Enable MissileLauncher</string>
     <string name="settings">Settings</string>
     <string name="show_ungrouped_apps_only">Show UnGrouped Apps Only</string>
-    <string name="foreground_text_message">This notification will make sure I keep working.  This notification can be removed in the app.</string>
+    <string name="foreground_text_message1">This notification will make sure I keep working.</string>
+    <string name="foreground_text_message2">It can be disabled in the app.</string>
     <string name="show_notification_text">Show Notification (app may stop working if this is disabled)</string>
 
 </resources>

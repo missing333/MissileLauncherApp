@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/fg_missile_launcher"
+        android:icon="@mipmap/missile_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/fg_missile_launcher"
+        android:roundIcon="@mipmap/missile_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.missilelauncher.missilelauncher.MainActivity">
@@ -30,13 +30,20 @@
             android:label="@string/title_activity_settings"></activity>
         <activity android:name="com.missilelauncher.missilelauncher.GroupIconPicker" />
 
-        <activity android:name="com.missilelauncher.missilelauncher.G1SelectedItems" />
-        <activity android:name="com.missilelauncher.missilelauncher.G2SelectedItems" />
-        <activity android:name="com.missilelauncher.missilelauncher.G3SelectedItems" />
-        <activity android:name="com.missilelauncher.missilelauncher.G4SelectedItems" />
-        <activity android:name="com.missilelauncher.missilelauncher.G5SelectedItems" />
-        <activity android:name="com.missilelauncher.missilelauncher.G6SelectedItems" />
-        <activity android:name="com.missilelauncher.missilelauncher.G7SelectedItems" />
+        <activity android:name="com.missilelauncher.missilelauncher.G1SelectedItems"
+            android:label="@string/pref_group1"/>
+        <activity android:name="com.missilelauncher.missilelauncher.G2SelectedItems"
+            android:label="@string/pref_group2"/>
+        <activity android:name="com.missilelauncher.missilelauncher.G3SelectedItems"
+            android:label="@string/pref_group3"/>
+        <activity android:name="com.missilelauncher.missilelauncher.G4SelectedItems"
+            android:label="@string/pref_group4"/>
+        <activity android:name="com.missilelauncher.missilelauncher.G5SelectedItems"
+            android:label="@string/pref_group5"/>
+        <activity android:name="com.missilelauncher.missilelauncher.G6SelectedItems"
+            android:label="@string/pref_group6"/>
+        <activity android:name="com.missilelauncher.missilelauncher.G7SelectedItems"
+            android:label="@string/pref_group7"/>
         <activity android:name=".PlayStorePrompt"
             android:theme="@style/AppTheme.Modal"
             />
