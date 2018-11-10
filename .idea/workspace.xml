@@ -19,6 +19,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -77,11 +79,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1138">
+              <caret line="229" column="65" selection-start-line="229" selection-start-column="65" selection-end-line="229" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayStorePrompt.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="38" column="47" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+            <state relative-caret-position="23">
+              <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -89,17 +112,8 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="442">
               <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="8" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -118,7 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onStartCommand</find>
       <find>setIconSizePos</find>
       <find>appxs</find>
       <find>star</find>
@@ -148,6 +161,7 @@
       <find>change</find>
       <find>notifi</find>
       <find>position</find>
+      <find>pro</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -2289,11 +2303,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/RestartServiceReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/play_store_prompt.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G4SelectedItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G2SelectedItems.java" />
@@ -2309,9 +2321,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_group5.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_group4.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" />
       </list>
     </option>
   </component>
@@ -2872,7 +2886,21 @@
       <option name="project" value="LOCAL" />
       <updated>1541820742137</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="removed toast on IsPro = true">
+      <created>1541822592380</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1541822592380</updated>
+    </task>
+    <task id="LOCAL-00027" summary="removed toast on IsPro = true, fixed crash when pro key not found.">
+      <created>1541863953152</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1541863953152</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -2890,6 +2918,7 @@
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="10" weight="0.32943678" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32943678" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.32799247" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Build Variants" order="5" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
@@ -2899,12 +2928,12 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.49521786" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32943678" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Logcat" order="9" visible="true" weight="0.3883129" />
+      <window_info anchor="bottom" id="Logcat" order="9" weight="0.3883129" />
       <window_info id="Captures" order="7" weight="0.24972191" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="4" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.209622" />
-      <window_info anchor="bottom" id="Build" order="12" weight="0.41187558" />
+      <window_info anchor="bottom" id="Build" order="12" visible="true" weight="0.41187558" />
       <window_info anchor="right" id="Gradle" order="8" />
       <window_info id="Structure" order="1" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49944383" weight="0.35387886" />
@@ -2940,7 +2969,6 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.32731137" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49521786" />
       <window_info anchor="bottom" id="Build" order="12" weight="0.41245973" />
-      <window_info anchor="bottom" id="Messages" order="15" weight="0.32837406" />
       <window_info id="Captures" order="7" weight="0.24972191" />
       <window_info anchor="right" id="Gradle" order="8" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -2951,8 +2979,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="phase 1 of getting settings to work." />
-    <MESSAGE value="got Preferences working.  other minor improvements." />
     <MESSAGE value="Fixed small bug when staring app" />
     <MESSAGE value="fixed minor app positioning" />
     <MESSAGE value="changed icon from star to circle.  &#10;added sorting to groups" />
@@ -2976,7 +3002,9 @@
     <MESSAGE value="changed title of the activity to the custom title" />
     <MESSAGE value="auto-capitalized each word" />
     <MESSAGE value="cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup" />
+    <MESSAGE value="removed toast on IsPro = true" />
+    <MESSAGE value="removed toast on IsPro = true, fixed crash when pro key not found." />
+    <option name="LAST_COMMIT_MESSAGE" value="removed toast on IsPro = true, fixed crash when pro key not found." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3136,18 +3164,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/missile_launcher_round.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="43" column="17" lean-forward="true" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1077#1714#0" expanded="true" />
-            <element signature="e#1713#1714#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
@@ -3393,56 +3409,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="231" column="97" selection-start-line="231" selection-start-column="79" selection-end-line="231" selection-end-column="97" />
-          <folding>
-            <element signature="e#1843#3122#0" expanded="true" />
-            <element signature="e#3121#3122#0" expanded="true" />
-            <element signature="e#6996#9158#0" expanded="true" />
-            <element signature="e#9157#9158#0" expanded="true" />
-            <element signature="e#10876#11203#0" expanded="true" />
-            <element signature="e#11202#11203#0" expanded="true" />
-            <element signature="e#11313#11689#0" expanded="true" />
-            <element signature="e#11688#11689#0" expanded="true" />
-            <element signature="e#13212#13539#0" expanded="true" />
-            <element signature="e#13538#13539#0" expanded="true" />
-            <element signature="e#13648#14024#0" expanded="true" />
-            <element signature="e#14023#14024#0" expanded="true" />
-            <element signature="e#15547#15874#0" expanded="true" />
-            <element signature="e#15873#15874#0" expanded="true" />
-            <element signature="e#15984#16360#0" expanded="true" />
-            <element signature="e#16359#16360#0" expanded="true" />
-            <element signature="e#17881#18208#0" expanded="true" />
-            <element signature="e#18207#18208#0" expanded="true" />
-            <element signature="e#18317#18693#0" expanded="true" />
-            <element signature="e#18692#18693#0" expanded="true" />
-            <element signature="e#20215#20542#0" expanded="true" />
-            <element signature="e#20541#20542#0" expanded="true" />
-            <element signature="e#20652#21028#0" expanded="true" />
-            <element signature="e#21027#21028#0" expanded="true" />
-            <element signature="e#22550#22877#0" expanded="true" />
-            <element signature="e#22876#22877#0" expanded="true" />
-            <element signature="e#22987#23363#0" expanded="true" />
-            <element signature="e#23362#23363#0" expanded="true" />
-            <element signature="e#24885#25212#0" expanded="true" />
-            <element signature="e#25211#25212#0" expanded="true" />
-            <element signature="e#25322#25698#0" expanded="true" />
-            <element signature="e#25697#25698#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1138">
+          <caret line="229" column="65" selection-start-line="229" selection-start-column="65" selection-end-line="229" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        <state relative-caret-position="23">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -3450,6 +3425,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="38" column="47" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
