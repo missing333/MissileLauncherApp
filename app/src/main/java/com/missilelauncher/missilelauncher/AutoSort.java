@@ -1,6 +1,7 @@
 package com.missilelauncher.missilelauncher;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -10,10 +11,15 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -28,23 +34,36 @@ public class AutoSort extends AppCompatActivity {
 
     public final static String GOOGLE_URL = "https://play.google.com/store/apps/details?id=";
     public static final String ERROR = "error";
+    private ProgressBar progressBar;
+    TextView txt;
+    Integer count =1;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auto_sort);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * .5));
-
-        new FetchCategoryTask().execute();
+        new AlertDialog.Builder(this)
+                .setTitle("Are you sure?")
+                .setMessage("This will overwrite all of the Groups.")
+                .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do something
+                        new FetchCategoryTask().execute();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing (will close dialog)
+                        finish();
+                    }
+                })
+                .show();
     }
 
-    private class FetchCategoryTask extends AsyncTask<ArrayList<AppInfo>[], Void,ArrayList<AppInfo>[]> {
+    private class FetchCategoryTask extends AsyncTask<ArrayList<AppInfo>[], Integer, ArrayList<AppInfo>[]> {
 
         private PackageManager pm;
         private int Other=1, Reading=2, Productivity=3, Games=4, Media=5, Social=6, Lifestyle=7;
@@ -86,9 +105,36 @@ public class AutoSort extends AppCompatActivity {
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            setContentView(R.layout.activity_auto_sort);
+
+            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            txt = (TextView) findViewById(R.id.output);
+            DisplayMetrics dm = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+            int width = dm.widthPixels;
+            int height = dm.heightPixels;
+
+            getWindow().setLayout((int) (width * .7), (int) (height * .4));
+
+            txt.setText("Task Starting...");
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            int percent = count*100/getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA).size();
+            txt.setText(percent + "%");
+            progressBar.setProgress(values[0]);
+        }
+
+        @Override
         protected ArrayList[] doInBackground(ArrayList[]... arrayLists) {
             String category;
             pm = getPackageManager();
+
             List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
             Iterator<ApplicationInfo> iterator = packages.iterator();
             ArrayList[] groupAppList = new ArrayList[10];
@@ -100,7 +146,10 @@ public class AutoSort extends AppCompatActivity {
             groupAppList[Other] = new ArrayList<>(0);
             groupAppList[Lifestyle] = new ArrayList<>(0);
 
+            progressBar.setMax(packages.size());
+
             while (iterator.hasNext()) {
+                count++;
                 ApplicationInfo packageInfo = iterator.next();
                 String query_url = GOOGLE_URL + packageInfo.packageName;
                 if (getPackageManager().getLaunchIntentForPackage(packageInfo.packageName) != null){
@@ -126,7 +175,7 @@ public class AutoSort extends AppCompatActivity {
                         case "Puzzle":
                             groupAppList[Games].add(newInfo);
                             break;
-                        case "Cards":
+                        case "Card":
                             groupAppList[Games].add(newInfo);
                             break;
                         case "Casual":
@@ -246,12 +295,12 @@ public class AutoSort extends AppCompatActivity {
                             groupAppList[Other].add(newInfo);
                             break;
                     }
+
+                    publishProgress(count);
                 }
 
 
             }
-
-
 
             return groupAppList;
         }
@@ -295,6 +344,7 @@ public class AutoSort extends AppCompatActivity {
             editor.putLong("iconID"+Media, R.drawable.play_circle_filled).apply();
             editor.putLong("iconID"+Social, R.drawable.ic_chat_black_24dp).apply();
             editor.putLong("iconID"+Lifestyle, R.drawable.ic_favorite_black_24dp).apply();
+
             finish();
         }
 

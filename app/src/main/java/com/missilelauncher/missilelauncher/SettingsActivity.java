@@ -166,13 +166,23 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         private SharedPreferences.OnSharedPreferenceChangeListener listener;
 
         @Override
+        public void onStart() {
+            super.onStart();
+            if(isProInstalled(getContext())){
+                Preference numZones = findPreference("numZones");
+                numZones.setIcon(R.drawable.ic_lock_open_green_24dp);
+                numZones.setTitle(R.string.numGroupsUnlocked);
+            }
+        }
+
+        @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
             if(isProInstalled(getContext())){
-                Preference numZones = findPreference("NumZones");
+                Preference numZones = findPreference("numZones");
                 numZones.setIcon(R.drawable.ic_lock_open_green_24dp);
                 numZones.setTitle(R.string.numGroupsUnlocked);
             }
@@ -268,17 +278,23 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public static class AutoSortFragment extends PreferenceFragment {
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.auto_sort);
-            setHasOptionsMenu(true);
-
+        public void onStart() {
+            super.onStart();
             Preference btnAutoSort = findPreference("AutoSort");
 
             if(isProInstalled(getContext())){
                 btnAutoSort.setIcon(R.drawable.ic_lock_open_green_24dp);
                 btnAutoSort.setTitle(R.string.AutoSortUnlocked);
             }
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.auto_sort);
+            setHasOptionsMenu(true);
+
+            Preference btnAutoSort = findPreference("AutoSort");
 
             btnAutoSort.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 @Override

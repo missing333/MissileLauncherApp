@@ -44,7 +44,7 @@
             android:theme="@style/AppTheme.Modal.EasyRemove" />
         <activity
             android:name=".AutoSort"
-            android:theme="@style/AppTheme.Modal" />
+            android:theme="@style/AppTheme.Modal.EasyRemove" />
 
         <receiver android:name=".DeviceBootReceiver">
             <intent-filter>
