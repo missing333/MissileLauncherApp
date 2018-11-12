@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- A 'parent' preference, which enables/disables child preferences (below)
+         when checked/unchecked. -->
+
+    <Preference
+        android:key="AutoSort"
+        android:showDefault="true"
+        android:showSilent="true"
+        android:icon="@drawable/ic_lock_outline_red_24dp"
+        android:title="@string/AutoSortLocked"/>
+
+</PreferenceScreen>

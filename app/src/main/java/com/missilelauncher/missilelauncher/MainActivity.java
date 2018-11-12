@@ -1,5 +1,6 @@
 package com.missilelauncher.missilelauncher;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -13,12 +14,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -141,17 +145,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnAutoSort = findViewById(R.id.btnAutoSort);
-        btnAutoSort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AutoSort.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-            }
-        });
-
         init();
+    }
+
+    protected boolean isProInstalled(Context context) {
+        PackageManager manager = context.getPackageManager();
+        try {
+            if (manager.checkSignatures(context.getPackageName(), "com.missing.missilelauncherpro")
+                    == PackageManager.SIGNATURE_MATCH) {
+                //Pro key installed, and signatures match
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
     }
 
     void init(){
@@ -224,10 +232,20 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         Button setPermissionBtn = findViewById(R.id.setPermissionBtn);
+        ImageView imgHow = findViewById(R.id.imgHow);
         Switch enableNotif = findViewById(R.id.foregroundNotification);
+        Button config = findViewById(R.id.config);
+        final Switch enableToggle = findViewById(R.id.enableService);
+        final Switch enableForegroundNotif = findViewById(R.id.foregroundNotification);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
             setPermissionBtn.setVisibility(View.VISIBLE);
+            imgHow.setVisibility(View.VISIBLE);
+            config.setVisibility(View.GONE);
+            enableToggle.setVisibility(View.GONE);
+            enableForegroundNotif.setVisibility(View.GONE);
+
+
             setPermissionBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -235,8 +253,16 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(myIntent);
                 }
             });
+
+
         } else {
             setPermissionBtn.setVisibility(View.GONE);
+            imgHow.setVisibility(View.GONE);
+            config.setVisibility(View.VISIBLE);
+            enableToggle.setVisibility(View.VISIBLE);
+            enableForegroundNotif.setVisibility(View.VISIBLE);
+
+
             Log.v("ol", "Ready to draw overlays");
 
             Intent startIntent = new Intent(this, FloatingWindow.class);

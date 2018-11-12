@@ -147,6 +147,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
+                || AutoSortFragment.class.getName().equals(fragmentName)
                 || Group1PreferenceFragment.class.getName().equals(fragmentName)
                 || Group2PreferenceFragment.class.getName().equals(fragmentName)
                 || Group3PreferenceFragment.class.getName().equals(fragmentName)
@@ -169,6 +170,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
+
+            if(isProInstalled(getContext())){
+                Preference numZones = findPreference("NumZones");
+                numZones.setIcon(R.drawable.ic_lock_open_green_24dp);
+                numZones.setTitle(R.string.numGroupsUnlocked);
+            }
 
             bindPreferenceSummaryToValue(findPreference("numZones"));
             bindPreferenceSummaryToValue(findPreference("numAppCols"));
@@ -228,6 +235,69 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             prefs.unregisterOnSharedPreferenceChangeListener(listener);
         }
+
+        protected boolean isProInstalled(Context context) {
+            PackageManager manager = context.getPackageManager();
+            try {
+                if (manager.checkSignatures(context.getPackageName(), "com.missing.missilelauncherpro")
+                        == PackageManager.SIGNATURE_MATCH) {
+                    //Pro key installed, and signatures match
+                    return true;
+                }
+            } catch (Exception e) {
+                return false;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }else if (item.getTitle() == "Number of Groups"){
+                Toast.makeText(getContext(), "Just picked numGroups!!!", Toast.LENGTH_SHORT).show();
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class AutoSortFragment extends PreferenceFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.auto_sort);
+            setHasOptionsMenu(true);
+
+            Preference btnAutoSort = findPreference("AutoSort");
+
+            if(isProInstalled(getContext())){
+                btnAutoSort.setIcon(R.drawable.ic_lock_open_green_24dp);
+                btnAutoSort.setTitle(R.string.AutoSortUnlocked);
+            }
+
+            btnAutoSort.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = null;
+                    if(isProInstalled(getContext())){
+                        intent = new Intent(getActivity(),AutoSort.class);
+                    }else {
+                        intent = new Intent(getActivity(),PlayStorePrompt.class);
+                    }
+                    startActivity(intent);
+                    return false;
+                }
+            });
+
+
+
+        }
+
 
         protected boolean isProInstalled(Context context) {
             PackageManager manager = context.getPackageManager();

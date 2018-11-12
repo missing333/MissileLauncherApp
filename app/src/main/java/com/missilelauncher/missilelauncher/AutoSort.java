@@ -46,7 +46,6 @@ public class AutoSort extends AppCompatActivity {
 
     private class FetchCategoryTask extends AsyncTask<ArrayList<AppInfo>[], Void,ArrayList<AppInfo>[]> {
 
-        private final String TAG = FetchCategoryTask.class.getSimpleName();
         private PackageManager pm;
         private int Other=1, Reading=2, Productivity=3, Games=4, Media=5, Social=6, Lifestyle=7;
 
@@ -54,7 +53,7 @@ public class AutoSort extends AppCompatActivity {
             boolean network = isNetworkAvailable();
             if (!network) {
                 //manage connectivity lost
-                Toast.makeText(getApplicationContext(), "Network Connectivity lost.  Please try again with a more stable network.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.NetworkLost, Toast.LENGTH_LONG).show();
                 return ERROR;
             } else {
                 try {

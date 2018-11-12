@@ -5,7 +5,8 @@
         android:entries="@array/group_selection"
         android:entryValues="@array/group_selection"
         android:key="numZones"
-        android:title="Number of Groups" />
+        android:icon="@drawable/ic_lock_outline_red_24dp"
+        android:title="@string/numGroupsLocked"/>
 
     <ListPreference
         android:defaultValue="6"

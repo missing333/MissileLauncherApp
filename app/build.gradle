@@ -23,8 +23,8 @@ android {
         applicationId "com.missilelauncher.missilelauncher"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 14
-        versionName "1.0.14"
+        versionCode 15
+        versionName "1.0.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2' // Old 2.8.0
     // https://mvnrepository.com/artifact/org.jsoup/jsoup
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+
 
 
 }

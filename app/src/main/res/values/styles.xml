@@ -12,5 +12,10 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="AppTheme.Modal.EasyRemove" parent="AppTheme.Modal">
+        <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 </resources>

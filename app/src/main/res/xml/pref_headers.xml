@@ -8,6 +8,11 @@
         android:title="@string/pref_header_general" />
 
     <header
+        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$AutoSortFragment"
+        android:icon="@drawable/ic_auto_sort"
+        android:title="Autosort" />
+
+    <header
         android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group1PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group1" />
