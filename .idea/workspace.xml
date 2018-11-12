@@ -19,8 +19,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6947ca1c-ec42-485d-a289-060ab9ac75bd" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -79,16 +78,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SettingsActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1138">
-              <caret line="229" column="65" selection-start-line="229" selection-start-column="65" selection-end-line="229" selection-end-column="65" />
+            <state relative-caret-position="2856">
+              <caret line="201" column="43" selection-start-line="201" selection-start-column="43" selection-end-line="201" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayStorePrompt.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayStorePrompt.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
@@ -2322,10 +2321,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_group4.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" />
       </list>
     </option>
   </component>
@@ -2900,7 +2899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541863953152</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="link to pro version on Play Prompt now.">
+      <created>1541864193215</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1541864193215</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -2979,7 +2985,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed small bug when staring app" />
     <MESSAGE value="fixed minor app positioning" />
     <MESSAGE value="changed icon from star to circle.  &#10;added sorting to groups" />
     <MESSAGE value="added list options to Preferences for cols, rows." />
@@ -3004,7 +3009,8 @@
     <MESSAGE value="cleanup" />
     <MESSAGE value="removed toast on IsPro = true" />
     <MESSAGE value="removed toast on IsPro = true, fixed crash when pro key not found." />
-    <option name="LAST_COMMIT_MESSAGE" value="removed toast on IsPro = true, fixed crash when pro key not found." />
+    <MESSAGE value="link to pro version on Play Prompt now." />
+    <option name="LAST_COMMIT_MESSAGE" value="link to pro version on Play Prompt now." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3407,13 +3413,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1138">
-          <caret line="229" column="65" selection-start-line="229" selection-start-column="65" selection-end-line="229" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -3442,6 +3441,13 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2856">
+          <caret line="201" column="43" selection-start-line="201" selection-start-column="43" selection-end-line="201" selection-end-column="43" />
         </state>
       </provider>
     </entry>

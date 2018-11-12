@@ -179,9 +179,15 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
                     // Implementation
                     if (key.equals("numZones") && Integer.parseInt(prefs.getString("numZones","3")) > 3 ){
-                        if (isProInstalled(getContext())){
-                            //Toast.makeText(getContext(), "Thanks for being PRO!!!!!!", Toast.LENGTH_SHORT).show();
-                        }else{
+
+                        Boolean pro = false;
+                        try {
+                            pro = isProInstalled(getContext());
+                        } catch (Exception e) {
+                            pro = false;
+                        }
+
+                        if (!pro){
                             prefs.edit().putString("numZones","3").commit();      //restore back down to 3 if they aren't Pro
                             startActivity(new Intent(getContext(), PlayStorePrompt.class));
                         }
