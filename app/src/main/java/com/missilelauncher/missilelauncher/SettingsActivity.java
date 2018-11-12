@@ -179,43 +179,40 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
                     // Implementation
                     if (key.equals("numZones") && Integer.parseInt(prefs.getString("numZones","3")) > 3 ){
-
-                        Boolean pro = false;
-                        try {
-                            pro = isProInstalled(getContext());
-                        } catch (Exception e) {
-                            pro = false;
-                        }
-
-                        if (!pro){
+                        if (isProInstalled(getContext())){
+                            //Toast.makeText(getContext(), "Thanks for being PRO!!!!!!", Toast.LENGTH_SHORT).show();
+                        }else{
                             prefs.edit().putString("numZones","3").commit();      //restore back down to 3 if they aren't Pro
+                            bindPreferenceSummaryToValue(findPreference("numZones"));
                             startActivity(new Intent(getContext(), PlayStorePrompt.class));
                         }
                     }
 
 
-                    //this stops and restarts the activation areas
-                    Intent intent = new Intent(getContext(), FloatingWindow.class);
-                    try {
-                        intent.setAction("Stop");
-                        getContext().stopService(intent);
-                    } catch (Exception e) {
-                    }
+                    if (!key.equals("numZones")) {
+                        //this stops and restarts the activation areas for updates
+                        Intent intent = new Intent(getContext(), FloatingWindow.class);
+                        try {
+                            intent.setAction("Stop");
+                            getContext().stopService(intent);
+                        } catch (Exception e) {
+                        }
 
-                    SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-                    intent.setAction("Start");
-                    if (settingsPrefs.getBoolean("appEnabled", true)){
-                        if(settingsPrefs.getBoolean("foregroundNotif", true)) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                Log.v("app", "Starting Foreground Service");
-                                getContext().startForegroundService(intent);
-                            } else {
+                        SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                        intent.setAction("Start");
+                        if (settingsPrefs.getBoolean("appEnabled", true)){
+                            if(settingsPrefs.getBoolean("foregroundNotif", true)) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    Log.v("app", "Starting Foreground Service");
+                                    getContext().startForegroundService(intent);
+                                } else {
+                                    Log.v("app", "Starting regular Service");
+                                    getContext().startService(intent);
+                                }
+                            }else {
                                 Log.v("app", "Starting regular Service");
                                 getContext().startService(intent);
                             }
-                        }else {
-                            Log.v("app", "Starting regular Service");
-                            getContext().startService(intent);
                         }
                     }
                 }

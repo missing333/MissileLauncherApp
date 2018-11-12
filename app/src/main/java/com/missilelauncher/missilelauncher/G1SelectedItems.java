@@ -55,8 +55,23 @@ public class G1SelectedItems extends AppCompatActivity {
             saveList = new ArrayList<>(0);
         }
 
+
+
         Button b = findViewById(R.id.saveButton);
         gridView = findViewById(R.id.gridView);
+
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedListPreferencesHelper.saveFavorites(getApplicationContext(), saveList ,group );
+
+                for (int i = 0; i< G1SelectedApps.size(); i++){
+                    Log.v("g1 apps","App " + i +": " + G1SelectedApps.get(i).label);
+                }
+                Toast.makeText(G1SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
 
 
         Switch uca = findViewById(R.id.uncategoriezedButton);
@@ -112,22 +127,10 @@ public class G1SelectedItems extends AppCompatActivity {
         });
 
 
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedListPreferencesHelper.saveFavorites(getApplicationContext(), saveList ,group );
 
-                for (int i = 0; i< G1SelectedApps.size(); i++){
-                    Log.v("g1 apps","App " + i +": " + G1SelectedApps.get(i).label);
-                }
-                Toast.makeText(G1SelectedItems.this,"Apps Saved!",Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
 
 
     }
-
 
     public ArrayList<AppInfo> getPackages() {
         ArrayList<AppInfo> apps = getInstalledApps(false); /* false = no system packages */

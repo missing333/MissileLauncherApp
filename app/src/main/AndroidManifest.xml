@@ -2,11 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.missilelauncher.missilelauncher">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +18,7 @@
         android:roundIcon="@mipmap/missile_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.missilelauncher.missilelauncher.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,38 +26,32 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.missilelauncher.missilelauncher.FloatingWindow" />
+        <service android:name=".FloatingWindow" />
 
         <activity
-            android:name="com.missilelauncher.missilelauncher.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
-        <activity android:name="com.missilelauncher.missilelauncher.GroupIconPicker" />
-
-        <activity android:name="com.missilelauncher.missilelauncher.G1SelectedItems"
-            android:label="@string/pref_group1"/>
-        <activity android:name="com.missilelauncher.missilelauncher.G2SelectedItems"
-            android:label="@string/pref_group2"/>
-        <activity android:name="com.missilelauncher.missilelauncher.G3SelectedItems"
-            android:label="@string/pref_group3"/>
-        <activity android:name="com.missilelauncher.missilelauncher.G4SelectedItems"
-            android:label="@string/pref_group4"/>
-        <activity android:name="com.missilelauncher.missilelauncher.G5SelectedItems"
-            android:label="@string/pref_group5"/>
-        <activity android:name="com.missilelauncher.missilelauncher.G6SelectedItems"
-            android:label="@string/pref_group6"/>
-        <activity android:name="com.missilelauncher.missilelauncher.G7SelectedItems"
-            android:label="@string/pref_group7"/>
-        <activity android:name=".PlayStorePrompt"
-            android:theme="@style/AppTheme.Modal"
-            />
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".GroupIconPicker" />
+        <activity android:name=".G1SelectedItems" />
+        <activity android:name=".G2SelectedItems" />
+        <activity android:name=".G3SelectedItems" />
+        <activity android:name=".G4SelectedItems" />
+        <activity android:name=".G5SelectedItems" />
+        <activity android:name=".G6SelectedItems" />
+        <activity android:name=".G7SelectedItems" />
+        <activity
+            android:name=".PlayStorePrompt"
+            android:theme="@style/AppTheme.Modal" />
+        <activity
+            android:name=".AutoSort"
+            android:theme="@style/AppTheme.Modal" />
 
         <receiver android:name=".DeviceBootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
     </application>
-
-
 
 </manifest>

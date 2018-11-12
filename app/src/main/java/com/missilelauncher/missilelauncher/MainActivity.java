@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
             enableForegroundNotif.setChecked(false);
         }
 
-/*        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             enableForegroundNotif.setVisibility(View.VISIBLE);
         }
         else{
             enableForegroundNotif.setVisibility(View.GONE);
-        }*/
+        }
 
         enableToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -141,6 +141,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnAutoSort = findViewById(R.id.btnAutoSort);
+        btnAutoSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AutoSort.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+
         init();
     }
 
@@ -193,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int f=0;f<saveList.size();f++) {
                         //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
                         if(res.get(i).packageName.equals(saveList.get(f))){
+                            //add the package name (ie: com.google.youtube) to groupAppList
                             groupAppList[g].add(res.get(i));
                         }
                     }

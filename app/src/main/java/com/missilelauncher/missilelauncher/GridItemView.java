@@ -30,7 +30,6 @@ public class GridItemView extends FrameLayout {
         LayoutParams gp = new LayoutParams(50,50 );
         gp.gravity = Gravity.CENTER;
         iconView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
         iconView.setImageDrawable(icon);
 
         textView.setText(text);
