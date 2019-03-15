@@ -40,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -267,11 +268,45 @@ public class FloatingWindow extends Service{
                                 editor.putInt(a.label.toString()+"_launchCount", settingsPrefs.getInt(a.label.toString()+"_launchCount", 0)+1);
                                 editor.commit();
                                 Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
-                                Intent launchApp = appPositions[coords[0]][coords[1]].launchIntent;
+                                Intent launchApp = a.launchIntent;
                                 launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 try {
                                     startActivity(launchApp);
                                 } catch (Exception e) {
+                                    Log.v("touch", "App failed to launch.  Removing from this Group.");
+                                    Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
+                                    //#TODO: remove this app from GXSelectedItems.GXSelectedApps, for all X's
+                                    try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}
+
+
                                     e.printStackTrace();
                                 }
                             }
@@ -518,7 +553,6 @@ public class FloatingWindow extends Service{
         }
         return result;
     }
-
 
 
     private void configImageButton(ImageButton b){

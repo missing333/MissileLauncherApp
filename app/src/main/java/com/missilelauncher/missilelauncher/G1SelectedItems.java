@@ -227,4 +227,5 @@ public class G1SelectedItems extends AppCompatActivity {
             }
         }
     }
+
 }
