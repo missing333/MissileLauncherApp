@@ -345,6 +345,8 @@ public class AutoSort extends AppCompatActivity {
             editor.putLong("iconID"+Social, R.drawable.ic_chat_black_24dp).apply();
             editor.putLong("iconID"+Lifestyle, R.drawable.ic_favorite_black_24dp).apply();
 
+            //updates numGroups to 7
+            settingsPrefs.edit().putString("numZones","7").commit();
             finish();
         }
 
