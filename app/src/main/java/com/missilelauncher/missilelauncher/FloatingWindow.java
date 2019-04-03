@@ -426,7 +426,7 @@ public class FloatingWindow extends Service{
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
                         if (coords[0] != -1 || coords[1] != -1){
                             AppInfo a = appPositions[coords[0]][coords[1]];
-                            if (a.launchIntent != null && event.getRawX() < screenWidth * .85){
+                            if (a.launchIntent != null && event.getRawX() > screenWidth * .10){
                                 editor.putInt(a.label.toString()+"_launchCount", settingsPrefs.getInt(a.label.toString()+"_launchCount", 0)+1);
                                 editor.commit();
                                 Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
