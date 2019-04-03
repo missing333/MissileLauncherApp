@@ -275,7 +275,6 @@ public class FloatingWindow extends Service{
                                 } catch (Exception e) {
                                     Log.v("touch", "App failed to launch.  Removing from this Group.");
                                     Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
-                                    //#TODO: remove this app from GXSelectedItems.GXSelectedApps, for all X's
                                     try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                             G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
@@ -425,19 +424,49 @@ public class FloatingWindow extends Service{
                         Log.v("touch", "Touch no longer detected.");
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
-                        if (coords[0] != -1 || coords[1] !=-1){
+                        if (coords[0] != -1 || coords[1] != -1){
                             AppInfo a = appPositions[coords[0]][coords[1]];
                             if (a.launchIntent != null && event.getRawX() < screenWidth * .85){
                                 editor.putInt(a.label.toString()+"_launchCount", settingsPrefs.getInt(a.label.toString()+"_launchCount", 0)+1);
                                 editor.commit();
                                 Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
-                                Intent launchApp = null;
-                                launchApp = appPositions[coords[0]][coords[1]].launchIntent;
+                                Intent launchApp = a.launchIntent;
                                 launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 try {
-
                                     startActivity(launchApp);
                                 } catch (Exception e) {
+                                    Log.v("touch", "App failed to launch.  Removing from this Group.");
+                                    Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}try {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                        }
+                                    }catch (Exception f){}
+
                                     e.printStackTrace();
                                 }
                             }
