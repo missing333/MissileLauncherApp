@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static com.missilelauncher.missilelauncher.GroupIconPicker.PREFS_NAME;
+import static java.lang.Math.sqrt;
 
 /**
  * Created by mmissildine on 9/20/2018.
@@ -83,8 +84,10 @@ public class FloatingWindow extends Service{
     private ArrayList<AppInfo>[] groupAppList;
     private int appSize = 100;
     int offset;
+    int viewAdded;
     private Configuration config;
     private boolean leftSideNavigationBar, rightSideNavigationBar;
+    final int distFingerTraveledTolerance = 50;
 
 
     @Nullable
@@ -163,7 +166,7 @@ public class FloatingWindow extends Service{
         tl.setBackgroundColor(Color.argb(25,0,0,0));
 
         coords = new int[]{-1, -1};
-
+        viewAdded = 0;
 
         ll.setOnTouchListener(new View.OnTouchListener(){
 
@@ -186,7 +189,7 @@ public class FloatingWindow extends Service{
                         lastGroup = -99;
                         lastAppTouched[0] = -99;
                         lastAppTouched[1] = -99;
-                        Log.v("touch", "Touch detected.");
+
                         gl.removeAllViews();
                         getDimensions();
                         if (!portrait){
@@ -194,17 +197,28 @@ public class FloatingWindow extends Service{
                         }else {
                             offset = zoneXSize;
                         }
-                        setIconSizePos(screenWidth-offset);
-                        wm.addView(gl, gparameters);
-                        gl.addView(t);
-                        for (int i=0;i<numZones;i++){
+                        setIconSizePos(screenWidth - offset);
+                        for (int i = 0; i < numZones; i++) {
                             gl.addView(g[i]);
                         }
+
+                        //
+                        gl.addView(t);
+                        Log.v("touch", "Touch detected.");
+
                         break;
 
                     case MotionEvent.ACTION_MOVE:
                         updatedParameters.x = (int) (x + (event.getRawX() - touchedX));
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
+
+
+                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX)*(event.getRawX() - touchedX) + (event.getRawY() - touchedY)*(event.getRawY() - touchedY));
+
+                        if ( distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
+                            wm.addView(gl, gparameters);
+                            viewAdded = 1;
+                        }
 
                         //////user touching Groups or Apps?
                         if (event.getRawX() > gl.getWidth() - zoneXSize ) {
@@ -262,6 +276,9 @@ public class FloatingWindow extends Service{
                         Log.v("touch", "Touch no longer detected.");
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
+
+                        viewAdded = 0;
+
                         if (coords[0] != -1 || coords[1] !=-1){
                             AppInfo a = appPositions[coords[0]][coords[1]];
                             if (a.launchIntent != null && event.getRawX() < screenWidth * .85){
@@ -312,6 +329,7 @@ public class FloatingWindow extends Service{
                         }
 
 
+
                         try {
                             wm.removeView(gl);
                         } catch (Exception e) {
@@ -350,7 +368,6 @@ public class FloatingWindow extends Service{
                         gl.removeAllViews();
                         getDimensions();
                         setIconSizePos(0);
-                        wm.addView(gl, gparameters);
                         gl.addView(t);
                         for (int i=0;i<numZones;i++){
                             gl.addView(g[i]);
@@ -360,6 +377,15 @@ public class FloatingWindow extends Service{
                     case MotionEvent.ACTION_MOVE:
                         updatedParameters.x = (int) (x + (event.getRawX() - touchedX));
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
+
+
+                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX)*(event.getRawX() - touchedX) + (event.getRawY() - touchedY)*(event.getRawY() - touchedY));
+
+                        if ( distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
+                            wm.addView(gl, gparameters);
+                            viewAdded = 1;
+                        }
+
 
                         //////user touching Groups or Apps?
 
@@ -424,6 +450,9 @@ public class FloatingWindow extends Service{
                         Log.v("touch", "Touch no longer detected.");
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
+
+                        viewAdded = 0;
+
                         if (coords[0] != -1 || coords[1] != -1){
                             AppInfo a = appPositions[coords[0]][coords[1]];
                             if (a.launchIntent != null && event.getRawX() > screenWidth * .10){
