@@ -17,6 +17,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -88,6 +89,7 @@ public class FloatingWindow extends Service{
     private Configuration config;
     private boolean leftSideNavigationBar, rightSideNavigationBar;
     final int distFingerTraveledTolerance = 50;
+    int disappearDelay = 2000;
 
 
     @Nullable
@@ -118,6 +120,7 @@ public class FloatingWindow extends Service{
         rightSideNavigationBar = false;
 
 
+        //set up activation zone
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         ll = new LinearLayout(this);
         lhs = new LinearLayout(this);
@@ -152,11 +155,9 @@ public class FloatingWindow extends Service{
 
         g = new ImageView[10];
         getDimensions();
-
-
-
         /////////////////////////////done with activation area/////////////////////////
 
+        //gl = group layout.  displays the configured Groups first, before displaying apps within that group.
         gl = new RelativeLayout(this.getApplicationContext());
 
         gl.setBackgroundColor(Color.argb(155,0,0,0));
@@ -212,9 +213,7 @@ public class FloatingWindow extends Service{
                         updatedParameters.x = (int) (x + (event.getRawX() - touchedX));
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
 
-
                         int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX)*(event.getRawX() - touchedX) + (event.getRawY() - touchedY)*(event.getRawY() - touchedY));
-
                         if ( distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
                             wm.addView(gl, gparameters);
                             viewAdded = 1;
@@ -277,7 +276,23 @@ public class FloatingWindow extends Service{
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
 
-                        viewAdded = 0;
+                        if (viewAdded == 0){
+                            //remove activation area for n seconds
+                            CountDownTimer timer = new CountDownTimer(disappearDelay, 1000) {
+                                @Override
+                                public void onTick(long millisUntilFinished) {
+                                    ll.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onFinish() {
+                                    ll.setVisibility(View.VISIBLE); //(or GONE)
+                                }
+                            }.start();
+                        }else{
+                            viewAdded = 0;
+                        }
+
 
                         if (coords[0] != -1 || coords[1] !=-1){
                             AppInfo a = appPositions[coords[0]][coords[1]];
@@ -451,7 +466,22 @@ public class FloatingWindow extends Service{
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
 
-                        viewAdded = 0;
+                        if (viewAdded == 0){
+                            //remove activation area for n seconds
+                            CountDownTimer timer = new CountDownTimer(disappearDelay, 1000) {
+                                @Override
+                                public void onTick(long millisUntilFinished) {
+                                    lhs.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onFinish() {
+                                    lhs.setVisibility(View.VISIBLE); //(or GONE)
+                                }
+                            }.start();
+                        }else{
+                            viewAdded = 0;
+                        }
 
                         if (coords[0] != -1 || coords[1] != -1){
                             AppInfo a = appPositions[coords[0]][coords[1]];

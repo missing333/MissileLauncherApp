@@ -13,13 +13,10 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="minor update for autosort">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="no window activation on touch.  must slide to activate.  allows touching buttons on side of screen.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -86,14 +83,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="191" selection-start-line="191" selection-end-line="191" />
+            <state relative-caret-position="222">
+              <caret line="476" column="41" selection-start-line="476" selection-start-column="41" selection-end-line="476" selection-end-column="41" />
               <folding>
                 <element signature="docComment;class#FloatingWindow#0" />
-                <element signature="e#2783#2792#0" />
-                <element signature="e#11224#14904#1" />
-                <element signature="e#17081#19247#0" />
-                <element signature="e#20221#23900#1" />
+                <element signature="e#11505#15185#1" />
               </folding>
             </state>
           </provider>
@@ -102,7 +96,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
+            <state relative-caret-position="918">
               <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
             </state>
           </provider>
@@ -111,7 +105,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
+            <state relative-caret-position="442">
               <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
             </state>
           </provider>
@@ -171,7 +165,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -183,8 +177,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -345,12 +339,12 @@
       <option name="project" value="LOCAL" />
       <updated>1554333650153</updated>
     </task>
-    <task id="LOCAL-00007" summary="added button to quick Edit this group">
-      <created>1539297973501</created>
+    <task id="LOCAL-00007" summary="no window activation on touch.  must slide to activate.  allows touching buttons on side of screen.">
+      <created>1560220401542</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1539297973501</updated>
+      <updated>1560220401542</updated>
     </task>
     <task id="LOCAL-00008" summary="fixed bug where EditGroup button didn't display when rows completely filled">
       <created>1539300008013</created>
@@ -506,14 +500,13 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1858" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Resources Explorer" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.20522803" />
       <window_info id="Structure" order="1" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
       <window_info id="Image Layers" order="2" />
@@ -522,8 +515,9 @@
       <window_info id="Designer" order="5" />
       <window_info id="Build Variants" order="6" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
       <window_info id="Capture Tool" order="7" />
+      <window_info id="Resources Explorer" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32731137" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32659575" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49521786" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49944383" weight="0.45957446" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -531,11 +525,11 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32943678" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5011025" side_tool="true" weight="0.41232732" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Logcat" order="9" weight="0.5468085" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="9" visible="true" weight="0.5468085" />
       <window_info anchor="bottom" id="Android Profiler" order="10" weight="0.32943678" />
       <window_info anchor="bottom" id="Dependency Viewer" order="11" weight="0.32943678" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32943678" />
-      <window_info active="true" anchor="bottom" id="Build" order="13" sideWeight="0.49889746" visible="true" weight="0.30957446" />
+      <window_info anchor="bottom" id="Build" order="13" sideWeight="0.49889746" weight="0.26489362" />
       <window_info anchor="bottom" id="Gradle Console" order="14" side_tool="true" />
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.32943678" />
       <window_info anchor="bottom" id="Messages" order="16" weight="0.32799247" />
@@ -552,7 +546,6 @@
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added Y pos setting for Activation Area.&#10;Sync'ed left and right Activation Areas." />
     <MESSAGE value="updated version number" />
     <MESSAGE value="now starts on boot." />
     <MESSAGE value="fixed a bug where Apps didnt display after reboot." />
@@ -577,7 +570,8 @@
     <MESSAGE value="update version num" />
     <MESSAGE value="prevent accidental app launch on left side." />
     <MESSAGE value="minor update for autosort" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor update for autosort" />
+    <MESSAGE value="no window activation on touch.  must slide to activate.  allows touching buttons on side of screen." />
+    <option name="LAST_COMMIT_MESSAGE" value="no window activation on touch.  must slide to activate.  allows touching buttons on side of screen." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -884,16 +878,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="476" column="41" selection-start-line="476" selection-start-column="41" selection-end-line="476" selection-end-column="41" />
+          <folding>
+            <element signature="docComment;class#FloatingWindow#0" />
+            <element signature="e#11505#15185#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
+        <state relative-caret-position="918">
           <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="442">
           <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
         </state>
       </provider>
@@ -902,20 +907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="191" selection-start-line="191" selection-end-line="191" />
-          <folding>
-            <element signature="docComment;class#FloatingWindow#0" />
-            <element signature="e#2783#2792#0" />
-            <element signature="e#11224#14904#1" />
-            <element signature="e#17081#19247#0" />
-            <element signature="e#20221#23900#1" />
-          </folding>
         </state>
       </provider>
     </entry>
