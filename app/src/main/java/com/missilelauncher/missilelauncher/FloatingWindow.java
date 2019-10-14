@@ -302,6 +302,7 @@ public class FloatingWindow extends Service{
                                 Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
                                 Intent launchApp = a.launchIntent;
                                 launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                launchApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 try {
                                     startActivity(launchApp);
                                 } catch (Exception e) {
@@ -491,6 +492,7 @@ public class FloatingWindow extends Service{
                                 Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
                                 Intent launchApp = a.launchIntent;
                                 launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                launchApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 try {
                                     startActivity(launchApp);
                                 } catch (Exception e) {
@@ -551,6 +553,8 @@ public class FloatingWindow extends Service{
     public void getDimensions(){
 
         statusBarOffset = getStatusBarHeight();
+
+
         setScreenSize();
 
 
@@ -667,7 +671,7 @@ public class FloatingWindow extends Service{
 
     private void setIconSizePos(int marginLeft){
         RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        if (marginLeft>0 ){
+        if (marginLeft > 0 ){
             groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         }else
             groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
