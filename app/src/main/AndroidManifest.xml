@@ -2,14 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.missilelauncher.missilelauncher">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -26,7 +25,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".FloatingWindow" />
 
         <activity
             android:name=".SettingsActivity"
@@ -46,10 +44,21 @@
             android:name=".AutoSort"
             android:theme="@style/AppTheme.Modal.EasyRemove" />
 
+
+        <service android:name=".FloatingWindow"
+            android:enabled="true"/>
+
         <receiver android:name=".DeviceBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".LauncherRestarterBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
         </receiver>
 
         <uses-library android:name="org.apache.http.legacy" android:required="false" />

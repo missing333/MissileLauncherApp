@@ -1,11 +1,6 @@
 package com.missilelauncher.missilelauncher;
 
 import android.annotation.TargetApi;
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -19,14 +14,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
@@ -55,6 +48,13 @@ import static java.lang.Math.sqrt;
 
 public class FloatingWindow extends Service{
 
+    public FloatingWindow(Context applicationContext) {
+        super();
+        Log.i("HERE", "here I am!");
+    }
+
+    public FloatingWindow() {
+    }
 
     private WindowManager wm;
     private SharedPreferences settingsPrefs;
@@ -80,13 +80,11 @@ public class FloatingWindow extends Service{
     private ImageView[] g;
     private int lastGroup;
     private int[] lastAppTouched;
-    public AppInfo appPositions[][];
+    public AppInfo[][] appPositions;
     private int[] coords;
     private ArrayList<AppInfo>[] groupAppList;
-    private int appSize = 100;
     int offset;
     int viewAdded;
-    private Configuration config;
     private boolean leftSideNavigationBar, rightSideNavigationBar;
     final int distFingerTraveledTolerance = 50;
     int disappearDelay = 2000;
@@ -98,6 +96,13 @@ public class FloatingWindow extends Service{
         return null;
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        super.onStartCommand(intent, flags, startId);
+        getDimensions();
+        return START_STICKY;
+    }
 
     @Override
     public void onCreate() {
@@ -649,6 +654,7 @@ public class FloatingWindow extends Service{
 
     private void configImageButton(ImageButton b){
         WindowManager.LayoutParams appIconParams = new WindowManager.LayoutParams();
+        int appSize = 100;
         appIconParams.width = appSize;
         appIconParams.height = appSize;
         b.setLayoutParams(appIconParams);
@@ -746,7 +752,7 @@ public class FloatingWindow extends Service{
             int marginTop = (screenHeight - ySizeNeeded) / 2;
             int numAppsInGroup = groupAppList[group].size();
             int rowsNeeded = (numAppsInGroup/numAppCols);
-            int nearestRow = (((group * zoneYSize)+marginTop)/Math.round((screenHeight/(numAppRows+2))))-1;
+            int nearestRow = (((group * zoneYSize)+marginTop)/Math.round(screenHeight/(numAppRows+2)))-1;
             int row = nearestRow+rowOffset;
 
             for(AppInfo item:groupAppList[group]){
@@ -756,6 +762,7 @@ public class FloatingWindow extends Service{
 
             String sort = settingsPrefs.getString("sortG"+group,"Most Used" );
             //Log.v("sort", "Sorting Group "+group+" SHOULD BE: " +sort);
+            assert sort != null;
             if (sort.equals("Most Used")){
                 //Log.v("sort", "Sorting Group "+group+" by Most Used.");
                 Collections.sort(groupAppList[group], AppInfo.appLaunchCount);
@@ -965,64 +972,7 @@ public class FloatingWindow extends Service{
     }
 
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent.getAction().equals("Start")) {
-            Log.i("start", "Received Start Foreground Intent ");
-            // your start service code
-            Log.d("notif", "starting to build notification");
 
-            if( settingsPrefs.getBoolean("foregroundNotif", true)){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-                    int notifyID = 1;
-                    String CHANNEL_ID = "my_channel_01";// The id of the channel.
-                    CharSequence name = getString((R.string.app_name));// The user-visible name of the channel.
-                    int importance = NotificationManager.IMPORTANCE_MIN;
-                    NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                    // Create a notification and set the notification channel.
-                    Notification notification = new Notification.Builder(getApplicationContext())
-                            .setContentTitle(getString(R.string.foreground_text_message1))
-                            .setContentText(getString(R.string.foreground_text_message2))
-                            .setSmallIcon(R.drawable.blank)
-                            .setChannelId(CHANNEL_ID)
-                            .build();
-
-                    NotificationManager mNotificationManager =
-                            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    mNotificationManager.createNotificationChannel(mChannel);
-
-                    // Issue the notification.
-                    mNotificationManager.notify(notifyID , notification);
-
-                    startForeground(1, notification);
-
-                } else {
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                            .setContentTitle(getString(R.string.foreground_text_message1))
-                            .setContentText(getString(R.string.foreground_text_message2))
-                            .setPriority(NotificationCompat.PRIORITY_MIN)
-                            .setSmallIcon(R.drawable.blank)
-                            .setAutoCancel(true);
-
-                    Notification notification = builder.build();
-
-                    startForeground(1, notification);
-                }
-            }
-        }
-        else if (intent.getAction().equals( "Stop" )) {
-            Log.i("stop", "Received Stop Foreground Intent");
-            //your end servce code
-            stopForeground(true);
-            stopSelf();
-        }
-
-
-
-        return START_STICKY;
-    }
 
 
     public void updateRHS(){
@@ -1085,9 +1035,14 @@ public class FloatingWindow extends Service{
 
     public void onDestroy() {
         super.onDestroy();
+        Log.i("EXIT", "ondestroy!");
+        Intent broadcastIntent = new Intent(this, LauncherRestarterBroadcastReceiver.class);
+        sendBroadcast(broadcastIntent);
         wm.removeView(ll);
         wm.removeView(lhs);
     }
+
+
 }
 
 
