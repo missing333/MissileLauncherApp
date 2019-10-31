@@ -1036,10 +1036,10 @@ public class FloatingWindow extends Service{
     public void onDestroy() {
         super.onDestroy();
         Log.i("EXIT", "ondestroy!");
-        Intent broadcastIntent = new Intent(this, LauncherRestarterBroadcastReceiver.class);
-        sendBroadcast(broadcastIntent);
         wm.removeView(ll);
         wm.removeView(lhs);
+        Intent broadcastIntent = new Intent(this, LauncherRestarterBroadcastReceiver.class);
+        sendBroadcast(broadcastIntent);
     }
 
 
