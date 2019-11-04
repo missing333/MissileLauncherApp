@@ -266,8 +266,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             if (id == android.R.id.home) {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
-            }else if (item.getTitle() == "Number of Groups"){
-                Toast.makeText(getContext(), "Just picked numGroups!!!", Toast.LENGTH_SHORT).show();
+            }else if (item.getTitle() == "Number of App Columns"){
+                Toast.makeText(getContext(), "Just picked numCols!!!", Toast.LENGTH_SHORT).show();
             }
             return super.onOptionsItemSelected(item);
         }
@@ -314,7 +314,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         }
 
-
         protected boolean isProInstalled(Context context) {
             PackageManager manager = context.getPackageManager();
             try {
@@ -335,8 +334,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             if (id == android.R.id.home) {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
-            }else if (item.getTitle() == "Number of Groups"){
-                Toast.makeText(getContext(), "Just picked numGroups!!!", Toast.LENGTH_SHORT).show();
             }
             return super.onOptionsItemSelected(item);
         }
@@ -457,7 +454,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             return super.onOptionsItemSelected(item);
         }
     }
-
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class Group3PreferenceFragment extends PreferenceFragment {
         @Override
@@ -565,6 +561,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
+
             return super.onOptionsItemSelected(item);
         }
     }

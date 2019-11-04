@@ -5,6 +5,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -38,6 +40,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static com.missilelauncher.missilelauncher.GroupIconPicker.PREFS_NAME;
 import static java.lang.Math.sqrt;
@@ -100,7 +103,10 @@ public class FloatingWindow extends Service{
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         super.onStartCommand(intent, flags, startId);
+
+        init();
         getDimensions();
+
         return START_STICKY;
     }
 
@@ -555,6 +561,71 @@ public class FloatingWindow extends Service{
 
     }
 
+    private void init(){
+
+        ////////set all previous app lists if available
+        ArrayList<AppInfo> res = new ArrayList<>();
+        PackageManager packageManager = getPackageManager();
+        List<PackageInfo> packs = packageManager.getInstalledPackages(0);
+        for(int i=0;i<packs.size();i++) {
+            PackageInfo p = packs.get(i);
+            try{
+                if(packageManager.getLaunchIntentForPackage(p.packageName) != null){
+
+                    AppInfo newInfo = new AppInfo();
+                    newInfo.setLabel(p.applicationInfo.loadLabel(getPackageManager()).toString());
+                    newInfo.setPackageName(p.packageName);
+                    newInfo.versionName = p.versionName;
+                    newInfo.versionCode = p.versionCode;
+                    newInfo.icon = p.applicationInfo.loadIcon(getPackageManager());
+                    newInfo.setLaunchIntent(getPackageManager().getLaunchIntentForPackage(p.packageName));
+                    res.add(newInfo);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        Collections.sort(res, AppInfo.appNameComparator);
+        SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
+
+        ArrayList[] groupAppList = new ArrayList[10];
+        groupAppList[1] = G1SelectedItems.G1SelectedApps;
+        groupAppList[2] = G2SelectedItems.G2SelectedApps;
+        groupAppList[3] = G3SelectedItems.G3SelectedApps;
+        groupAppList[4] = G4SelectedItems.G4SelectedApps;
+        groupAppList[5] = G5SelectedItems.G5SelectedApps;
+        groupAppList[6] = G6SelectedItems.G6SelectedApps;
+        groupAppList[7] = G7SelectedItems.G7SelectedApps;
+
+        for (int g=1;g<7+1;g++){
+            ArrayList saveList = sh.getFavorites(getApplicationContext(),g);
+            if (saveList == null){
+                saveList = new ArrayList<>(0);
+            }
+            groupAppList[g] = new ArrayList<>(0);
+            if(res.size() > 0 ){
+                for (int i=0;i<res.size();i++) {
+                    //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
+                    for (int f=0;f<saveList.size();f++) {
+                        //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
+                        if(res.get(i).packageName.equals(saveList.get(f))){
+                            //add the package name (ie: com.google.youtube) to groupAppList
+                            groupAppList[g].add(res.get(i));
+                        }
+                    }
+                }
+            }
+        }
+        new G1SelectedItems().setG1Apps(groupAppList[1]);
+        new G2SelectedItems().setG2Apps(groupAppList[2]);
+        new G3SelectedItems().setG3Apps(groupAppList[3]);
+        new G4SelectedItems().setG4Apps(groupAppList[4]);
+        new G5SelectedItems().setG5Apps(groupAppList[5]);
+        new G6SelectedItems().setG6Apps(groupAppList[6]);
+        new G7SelectedItems().setG7Apps(groupAppList[7]);
+    }
+
     public void getDimensions(){
 
         statusBarOffset = getStatusBarHeight();
@@ -628,7 +699,7 @@ public class FloatingWindow extends Service{
 
     private void vibrate() {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        int vibTime = 100;// Vibrate for 500 milliseconds
+        int vibTime = 100;// Vibrate for 100 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (v != null) {
                 v.vibrate(VibrationEffect.createOneShot(vibTime, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -970,9 +1041,6 @@ public class FloatingWindow extends Service{
         wm.addView(ll, rhsparameters);
         wm.addView(lhs, lhsparameters);
     }
-
-
-
 
 
     public void updateRHS(){

@@ -59,20 +59,6 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
-    protected boolean isProInstalled(Context context) {
-        PackageManager manager = context.getPackageManager();
-        try {
-            if (manager.checkSignatures(context.getPackageName(), "com.missing.missilelauncherpro")
-                    == PackageManager.SIGNATURE_MATCH) {
-                //Pro key installed, and signatures match
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return false;
-    }
-
     private void init(){
 
         ////////set all previous app lists if available
