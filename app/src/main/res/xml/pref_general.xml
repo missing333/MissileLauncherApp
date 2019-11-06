@@ -32,6 +32,12 @@
         android:key="rhs"
         android:title="Right Side Activation Area" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="landscape"
+        android:title="Enable Activation Areas in Landscape Mode"
+        android:summary="Can work weirdly with hidden navigation bars"/>
+
     <SeekBarPreference
         android:key="lhsWidth"
         android:title="Width of Activation Area"
