@@ -1,7 +1,7 @@
 package com.missilelauncher.missilelauncher;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,13 +22,13 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.JobIntentService;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -49,7 +49,42 @@ import static java.lang.Math.sqrt;
  * Created by mmissildine on 9/20/2018.
  */
 
-public class FloatingWindow extends Service{
+@SuppressWarnings({"unchecked", "ConstantConditions"})
+public class FloatingWindow extends JobIntentService {
+
+    private static final int JOB_ID = 0x01;
+    private WindowManager wm;
+    private SharedPreferences settingsPrefs;
+    private LinearLayout rhs;
+    private LinearLayout lhs;
+    private RelativeLayout gl;
+    private RelativeLayout tl;
+    private int statusBarOffset;
+    private int screenWidth;
+    private int screenHeight;
+    private boolean portrait = true;
+    private RelativeLayout.LayoutParams relativeParams;
+    private WindowManager.LayoutParams gparameters;
+    private WindowManager.LayoutParams rhsparameters;
+    private WindowManager.LayoutParams lhsparameters;
+    private int numZones;
+    private int numAppRows;
+    private int numAppCols;
+    private int zoneXSize;
+    private int zoneYSize;
+    private TextView t;
+    private ImageView[] g;
+    private int lastGroup;
+    private int[] lastAppTouched;
+    private AppInfo[][] appPositions;
+    private int[] coords;
+    private ArrayList<AppInfo>[] groupAppList;
+    private int offset;
+    private int viewAdded;
+    private boolean leftSideNavigationBar, rightSideNavigationBar;
+    private final int distFingerTraveledTolerance = 50;
+    private final int disappearDelay = 2000;
+
 
     public FloatingWindow(Context applicationContext) {
         super();
@@ -59,43 +94,19 @@ public class FloatingWindow extends Service{
     public FloatingWindow() {
     }
 
-    private WindowManager wm;
-    private SharedPreferences settingsPrefs;
-    private LinearLayout rhs;
-    private LinearLayout lhs;
-    private RelativeLayout gl;
-    private RelativeLayout tl;
-    public int statusBarOffset;
-    public int screenWidth;
-    public int screenHeight;
-    private boolean portrait = true;
-    private RelativeLayout.LayoutParams relativeParams;
-    private WindowManager.LayoutParams gparameters;
-    private WindowManager.LayoutParams rhsparameters;
-    private WindowManager.LayoutParams lhsparameters;
-    public int numZones;
-    public int numAppRows;
-    public int numAppCols;
-    public int zoneXSize;
-    public int zoneYSize;
-    public int maxAppSize;
-    private TextView t;
-    private ImageView[] g;
-    private int lastGroup;
-    private int[] lastAppTouched;
-    public AppInfo[][] appPositions;
-    private int[] coords;
-    private ArrayList<AppInfo>[] groupAppList;
-    int offset;
-    int viewAdded;
-    private boolean leftSideNavigationBar, rightSideNavigationBar;
-    final int distFingerTraveledTolerance = 50;
-    int disappearDelay = 2000;
+    public static void enqueueWork(Context context, Intent work) {
+        enqueueWork(context, FloatingWindow.class, JOB_ID, work);
+    }
+
+    @Override
+    protected void onHandleWork(@NonNull Intent intent) {
+        onCreate();
+    }
 
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(@NonNull Intent intent) {
         return null;
     }
 
@@ -109,6 +120,7 @@ public class FloatingWindow extends Service{
         return START_STICKY;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onCreate() {
         super.onCreate();
@@ -116,14 +128,14 @@ public class FloatingWindow extends Service{
         settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         final SharedPreferences.Editor editor = settingsPrefs.edit();
 
-        numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
+        numZones = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
         numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
         numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
-        editor.putString("landscapeNumAppRows", numAppCols+"");
-        editor.putString("landscapeNumAppCols", numAppRows+"");
-        Log.v("prefs","numGroups = " + numZones);
-        Log.v("prefs","numAppRows = " + numAppRows);
-        Log.v("prefs","numAppCols = " + numAppCols);
+        editor.putString("landscapeNumAppRows", numAppCols + "");
+        editor.putString("landscapeNumAppCols", numAppRows + "");
+        Log.v("prefs", "numGroups = " + numZones);
+        Log.v("prefs", "numAppRows = " + numAppRows);
+        Log.v("prefs", "numAppCols = " + numAppCols);
 
         leftSideNavigationBar = false;
         rightSideNavigationBar = false;
@@ -134,26 +146,25 @@ public class FloatingWindow extends Service{
         rhs = new LinearLayout(this);
         lhs = new LinearLayout(this);
 
-        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
-        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3) / 100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45) / 100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
-        int ypos = settingsPrefs.getInt("lhsYPos", 50)-50;
+        int ypos = settingsPrefs.getInt("lhsYPos", 50) - 50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        }
-        else {
+        } else {
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
-        rhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        rhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight*ypos/100;
+        lhsparameters.y = -screenHeight * ypos / 100;
         lhsparameters.gravity = Gravity.START;
-        lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
+        lhs.setBackgroundColor(Color.argb(transparency, 0, 200, 200));
 
         wm.addView(rhs, rhsparameters);
-        wm.addView(lhs,lhsparameters);
+        wm.addView(lhs, lhsparameters);
 
         t = new TextView(this);
         t.setText("");
@@ -169,26 +180,26 @@ public class FloatingWindow extends Service{
         //gl = group layout.  displays the configured Groups first, before displaying apps within that group.
         gl = new RelativeLayout(this.getApplicationContext());
 
-        gl.setBackgroundColor(Color.argb(155,0,0,0));
+        gl.setBackgroundColor(Color.argb(155, 0, 0, 0));
         gl.setLayoutParams(relativeParams);
 
         tl = new RelativeLayout(this);
-        tl.setBackgroundColor(Color.argb(25,0,0,0));
+        tl.setBackgroundColor(Color.argb(25, 0, 0, 0));
 
         coords = new int[]{-1, -1};
         viewAdded = 0;
 
 
+        rhs.setOnTouchListener(new View.OnTouchListener() {
 
-        rhs.setOnTouchListener(new View.OnTouchListener(){
-
-            private WindowManager.LayoutParams updatedParameters = rhsparameters;
+            private final WindowManager.LayoutParams updatedParameters = rhsparameters;
             int x, y;
             float touchedX, touchedY;
 
+            @SuppressLint("ClickableViewAccessibility")
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-            public boolean onTouch(View arg0, MotionEvent event){
+            public boolean onTouch(View arg0, MotionEvent event) {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -202,9 +213,9 @@ public class FloatingWindow extends Service{
 
                         gl.removeAllViews();
                         initAppList();
-                        if (!portrait){
+                        if (!portrait) {
                             offset = zoneXSize * 2;
-                        }else {
+                        } else {
                             offset = zoneXSize;
                         }
                         setIconSizePos(screenWidth - offset);
@@ -222,49 +233,49 @@ public class FloatingWindow extends Service{
                         updatedParameters.x = (int) (x + (event.getRawX() - touchedX));
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
 
-                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX)*(event.getRawX() - touchedX) + (event.getRawY() - touchedY)*(event.getRawY() - touchedY));
-                        if ( distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
+                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX) * (event.getRawX() - touchedX) + (event.getRawY() - touchedY) * (event.getRawY() - touchedY));
+                        if (distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
                             wm.addView(gl, gparameters);
                             viewAdded = 1;
                         }
 
                         //////user touching Groups or Apps?
-                        if (event.getRawX() > gl.getWidth() - zoneXSize ) {
+                        if (event.getRawX() > gl.getWidth() - zoneXSize) {
                             int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
                             switch (group) {
                                 case 1:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName1","Group 1" ));
+                                    t.setText(settingsPrefs.getString("groupName1", "Group 1"));
                                     setContentsPositionGroup(1, 0);
                                     break;
                                 case 2:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName2","Group 2" ));
+                                    t.setText(settingsPrefs.getString("groupName2", "Group 2"));
                                     setContentsPositionGroup(2, 0);
                                     break;
                                 case 3:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName3","Group 3" ));
+                                    t.setText(settingsPrefs.getString("groupName3", "Group 3"));
                                     setContentsPositionGroup(3, 0);
                                     break;
                                 case 4:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName4","Group 4" ));
+                                    t.setText(settingsPrefs.getString("groupName4", "Group 4"));
                                     setContentsPositionGroup(4, 0);
                                     break;
                                 case 5:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName5","Group 5" ));
+                                    t.setText(settingsPrefs.getString("groupName5", "Group 5"));
                                     setContentsPositionGroup(5, 0);
                                     break;
                                 case 6:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName6","Group 6" ));
+                                    t.setText(settingsPrefs.getString("groupName6", "Group 6"));
                                     setContentsPositionGroup(6, 0);
                                     break;
                                 case 7:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName7","Group 7" ));
+                                    t.setText(settingsPrefs.getString("groupName7", "Group 7"));
                                     setContentsPositionGroup(7, 0);
                                     break;
                             }
@@ -285,9 +296,9 @@ public class FloatingWindow extends Service{
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
 
-                        if (viewAdded == 0){
+                        if (viewAdded == 0) {
                             //remove activation area for n seconds
-                            CountDownTimer timer = new CountDownTimer(disappearDelay, 1000) {
+                            new CountDownTimer(disappearDelay, 1000) {
                                 @Override
                                 public void onTick(long millisUntilFinished) {
                                     rhs.setVisibility(View.GONE);
@@ -298,17 +309,17 @@ public class FloatingWindow extends Service{
                                     rhs.setVisibility(View.VISIBLE); //(or GONE)
                                 }
                             }.start();
-                        }else{
+                        } else {
                             viewAdded = 0;
                         }
 
 
-                        if (coords[0] != -1 || coords[1] !=-1){
+                        if (coords[0] != -1 || coords[1] != -1) {
                             AppInfo a = appPositions[coords[0]][coords[1]];
-                            if (a.launchIntent != null && event.getRawX() < screenWidth * .85){
-                                editor.putInt(a.label.toString()+"_launchCount", settingsPrefs.getInt(a.label.toString()+"_launchCount", 0)+1);
-                                editor.commit();
-                                Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
+                            if (a.launchIntent != null && event.getRawX() < screenWidth * .85) {
+                                editor.putInt(a.label + "_launchCount", settingsPrefs.getInt(a.label + "_launchCount", 0) + 1);
+                                editor.apply();
+                                Log.v("launchCount", "LaunchCount for " + a.label + " is: " + settingsPrefs.getInt(a.label + "_launchCount", 0));
                                 Intent launchApp = a.launchIntent;
                                 launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 launchApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -319,40 +330,52 @@ public class FloatingWindow extends Service{
                                     Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
                                     try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}
+                                    } catch (Exception ignored) {
+                                    }
 
 
                                     e.printStackTrace();
                                 }
                             }
                         }
-
 
 
                         try {
@@ -369,14 +392,15 @@ public class FloatingWindow extends Service{
 
         });
 
-        lhs.setOnTouchListener(new View.OnTouchListener(){
+        lhs.setOnTouchListener(new View.OnTouchListener() {
 
-            private WindowManager.LayoutParams updatedParameters = rhsparameters;
+            private final WindowManager.LayoutParams updatedParameters = rhsparameters;
             int x, y;
             float touchedX, touchedY;
+
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-            public boolean onTouch(View arg0, MotionEvent event){
+            public boolean onTouch(View arg0, MotionEvent event) {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -392,7 +416,7 @@ public class FloatingWindow extends Service{
                         initAppList();
                         setIconSizePos(0);
                         gl.addView(t);
-                        for (int i=0;i<numZones;i++){
+                        for (int i = 0; i < numZones; i++) {
                             gl.addView(g[i]);
                         }
                         break;
@@ -402,9 +426,9 @@ public class FloatingWindow extends Service{
                         updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
 
 
-                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX)*(event.getRawX() - touchedX) + (event.getRawY() - touchedY)*(event.getRawY() - touchedY));
+                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX) * (event.getRawX() - touchedX) + (event.getRawY() - touchedY) * (event.getRawY() - touchedY));
 
-                        if ( distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
+                        if (distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
                             wm.addView(gl, gparameters);
                             viewAdded = 1;
                         }
@@ -413,47 +437,47 @@ public class FloatingWindow extends Service{
                         //////user touching Groups or Apps?
 
                         int leftBarOffset;
-                        if (leftSideNavigationBar){
+                        if (leftSideNavigationBar) {
                             leftBarOffset = zoneXSize;
-                        }else{
+                        } else {
                             leftBarOffset = 0;
                         }
-                        if (event.getRawX() < (zoneXSize*.8)+leftBarOffset) {
+                        if (event.getRawX() < (zoneXSize * .8) + leftBarOffset) {
                             int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
                             switch (group) {
                                 case 1:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName1","Group 1" ));
+                                    t.setText(settingsPrefs.getString("groupName1", "Group 1"));
                                     setContentsPositionGroup(1, 1);
                                     break;
                                 case 2:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName2","Group 2" ));
+                                    t.setText(settingsPrefs.getString("groupName2", "Group 2"));
                                     setContentsPositionGroup(2, 1);
                                     break;
                                 case 3:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName3","Group 3" ));
+                                    t.setText(settingsPrefs.getString("groupName3", "Group 3"));
                                     setContentsPositionGroup(3, 1);
                                     break;
                                 case 4:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName4","Group 4" ));
+                                    t.setText(settingsPrefs.getString("groupName4", "Group 4"));
                                     setContentsPositionGroup(4, 1);
                                     break;
                                 case 5:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName5","Group 5" ));
+                                    t.setText(settingsPrefs.getString("groupName5", "Group 5"));
                                     setContentsPositionGroup(5, 1);
                                     break;
                                 case 6:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName6","Group 6" ));
+                                    t.setText(settingsPrefs.getString("groupName6", "Group 6"));
                                     setContentsPositionGroup(6, 1);
                                     break;
                                 case 7:
                                     tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName7","Group 7" ));
+                                    t.setText(settingsPrefs.getString("groupName7", "Group 7"));
                                     setContentsPositionGroup(7, 1);
                                     break;
                             }
@@ -474,9 +498,9 @@ public class FloatingWindow extends Service{
                         //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
                         //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
 
-                        if (viewAdded == 0){
-                            //remove activation area for n seconds
-                            CountDownTimer timer = new CountDownTimer(disappearDelay, 1000) {
+                        if (viewAdded == 0) {
+                            //remove activation area for n=1000 seconds
+                            new CountDownTimer(disappearDelay, 1000) {
                                 @Override
                                 public void onTick(long millisUntilFinished) {
                                     lhs.setVisibility(View.GONE);
@@ -487,16 +511,16 @@ public class FloatingWindow extends Service{
                                     lhs.setVisibility(View.VISIBLE); //(or GONE)
                                 }
                             }.start();
-                        }else{
+                        } else {
                             viewAdded = 0;
                         }
 
-                        if (coords[0] != -1 || coords[1] != -1){
+                        if (coords[0] != -1 || coords[1] != -1) {
                             AppInfo a = appPositions[coords[0]][coords[1]];
-                            if (a.launchIntent != null && event.getRawX() > screenWidth * .10){
-                                editor.putInt(a.label.toString()+"_launchCount", settingsPrefs.getInt(a.label.toString()+"_launchCount", 0)+1);
+                            if (a.launchIntent != null && event.getRawX() > screenWidth * .10) {
+                                editor.putInt(a.label + "_launchCount", settingsPrefs.getInt(a.label + "_launchCount", 0) + 1);
                                 editor.commit();
-                                Log.v("launchCount", "LaunchCount for "+a.label+" is: " +settingsPrefs.getInt(a.label.toString()+"_launchCount", 0));
+                                Log.v("launchCount", "LaunchCount for " + a.label + " is: " + settingsPrefs.getInt(a.label + "_launchCount", 0));
                                 Intent launchApp = a.launchIntent;
                                 launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 launchApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -507,33 +531,46 @@ public class FloatingWindow extends Service{
                                     Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
                                     try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}try {
+                                    } catch (Exception ignored) {
+                                    }
+                                    try {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.toString().equals(a.label.toString())));
+                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
                                         }
-                                    }catch (Exception f){}
+                                    } catch (Exception ignored) {
+                                    }
 
                                     e.printStackTrace();
                                 }
@@ -558,17 +595,16 @@ public class FloatingWindow extends Service{
     }
 
 
-
-    private void init(){
+    private void init() {
 
         ////////set all previous app lists if available
         ArrayList<AppInfo> res = new ArrayList<>();
         PackageManager packageManager = getPackageManager();
         List<PackageInfo> packs = packageManager.getInstalledPackages(0);
-        for(int i=0;i<packs.size();i++) {
+        for (int i = 0; i < packs.size(); i++) {
             PackageInfo p = packs.get(i);
-            try{
-                if(packageManager.getLaunchIntentForPackage(p.packageName) != null){
+            try {
+                if (packageManager.getLaunchIntentForPackage(p.packageName) != null) {
 
                     AppInfo newInfo = new AppInfo();
                     newInfo.setLabel(p.applicationInfo.loadLabel(getPackageManager()).toString());
@@ -579,7 +615,7 @@ public class FloatingWindow extends Service{
                     newInfo.setLaunchIntent(getPackageManager().getLaunchIntentForPackage(p.packageName));
                     res.add(newInfo);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -596,18 +632,18 @@ public class FloatingWindow extends Service{
         groupAppList[6] = G6SelectedItems.G6SelectedApps;
         groupAppList[7] = G7SelectedItems.G7SelectedApps;
 
-        for (int g=1;g<7+1;g++){
-            ArrayList saveList = sh.getFavorites(getApplicationContext(),g);
-            if (saveList == null){
+        for (int g = 1; g < 7 + 1; g++) {
+            ArrayList saveList = sh.getFavorites(getApplicationContext(), g);
+            if (saveList == null) {
                 saveList = new ArrayList<>(0);
             }
             groupAppList[g] = new ArrayList<>(0);
-            if(res.size() > 0 ){
-                for (int i=0;i<res.size();i++) {
+            if (res.size() > 0) {
+                for (int i = 0; i < res.size(); i++) {
                     //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
-                    for (int f=0;f<saveList.size();f++) {
+                    for (int f = 0; f < saveList.size(); f++) {
                         //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
-                        if(res.get(i).packageName.equals(saveList.get(f))){
+                        if (res.get(i).packageName.equals(saveList.get(f))) {
                             //add the package name (ie: com.google.youtube) to groupAppList
                             groupAppList[g].add(res.get(i));
                         }
@@ -631,7 +667,7 @@ public class FloatingWindow extends Service{
             if (v != null) {
                 v.vibrate(VibrationEffect.createOneShot(vibTime, VibrationEffect.DEFAULT_AMPLITUDE));
             }
-        }else{
+        } else {
             //deprecated in API 26
             if (v != null) {
                 v.vibrate(vibTime);
@@ -639,7 +675,7 @@ public class FloatingWindow extends Service{
         }
     }
 
-    public void getDimensions(){
+    private void getDimensions() {
 
         statusBarOffset = getStatusBarHeight();
 
@@ -668,54 +704,61 @@ public class FloatingWindow extends Service{
                 r.getDisplayMetrics()
         );
         zoneXSize = (int) px;
-        zoneYSize = (int) ((int) px*1.3);  //1.3 is for a little extra margin on top & bottom of icon
+        zoneYSize = (int) ((int) px * 1.3);  //1.3 is for a little extra margin on top & bottom of icon
         //if zoneYsize is too big to fit all icons on the screen, reduce their size.
-        if (zoneYSize*numZones > screenHeight){
-            zoneYSize = screenHeight/numZones;
+        if (zoneYSize * numZones > screenHeight) {
+            zoneYSize = screenHeight / numZones;
         }
 
-        Log.d("screen","Screen Height: "+screenHeight+", zoneYSize: "+zoneYSize);
-        if (portrait){
-            maxAppSize = (int) (zoneXSize * .7);     //app icon size a little bigger in Portrait mode.
-        }
-        else{
-            maxAppSize = (int) (zoneXSize * .5);    //app icon size a little smaller in Landscape mode.
-        }
-
+        Log.d("screen", "Screen Height: " + screenHeight + ", zoneYSize: " + zoneYSize);
 
 
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        }
-        else {
+        } else {
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
-
 
 
         updateRHS();
         updateLHS();
 
-        if (!portrait && hasNavBar(getResources())){
-            gparameters = new WindowManager.LayoutParams(screenWidth-zoneXSize,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        }else{
-            gparameters = new WindowManager.LayoutParams(screenWidth,screenHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        if (!portrait && hasNavBar(getResources())) {
+            gparameters = new WindowManager.LayoutParams(screenWidth - zoneXSize, screenHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        } else {
+            gparameters = new WindowManager.LayoutParams(screenWidth, screenHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         }
 
         relativeParams = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        appPositions = new AppInfo[numAppCols+numAppRows+10][numAppCols+numAppRows+10];
+        initAppList();
+        appPositions = new AppInfo[numAppCols + numAppRows + 10][numAppCols + numAppRows + 10];
         initAppArray();
 
         t.setX((float) (screenWidth * .15));
         t.setY((float) (screenHeight * .01));
 
-        initAppList();
+
     }
 
-    public void initAppList(){
+    private void initAppArray() {
+        for (int row = 0; row < numAppCols + numAppRows + 4; row++) {
+            for (int col = 0; col < numAppCols + numAppRows + 4; col++) {
+                appPositions[row][col] = new AppInfo(
+                        "",
+                        col * screenWidth / (numAppCols + 2),
+                        row * screenHeight / (numAppRows + 2));
+//                appPositions[row][col].label = "";
+//                appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
+//                appPositions[row][col].setY(row * screenHeight/(numAppRows+2));
+//                appPositions[row][col].setLaunchIntent(null);
+            }
+        }
+    }
+
+    private void initAppList() {
         groupAppList = new ArrayList[10];
         groupAppList[1] = G1SelectedItems.G1SelectedApps;
         groupAppList[2] = G2SelectedItems.G2SelectedApps;
@@ -727,68 +770,66 @@ public class FloatingWindow extends Service{
 
     }
 
-    public void updateRHS(){
+    private void updateRHS() {
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
-        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3) / 100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45) / 100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
-        int ypos = settingsPrefs.getInt("lhsYPos", 50)-50;
+        int ypos = settingsPrefs.getInt("lhsYPos", 50) - 50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        }
-        else {
+        } else {
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
 
-        boolean on = settingsPrefs.getBoolean("rhs",true );
-        boolean showInLandscape = settingsPrefs.getBoolean("landscape",false);
+        boolean on = settingsPrefs.getBoolean("rhs", true);
+        boolean showInLandscape = settingsPrefs.getBoolean("landscape", false);
         if (!on || (!showInLandscape && !portrait)) {
             activationWidth = 0;
             activationHeight = 0;
             transparency = 0;
         }
-        rhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        rhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         rhsparameters.x = 0;
-        rhsparameters.y = -screenHeight*ypos/100;
+        rhsparameters.y = -screenHeight * ypos / 100;
         rhsparameters.gravity = Gravity.END;
-        rhs.setBackgroundColor(Color.argb(transparency,0,200,200));
+        rhs.setBackgroundColor(Color.argb(transparency, 0, 200, 200));
         wm.updateViewLayout(rhs, rhsparameters);
     }
 
-    public void updateLHS(){
+    private void updateLHS() {
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        SharedPreferences  settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)/100;
-        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45)/100);
+        SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3) / 100;
+        int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45) / 100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
-        int ypos = settingsPrefs.getInt("lhsYPos", 50)-50;
+        int ypos = settingsPrefs.getInt("lhsYPos", 50) - 50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        }
-        else {
+        } else {
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
 
-        boolean on = settingsPrefs.getBoolean("lhs",true );
-        boolean showInLandscape = settingsPrefs.getBoolean("landscape",false);
+        boolean on = settingsPrefs.getBoolean("lhs", true);
+        boolean showInLandscape = settingsPrefs.getBoolean("landscape", false);
 
         if (!on || (!showInLandscape && !portrait)) {
             activationWidth = 0;
             activationHeight = 0;
             transparency = 0;
         }
-        lhsparameters = new WindowManager.LayoutParams(activationWidth,activationHeight,overlayType,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight*ypos/100;
+        lhsparameters.y = -screenHeight * ypos / 100;
         lhsparameters.gravity = Gravity.START;
-        lhs.setBackgroundColor(Color.argb(transparency,0,200,200));
-        wm.updateViewLayout(lhs,lhsparameters);
+        lhs.setBackgroundColor(Color.argb(transparency, 0, 200, 200));
+        wm.updateViewLayout(lhs, lhsparameters);
     }
 
-    public int getStatusBarHeight() {
+    private int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
@@ -797,7 +838,7 @@ public class FloatingWindow extends Service{
         return result;
     }
 
-    private void configImageButton(ImageButton b){
+    private void configImageButton(ImageButton b) {
         WindowManager.LayoutParams appIconParams = new WindowManager.LayoutParams();
         int appSize = 100;
         appIconParams.width = appSize;
@@ -808,7 +849,7 @@ public class FloatingWindow extends Service{
         b.setScaleType(ImageView.ScaleType.FIT_CENTER);
     }
 
-    public void setScreenSize() {
+    private void setScreenSize() {
         int x, y;
         Display display = wm.getDefaultDisplay();
         Point screenSize = new Point();
@@ -819,44 +860,43 @@ public class FloatingWindow extends Service{
         screenHeight = y - statusBarOffset;
     }
 
-    private void setIconSizePos(int marginLeft){
-        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-        if (marginLeft > 0 ){
+    private void setIconSizePos(int marginLeft) {
+        RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        if (marginLeft > 0) {
             groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        }else
+        } else
             groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
-        numZones = Integer.parseInt(settingsPrefs.getString("numZones","3"));
+        numZones = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
         int yOffset = 0;
         int ySizeNeeded = numZones * zoneYSize;
         int marginTop = (screenHeight - ySizeNeeded) / 5;
-        if (portrait){
+        if (portrait) {
             yOffset = statusBarOffset;
-            marginLeft+=zoneXSize;
         }
 
-        SharedPreferences settings = getApplicationContext().getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
-        for (int i=0;i<numZones;i++){
+        SharedPreferences settings = getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        for (int i = 0; i < numZones; i++) {
             g[i] = new ImageView(this);
-            int n = i+1;
-            int id = (int) settings.getLong("iconID"+n, R.drawable.ring_50dp);
+            int n = i + 1;
+            int id = (int) settings.getLong("iconID" + n, R.drawable.ring_50dp);
             Drawable d = ContextCompat.getDrawable(this, id);
             g[i].setImageDrawable(d);
-            groupIconParams.setMargins(0,marginTop,0,0);
+            groupIconParams.setMargins(0, marginTop, 0, 0);
             g[i].setLayoutParams(groupIconParams);
-            g[i].setY((float) (  zoneYSize * i )+yOffset+marginTop);
+            g[i].setY((float) (zoneYSize * i) + yOffset + marginTop);
         }
     }
 
-    private int checkGroup (int x, int y){
+    private int checkGroup(int x, int y) {
         int ySizeNeeded = numZones * zoneYSize;
         int marginTop = (screenHeight - ySizeNeeded) / 2;
-        for (int groupNum = 1; groupNum <= numZones ; groupNum++){
-            if ((y < ((zoneYSize * groupNum) +  marginTop))){
-                Log.v("group","pointer coords are : " + x +", " +y);
-                Log.v("group","lastGroup is: " + lastGroup);
-                Log.v("group","Group found is: " + groupNum);
-                if(groupNum != lastGroup){
+        for (int groupNum = 1; groupNum <= numZones; groupNum++) {
+            if ((y < ((zoneYSize * groupNum) + marginTop))) {
+                Log.v("group", "pointer coords are : " + x + ", " + y);
+                Log.v("group", "lastGroup is: " + lastGroup);
+                Log.v("group", "Group found is: " + groupNum);
+                if (groupNum != lastGroup) {
                     lastGroup = groupNum;
                     vibrate();
                     initAppArray();
@@ -867,76 +907,61 @@ public class FloatingWindow extends Service{
         return -99; //cant find any group
     }
 
-    private void initAppArray(){
-        for (int row = 0; row < numAppCols+numAppRows+4; row ++){
-            for (int col = 0; col < numAppCols+numAppRows+4; col++){
-                appPositions[row][col] = new AppInfo(
-                        "",
-                        col * screenWidth/(numAppCols+2),
-                        row * screenHeight/(numAppRows+2));
-//                appPositions[row][col].label = "";
-//                appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
-//                appPositions[row][col].setY(row * screenHeight/(numAppRows+2));
-//                appPositions[row][col].setLaunchIntent(null);
-            }
-        }
-    }
-
-    private void setContentsPositionGroup(int group, int ltr){
+    private void setContentsPositionGroup(int group, int ltr) {
 
         int index = 0;
         int rowOffset = 0;
         int colOffset = 0;
-        if (!portrait && (leftSideNavigationBar || rightSideNavigationBar)){
+        if (!portrait && (leftSideNavigationBar || rightSideNavigationBar)) {
             colOffset = 1;
         }
-        if (!portrait && group == 1 && numZones >= 7)
-        {rowOffset = 1;}
-        else if (!portrait && group == 7)
-        {rowOffset = -1;}
+        if (!portrait && group == 1 && numZones >= 7) {
+            rowOffset = 1;
+        } else if (!portrait && group == 7) {
+            rowOffset = -1;
+        }
         try {
             int ySizeNeeded = numZones * zoneYSize;
             int marginTop = (screenHeight - ySizeNeeded) / 2;
             int numAppsInGroup = groupAppList[group].size();
-            int rowsNeeded = (numAppsInGroup/numAppCols);
-            int nearestRow = (((group * zoneYSize)+marginTop)/Math.round(screenHeight/(numAppRows+2)))-1;
-            int row = nearestRow+rowOffset;
+            int rowsNeeded = (numAppsInGroup / numAppCols);
+            int nearestRow = (((group * zoneYSize) + marginTop) / Math.round(screenHeight / (numAppRows + 2))) - 1;
+            int row = nearestRow + rowOffset;
 
-            for(AppInfo item:groupAppList[group]){
-                item.setLaunchCount(settingsPrefs.getInt(item.label.toString()+"_launchCount",0 ));
+            for (AppInfo item : groupAppList[group]) {
+                item.setLaunchCount(settingsPrefs.getInt(item.label + "_launchCount", 0));
             }
 
 
-            String sort = settingsPrefs.getString("sortG"+group,"Most Used" );
+            String sort = settingsPrefs.getString("sortG" + group, "Most Used");
             //Log.v("sort", "Sorting Group "+group+" SHOULD BE: " +sort);
             assert sort != null;
-            if (sort.equals("Most Used")){
+            if (sort.equals("Most Used")) {
                 //Log.v("sort", "Sorting Group "+group+" by Most Used.");
                 Collections.sort(groupAppList[group], AppInfo.appLaunchCount);
 
-            }else {
+            } else {
                 //Log.v("sort", "Sorting Group "+group+" by Alphabetical.");
                 Collections.sort(groupAppList[group], AppInfo.appNameComparator);
             }
 
 
-            while (row < numAppRows+1){
-                if (ltr == 0){
-                    for (int col = numAppCols-colOffset; col > 0 ; col--){
+            while (row < numAppRows + 1) {
+                if (ltr == 0) {
+                    for (int col = numAppCols - colOffset; col > 0; col--) {
 
                         //populate apps from right to left
-                        if (index < numAppsInGroup){
+                        if (index < numAppsInGroup) {
                             AppInfo a = groupAppList[group].get(index);
                             ImageButton appIcon = new ImageButton(this);
                             configImageButton(appIcon);
                             appPositions[col][row].setLabel(a.label);
                             appPositions[col][row].setLaunchIntent(a.launchIntent);
-                            appIcon.setX(col * screenWidth/(numAppCols+2));
-                            appIcon.setY(row * screenHeight/(numAppRows+2));
+                            appIcon.setX(col * screenWidth / (numAppCols + 2));
+                            appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(a.icon);
                             tl.addView(appIcon);
-                        }
-                        else{
+                        } else if (index == numAppsInGroup) {
                             //this section adds the Edit Group button at the very end of the list.
                             Intent intent = null;
                             switch (group) {
@@ -966,8 +991,8 @@ public class FloatingWindow extends Service{
                             configImageButton(appIcon);
                             appPositions[col][row].setLabel("Edit this Group");
                             appPositions[col][row].setLaunchIntent(intent);
-                            appIcon.setX(col * screenWidth/(numAppCols+2));
-                            appIcon.setY(row * screenHeight/(numAppRows+2));
+                            appIcon.setX(col * screenWidth / (numAppCols + 2));
+                            appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_add_white_50dp));
                             tl.addView(appIcon);
                         }
@@ -978,23 +1003,21 @@ public class FloatingWindow extends Service{
                         }
                     }
 
-                }
-                else{
-                    for (int col = 1; col < numAppCols+1 ; col++){
+                } else {
+                    for (int col = 1; col < numAppCols + 1; col++) {
 
                         //populate apps from left to right
-                        if (index < numAppsInGroup){
+                        if (index < numAppsInGroup) {
                             AppInfo a = groupAppList[group].get(index);
                             ImageButton appIcon = new ImageButton(this);
                             configImageButton(appIcon);
                             appPositions[col][row].setLabel(a.label);
                             appPositions[col][row].setLaunchIntent(a.launchIntent);
-                            appIcon.setX(col * screenWidth/(numAppCols+2));
-                            appIcon.setY(row * screenHeight/(numAppRows+2));
+                            appIcon.setX(col * screenWidth / (numAppCols + 2));
+                            appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(a.icon);
                             tl.addView(appIcon);
-                        }
-                        else{
+                        } else if (index == numAppsInGroup) {
                             Intent intent = null;
                             switch (group) {
                                 case 1:
@@ -1023,69 +1046,70 @@ public class FloatingWindow extends Service{
                             configImageButton(appIcon);
                             appPositions[col][row].setLabel("Edit this Group");
                             appPositions[col][row].setLaunchIntent(intent);
-                            appIcon.setX(col * screenWidth/(numAppCols+2));
-                            appIcon.setY(row * screenHeight/(numAppRows+2));
+                            appIcon.setX(col * screenWidth / (numAppCols + 2));
+                            appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_add_white_50dp));
                             tl.addView(appIcon);
                         }
 
                         index++;
-                        if (index > numAppsInGroup){
-                            row = numAppRows+11;
+                        if (index > numAppsInGroup) {
+                            row = numAppRows + 11;
                         }
                     }
                 }
-                if (nearestRow + rowsNeeded > numAppRows){
+                if (nearestRow + rowsNeeded > numAppRows) {
                     row--;
-                }
-                else{
+                } else {
                     row++;
                 }
             }
 
         } catch (Exception e) {
+            //usual error setting applabel
+            Log.d("tag", "usual error with null Applabel");
             e.printStackTrace();
         }
     }
 
     @NonNull
-    private int[] checkWhichAppSelected(int rawX, int rawY){
+    private int[] checkWhichAppSelected(int rawX, int rawY) {
         int x, y;
-        int appXSize = (screenWidth/(numAppCols+2));
-        int appYSize = (screenHeight/(numAppRows+2));
-        x = Math.round((rawX+(appXSize/3))/appXSize);
-        y = Math.round((rawY-(appYSize/3))/appYSize);
+        int appXSize = (screenWidth / (numAppCols + 2));
+        int appYSize = (screenHeight / (numAppRows + 2));
+        x = Math.round((rawX + (appXSize / 3)) / appXSize);
+        y = Math.round((rawY - (appYSize / 3)) / appYSize);
 
-        if (!portrait && leftSideNavigationBar){
+        if (!portrait && leftSideNavigationBar) {
             x--;
         }
 
-        if(x != lastAppTouched[0]){
+        if (x != lastAppTouched[0]) {
             lastAppTouched[0] = x;
             if (appPositions[x][y].launchIntent != null)
                 vibrate();
         }
-        if(y != lastAppTouched[1]){
+        if (y != lastAppTouched[1]) {
             lastAppTouched[1] = y;
             if (appPositions[x][y].launchIntent != null)
                 vibrate();
         }
-        return new int[]{x,y};
+        return new int[]{x, y};
     }
 
-    public boolean hasNavBar (Resources resources)
-    {
+    private boolean hasNavBar(Resources resources) {
         int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
         return id > 0 && resources.getBoolean(id);      //this apparently does NOT work in emulators...
     }
 
-        @Override
+    @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         getDimensions();
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public void onDestroy() {
         super.onDestroy();
         Log.i("EXIT", "ondestroy!");

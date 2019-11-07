@@ -32,7 +32,6 @@ public class G7SelectedItems extends AppCompatActivity {
     public AppInfo[] appArray;
     SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
     SharedPreferences sharedPrefs;
-    SharedPreferences.Editor editor;
     public static ArrayList<String> saveList;
     final int group = 7;
     GridViewAdapter adapter;
@@ -43,7 +42,6 @@ public class G7SelectedItems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         sharedPrefs = getSharedPreferences("SettingsActivity",0 );
-        editor = sharedPrefs.edit();
 
         setContentView(R.layout.group_picking);
 

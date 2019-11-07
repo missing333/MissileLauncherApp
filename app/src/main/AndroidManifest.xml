@@ -47,12 +47,13 @@
 
 
         <service android:name=".FloatingWindow"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <receiver android:name=".DeviceBootReceiver"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />

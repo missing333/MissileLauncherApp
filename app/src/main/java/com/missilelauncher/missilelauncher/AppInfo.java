@@ -1,26 +1,22 @@
 package com.missilelauncher.missilelauncher;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 
 import java.util.Comparator;
 
 public class AppInfo {
-    String label = "-";
+    String label = "";
     CharSequence packageName;
     Drawable icon;
     String versionName;
     Intent launchIntent = null;
     int versionCode;
-    int x;
-    int y;
-    int launchCount = 0;
+    private int x;
+    private int y;
+    private int launchCount = 0;
 
-    public AppInfo(){
+    public AppInfo() {
 
     }
 
@@ -52,7 +48,7 @@ public class AppInfo {
         this.y = y;
     }
 
-    public void setLaunchCount(int c) {
+    void setLaunchCount(int c) {
         this.launchCount = c;
     }
 
@@ -60,33 +56,25 @@ public class AppInfo {
         this.launchIntent = launchIntent;
     }
 
-    public static Drawable getActivityIcon(Context context, String packageName, String activityName) {
-        PackageManager pm = context.getPackageManager();
-        Intent intent = new Intent();
-        intent.setComponent(new ComponentName(packageName, activityName));
-        ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
-
-        return resolveInfo.loadIcon(pm);
-    }
-
-    public String prettyPrint() {
+    String prettyPrint() {
         //Log.v("group",label + "\t\t\t" + packageName + "\t\t" + versionName + "\t" + versionCode + "\t\t" + launchIntent);
-        String r = "appName: " + label + ", " + "launchIntent: " + launchIntent;
-        return r;
+        return "appName: " + label + ", " + "launchIntent: " + launchIntent;
     }
 
-    static Comparator<AppInfo> appNameComparator = new Comparator<AppInfo>() {
+    static final Comparator<AppInfo> appNameComparator;
 
-        public int compare(AppInfo a1, AppInfo a2) {
-            String appName1 = a1.label+"";
-            String appName2 = a2.label+"";
+    static {
+        appNameComparator = (a1, a2) -> {
+            String appName1 = a1.label + "";
+            String appName2 = a2.label + "";
 
             //ascending order
             return appName1.compareTo(appName2);
 
             //descending order
             //return StudentName2.compareTo(StudentName1);
-        }};
+        };
+    }
 
     /*Comparator for sorting the list by roll no*/
     public static Comparator<AppInfo> appLaunchCount = new Comparator<AppInfo>() {
@@ -101,7 +89,8 @@ public class AppInfo {
 
             /*For descending order*/
             //rollno2-rollno1;
-            return launchCount2-launchCount1;
-        }};
+            return launchCount2 - launchCount1;
+        }
+    };
 
 }
