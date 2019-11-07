@@ -31,7 +31,7 @@ public class DeviceBootReceiver extends BroadcastReceiver {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Log.v("app","Starting Foreground Service");
                 //Toast.makeText(this,"Starting as Foreground Service." ,Toast.LENGTH_SHORT ).show();
-                context.startForegroundService(startIntent);
+                context.startService(startIntent);
             } else {
                 Log.v("app","Starting regular Service");
                 //Toast.makeText(this,"Starting as regular Service." ,Toast.LENGTH_SHORT ).show();

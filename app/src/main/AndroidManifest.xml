@@ -28,7 +28,8 @@
 
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name=".GroupIconPicker" />
         <activity android:name=".G1SelectedItems" />
         <activity android:name=".G2SelectedItems" />
@@ -50,7 +51,8 @@
 
         <receiver android:name=".DeviceBootReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />

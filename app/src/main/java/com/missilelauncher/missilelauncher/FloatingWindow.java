@@ -199,7 +199,7 @@ public class FloatingWindow extends Service{
                         lastAppTouched[1] = -99;
 
                         gl.removeAllViews();
-                        //getDimensions();
+                        initAppList();
                         if (!portrait){
                             offset = zoneXSize * 2;
                         }else {
@@ -387,7 +387,7 @@ public class FloatingWindow extends Service{
                         lastAppTouched[1] = -99;
                         Log.v("touch", "Touch detected.");
                         gl.removeAllViews();
-                        //getDimensions();
+                        initAppList();
                         setIconSizePos(0);
                         gl.addView(t);
                         for (int i=0;i<numZones;i++){
@@ -555,6 +555,8 @@ public class FloatingWindow extends Service{
 
     }
 
+
+
     private void init(){
 
         ////////set all previous app lists if available
@@ -642,6 +644,18 @@ public class FloatingWindow extends Service{
 
         setScreenSize();
 
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // In landscape
+            numAppCols = Integer.parseInt(settingsPrefs.getString("landscapeNumAppCols", "10"));
+            numAppRows = Integer.parseInt(settingsPrefs.getString("landscapeNumAppRows", "6"));
+            portrait = false;
+        } else {
+            // In portrait
+            numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
+            numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
+            portrait = true;
+        }
 
         //size of Group Icons
         float dip = 50f;
@@ -676,6 +690,8 @@ public class FloatingWindow extends Service{
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
 
+
+
         updateRHS();
         updateLHS();
 
@@ -694,6 +710,10 @@ public class FloatingWindow extends Service{
         t.setX((float) (screenWidth * .15));
         t.setY((float) (screenHeight * .01));
 
+        initAppList();
+    }
+
+    public void initAppList(){
         groupAppList = new ArrayList[10];
         groupAppList[1] = G1SelectedItems.G1SelectedApps;
         groupAppList[2] = G2SelectedItems.G2SelectedApps;
@@ -702,6 +722,7 @@ public class FloatingWindow extends Service{
         groupAppList[5] = G5SelectedItems.G5SelectedApps;
         groupAppList[6] = G6SelectedItems.G6SelectedApps;
         groupAppList[7] = G7SelectedItems.G7SelectedApps;
+
     }
 
     public void updateRHS(){
@@ -1054,42 +1075,11 @@ public class FloatingWindow extends Service{
         return id > 0 && resources.getBoolean(id);      //this apparently does NOT work in emulators...
     }
 
-    @Override
+        @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            //Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-            numAppCols = Integer.parseInt(settingsPrefs.getString("landscapeNumAppCols", "10"));
-            numAppRows = Integer.parseInt(settingsPrefs.getString("landscapeNumAppRows", "6"));
-            portrait = false;
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            //Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-            numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
-            numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
-            portrait = true;
-        }
-
-        if (hasNavBar(getResources())){
-            Log.d("navbar","we HAVE a navbar!");
-            leftSideNavigationBar = Build.VERSION.SDK_INT > Build.VERSION_CODES.N
-                    && ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                    .getDefaultDisplay().getRotation() == Surface.ROTATION_270;
-            rightSideNavigationBar = Build.VERSION.SDK_INT > Build.VERSION_CODES.N
-                    && ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                    .getDefaultDisplay().getRotation() == Surface.ROTATION_90;
-        }else{
-            leftSideNavigationBar = false;
-            rightSideNavigationBar = false;
-        }
-
-        Log.v("orientation","Rows: " +numAppRows + ", Cols: "+numAppCols);
-        wm.removeView(rhs);
-        wm.removeView(lhs);
         getDimensions();
-        wm.addView(rhs, rhsparameters);
-        wm.addView(lhs, lhsparameters);
     }
 
     public void onDestroy() {
