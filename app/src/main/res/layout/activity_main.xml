@@ -23,7 +23,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imgHow" />
 
 
-
     <Button
         android:id="@+id/setPermissionBtn"
         style="@android:style/Widget.Button"
@@ -31,6 +30,8 @@
         android:layout_height="119dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorAccent"
+        android:paddingLeft="50dp"
+        android:paddingRight="150px"
         android:text="@string/permissionPrompt"
         android:textColorLink="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,16 +45,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="75dp"
         android:background="@drawable/primary_square"
         android:text="@string/settings"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgHow" />
 
     <ImageView
         android:id="@+id/imgHow"
@@ -65,6 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setPermissionBtn"
-        app:srcCompat="@drawable/how_to_draw_over" />
+        app:srcCompat="@drawable/how_to_draw_over2" />
 
 </android.support.constraint.ConstraintLayout>

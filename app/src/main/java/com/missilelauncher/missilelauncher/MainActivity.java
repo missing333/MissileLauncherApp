@@ -1,9 +1,11 @@
 package com.missilelauncher.missilelauncher;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             setPermissionBtn.setOnClickListener(v -> {
-                Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getApplicationContext().getPackageName()));
                 startActivity(myIntent);
             });
 
