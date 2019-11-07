@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable;
 import java.util.Comparator;
 
 public class AppInfo {
-    CharSequence label;
+    String label = "-";
     CharSequence packageName;
     Drawable icon;
     String versionName;
@@ -20,7 +20,19 @@ public class AppInfo {
     int y;
     int launchCount = 0;
 
-    public void setLabel(CharSequence label) {
+    public AppInfo(){
+
+    }
+
+    public AppInfo(String label, int x, int y) {
+        super();
+        this.label = label;
+        this.x = x;
+        this.y = y;
+        this.launchIntent = null;
+    }
+
+    public void setLabel(String label) {
         this.label = label;
     }
 

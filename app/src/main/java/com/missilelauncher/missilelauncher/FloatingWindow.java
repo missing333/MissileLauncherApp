@@ -178,6 +178,8 @@ public class FloatingWindow extends Service{
         coords = new int[]{-1, -1};
         viewAdded = 0;
 
+
+
         rhs.setOnTouchListener(new View.OnTouchListener(){
 
             private WindowManager.LayoutParams updatedParameters = rhsparameters;
@@ -868,11 +870,14 @@ public class FloatingWindow extends Service{
     private void initAppArray(){
         for (int row = 0; row < numAppCols+numAppRows+4; row ++){
             for (int col = 0; col < numAppCols+numAppRows+4; col++){
-                appPositions[row][col] = new AppInfo();
-                appPositions[row][col].label = "";
-                appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
-                appPositions[row][col].setY(row * screenHeight/(numAppRows+2));
-                appPositions[row][col].setLaunchIntent(null);
+                appPositions[row][col] = new AppInfo(
+                        "",
+                        col * screenWidth/(numAppCols+2),
+                        row * screenHeight/(numAppRows+2));
+//                appPositions[row][col].label = "";
+//                appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
+//                appPositions[row][col].setY(row * screenHeight/(numAppRows+2));
+//                appPositions[row][col].setLaunchIntent(null);
             }
         }
     }
@@ -1039,8 +1044,7 @@ public class FloatingWindow extends Service{
             }
 
         } catch (Exception e) {
-            Log.e("error", "Usual Exception thrown when trying to display apps.");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
