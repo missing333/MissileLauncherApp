@@ -2,7 +2,7 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="GROUP_BY_SEVERITY" value="true" />
-    <option name="SCOPE_TYPE" value="3" />
+    <option name="SCOPE_TYPE" value="4" />
   </component>
   <component name="AndroidLayouts">
     <shared>
@@ -10,7 +10,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="missil" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
@@ -18,56 +17,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="Restart on Bootup now working again Android Pie">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MissileLauncherApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MissileLauncherApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/missilelauncher/missilelauncher/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/missilelauncher/missilelauncher/ExampleInstrumentedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppCompatPreferenceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppCompatPreferenceActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G2SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G2SelectedItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G3SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G3SelectedItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G4SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G4SelectedItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G5SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G5SelectedItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G6SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G6SelectedItems.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G7SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G7SelectedItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/gear.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gear.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_auto_sort.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_auto_sort.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/sliders.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/sliders.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/play_store_prompt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/play_store_prompt.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/.gradle/" />
-    <ignored path="$PROJECT_DIR$/build/classes/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/annotation_processor_list/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/apk_list/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/blame/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/check-libraries/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/check-manifest/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/checkDebugClasspath/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/checkReleaseClasspath/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/compatible_screen_manifest/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/incremental/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/instant_run_merged_manifests/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/javac/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/jniLibs/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/linked_res_for_bundle/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/merged_assets/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/merged_manifests/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/module_bundle/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/prebuild/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/processed_res/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/res/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/rs/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/shader_assets/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/shaders/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/split_list/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/symbols/" />
-    <ignored path="$PROJECT_DIR$/app/build/intermediates/transforms/" />
-    <ignored path="$PROJECT_DIR$/app/build/outputs/" />
-    <ignored path="$PROJECT_DIR$/app/build/tmp/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
-  </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3a_API_30" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -76,6 +68,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -93,228 +91,6 @@
   <component name="FavoritesManager">
     <favorites_list name="MissileLauncherApp" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="50" column="68" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
-              <folding>
-                <element signature="docComment;class#FloatingWindow#0" />
-                <element signature="e#1641#1671#0" expanded="true" />
-                <element signature="e#1633#1744#0" />
-                <element signature="e#1750#1781#0" />
-                <element signature="e#1797#1926#0" />
-                <element signature="e#2889#2898#0" />
-                <element signature="e#2988#3176#0" />
-                <element signature="e#3506#3549#0" />
-                <element signature="e#3182#27027#0" />
-                <element signature="e#4615#4705#1" />
-                <element signature="e#4719#4795#1" />
-                <element signature="e#5676#5755#0" />
-                <element signature="class#6220:16598" />
-                <element signature="e#6750#6793#0" />
-                <element signature="e#6400#6446#0" />
-                <element signature="method#onTouch#0;class#6220:16598" />
-                <element signature="e#6624#16543#0" />
-                <element signature="e#7140#7219#1" />
-                <element signature="e#7224#7299#1" />
-                <element signature="e#7421#7494#1" />
-                <element signature="e#8158#8285#1" />
-                <element signature="e#8421#10756#1" />
-                <element signature="e#8564#10730#0" />
-                <element signature="e#10762#11051#1" />
-                <element signature="e#11385#11503#0" />
-                <element signature="e#11685#12348#1" />
-                <element signature="class#11809:12313" />
-                <element signature="method#onTick#0;class#11809:12313" />
-                <element signature="method#onFinish#0;class#11809:12313" />
-                <element signature="e#12352#12422#1" />
-                <element signature="e#12487#16250#1" />
-                <element signature="e#12659#16224#1" />
-                <element signature="e#13281#13378#0" />
-                <element signature="e#13399#16194#0" />
-                <element signature="e#13704#14022#0" />
-                <element signature="e#13798#13984#1" />
-                <element signature="e#14047#14365#0" />
-                <element signature="e#14141#14327#1" />
-                <element signature="e#14390#14708#0" />
-                <element signature="e#14484#14670#1" />
-                <element signature="e#14733#15051#0" />
-                <element signature="e#14827#15013#1" />
-                <element signature="e#15076#15394#0" />
-                <element signature="e#15170#15356#1" />
-                <element signature="e#15419#15737#0" />
-                <element signature="e#15513#15699#1" />
-                <element signature="e#15762#16080#0" />
-                <element signature="e#15856#16042#1" />
-                <element signature="e#16282#16356#0" />
-                <element signature="e#16377#16464#0" />
-                <element signature="class#16637:27018" />
-                <element signature="e#16816#16862#0" />
-                <element signature="method#onTouch#0;class#16637:27018" />
-                <element signature="e#17040#26963#0" />
-                <element signature="e#17710#17783#1" />
-                <element signature="e#18322#18449#1" />
-                <element signature="e#18606#18688#1" />
-                <element signature="e#18692#18766#1" />
-                <element signature="e#18843#21178#1" />
-                <element signature="e#18986#21152#0" />
-                <element signature="e#21184#21473#1" />
-                <element signature="e#21807#21925#0" />
-                <element signature="e#22107#22770#1" />
-                <element signature="class#22231:22735" />
-                <element signature="method#onTick#0;class#22231:22735" />
-                <element signature="method#onFinish#0;class#22231:22735" />
-                <element signature="e#22774#22844#1" />
-                <element signature="e#22909#26671#1" />
-                <element signature="e#23081#26645#1" />
-                <element signature="e#23703#23800#0" />
-                <element signature="e#23821#26615#0" />
-                <element signature="e#24126#24444#0" />
-                <element signature="e#24220#24406#1" />
-                <element signature="e#24469#24787#0" />
-                <element signature="e#24563#24749#1" />
-                <element signature="e#24812#25130#0" />
-                <element signature="e#24906#25092#1" />
-                <element signature="e#25155#25473#0" />
-                <element signature="e#25249#25435#1" />
-                <element signature="e#25498#25816#0" />
-                <element signature="e#25592#25778#1" />
-                <element signature="e#25841#26159#0" />
-                <element signature="e#25935#26121#1" />
-                <element signature="e#26184#26502#0" />
-                <element signature="e#26278#26464#1" />
-                <element signature="e#26702#26776#0" />
-                <element signature="e#26797#26884#0" />
-                <element signature="e#27035#30049#0" />
-                <element signature="e#27340#28153#1" />
-                <element signature="e#27399#28072#0" />
-                <element signature="e#27484#28058#1" />
-                <element signature="e#28091#28143#0" />
-                <element signature="e#28782#29637#1" />
-                <element signature="e#28894#28956#1" />
-                <element signature="e#29038#29627#1" />
-                <element signature="e#29087#29613#1" />
-                <element signature="e#29233#29595#1" />
-                <element signature="e#29393#29573#1" />
-                <element signature="e#30055#30565#0" />
-                <element signature="e#30274#30430#1" />
-                <element signature="e#30303#30420#1" />
-                <element signature="e#30434#30559#1" />
-                <element signature="e#30498#30549#1" />
-                <element signature="e#30571#33371#0" />
-                <element signature="e#30814#31076#1" />
-                <element signature="e#31082#31324#1" />
-                <element signature="e#31843#31901#1" />
-                <element signature="e#32337#32427#1" />
-                <element signature="e#32441#32517#1" />
-                <element signature="e#32615#32803#1" />
-                <element signature="e#32807#32985#1" />
-                <element signature="e#33718#34391#0" />
-                <element signature="e#33811#34385#1" />
-                <element signature="e#33880#34375#1" />
-                <element signature="e#34082#34134#0" />
-                <element signature="e#33377#33858#0" />
-                <element signature="e#33864#35398#0" />
-                <element signature="e#34497#34587#1" />
-                <element signature="e#34601#34677#1" />
-                <element signature="e#34870#34978#1" />
-                <element signature="e#35404#36940#0" />
-                <element signature="e#36037#36127#1" />
-                <element signature="e#36141#36217#1" />
-                <element signature="e#36411#36519#1" />
-                <element signature="e#36946#37239#0" />
-                <element signature="e#37128#37210#1" />
-                <element signature="e#37245#37651#0" />
-                <element signature="e#37657#37962#0" />
-                <element signature="e#37968#39278#0" />
-                <element signature="e#38211#38294#1" />
-                <element signature="e#38601#38686#1" />
-                <element signature="e#38840#39272#1" />
-                <element signature="e#39284#40024#0" />
-                <element signature="e#39494#39976#1" />
-                <element signature="e#39556#39966#1" />
-                <element signature="e#39791#39919#1" />
-                <element signature="e#40709#48946#0" />
-                <element signature="e#40921#40959#1" />
-                <element signature="e#42132#42170#1" />
-                <element signature="e#42205#42244#1" />
-                <element signature="e#41119#48875#0" />
-                <element signature="e#41554#41669#1" />
-                <element signature="e#41899#42068#1" />
-                <element signature="e#42073#42247#1" />
-                <element signature="e#42288#48864#1" />
-                <element signature="e#42319#45544#1" />
-                <element signature="e#42394#45525#1" />
-                <element signature="e#42507#43150#1" />
-                <element signature="e#43552#45711#1" />
-                <element signature="e#43373#44692#0" />
-                <element signature="e#45425#45503#1" />
-                <element signature="e#45565#48679#1" />
-                <element signature="e#45632#48661#1" />
-                <element signature="e#45745#46388#1" />
-                <element signature="e#46417#48477#1" />
-                <element signature="e#46512#47831#0" />
-                <element signature="e#48563#48639#1" />
-                <element signature="e#48737#48783#1" />
-                <element signature="e#48804#48850#1" />
-                <element signature="e#49240#49327#0" />
-                <element signature="e#48952#49699#0" />
-                <element signature="e#49303#49331#1" />
-                <element signature="e#49367#49497#1" />
-                <element signature="e#49532#49662#1" />
-                <element signature="e#49705#49956#0" />
-                <element signature="e#49966#50122#0" />
-                <element signature="e#50128#50412#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -322,32 +98,9 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>adapter</find>
-      <find>eas</find>
-      <find>versionco</find>
-      <find>updateLHS</find>
-      <find>ibinder</find>
-      <find>fore</find>
-      <find>foreg</find>
-      <find>start</find>
-      <find>stopser</find>
-      <find>ispro</find>
-      <find>version</find>
-      <find>onOptionsItemSelected</find>
-      <find>ver</find>
-      <find>leftsid</find>
-      <find>rhs</find>
-      <find>screenh</find>
-      <find>log</find>
-      <find>showinla</find>
-      <find>editor</find>
-    </findStrings>
-  </component>
   <component name="GenerateSignedApkSettings">
     <option name="EXPORT_PRIVATE_KEY" value="false" />
-    <option name="KEY_STORE_PATH" value="C:\Users\mmissildine\Dropbox\Apps\Android_Studio\key\MissileLauncher Keys\MLKey" />
+    <option name="KEY_STORE_PATH" value="C:\android\keys\MLKey" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
@@ -359,122 +112,36 @@
       </map>
     </option>
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MissileLauncherRestarterBroadcastReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/xml/backup_descriptor.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SharedListPreferencesHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppInfo.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G7SelectedItems.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="72" />
-    <option name="y" value="2" />
-    <option name="width" value="1856" />
-    <option name="height" value="1086" />
-  </component>
+  <component name="ProjectId" id="1f3t5LTpSMocHlzxKcWBg8S49gT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="missilelauncher" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="xml" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="MissileLauncherApp" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="BundleExportedModule" value="app" />
     <property name="DEBUGGABLE_DEVICE" value="emulator-5554" />
     <property name="DEBUGGABLE_PROCESS" value="com.missilelauncher.missilelauncher" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="ExportApk.ApkPath" value="C:\git\Android_Studio\MissileLauncherApp\app" />
+    <property name="ExportApk.ApkPath" value="C:\android" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.Flavors" value="" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="device.picker.selection" value="Pixel_2_XL_API_28" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="C:/android/MissileLauncherDeluxe" />
+    <property name="project.structure.last.edited" value="Suggestions" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.30710658" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="ics" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Android App.app">
     <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -501,8 +168,6 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -545,6 +210,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MissileLauncherApp:app [androidDependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/app" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="androidDependencies" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -554,6 +238,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.MissileLauncherApp:app [androidDependencies]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -772,56 +461,6 @@
     <option name="localTasksCounter" value="14" />
     <servers />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49946865" visible="true" weight="0.20507166" />
-      <window_info id="Structure" order="1" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Captures" order="3" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="4" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
-      <window_info id="Designer" order="5" />
-      <window_info id="Build Variants" order="6" sideWeight="0.5005314" side_tool="true" weight="0.26751947" />
-      <window_info id="Capture Tool" order="7" />
-      <window_info id="Resources Explorer" order="8" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32659575" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.49468085" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49944383" weight="0.45957446" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3287234" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5005513" side_tool="true" weight="0.3287234" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32978722" />
-      <window_info anchor="bottom" id="Logcat" order="9" weight="0.47340426" />
-      <window_info anchor="bottom" id="Android Profiler" order="10" weight="0.3287234" />
-      <window_info anchor="bottom" id="Dependency Viewer" order="11" weight="0.32943678" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49944875" weight="0.3287234" />
-      <window_info anchor="bottom" id="Build" order="13" sideWeight="0.49779493" weight="0.26489362" />
-      <window_info anchor="bottom" id="Gradle Console" order="14" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Inspection Results" order="15" visible="true" weight="0.3287234" />
-      <window_info anchor="bottom" id="Messages" order="16" weight="0.32765958" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Preview" order="3" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Gradle" order="8" weight="0.32983425" />
-      <window_info anchor="right" id="Assistant" order="9" weight="0.32910696" />
-    </layout>
-  </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
       <list>
@@ -838,20 +477,7 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -886,14 +512,75 @@
     <MESSAGE value="Restart on Bootup now working again Android Pie" />
     <option name="LAST_COMMIT_MESSAGE" value="Restart on Bootup now working again Android Pie" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="249" y="164" key="#PSD" timestamp="1600105693232">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="249" y="164" key="#PSD/0.0.1462.864@0.0.1462.864" timestamp="1600105693232" />
+    <state x="452" y="77" key="#app" timestamp="1595461494319">
+      <screen x="0" y="0" width="1449" height="864" />
+    </state>
+    <state x="452" y="77" key="#app/0.0.1449.864@0.0.1449.864" timestamp="1595461494319" />
+    <state x="575" y="321" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1595461751923">
+      <screen x="0" y="0" width="1449" height="864" />
+    </state>
+    <state x="575" y="321" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461751923" />
+    <state x="412" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1599799199076">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="412" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1462.864@0.0.1462.864" timestamp="1599799199076" />
+    <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600102591744">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1600102591744" />
+    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600123112737">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="546" y="187" key="FileChooserDialogImpl/0.0.1449.864@0.0.1449.864" timestamp="1595472618891" />
+    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600123112737" />
+    <state width="1418" height="223" key="GridCell.Tab.0.bottom" timestamp="1600110518784">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state width="1418" height="223" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
+    <state width="1418" height="223" key="GridCell.Tab.0.center" timestamp="1600110518784">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state width="1418" height="223" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
+    <state width="1418" height="223" key="GridCell.Tab.0.left" timestamp="1600110518784">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state width="1418" height="223" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
+    <state width="1418" height="223" key="GridCell.Tab.0.right" timestamp="1600110518784">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state width="1418" height="223" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
+    <state x="236" y="74" key="SettingsEditor" timestamp="1600104230909">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="234" y="74" key="SettingsEditor/0.0.1449.864@0.0.1449.864" timestamp="1595460708243" />
+    <state x="236" y="74" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1600104230909" />
+    <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599836663171">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="93" y="93" width="1263" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461477037" />
+    <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1462.864@0.0.1462.864" timestamp="1599836663171" />
+    <state x="425" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1599798746454">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="421" y="256" key="com.intellij.ide.util.TipDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461738521" />
+    <state x="425" y="256" key="com.intellij.ide.util.TipDialog/0.0.1462.864@0.0.1462.864" timestamp="1599798746454" />
+    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599842342912">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1462.864@0.0.1462.864" timestamp="1599842342912" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java</url>
-          <line>171</line>
-          <properties />
-          <option name="timeStamp" value="3" />
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java</url>
+          <line>94</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -906,614 +593,5 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_grid.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/play_store_prompt.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="12508" selection-start-line="12508" selection-end-line="12508" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="19" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradle.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/os/MessageQueue.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/RestarterService.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/backup_descriptor.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_launcher_foreground.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_notifications_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/sample_1.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/g1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/missilelauncher/missilelauncher/ExampleUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="43" column="34" lean-forward="true" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/androidTest/debug/com/missilelauncher/missilelauncher/test/BuildConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/pref_group4.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_grid_pick.xml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/pref_headers.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="46" lean-forward="true" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
-          <folding>
-            <element signature="e#2081#2101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GridItemView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GridViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/ImageAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppCompatPreferenceActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
-          <folding>
-            <element signature="docComment;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#onCreate#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#onPostCreate#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#setSupportActionBar#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#setContentView#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#setContentView#2;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#addContentView#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#onPostResume#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#onTitleChanged#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#onConfigurationChanged#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#onStop#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#onDestroy#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="method#getDelegate#0;class#AppCompatPreferenceActivity#0" />
-            <element signature="e#2901#2974#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/NumberPickerPreference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="67" column="45" selection-start-line="67" selection-start-column="45" selection-end-line="67" selection-end-column="45" />
-          <folding>
-            <element signature="docComment;class#SettingsActivity#0" />
-            <element signature="docComment;field#sBindPreferenceSummaryToValueListener#0;class#SettingsActivity#0" />
-            <element signature="e#2102#2163#0" />
-            <element signature="e#2700#2760#0" />
-            <element signature="e#2885#3078#1" />
-            <element signature="e#2903#2963#0" />
-            <element signature="docComment;method#isXLargeTablet#0;class#SettingsActivity#0" />
-            <element signature="method#isXLargeTablet#0;class#SettingsActivity#0" />
-            <element signature="docComment;method#bindPreferenceSummaryToValue#0;class#SettingsActivity#0" />
-            <element signature="method#bindPreferenceSummaryToValue#0;class#SettingsActivity#0" />
-            <element signature="e#4163#4220#0" />
-            <element signature="docComment;method#setupActionBar#0;class#SettingsActivity#0" />
-            <element signature="method#setupActionBar#0;class#SettingsActivity#0" />
-            <element signature="e#4717#4836#1" />
-            <element signature="docComment;method#onIsMultiPane#0;class#SettingsActivity#0" />
-            <element signature="docComment;method#onBuildHeaders#0;class#SettingsActivity#0" />
-            <element signature="e#5017#5026#0" />
-            <element signature="method#onBuildHeaders#0;class#SettingsActivity#0" />
-            <element signature="docComment;method#isValidFragment#0;class#SettingsActivity#0" />
-            <element signature="method#isValidFragment#0;class#SettingsActivity#0" />
-            <element signature="docComment;class#GeneralPreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#9221#10011#1" />
-            <element signature="e#9305#9808#1" />
-            <element signature="e#9391#9588#1" />
-            <element signature="e#9594#9778#1" />
-            <element signature="e#9813#9985#1" />
-            <element signature="method#onDestroy#0;class#GeneralPreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#isProInstalled#0;class#GeneralPreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#10655#10948#0" />
-            <element signature="e#10820#10934#1" />
-            <element signature="e#10969#11014#0" />
-            <element signature="class#Group4PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#onOptionsItemSelected#0;class#Group4PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="class#Group5PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#onCreate#0;class#Group5PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#onResume#0;class#Group5PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#24833#25153#1" />
-            <element signature="method#onOptionsItemSelected#0;class#Group5PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#25325#25451#1" />
-            <element signature="class#Group6PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#onCreate#0;class#Group6PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#onResume#0;class#Group6PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#27168#27488#1" />
-            <element signature="method#onOptionsItemSelected#0;class#Group6PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#27660#27786#1" />
-            <element signature="class#Group7PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#onCreate#0;class#Group7PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="method#onResume#0;class#Group7PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#29503#29823#1" />
-            <element signature="method#onOptionsItemSelected#0;class#Group7PreferenceFragment#0;class#SettingsActivity#0" />
-            <element signature="e#29995#30121#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/androidx/slice/compat/CompatPermissionManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="76" column="46" selection-start-line="76" selection-start-column="46" selection-end-line="76" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/view/ViewManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/app/servertransaction/ConfigurationChangeItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/app/servertransaction/TransactionExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/app/ActivityThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="1808" selection-start-line="1808" selection-end-line="1808" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/os/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/os/Looper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="193" selection-start-line="193" selection-end-line="193" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="72" lean-forward="true" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="40" column="15" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SharedListPreferencesHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/util/Log.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="177" column="36" selection-start-line="177" selection-start-column="36" selection-end-line="177" selection-end-column="36" />
-          <folding>
-            <element signature="method#init#0;class#MainActivity#0" />
-            <element signature="e#2009#2822#1" />
-            <element signature="e#2068#2741#0" />
-            <element signature="e#2153#2727#1" />
-            <element signature="e#2760#2812#0" />
-            <element signature="e#3451#4306#1" />
-            <element signature="e#3563#3625#1" />
-            <element signature="e#3707#4296#1" />
-            <element signature="e#3756#4282#1" />
-            <element signature="e#3902#4264#1" />
-            <element signature="e#4062#4242#1" />
-            <element signature="method#onStart#0;class#MainActivity#0" />
-            <element signature="e#5279#5429#0" />
-            <element signature="method#isMyServiceRunning#0;class#MainActivity#0" />
-            <element signature="e#6094#6285#1" />
-            <element signature="e#6175#6275#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="50" column="68" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G7SelectedItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="37" column="43" lean-forward="true" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
-          <folding>
-            <element signature="e#587#661#0" expanded="true" />
-            <element signature="e#1725#1779#1" />
-            <element signature="e#2878#2924#1" />
-            <element signature="method#getPackages#0;class#G1SelectedItems#0" />
-            <element signature="e#4785#4817#0" />
-            <element signature="e#4889#4939#1" />
-            <element signature="e#5276#6089#1" />
-            <element signature="e#5335#6008#0" />
-            <element signature="e#5420#5994#1" />
-            <element signature="e#6027#6079#0" />
-            <element signature="e#6229#6266#0" />
-            <element signature="e#6448#6487#1" expanded="true" />
-            <element signature="e#6554#7263#1" />
-            <element signature="e#6584#7253#1" />
-            <element signature="e#6762#7237#1" />
-            <element signature="e#6811#7219#1" />
-            <element signature="e#6918#7197#1" />
-            <element signature="e#6989#7171#1" />
-            <element signature="e#7698#7752#1" />
-            <element signature="e#8127#8586#1" />
-            <element signature="e#8280#8568#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="58" column="17" lean-forward="true" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#800#801#0" expanded="true" />
-            <element signature="e#1135#1136#0" expanded="true" />
-            <element signature="e#1171#1172#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
-          <folding>
-            <element signature="docComment;class#FloatingWindow#0" />
-            <element signature="e#1641#1671#0" expanded="true" />
-            <element signature="e#1633#1744#0" />
-            <element signature="e#1750#1781#0" />
-            <element signature="e#1797#1926#0" />
-            <element signature="e#2889#2898#0" />
-            <element signature="e#2988#3176#0" />
-            <element signature="e#3506#3549#0" />
-            <element signature="e#3182#27027#0" />
-            <element signature="e#4615#4705#1" />
-            <element signature="e#4719#4795#1" />
-            <element signature="e#5676#5755#0" />
-            <element signature="class#6220:16598" />
-            <element signature="e#6750#6793#0" />
-            <element signature="e#6400#6446#0" />
-            <element signature="method#onTouch#0;class#6220:16598" />
-            <element signature="e#6624#16543#0" />
-            <element signature="e#7140#7219#1" />
-            <element signature="e#7224#7299#1" />
-            <element signature="e#7421#7494#1" />
-            <element signature="e#8158#8285#1" />
-            <element signature="e#8421#10756#1" />
-            <element signature="e#8564#10730#0" />
-            <element signature="e#10762#11051#1" />
-            <element signature="e#11385#11503#0" />
-            <element signature="e#11685#12348#1" />
-            <element signature="class#11809:12313" />
-            <element signature="method#onTick#0;class#11809:12313" />
-            <element signature="method#onFinish#0;class#11809:12313" />
-            <element signature="e#12352#12422#1" />
-            <element signature="e#12487#16250#1" />
-            <element signature="e#12659#16224#1" />
-            <element signature="e#13281#13378#0" />
-            <element signature="e#13399#16194#0" />
-            <element signature="e#13704#14022#0" />
-            <element signature="e#13798#13984#1" />
-            <element signature="e#14047#14365#0" />
-            <element signature="e#14141#14327#1" />
-            <element signature="e#14390#14708#0" />
-            <element signature="e#14484#14670#1" />
-            <element signature="e#14733#15051#0" />
-            <element signature="e#14827#15013#1" />
-            <element signature="e#15076#15394#0" />
-            <element signature="e#15170#15356#1" />
-            <element signature="e#15419#15737#0" />
-            <element signature="e#15513#15699#1" />
-            <element signature="e#15762#16080#0" />
-            <element signature="e#15856#16042#1" />
-            <element signature="e#16282#16356#0" />
-            <element signature="e#16377#16464#0" />
-            <element signature="class#16637:27018" />
-            <element signature="e#16816#16862#0" />
-            <element signature="method#onTouch#0;class#16637:27018" />
-            <element signature="e#17040#26963#0" />
-            <element signature="e#17710#17783#1" />
-            <element signature="e#18322#18449#1" />
-            <element signature="e#18606#18688#1" />
-            <element signature="e#18692#18766#1" />
-            <element signature="e#18843#21178#1" />
-            <element signature="e#18986#21152#0" />
-            <element signature="e#21184#21473#1" />
-            <element signature="e#21807#21925#0" />
-            <element signature="e#22107#22770#1" />
-            <element signature="class#22231:22735" />
-            <element signature="method#onTick#0;class#22231:22735" />
-            <element signature="method#onFinish#0;class#22231:22735" />
-            <element signature="e#22774#22844#1" />
-            <element signature="e#22909#26671#1" />
-            <element signature="e#23081#26645#1" />
-            <element signature="e#23703#23800#0" />
-            <element signature="e#23821#26615#0" />
-            <element signature="e#24126#24444#0" />
-            <element signature="e#24220#24406#1" />
-            <element signature="e#24469#24787#0" />
-            <element signature="e#24563#24749#1" />
-            <element signature="e#24812#25130#0" />
-            <element signature="e#24906#25092#1" />
-            <element signature="e#25155#25473#0" />
-            <element signature="e#25249#25435#1" />
-            <element signature="e#25498#25816#0" />
-            <element signature="e#25592#25778#1" />
-            <element signature="e#25841#26159#0" />
-            <element signature="e#25935#26121#1" />
-            <element signature="e#26184#26502#0" />
-            <element signature="e#26278#26464#1" />
-            <element signature="e#26702#26776#0" />
-            <element signature="e#26797#26884#0" />
-            <element signature="e#27035#30049#0" />
-            <element signature="e#27340#28153#1" />
-            <element signature="e#27399#28072#0" />
-            <element signature="e#27484#28058#1" />
-            <element signature="e#28091#28143#0" />
-            <element signature="e#28782#29637#1" />
-            <element signature="e#28894#28956#1" />
-            <element signature="e#29038#29627#1" />
-            <element signature="e#29087#29613#1" />
-            <element signature="e#29233#29595#1" />
-            <element signature="e#29393#29573#1" />
-            <element signature="e#30055#30565#0" />
-            <element signature="e#30274#30430#1" />
-            <element signature="e#30303#30420#1" />
-            <element signature="e#30434#30559#1" />
-            <element signature="e#30498#30549#1" />
-            <element signature="e#30571#33371#0" />
-            <element signature="e#30814#31076#1" />
-            <element signature="e#31082#31324#1" />
-            <element signature="e#31843#31901#1" />
-            <element signature="e#32337#32427#1" />
-            <element signature="e#32441#32517#1" />
-            <element signature="e#32615#32803#1" />
-            <element signature="e#32807#32985#1" />
-            <element signature="e#33718#34391#0" />
-            <element signature="e#33811#34385#1" />
-            <element signature="e#33880#34375#1" />
-            <element signature="e#34082#34134#0" />
-            <element signature="e#33377#33858#0" />
-            <element signature="e#33864#35398#0" />
-            <element signature="e#34497#34587#1" />
-            <element signature="e#34601#34677#1" />
-            <element signature="e#34870#34978#1" />
-            <element signature="e#35404#36940#0" />
-            <element signature="e#36037#36127#1" />
-            <element signature="e#36141#36217#1" />
-            <element signature="e#36411#36519#1" />
-            <element signature="e#36946#37239#0" />
-            <element signature="e#37128#37210#1" />
-            <element signature="e#37245#37651#0" />
-            <element signature="e#37657#37962#0" />
-            <element signature="e#37968#39278#0" />
-            <element signature="e#38211#38294#1" />
-            <element signature="e#38601#38686#1" />
-            <element signature="e#38840#39272#1" />
-            <element signature="e#39284#40024#0" />
-            <element signature="e#39494#39976#1" />
-            <element signature="e#39556#39966#1" />
-            <element signature="e#39791#39919#1" />
-            <element signature="e#40709#48946#0" />
-            <element signature="e#40921#40959#1" />
-            <element signature="e#42132#42170#1" />
-            <element signature="e#42205#42244#1" />
-            <element signature="e#41119#48875#0" />
-            <element signature="e#41554#41669#1" />
-            <element signature="e#41899#42068#1" />
-            <element signature="e#42073#42247#1" />
-            <element signature="e#42288#48864#1" />
-            <element signature="e#42319#45544#1" />
-            <element signature="e#42394#45525#1" />
-            <element signature="e#42507#43150#1" />
-            <element signature="e#43552#45711#1" />
-            <element signature="e#43373#44692#0" />
-            <element signature="e#45425#45503#1" />
-            <element signature="e#45565#48679#1" />
-            <element signature="e#45632#48661#1" />
-            <element signature="e#45745#46388#1" />
-            <element signature="e#46417#48477#1" />
-            <element signature="e#46512#47831#0" />
-            <element signature="e#48563#48639#1" />
-            <element signature="e#48737#48783#1" />
-            <element signature="e#48804#48850#1" />
-            <element signature="e#49240#49327#0" />
-            <element signature="e#48952#49699#0" />
-            <element signature="e#49303#49331#1" />
-            <element signature="e#49367#49497#1" />
-            <element signature="e#49532#49662#1" />
-            <element signature="e#49705#49956#0" />
-            <element signature="e#49966#50122#0" />
-            <element signature="e#50128#50412#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

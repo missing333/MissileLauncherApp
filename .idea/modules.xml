@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MissileLauncherApp.iml" filepath="$PROJECT_DIR$/MissileLauncherApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MissileLauncherApp.iml" filepath="$PROJECT_DIR$/MissileLauncherApp.iml" group="MissileLauncherApp" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="MissileLauncherApp/app" />
     </modules>
   </component>
 </project>

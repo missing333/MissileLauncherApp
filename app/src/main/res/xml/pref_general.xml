@@ -35,8 +35,8 @@
     <SwitchPreference
         android:defaultValue="false"
         android:key="landscape"
-        android:title="Enable Activation Areas in Landscape Mode"
-        android:summary="Can work weirdly with hidden navigation bars"/>
+        android:summary="Can work weirdly with hidden navigation bars"
+        android:title="Enable Activation Areas in Landscape" />
 
     <SeekBarPreference
         android:key="lhsWidth"

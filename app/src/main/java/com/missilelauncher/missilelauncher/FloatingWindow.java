@@ -19,11 +19,11 @@ import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.JobIntentService;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.JobIntentService;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -870,7 +870,7 @@ public class FloatingWindow extends JobIntentService {
         numZones = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
         int yOffset = 0;
         int ySizeNeeded = numZones * zoneYSize;
-        int marginTop = (screenHeight - ySizeNeeded) / 5;
+        int marginTop = (screenHeight - ySizeNeeded) / 2;
         if (portrait) {
             yOffset = statusBarOffset;
         }
@@ -882,9 +882,10 @@ public class FloatingWindow extends JobIntentService {
             int id = (int) settings.getLong("iconID" + n, R.drawable.ring_50dp);
             Drawable d = ContextCompat.getDrawable(this, id);
             g[i].setImageDrawable(d);
-            groupIconParams.setMargins(0, marginTop, 0, 0);
             g[i].setLayoutParams(groupIconParams);
-            g[i].setY((float) (zoneYSize * i) + yOffset + marginTop);
+            g[i].setY((float) (zoneYSize * i) + marginTop - zoneYSize/3);     // move down 1/2 of the unused space (marginTop),
+                                                                                // then 1/2 of the height of an icon to center it (zoneYsize/2),
+                                                                                // then mark that spot (zoneYSize * i)
         }
     }
 
