@@ -16,50 +16,22 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="Restart on Bootup now working again Android Pie">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="Fixed auto-sort">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MissileLauncherApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MissileLauncherApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/missilelauncher/missilelauncher/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/missilelauncher/missilelauncher/ExampleInstrumentedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppCompatPreferenceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AppCompatPreferenceActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G1SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G2SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G2SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G3SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G3SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G4SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G4SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G5SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G5SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G6SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G6SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G7SelectedItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/G7SelectedItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/GroupIconPicker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/gear.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gear.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_auto_sort.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_auto_sort.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/sliders.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/sliders.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/play_store_prompt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/play_store_prompt.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3a_API_30" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="8XV5T15A28002046" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -105,12 +77,18 @@
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Marc &lt;mmissing3@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="startAsService" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1f3t5LTpSMocHlzxKcWBg8S49gT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -126,6 +104,8 @@
     <property name="DEBUGGABLE_DEVICE" value="emulator-5554" />
     <property name="DEBUGGABLE_PROCESS" value="com.missilelauncher.missilelauncher" />
     <property name="DEBUGGER_ID" value="Auto" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="8XV5T15A28002046" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-15T18:12:57.168Z" />
     <property name="ExportApk.ApkPath" value="C:\android" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
@@ -133,7 +113,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="device.picker.selection" value="Pixel_2_XL_API_28" />
-    <property name="last_opened_file_path" value="C:/android/MissileLauncherDeluxe" />
+    <property name="last_opened_file_path" value="C:/android/virtueGrowApp" />
     <property name="project.structure.last.edited" value="Suggestions" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.30710658" />
@@ -346,12 +326,12 @@
       <option name="project" value="LOCAL" />
       <updated>1573068530311</updated>
     </task>
-    <task id="LOCAL-00014" summary="fixed a crash">
-      <created>1540942046960</created>
+    <task id="LOCAL-00014" summary="Add Dark Mode, update to target sdk 29">
+      <created>1600124923689</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1540942046960</updated>
+      <updated>1600124923689</updated>
     </task>
     <task id="LOCAL-00015" summary="ability to change a group's icon">
       <created>1541536987781</created>
@@ -458,7 +438,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -485,8 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed error with notification not showing in android O+" />
-    <MESSAGE value="implemented Broadcast Reciever to keep FloatingWindow alive when destroyed." />
     <MESSAGE value="Saving Group icons properly now" />
     <MESSAGE value="fixed landscape mode with navbar on left" />
     <MESSAGE value="changed title of the activity to the custom title" />
@@ -510,7 +488,9 @@
     <MESSAGE value="restores groups correctly after restart now." />
     <MESSAGE value="Option to hide Activation Zones in Landscape mode." />
     <MESSAGE value="Restart on Bootup now working again Android Pie" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restart on Bootup now working again Android Pie" />
+    <MESSAGE value="Add Dark Mode, update to target sdk 29" />
+    <MESSAGE value="Fixed auto-sort" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed auto-sort" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="164" key="#PSD" timestamp="1600105693232">
@@ -533,32 +513,40 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1600102591744" />
-    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600123112737">
+    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1600192616313">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1600192616313" />
+    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600126727605">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="546" y="187" key="FileChooserDialogImpl/0.0.1449.864@0.0.1449.864" timestamp="1595472618891" />
-    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600123112737" />
-    <state width="1418" height="223" key="GridCell.Tab.0.bottom" timestamp="1600110518784">
+    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600126727605" />
+    <state width="1418" height="443" key="GridCell.Tab.0.bottom" timestamp="1600194033798">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="223" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
-    <state width="1418" height="223" key="GridCell.Tab.0.center" timestamp="1600110518784">
+    <state width="1418" height="443" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1600194033798" />
+    <state width="1418" height="443" key="GridCell.Tab.0.center" timestamp="1600194033798">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="223" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
-    <state width="1418" height="223" key="GridCell.Tab.0.left" timestamp="1600110518784">
+    <state width="1418" height="443" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1600194033798" />
+    <state width="1418" height="443" key="GridCell.Tab.0.left" timestamp="1600194033797">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="223" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
-    <state width="1418" height="223" key="GridCell.Tab.0.right" timestamp="1600110518784">
+    <state width="1418" height="443" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1600194033797" />
+    <state width="1418" height="443" key="GridCell.Tab.0.right" timestamp="1600194033798">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="223" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1600110518784" />
+    <state width="1418" height="443" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1600194033798" />
     <state x="236" y="74" key="SettingsEditor" timestamp="1600104230909">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="234" y="74" key="SettingsEditor/0.0.1449.864@0.0.1449.864" timestamp="1595460708243" />
     <state x="236" y="74" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1600104230909" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1600125139551">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1600125139551" />
     <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599836663171">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
@@ -569,10 +557,10 @@
     </state>
     <state x="421" y="256" key="com.intellij.ide.util.TipDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461738521" />
     <state x="425" y="256" key="com.intellij.ide.util.TipDialog/0.0.1462.864@0.0.1462.864" timestamp="1599798746454" />
-    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599842342912">
+    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600192376214">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1462.864@0.0.1462.864" timestamp="1599842342912" />
+    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1462.864@0.0.1462.864" timestamp="1600192376214" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

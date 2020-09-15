@@ -1,27 +1,22 @@
 package com.missilelauncher.missilelauncher;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,8 +24,6 @@ import java.util.List;
 
 public class AutoSort extends AppCompatActivity {
 
-    public final static String GOOGLE_URL = "https://play.google.com/store/apps/details?id=";
-    public static final String ERROR = "error";
     private ProgressBar progressBar;
     TextView txt;
     Integer count =1;
@@ -43,63 +36,46 @@ public class AutoSort extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Are you sure?")
                 .setMessage("This will overwrite all of the Groups.")
-                .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do something
-                        new FetchCategoryTask().execute();
-                    }
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                    // do something
+                    new FetchCategoryTask().execute();
                 })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing (will close dialog)
-                        finish();
-                    }
+                .setNegativeButton(android.R.string.no, (dialog, which) -> {
+                    // do nothing (will close dialog)
+                    finish();
                 })
                 .show();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class FetchCategoryTask extends AsyncTask<ArrayList<AppInfo>[], Integer, ArrayList<AppInfo>[]> {
 
         private PackageManager pm;
         private int Other=1, Reading=2, Productivity=3, Games=4, Media=5, Social=6, Lifestyle=7;
 
-        private String getCategory(String query_url) {
-            boolean network = isNetworkAvailable();
-            if (!network) {
-                //manage connectivity lost
-                Toast.makeText(getApplicationContext(), R.string.NetworkLost, Toast.LENGTH_LONG).show();
-                return ERROR;
-            } else {
-                try {
-                    Document doc = Jsoup.connect(query_url)
-                            .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
-                            .referrer("http://www.google.com")
-                            .timeout(1000*5)
-                            .get();
-                    //Log.d("autosort",doc.text());
-                    Element link = doc.select("a[itemprop=genre]").first();
-                    return link.text();
-                } catch (Exception e) {
-                    //e.printStackTrace();
-                    return ERROR;
-                }
+        private String getCategoryNew(String package_name, Context applicationContext) {
+
+            pm = getPackageManager();
+            ApplicationInfo applicationInfo = null;
+            try {
+                applicationInfo = pm.getApplicationInfo(package_name, 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
             }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                int appCategory = 0;
+                if (applicationInfo != null) {
+                    appCategory = applicationInfo.category;
+                }
+                return (String) ApplicationInfo.getCategoryTitle(applicationContext, appCategory);
+            }
+            return "error getting category";
+
         }
 
-        // Check all connectivities whether available or not
-        public boolean isNetworkAvailable() {
-            ConnectivityManager cm = (ConnectivityManager)
-                    getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-            // if no network is available networkInfo will be null
-            // otherwise check if we are connected
-            if (networkInfo != null && networkInfo.isConnected()) {
-                return true;
-            }
-            return false;
-        }
+
+
+
 
         @Override
         protected void onPreExecute() {
@@ -123,7 +99,8 @@ public class AutoSort extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             int percent = count*100/getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA).size();
-            txt.setText(percent + "%");
+            String s = percent + "%";
+            txt.setText(s);
             progressBar.setProgress(values[0]);
         }
 
@@ -148,12 +125,12 @@ public class AutoSort extends AppCompatActivity {
             while (iterator.hasNext()) {
                 count++;
                 ApplicationInfo packageInfo = iterator.next();
-                String query_url = GOOGLE_URL + packageInfo.packageName;
+
                 if (getPackageManager().getLaunchIntentForPackage(packageInfo.packageName) != null){
-                    category = getCategory(query_url);
+
+                    category = getCategoryNew(packageInfo.packageName, getApplicationContext());
 
                     Log.d("autosort",packageInfo.packageName + ": " + category);
-                    //Log.i(TAG, query_url);
 
                     AppInfo newInfo = new AppInfo();
                     newInfo.icon = packageInfo.loadIcon(getPackageManager());
@@ -161,142 +138,153 @@ public class AutoSort extends AppCompatActivity {
                     newInfo.setLabel(packageInfo.loadLabel(getPackageManager()).toString());
                     newInfo.setLaunchIntent(getPackageManager().getLaunchIntentForPackage(packageInfo.packageName));
 
-                    // store category or do something else
-                    switch (category){
-                        case "Tools":
-                            groupAppList[Other].add(newInfo);
-                            break;
-                        case "Arcade":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Puzzle":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Card":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Casual":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Racing":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Sport":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Action":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Adventure":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Board":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Casino":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Educational":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Music":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Role Playing":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Simulation":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Strategy":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Trivia":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Word Games":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Entertainment":
-                            groupAppList[Media].add(newInfo);
-                            break;
-                        case "Games":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "News & Magazines":
-                            groupAppList[Reading].add(newInfo);
-                            break;
-                        case "Comics":
-                            groupAppList[Reading].add(newInfo);
-                            break;
-                        case "Books & Reference":
-                            groupAppList[Reading].add(newInfo);
-                            break;
-                        case "Finance":
-                            groupAppList[Productivity].add(newInfo);
-                            break;
-                        case "Productivity":
-                            groupAppList[Productivity].add(newInfo);
-                            break;
-                        case "Business":
-                            groupAppList[Productivity].add(newInfo);
-                            break;
-                        case "Social":
-                            groupAppList[Social].add(newInfo);
-                            break;
-                        case "Dating":
-                            groupAppList[Social].add(newInfo);
-                            break;
-                        case "Communication":
-                            groupAppList[Social].add(newInfo);
-                            break;
-                        case "Photography":
-                            groupAppList[Media].add(newInfo);
-                            break;
-                        case "Video Players & Editors":
-                            groupAppList[Media].add(newInfo);
-                            break;
-                        case "Music & Audio":
-                            groupAppList[Media].add(newInfo);
-                            break;
-                        case "Health & Fitness":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
-                        case "Sports":
-                            groupAppList[Games].add(newInfo);
-                            break;
-                        case "Shopping":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
-                        case "Weather":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
-                        case "Lifestyle":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
-                        case "Travel & Local":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
-                        case "House & Home":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
-                        case "Food & Drink":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
-                        case "Maps & Navigation":
-                            groupAppList[Lifestyle].add(newInfo);
-                            break;
+                    if (category == null){
+                        groupAppList[Other].add(newInfo);
+                    } else {
+                        // store category or do something else
+                        switch (category){
+                            case "Tools":
+                                groupAppList[Other].add(newInfo);
+                                break;
+                            case "Arcade":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Puzzle":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Card":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Casual":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Racing":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Sport":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Action":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Adventure":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Board":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Casino":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Educational":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Music":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Role Playing":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Simulation":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Strategy":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Trivia":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Word Games":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Entertainment":
+                                groupAppList[Media].add(newInfo);
+                                break;
+                            case "Games":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "News & Magazines":
+                                groupAppList[Reading].add(newInfo);
+                                break;
+                            case "Comics":
+                                groupAppList[Reading].add(newInfo);
+                                break;
+                            case "Books & Reference":
+                                groupAppList[Reading].add(newInfo);
+                                break;
+                            case "Finance":
+                                groupAppList[Productivity].add(newInfo);
+                                break;
+                            case "Productivity":
+                                groupAppList[Productivity].add(newInfo);
+                                break;
+                            case "Business":
+                                groupAppList[Productivity].add(newInfo);
+                                break;
+                            case "Social":
+                                groupAppList[Social].add(newInfo);
+                                break;
+                            case "Dating":
+                                groupAppList[Social].add(newInfo);
+                                break;
+                            case "Communication":
+                                groupAppList[Social].add(newInfo);
+                                break;
+                            case "Social & Communication":
+                                groupAppList[Social].add(newInfo);
+                                break;
+                            case "Photography":
+                                groupAppList[Media].add(newInfo);
+                                break;
+                            case "Video Players & Editors":
+                                groupAppList[Media].add(newInfo);
+                                break;
+                            case "Music & Audio":
+                                groupAppList[Media].add(newInfo);
+                                break;
+                            case "Movies & Video":
+                                groupAppList[Media].add(newInfo);
+                                break;
+                            case "Photos & Images":
+                                groupAppList[Media].add(newInfo);
+                                break;
+                            case "Health & Fitness":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
+                            case "Sports":
+                                groupAppList[Games].add(newInfo);
+                                break;
+                            case "Shopping":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
+                            case "Weather":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
+                            case "Lifestyle":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
+                            case "Travel & Local":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
+                            case "House & Home":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
+                            case "Food & Drink":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
+                            case "Maps & Navigation":
+                                groupAppList[Lifestyle].add(newInfo);
+                                break;
 
 
-                        default:
-                            groupAppList[Other].add(newInfo);
-                            break;
+                            default:
+                                groupAppList[Other].add(newInfo);
+                                break;
+                        }
                     }
 
                     publishProgress(count);
                 }
-
-
             }
 
             return groupAppList;
@@ -343,7 +331,7 @@ public class AutoSort extends AppCompatActivity {
             editor.putLong("iconID"+Lifestyle, R.drawable.ic_favorite_black_24dp).apply();
 
             //updates numGroups to 7
-            settingsPrefs.edit().putString("numZones","7").commit();
+            settingsPrefs.edit().putString("numZones","7").apply();
             finish();
         }
 
