@@ -17,9 +17,9 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="Fixed auto-sort">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="can now query packages in android R">
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,12 +335,12 @@
       <option name="project" value="LOCAL" />
       <updated>1600194054186</updated>
     </task>
-    <task id="LOCAL-00016" summary="updated version to 1.0.6">
-      <created>1541537080707</created>
+    <task id="LOCAL-00016" summary="can now query packages in android R">
+      <created>1600223669777</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1541537080707</updated>
+      <updated>1600223669777</updated>
     </task>
     <task id="LOCAL-00017" summary="made foreground notification so service doesn't get destroyed">
       <created>1541548738540</created>
@@ -433,7 +433,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -460,7 +460,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Saving Group icons properly now" />
     <MESSAGE value="fixed landscape mode with navbar on left" />
     <MESSAGE value="changed title of the activity to the custom title" />
     <MESSAGE value="auto-capitalized each word" />
@@ -485,7 +484,8 @@
     <MESSAGE value="Restart on Bootup now working again Android Pie" />
     <MESSAGE value="Add Dark Mode, update to target sdk 29" />
     <MESSAGE value="Fixed auto-sort" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed auto-sort" />
+    <MESSAGE value="can now query packages in android R" />
+    <option name="LAST_COMMIT_MESSAGE" value="can now query packages in android R" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="164" key="#PSD" timestamp="1600105693232">
@@ -508,10 +508,10 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1600102591744" />
-    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1600194052782">
+    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1600223668472">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1600194052782" />
+    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1600223668472" />
     <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600194702938">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
@@ -538,10 +538,10 @@
     </state>
     <state x="234" y="74" key="SettingsEditor/0.0.1449.864@0.0.1449.864" timestamp="1595460708243" />
     <state x="236" y="74" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1600104230909" />
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1600194074010">
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1600223673193">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1600194074010" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1600223673193" />
     <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599836663171">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
