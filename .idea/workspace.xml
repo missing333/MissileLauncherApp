@@ -10,6 +10,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="missile" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
@@ -18,20 +19,14 @@
   <component name="ChangeListManager">
     <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="Fixed auto-sort">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/missilelauncher/missilelauncher/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/missilelauncher/missilelauncher/ExampleInstrumentedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="8XV5T15A28002046" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3a_API_30" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -105,15 +100,15 @@
     <property name="DEBUGGABLE_PROCESS" value="com.missilelauncher.missilelauncher" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="8XV5T15A28002046" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-15T18:12:57.168Z" />
-    <property name="ExportApk.ApkPath" value="C:\android" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-15T18:41:03.261Z" />
+    <property name="ExportApk.ApkPath" value="C:\android\release\ML" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.Flavors" value="" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="device.picker.selection" value="Pixel_2_XL_API_28" />
-    <property name="last_opened_file_path" value="C:/android/virtueGrowApp" />
+    <property name="last_opened_file_path" value="C:/android/release/ML" />
     <property name="project.structure.last.edited" value="Suggestions" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.30710658" />
@@ -333,12 +328,12 @@
       <option name="project" value="LOCAL" />
       <updated>1600124923689</updated>
     </task>
-    <task id="LOCAL-00015" summary="ability to change a group's icon">
-      <created>1541536987781</created>
+    <task id="LOCAL-00015" summary="Fixed auto-sort">
+      <created>1600194054186</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1541536987782</updated>
+      <updated>1600194054186</updated>
     </task>
     <task id="LOCAL-00016" summary="updated version to 1.0.6">
       <created>1541537080707</created>
@@ -438,7 +433,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -513,40 +508,40 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1600102591744" />
-    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1600192616313">
+    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1600194052782">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1600192616313" />
-    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600126727605">
+    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1600194052782" />
+    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600194702938">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="546" y="187" key="FileChooserDialogImpl/0.0.1449.864@0.0.1449.864" timestamp="1595472618891" />
-    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600126727605" />
-    <state width="1418" height="443" key="GridCell.Tab.0.bottom" timestamp="1600194033798">
+    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600194702938" />
+    <state width="1418" height="269" key="GridCell.Tab.0.bottom" timestamp="1600223007019">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="443" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1600194033798" />
-    <state width="1418" height="443" key="GridCell.Tab.0.center" timestamp="1600194033798">
+    <state width="1418" height="269" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1600223007019" />
+    <state width="1418" height="269" key="GridCell.Tab.0.center" timestamp="1600223007018">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="443" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1600194033798" />
-    <state width="1418" height="443" key="GridCell.Tab.0.left" timestamp="1600194033797">
+    <state width="1418" height="269" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1600223007018" />
+    <state width="1418" height="269" key="GridCell.Tab.0.left" timestamp="1600223007018">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="443" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1600194033797" />
-    <state width="1418" height="443" key="GridCell.Tab.0.right" timestamp="1600194033798">
+    <state width="1418" height="269" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1600223007018" />
+    <state width="1418" height="269" key="GridCell.Tab.0.right" timestamp="1600223007018">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1418" height="443" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1600194033798" />
+    <state width="1418" height="269" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1600223007018" />
     <state x="236" y="74" key="SettingsEditor" timestamp="1600104230909">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="234" y="74" key="SettingsEditor/0.0.1449.864@0.0.1449.864" timestamp="1595460708243" />
     <state x="236" y="74" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1600104230909" />
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1600125139551">
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1600194074010">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1600125139551" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1600194074010" />
     <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599836663171">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
@@ -561,6 +556,10 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1462.864@0.0.1462.864" timestamp="1600192376214" />
+    <state x="426" y="30" width="611" height="804" key="find.popup" timestamp="1600223061673">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="426" y="30" width="611" height="804" key="find.popup/0.0.1462.864@0.0.1462.864" timestamp="1600223061673" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
