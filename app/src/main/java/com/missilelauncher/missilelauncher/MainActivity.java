@@ -3,17 +3,17 @@ package com.missilelauncher.missilelauncher;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
     private void init(){
 
         ////////set all previous app lists if available
-        ArrayList<AppInfo> res = new ArrayList<>();
+        ArrayList<AppInfo> fullAppList = new ArrayList<>();
         PackageManager packageManager = getPackageManager();
-        List<PackageInfo> packs = packageManager.getInstalledPackages(0);
-        for(int i=0;i<packs.size();i++) {
-            PackageInfo p = packs.get(i);
+        List<PackageInfo> packageList = packageManager.getInstalledPackages(0);
+        for(int i=0;i<packageList.size();i++) {
+            PackageInfo p = packageList.get(i);
             try{
                 if(packageManager.getLaunchIntentForPackage(p.packageName) != null){
 
@@ -77,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
                     newInfo.versionCode = p.versionCode;
                     newInfo.icon = p.applicationInfo.loadIcon(getPackageManager());
                     newInfo.setLaunchIntent(getPackageManager().getLaunchIntentForPackage(p.packageName));
-                    res.add(newInfo);
+                    fullAppList.add(newInfo);
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
 
-        Collections.sort(res, AppInfo.appNameComparator);
+        Collections.sort(fullAppList, AppInfo.appNameComparator);
         SharedListPreferencesHelper sh = new SharedListPreferencesHelper();
 
         ArrayList[] groupAppList = new ArrayList[10];
@@ -102,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
                 saveList = new ArrayList<>(0);
             }
             groupAppList[g] = new ArrayList<>(0);
-            if(res.size() > 0 ){
-                for (int i=0;i<res.size();i++) {
+            if(fullAppList.size() > 0 ){
+                for (int i=0;i<fullAppList.size();i++) {
                     //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
                     for (int f=0;f<saveList.size();f++) {
                         //Log.v("Setting","saveList "+ f + ": " + saveList.get(f));
-                        if(res.get(i).packageName.equals(saveList.get(f))){
+                        if(fullAppList.get(i).packageName.equals(saveList.get(f))){
                             //add the package name (ie: com.google.youtube) to groupAppList
-                            groupAppList[g].add(res.get(i));
+                            groupAppList[g].add(fullAppList.get(i));
                         }
                     }
                 }
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView imgHow = findViewById(R.id.imgHow);
         Button config = findViewById(R.id.config);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
+        if (!Settings.canDrawOverlays(MainActivity.this)) {
             setPermissionBtn.setVisibility(View.VISIBLE);
             imgHow.setVisibility(View.VISIBLE);
             config.setVisibility(View.GONE);

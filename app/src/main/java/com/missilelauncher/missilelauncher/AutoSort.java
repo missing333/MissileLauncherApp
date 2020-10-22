@@ -2,7 +2,6 @@ package com.missilelauncher.missilelauncher;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -93,7 +92,7 @@ public class AutoSort extends AppCompatActivity {
 
             getWindow().setLayout((int) (width * .7), (int) (height * .4));
 
-            txt.setText("Task Starting...");
+            txt.setText(R.string.TaskStart);
         }
 
         @Override
@@ -143,140 +142,63 @@ public class AutoSort extends AppCompatActivity {
                     } else {
                         // store category or do something else
                         switch (category){
-                            case "Tools":
-                                groupAppList[Other].add(newInfo);
-                                break;
                             case "Arcade":
-                                groupAppList[Games].add(newInfo);
-                                break;
-                            case "Puzzle":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Card":
-                                groupAppList[Games].add(newInfo);
-                                break;
+                            case "Puzzle":
                             case "Casual":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Racing":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Sport":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Action":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Adventure":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Board":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Casino":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Educational":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Music":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Role Playing":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Simulation":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Strategy":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Trivia":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Word Games":
+                            case "Games":
+                            case "Sports":
                                 groupAppList[Games].add(newInfo);
                                 break;
                             case "Entertainment":
+                            case "Photography":
+                            case "Video Players & Editors":
+                            case "Music & Audio":
+                            case "Movies & Video":
+                            case "Photos & Images":
                                 groupAppList[Media].add(newInfo);
                                 break;
-                            case "Games":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "News & Magazines":
-                                groupAppList[Reading].add(newInfo);
-                                break;
                             case "Comics":
-                                groupAppList[Reading].add(newInfo);
-                                break;
                             case "Books & Reference":
                                 groupAppList[Reading].add(newInfo);
                                 break;
                             case "Finance":
-                                groupAppList[Productivity].add(newInfo);
-                                break;
                             case "Productivity":
-                                groupAppList[Productivity].add(newInfo);
-                                break;
                             case "Business":
                                 groupAppList[Productivity].add(newInfo);
                                 break;
                             case "Social":
-                                groupAppList[Social].add(newInfo);
-                                break;
                             case "Dating":
-                                groupAppList[Social].add(newInfo);
-                                break;
                             case "Communication":
-                                groupAppList[Social].add(newInfo);
-                                break;
                             case "Social & Communication":
                                 groupAppList[Social].add(newInfo);
                                 break;
-                            case "Photography":
-                                groupAppList[Media].add(newInfo);
-                                break;
-                            case "Video Players & Editors":
-                                groupAppList[Media].add(newInfo);
-                                break;
-                            case "Music & Audio":
-                                groupAppList[Media].add(newInfo);
-                                break;
-                            case "Movies & Video":
-                                groupAppList[Media].add(newInfo);
-                                break;
-                            case "Photos & Images":
-                                groupAppList[Media].add(newInfo);
-                                break;
                             case "Health & Fitness":
-                                groupAppList[Lifestyle].add(newInfo);
-                                break;
-                            case "Sports":
-                                groupAppList[Games].add(newInfo);
-                                break;
                             case "Shopping":
-                                groupAppList[Lifestyle].add(newInfo);
-                                break;
                             case "Weather":
-                                groupAppList[Lifestyle].add(newInfo);
-                                break;
                             case "Lifestyle":
-                                groupAppList[Lifestyle].add(newInfo);
-                                break;
                             case "Travel & Local":
-                                groupAppList[Lifestyle].add(newInfo);
-                                break;
                             case "House & Home":
-                                groupAppList[Lifestyle].add(newInfo);
-                                break;
                             case "Food & Drink":
-                                groupAppList[Lifestyle].add(newInfo);
-                                break;
                             case "Maps & Navigation":
                                 groupAppList[Lifestyle].add(newInfo);
                                 break;
 
-
+                            case "Tools":
                             default:
                                 groupAppList[Other].add(newInfo);
                                 break;

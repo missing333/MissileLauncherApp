@@ -53,37 +53,48 @@ import static java.lang.Math.sqrt;
 public class FloatingWindow extends JobIntentService {
 
     private static final int JOB_ID = 0x01;
-    private WindowManager wm;
+    private WindowManager windowManager;
     private SharedPreferences settingsPrefs;
-    private LinearLayout rhs;
-    private LinearLayout lhs;
-    private RelativeLayout gl;
-    private RelativeLayout tl;
-    private int statusBarOffset;
-    private int screenWidth;
-    private int screenHeight;
+    private SharedPreferences.Editor editor;
     private boolean portrait = true;
     private RelativeLayout.LayoutParams relativeParams;
     private WindowManager.LayoutParams gparameters;
     private WindowManager.LayoutParams rhsparameters;
     private WindowManager.LayoutParams lhsparameters;
-    private int numZones;
+    private int numGroups;
     private int numAppRows;
     private int numAppCols;
     private int zoneXSize;
     private int zoneYSize;
-    private TextView t;
-    private ImageView[] g;
+
+    //coordination
+    private int statusBarOffset;
+    private int screenWidth;
+    private int screenHeight;
+    private int offset;
+    int x, y;
+    float touchedX, touchedY;
+
+    //views
+    private LinearLayout rhs;
+    private LinearLayout lhs;
+    private RelativeLayout groupLayout;
+    private RelativeLayout appLayout;
+    private TextView textView;
+    private ImageView[] imageView;
     private int lastGroup;
     private int[] lastAppTouched;
     private AppInfo[][] appPositions;
     private int[] coords;
     private ArrayList<AppInfo>[] groupAppList;
-    private int offset;
     private int viewAdded;
     private boolean leftSideNavigationBar, rightSideNavigationBar;
+
+    //misc
     private final int distFingerTraveledTolerance = 50;
     private final int disappearDelay = 2000;
+    private static final boolean sideRHS = true;
+    private static final boolean sideLHS = false;
 
 
     public FloatingWindow(Context applicationContext) {
@@ -125,15 +136,16 @@ public class FloatingWindow extends JobIntentService {
     public void onCreate() {
         super.onCreate();
 
-        settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final SharedPreferences.Editor editor = settingsPrefs.edit();
 
-        numZones = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
+        settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = settingsPrefs.edit();
+
+        numGroups = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
         numAppCols = Integer.parseInt(settingsPrefs.getString("numAppCols", "6"));
         numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
         editor.putString("landscapeNumAppRows", numAppCols + "");
         editor.putString("landscapeNumAppCols", numAppRows + "");
-        Log.v("prefs", "numGroups = " + numZones);
+        Log.v("prefs", "numGroups = " + numGroups);
         Log.v("prefs", "numAppRows = " + numAppRows);
         Log.v("prefs", "numAppCols = " + numAppCols);
 
@@ -142,11 +154,11 @@ public class FloatingWindow extends JobIntentService {
 
 
         //set up activation zone
-        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         rhs = new LinearLayout(this);
         lhs = new LinearLayout(this);
 
-        int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3) / 100;
+        int activationWidth = (Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)) / 100;
         int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45) / 100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
         int ypos = settingsPrefs.getInt("lhsYPos", 50) - 50;
@@ -163,39 +175,34 @@ public class FloatingWindow extends JobIntentService {
         lhsparameters.gravity = Gravity.START;
         lhs.setBackgroundColor(Color.argb(transparency, 0, 200, 200));
 
-        wm.addView(rhs, rhsparameters);
-        wm.addView(lhs, lhsparameters);
+        windowManager.addView(rhs, rhsparameters);
+        windowManager.addView(lhs, lhsparameters);
 
-        t = new TextView(this);
-        t.setText("");
-        t.setTextColor(Color.WHITE);
-        t.setTextSize(30);
-        t.setGravity(Gravity.CENTER);
+        textView = new TextView(this);
+        textView.setText("");
+        textView.setTextColor(Color.WHITE);
+        textView.setTextSize(30);
+        textView.setGravity(Gravity.CENTER);
         lastAppTouched = new int[2];
 
-        g = new ImageView[10];
+        imageView = new ImageView[10];
         getDimensions();
         /////////////////////////////done with activation area/////////////////////////
 
         //gl = group layout.  displays the configured Groups first, before displaying apps within that group.
-        gl = new RelativeLayout(this.getApplicationContext());
+        groupLayout = new RelativeLayout(this.getApplicationContext());
 
-        gl.setBackgroundColor(Color.argb(155, 0, 0, 0));
-        gl.setLayoutParams(relativeParams);
+        groupLayout.setBackgroundColor(Color.argb(155, 0, 0, 0));
+        groupLayout.setLayoutParams(relativeParams);
 
-        tl = new RelativeLayout(this);
-        tl.setBackgroundColor(Color.argb(25, 0, 0, 0));
+        appLayout = new RelativeLayout(this);
+        appLayout.setBackgroundColor(Color.argb(25, 0, 0, 0));
 
         coords = new int[]{-1, -1};
         viewAdded = 0;
 
 
         rhs.setOnTouchListener(new View.OnTouchListener() {
-
-            private final WindowManager.LayoutParams updatedParameters = rhsparameters;
-            int x, y;
-            float touchedX, touchedY;
-
             @SuppressLint("ClickableViewAccessibility")
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -203,186 +210,16 @@ public class FloatingWindow extends JobIntentService {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        x = updatedParameters.x;
-                        y = updatedParameters.y;
-                        touchedX = event.getRawX();
-                        touchedY = event.getRawY();
-                        lastGroup = -99;
-                        lastAppTouched[0] = -99;
-                        lastAppTouched[1] = -99;
-
-                        gl.removeAllViews();
-                        initAppList();
-                        if (!portrait) {
-                            offset = zoneXSize * 2;
-                        } else {
-                            offset = zoneXSize;
-                        }
-                        setIconSizePos(screenWidth - offset);
-                        for (int i = 0; i < numZones; i++) {
-                            gl.addView(g[i]);
-                        }
-
-                        //
-                        gl.addView(t);
-                        Log.v("touch", "Touch detected.");
-
+                        MotionDownMethod(event,sideRHS);
                         break;
 
                     case MotionEvent.ACTION_MOVE:
-                        updatedParameters.x = (int) (x + (event.getRawX() - touchedX));
-                        updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
-
-                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX) * (event.getRawX() - touchedX) + (event.getRawY() - touchedY) * (event.getRawY() - touchedY));
-                        if (distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
-                            wm.addView(gl, gparameters);
-                            viewAdded = 1;
-                        }
-
-                        //////user touching Groups or Apps?
-                        if (event.getRawX() > gl.getWidth() - zoneXSize) {
-                            int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
-                            switch (group) {
-                                case 1:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName1", "Group 1"));
-                                    setContentsPositionGroup(1, 0);
-                                    break;
-                                case 2:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName2", "Group 2"));
-                                    setContentsPositionGroup(2, 0);
-                                    break;
-                                case 3:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName3", "Group 3"));
-                                    setContentsPositionGroup(3, 0);
-                                    break;
-                                case 4:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName4", "Group 4"));
-                                    setContentsPositionGroup(4, 0);
-                                    break;
-                                case 5:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName5", "Group 5"));
-                                    setContentsPositionGroup(5, 0);
-                                    break;
-                                case 6:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName6", "Group 6"));
-                                    setContentsPositionGroup(6, 0);
-                                    break;
-                                case 7:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName7", "Group 7"));
-                                    setContentsPositionGroup(7, 0);
-                                    break;
-                            }
-                        } else {
-                            //This is where I choose the app by position.
-                            coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
-                            t.setText(appPositions[coords[0]][coords[1]].label);
-
-                        }
-
-                        tl.setLayoutParams(relativeParams);
-                        gl.removeView(tl);
-                        gl.addView(tl, relativeParams);
+                        MotionMoveMethod(event, sideRHS);
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        Log.v("touch", "Touch no longer detected.");
-                        //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
-
-                        if (viewAdded == 0) {
-                            //remove activation area for n seconds
-                            new CountDownTimer(disappearDelay, 1000) {
-                                @Override
-                                public void onTick(long millisUntilFinished) {
-                                    rhs.setVisibility(View.GONE);
-                                }
-
-                                @Override
-                                public void onFinish() {
-                                    rhs.setVisibility(View.VISIBLE); //(or GONE)
-                                }
-                            }.start();
-                        } else {
-                            viewAdded = 0;
-                        }
-
-
-                        if (coords[0] != -1 || coords[1] != -1) {
-                            AppInfo a = appPositions[coords[0]][coords[1]];
-                            if (a.launchIntent != null && event.getRawX() < screenWidth * .85) {
-                                editor.putInt(a.label + "_launchCount", settingsPrefs.getInt(a.label + "_launchCount", 0) + 1);
-                                editor.apply();
-                                Log.v("launchCount", "LaunchCount for " + a.label + " is: " + settingsPrefs.getInt(a.label + "_launchCount", 0));
-                                Intent launchApp = a.launchIntent;
-                                launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                launchApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                try {
-                                    startActivity(launchApp);
-                                } catch (Exception e) {
-                                    Log.v("touch", "App failed to launch.  Removing from this Group.");
-                                    Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-
-
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-
-
-                        try {
-                            wm.removeView(gl);
-                        } catch (Exception e) {
-                            Log.v("touch", e.getMessage());
-                        }
+                        MotionUpMethod(event,sideRHS);
+                        break;
 
                     default:
                         break;
@@ -395,8 +232,7 @@ public class FloatingWindow extends JobIntentService {
         lhs.setOnTouchListener(new View.OnTouchListener() {
 
             private final WindowManager.LayoutParams updatedParameters = rhsparameters;
-            int x, y;
-            float touchedX, touchedY;
+
 
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -404,185 +240,16 @@ public class FloatingWindow extends JobIntentService {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        x = updatedParameters.x;
-                        y = updatedParameters.y;
-                        touchedX = event.getRawX();
-                        touchedY = event.getRawY();
-                        lastGroup = -99;
-                        lastAppTouched[0] = -99;
-                        lastAppTouched[1] = -99;
-                        Log.v("touch", "Touch detected.");
-                        gl.removeAllViews();
-                        initAppList();
-                        setIconSizePos(0);
-                        gl.addView(t);
-                        for (int i = 0; i < numZones; i++) {
-                            gl.addView(g[i]);
-                        }
+                        MotionDownMethod(event,sideLHS);
                         break;
 
                     case MotionEvent.ACTION_MOVE:
-                        updatedParameters.x = (int) (x + (event.getRawX() - touchedX));
-                        updatedParameters.y = (int) (y + (event.getRawY() - touchedY));
-
-
-                        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX) * (event.getRawX() - touchedX) + (event.getRawY() - touchedY) * (event.getRawY() - touchedY));
-
-                        if (distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
-                            wm.addView(gl, gparameters);
-                            viewAdded = 1;
-                        }
-
-
-                        //////user touching Groups or Apps?
-
-                        int leftBarOffset;
-                        if (leftSideNavigationBar) {
-                            leftBarOffset = zoneXSize;
-                        } else {
-                            leftBarOffset = 0;
-                        }
-                        if (event.getRawX() < (zoneXSize * .8) + leftBarOffset) {
-                            int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
-                            switch (group) {
-                                case 1:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName1", "Group 1"));
-                                    setContentsPositionGroup(1, 1);
-                                    break;
-                                case 2:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName2", "Group 2"));
-                                    setContentsPositionGroup(2, 1);
-                                    break;
-                                case 3:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName3", "Group 3"));
-                                    setContentsPositionGroup(3, 1);
-                                    break;
-                                case 4:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName4", "Group 4"));
-                                    setContentsPositionGroup(4, 1);
-                                    break;
-                                case 5:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName5", "Group 5"));
-                                    setContentsPositionGroup(5, 1);
-                                    break;
-                                case 6:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName6", "Group 6"));
-                                    setContentsPositionGroup(6, 1);
-                                    break;
-                                case 7:
-                                    tl.removeAllViews();
-                                    t.setText(settingsPrefs.getString("groupName7", "Group 7"));
-                                    setContentsPositionGroup(7, 1);
-                                    break;
-                            }
-                        } else {
-                            //This is where I choose the app by position.
-                            coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
-                            t.setText(appPositions[coords[0]][coords[1]].label);
-
-                        }
-
-                        tl.setLayoutParams(relativeParams);
-                        gl.removeView(tl);
-                        gl.addView(tl, relativeParams);
+                        MotionMoveMethod(event, sideLHS);
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        Log.v("touch", "Touch no longer detected.");
-                        //Toast.makeText(FloatingWindow.this, "App " + coords[0] + ", " + coords[1] + " selected", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(FloatingWindow.this, "" + appPositions[coords[0]][coords[1]].label, Toast.LENGTH_SHORT).show();
-
-                        if (viewAdded == 0) {
-                            //remove activation area for n=1000 seconds
-                            new CountDownTimer(disappearDelay, 1000) {
-                                @Override
-                                public void onTick(long millisUntilFinished) {
-                                    lhs.setVisibility(View.GONE);
-                                }
-
-                                @Override
-                                public void onFinish() {
-                                    lhs.setVisibility(View.VISIBLE); //(or GONE)
-                                }
-                            }.start();
-                        } else {
-                            viewAdded = 0;
-                        }
-
-                        if (coords[0] != -1 || coords[1] != -1) {
-                            AppInfo a = appPositions[coords[0]][coords[1]];
-                            if (a.launchIntent != null && event.getRawX() > screenWidth * .10) {
-                                editor.putInt(a.label + "_launchCount", settingsPrefs.getInt(a.label + "_launchCount", 0) + 1);
-                                editor.commit();
-                                Log.v("launchCount", "LaunchCount for " + a.label + " is: " + settingsPrefs.getInt(a.label + "_launchCount", 0));
-                                Intent launchApp = a.launchIntent;
-                                launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                launchApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                try {
-                                    startActivity(launchApp);
-                                } catch (Exception e) {
-                                    Log.v("touch", "App failed to launch.  Removing from this Group.");
-                                    Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-                                    try {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                            G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
-                                        }
-                                    } catch (Exception ignored) {
-                                    }
-
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-
-
-                        try {
-                            wm.removeView(gl);
-                        } catch (Exception e) {
-                            Log.v("touch", e.getMessage());
-                        }
+                        MotionUpMethod(event,sideLHS);
+                        break;
 
                     default:
                         break;
@@ -594,6 +261,198 @@ public class FloatingWindow extends JobIntentService {
 
     }
 
+    private void MotionUpMethod(MotionEvent event, boolean isRHS) {
+
+        Log.v("touch", "Touch no longer detected.");
+
+        if (viewAdded == 0) {
+            //remove activation area for n seconds
+            new CountDownTimer(disappearDelay, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    if (isRHS)
+                        rhs.setVisibility(View.GONE);
+                    else
+                        lhs.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onFinish() {
+                    if (isRHS)
+                        rhs.setVisibility(View.VISIBLE);
+                    else
+                        lhs.setVisibility(View.VISIBLE);
+                }
+            }.start();
+        } else {
+            viewAdded = 0;
+        }
+
+        if (coords[0] != -1 || coords[1] != -1) {
+            AppInfo a = appPositions[coords[0]][coords[1]];
+
+            boolean isSafeToLaunch = false;
+            if(isRHS){
+                if (a.launchIntent != null && event.getRawX() < screenWidth * .85)
+                    isSafeToLaunch = true;
+            }else{
+                if (a.launchIntent != null && event.getRawX() > screenWidth * .10) {
+                    isSafeToLaunch = true;
+                }
+            }
+
+            if (isSafeToLaunch) {
+                editor.putInt(a.label + "_launchCount", settingsPrefs.getInt(a.label + "_launchCount", 0) + 1);
+                editor.commit();
+                Log.v("launchCount", "LaunchCount for " + a.label + " is: " + settingsPrefs.getInt(a.label + "_launchCount", 0));
+                Intent launchApp = a.launchIntent;
+                launchApp.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                launchApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    startActivity(launchApp);
+                } catch (Exception e) {
+                    Log.v("touch", "App failed to launch.  Removing from this Group.");
+                    Toast.makeText(FloatingWindow.this, "This app failed to launch.  Removing it from this group", Toast.LENGTH_SHORT).show();
+                    try {
+                        G1SelectedItems.G1SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
+                        G2SelectedItems.G2SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
+                        G3SelectedItems.G3SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
+                        G4SelectedItems.G4SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
+                        G5SelectedItems.G5SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
+                        G6SelectedItems.G6SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
+                        G7SelectedItems.G7SelectedApps.removeIf(obj -> (obj.label.equals(a.label)));
+                    } catch (Exception ignored) {
+                    }
+
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        try {
+            windowManager.removeView(groupLayout);
+        } catch (Exception e) {
+            Log.v("touch", e.getMessage());
+        }
+    }
+
+    private void MotionMoveMethod(MotionEvent event, boolean isRHS) {
+        rhsparameters.x = (int) (x + (event.getRawX() - touchedX));
+        rhsparameters.y = (int) (y + (event.getRawY() - touchedY));
+
+        int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX) * (event.getRawX() - touchedX) + (event.getRawY() - touchedY) * (event.getRawY() - touchedY));
+
+        if (distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
+            windowManager.addView(groupLayout, gparameters);
+            viewAdded = 1;
+        }
+
+
+        //////user touching Groups or Apps?
+
+        int leftBarOffset;
+        if (leftSideNavigationBar) {
+            leftBarOffset = zoneXSize;
+        } else {
+            leftBarOffset = 0;
+        }
+
+        //find out if i'm touching a group depending on which side i'm touching.
+        boolean touchingGroup = false;
+        if(isRHS){
+            if(event.getRawX() > groupLayout.getWidth() - zoneXSize){
+                touchingGroup = true;
+            }
+        }else{
+            if(event.getRawX() < (zoneXSize * .8) + leftBarOffset){
+                touchingGroup = true;
+            }
+        }
+
+        if (touchingGroup) {
+            int group = checkGroup((int) event.getRawX(), (int) event.getRawY());
+            switch (group) {
+                case 1:
+                    appLayout.removeAllViews();
+                    textView.setText(settingsPrefs.getString("groupName1", "Group 1"));
+                    setContentsPositionGroup(1, isRHS);
+                    break;
+                case 2:
+                    appLayout.removeAllViews();
+                    textView.setText(settingsPrefs.getString("groupName2", "Group 2"));
+                    setContentsPositionGroup(2, isRHS);
+                    break;
+                case 3:
+                    appLayout.removeAllViews();
+                    textView.setText(settingsPrefs.getString("groupName3", "Group 3"));
+                    setContentsPositionGroup(3, isRHS);
+                    break;
+                case 4:
+                    appLayout.removeAllViews();
+                    textView.setText(settingsPrefs.getString("groupName4", "Group 4"));
+                    setContentsPositionGroup(4, isRHS);
+                    break;
+                case 5:
+                    appLayout.removeAllViews();
+                    textView.setText(settingsPrefs.getString("groupName5", "Group 5"));
+                    setContentsPositionGroup(5, isRHS);
+                    break;
+                case 6:
+                    appLayout.removeAllViews();
+                    textView.setText(settingsPrefs.getString("groupName6", "Group 6"));
+                    setContentsPositionGroup(6, isRHS);
+                    break;
+                case 7:
+                    appLayout.removeAllViews();
+                    textView.setText(settingsPrefs.getString("groupName7", "Group 7"));
+                    setContentsPositionGroup(7, isRHS);
+                    break;
+            }
+        } else {
+            //This is where I choose the app by position.
+            coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
+            textView.setText(appPositions[coords[0]][coords[1]].label);
+
+        }
+
+        appLayout.setLayoutParams(relativeParams);
+        groupLayout.removeView(appLayout);
+        groupLayout.addView(appLayout, relativeParams);
+    }
+
+    private void MotionDownMethod(MotionEvent event, boolean isRHS){
+        x = rhsparameters.x;
+        y = rhsparameters.y;
+        touchedX = event.getRawX();
+        touchedY = event.getRawY();
+        lastGroup = -99;
+        lastAppTouched[0] = -99;
+        lastAppTouched[1] = -99;
+
+        groupLayout.removeAllViews();
+        initAppList();
+        if (!portrait) {
+            offset = zoneXSize * 2;
+        } else {
+            offset = zoneXSize;
+        }
+        if(isRHS){
+            setIconSizePos(screenWidth - offset);
+        }else{
+            setIconSizePos(0);
+        }
+
+        //add all main group icons
+        for (int i = 0; i < numGroups; i++) {
+            groupLayout.addView(imageView[i]);
+        }
+
+        //add Label to screen
+        groupLayout.addView(textView);
+        Log.v("touch", "Touch detected.");
+
+    }
 
     private void init() {
 
@@ -706,8 +565,8 @@ public class FloatingWindow extends JobIntentService {
         zoneXSize = (int) px;
         zoneYSize = (int) ((int) px * 1.3);  //1.3 is for a little extra margin on top & bottom of icon
         //if zoneYsize is too big to fit all icons on the screen, reduce their size.
-        if (zoneYSize * numZones > screenHeight) {
-            zoneYSize = screenHeight / numZones;
+        if (zoneYSize * numGroups > screenHeight) {
+            zoneYSize = screenHeight / numGroups;
         }
 
         Log.d("screen", "Screen Height: " + screenHeight + ", zoneYSize: " + zoneYSize);
@@ -737,8 +596,8 @@ public class FloatingWindow extends JobIntentService {
         appPositions = new AppInfo[numAppCols + numAppRows + 10][numAppCols + numAppRows + 10];
         initAppArray();
 
-        t.setX((float) (screenWidth * .15));
-        t.setY((float) (screenHeight * .01));
+        textView.setX((float) (screenWidth * .15));
+        textView.setY((float) (screenHeight * .01));
 
 
     }
@@ -851,7 +710,7 @@ public class FloatingWindow extends JobIntentService {
 
     private void setScreenSize() {
         int x, y;
-        Display display = wm.getDefaultDisplay();
+        Display display = windowManager.getDefaultDisplay();
         Point screenSize = new Point();
         display.getRealSize(screenSize);
         x = screenSize.x;
@@ -867,32 +726,32 @@ public class FloatingWindow extends JobIntentService {
         } else
             groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
-        numZones = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
+        numGroups = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
         int yOffset = 0;
-        int ySizeNeeded = numZones * zoneYSize;
+        int ySizeNeeded = numGroups * zoneYSize;
         int marginTop = (screenHeight - ySizeNeeded) / 2;
         if (portrait) {
             yOffset = statusBarOffset;
         }
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        for (int i = 0; i < numZones; i++) {
-            g[i] = new ImageView(this);
+        for (int i = 0; i < numGroups; i++) {
+            imageView[i] = new ImageView(this);
             int n = i + 1;
             int id = (int) settings.getLong("iconID" + n, R.drawable.ring_50dp);
             Drawable d = ContextCompat.getDrawable(this, id);
-            g[i].setImageDrawable(d);
-            g[i].setLayoutParams(groupIconParams);
-            g[i].setY((float) (zoneYSize * i) + marginTop - zoneYSize/3);     // move down 1/2 of the unused space (marginTop),
+            imageView[i].setImageDrawable(d);
+            imageView[i].setLayoutParams(groupIconParams);
+            imageView[i].setY((float) (zoneYSize * i) + marginTop - zoneYSize/3);     // move down 1/2 of the unused space (marginTop),
                                                                                 // then 1/2 of the height of an icon to center it (zoneYsize/2),
                                                                                 // then mark that spot (zoneYSize * i)
         }
     }
 
     private int checkGroup(int x, int y) {
-        int ySizeNeeded = numZones * zoneYSize;
+        int ySizeNeeded = numGroups * zoneYSize;
         int marginTop = (screenHeight - ySizeNeeded) / 2;
-        for (int groupNum = 1; groupNum <= numZones; groupNum++) {
+        for (int groupNum = 1; groupNum <= numGroups; groupNum++) {
             if ((y < ((zoneYSize * groupNum) + marginTop))) {
                 Log.v("group", "pointer coords are : " + x + ", " + y);
                 Log.v("group", "lastGroup is: " + lastGroup);
@@ -908,7 +767,7 @@ public class FloatingWindow extends JobIntentService {
         return -99; //cant find any group
     }
 
-    private void setContentsPositionGroup(int group, int ltr) {
+    private void setContentsPositionGroup(int group, boolean isRHS) {
 
         int index = 0;
         int rowOffset = 0;
@@ -916,13 +775,13 @@ public class FloatingWindow extends JobIntentService {
         if (!portrait && (leftSideNavigationBar || rightSideNavigationBar)) {
             colOffset = 1;
         }
-        if (!portrait && group == 1 && numZones >= 7) {
+        if (!portrait && group == 1 && numGroups >= 7) {
             rowOffset = 1;
         } else if (!portrait && group == 7) {
             rowOffset = -1;
         }
         try {
-            int ySizeNeeded = numZones * zoneYSize;
+            int ySizeNeeded = numGroups * zoneYSize;
             int marginTop = (screenHeight - ySizeNeeded) / 2;
             int numAppsInGroup = groupAppList[group].size();
             int rowsNeeded = (numAppsInGroup / numAppCols);
@@ -948,7 +807,7 @@ public class FloatingWindow extends JobIntentService {
 
 
             while (row < numAppRows + 1) {
-                if (ltr == 0) {
+                if (isRHS) {
                     for (int col = numAppCols - colOffset; col > 0; col--) {
 
                         //populate apps from right to left
@@ -961,7 +820,7 @@ public class FloatingWindow extends JobIntentService {
                             appIcon.setX(col * screenWidth / (numAppCols + 2));
                             appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(a.icon);
-                            tl.addView(appIcon);
+                            appLayout.addView(appIcon);
                         } else if (index == numAppsInGroup) {
                             //this section adds the Edit Group button at the very end of the list.
                             Intent intent = null;
@@ -995,7 +854,7 @@ public class FloatingWindow extends JobIntentService {
                             appIcon.setX(col * screenWidth / (numAppCols + 2));
                             appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_add_white_50dp));
-                            tl.addView(appIcon);
+                            appLayout.addView(appIcon);
                         }
 
                         index++;
@@ -1017,7 +876,7 @@ public class FloatingWindow extends JobIntentService {
                             appIcon.setX(col * screenWidth / (numAppCols + 2));
                             appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(a.icon);
-                            tl.addView(appIcon);
+                            appLayout.addView(appIcon);
                         } else if (index == numAppsInGroup) {
                             Intent intent = null;
                             switch (group) {
@@ -1050,7 +909,7 @@ public class FloatingWindow extends JobIntentService {
                             appIcon.setX(col * screenWidth / (numAppCols + 2));
                             appIcon.setY(row * screenHeight / (numAppRows + 2));
                             appIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_add_white_50dp));
-                            tl.addView(appIcon);
+                            appLayout.addView(appIcon);
                         }
 
                         index++;
@@ -1114,8 +973,8 @@ public class FloatingWindow extends JobIntentService {
     public void onDestroy() {
         super.onDestroy();
         Log.i("EXIT", "ondestroy!");
-        wm.removeView(rhs);
-        wm.removeView(lhs);
+        windowManager.removeView(rhs);
+        windowManager.removeView(lhs);
         Intent broadcastIntent = new Intent(this, LauncherRestarterBroadcastReceiver.class);
         sendBroadcast(broadcastIntent);
     }

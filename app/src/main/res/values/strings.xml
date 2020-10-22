@@ -34,5 +34,6 @@
     <string name="AutoSortUnlocked">AutoSort all apps</string>
     <string name="NetworkLost">Network Connectivity lost.  Please try again with a more stable network.</string>
     <string name="OKtoCloseModal">You can close this window, I will continue to work in the background.</string>
+    <string name="TaskStart">Task Starting...</string>
 
 </resources>
