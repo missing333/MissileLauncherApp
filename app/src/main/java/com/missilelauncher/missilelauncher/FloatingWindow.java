@@ -672,7 +672,6 @@ public class FloatingWindow extends JobIntentService {
         windowManager.updateViewLayout(lhs, lhsParameters);
     }
 
-
     private void configImageButton(ImageButton b) {
         WindowManager.LayoutParams appIconParams = new WindowManager.LayoutParams();
         int appSize = 100;

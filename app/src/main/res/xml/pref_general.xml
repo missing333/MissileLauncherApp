@@ -1,3 +1,4 @@
+<!--suppress AndroidElementNotAllowed, DeprecatedClassUsageInspection -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
@@ -32,12 +33,6 @@
         android:key="rhs"
         android:title="Right Side Activation Area" />
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="landscape"
-        android:summary="Can work weirdly with hidden navigation bars"
-        android:title="Enable Activation Areas in Landscape" />
-
     <SeekBarPreference
         android:key="lhsWidth"
         android:title="Width of Activation Area"
@@ -61,5 +56,12 @@
         android:title="Transparency of Activation Area"
         android:max="255"
         android:defaultValue="25" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:enabled="false"
+        android:icon="@drawable/warning_exclamation"
+        android:key="landscape"
+        android:summary="Under Construction"
+        android:title="Landscape mode" />
 
 </PreferenceScreen>

@@ -18,7 +18,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="major code cleanup &amp; variable renaming">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/warning_exclamation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -370,19 +376,19 @@
       <option name="project" value="LOCAL" />
       <updated>1603428108384</updated>
     </task>
-    <task id="LOCAL-00020" summary="implemented Broadcast Reciever to keep FloatingWindow alive when destroyed.">
-      <created>1541699924146</created>
+    <task id="LOCAL-00020" summary="major code cleanup &amp; variable renaming">
+      <created>1603428344458</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1541699924146</updated>
+      <updated>1603428344458</updated>
     </task>
-    <task id="LOCAL-00021" summary="Saving Group icons properly now">
-      <created>1541733191205</created>
+    <task id="LOCAL-00021" summary="major code cleanup &amp; variable renaming">
+      <created>1603428494936</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1541733191205</updated>
+      <updated>1603428494936</updated>
     </task>
     <task id="LOCAL-00022" summary="fixed landscape mode with navbar on left">
       <created>1541735061755</created>
@@ -440,7 +446,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -528,36 +534,40 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1600102591744" />
+    <state x="312" y="187" key="AndroidCreateResourceFileDialog" timestamp="1603429017769">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="312" y="187" key="AndroidCreateResourceFileDialog/0.0.1462.864@0.0.1462.864" timestamp="1603429017769" />
     <state x="700" y="338" key="AndroidCreateXmlResourceDialog" timestamp="1601933667100">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="700" y="338" key="AndroidCreateXmlResourceDialog/0.0.1462.864@0.0.1462.864" timestamp="1601933667100" />
-    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1603428343072">
+    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1603478565078">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1603428343072" />
+    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1603478565078" />
     <state x="420" y="33" key="CommitChangelistDialog2/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603405830452" />
     <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600226199424">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="546" y="187" key="FileChooserDialogImpl/0.0.1449.864@0.0.1449.864" timestamp="1595472618891" />
     <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600226199424" />
-    <state width="1391" height="265" key="GridCell.Tab.0.bottom" timestamp="1600226227289">
+    <state width="1106" height="220" key="GridCell.Tab.0.bottom" timestamp="1603429676828">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1391" height="265" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1600226227289" />
-    <state width="1391" height="265" key="GridCell.Tab.0.center" timestamp="1600226227289">
+    <state width="1106" height="220" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
+    <state width="1106" height="220" key="GridCell.Tab.0.center" timestamp="1603429676828">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1391" height="265" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1600226227289" />
-    <state width="1391" height="265" key="GridCell.Tab.0.left" timestamp="1600226227289">
+    <state width="1106" height="220" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
+    <state width="1106" height="220" key="GridCell.Tab.0.left" timestamp="1603429676828">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1391" height="265" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1600226227289" />
-    <state width="1391" height="265" key="GridCell.Tab.0.right" timestamp="1600226227289">
+    <state width="1106" height="220" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
+    <state width="1106" height="220" key="GridCell.Tab.0.right" timestamp="1603429676828">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1391" height="265" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1600226227289" />
+    <state width="1106" height="220" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
     <state x="236" y="74" key="SettingsEditor" timestamp="1600104230909">
       <screen x="0" y="0" width="1462" height="864" />
     </state>

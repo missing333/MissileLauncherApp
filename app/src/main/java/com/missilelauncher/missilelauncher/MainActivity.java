@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        init();
+
 
         config.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
@@ -52,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        init();
+
+
     }
 
     @SuppressWarnings("rawtypes")
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             imgHow.setVisibility(View.VISIBLE);
             config.setVisibility(View.GONE);
 
-
+            //ask for overlay permissions
             setPermissionBtn.setOnClickListener(v -> {
                 Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getApplicationContext().getPackageName()));
                 startActivity(myIntent);
@@ -144,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setPermissionBtn.setVisibility(View.GONE);
             imgHow.setVisibility(View.GONE);
-            config.setVisibility(View.VISIBLE);
 
 
             Log.v("ol", "Ready to draw overlays");
@@ -152,6 +154,9 @@ public class MainActivity extends AppCompatActivity {
             Intent startIntent = new Intent(this, FloatingWindow.class);
             startIntent.setAction("Start");
             startService(startIntent);
+
+            config.setVisibility(View.VISIBLE);
+            config.callOnClick();
 
         }
 
