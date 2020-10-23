@@ -24,21 +24,17 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Intent mServiceIntent;
-    private Context ctx;
-    private Context getCtx() {
-        return ctx;
-    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ctx = this;
+        Context ctx = this;
 
         setContentView(R.layout.activity_main);
 
-        FloatingWindow mFloatingWindowService = new FloatingWindow(getCtx());
-        mServiceIntent = new Intent(getCtx(), mFloatingWindowService.getClass());
+        FloatingWindow mFloatingWindowService = new FloatingWindow();
+        mServiceIntent = new Intent(ctx, mFloatingWindowService.getClass());
 
 
         Button config = findViewById(R.id.config);
@@ -59,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+    @SuppressWarnings("rawtypes")
     private void init(){
 
         ////////set all previous app lists if available
@@ -163,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        //noinspection deprecation
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
                 Log.i ("isMyServiceRunning?", true+"");

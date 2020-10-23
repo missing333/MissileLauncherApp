@@ -17,13 +17,8 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="can now query packages in android R">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/AutoSort.java" afterDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="major code cleanup &amp; variable renaming">
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +73,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Marc Missildine &lt;mmissing3@gmail.com&gt;" />
         <option value="Marc &lt;mmissing3@gmail.com&gt;" />
       </list>
     </option>
@@ -103,8 +99,8 @@
     <property name="DEBUGGABLE_DEVICE" value="emulator-5554" />
     <property name="DEBUGGABLE_PROCESS" value="com.missilelauncher.missilelauncher" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="8XV5T15A28002046" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-15T18:41:03.261Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3a_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-23T04:29:35.115Z" />
     <property name="ExportApk.ApkPath" value="C:\android\release\ML" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
@@ -360,19 +356,19 @@
       <option name="project" value="LOCAL" />
       <updated>1600223818512</updated>
     </task>
-    <task id="LOCAL-00018" summary="fixed error with notification not showing in android O+">
-      <created>1541613321691</created>
+    <task id="LOCAL-00018" summary="refactored RHS and LHS to use 1 single method.">
+      <created>1603405832185</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1541613321691</updated>
+      <updated>1603405832185</updated>
     </task>
-    <task id="LOCAL-00019" summary="fixed error with notification not showing in android O+">
-      <created>1541613793130</created>
+    <task id="LOCAL-00019" summary="major code cleanup &amp; variable renaming">
+      <created>1603428108384</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1541613793130</updated>
+      <updated>1603428108384</updated>
     </task>
     <task id="LOCAL-00020" summary="implemented Broadcast Reciever to keep FloatingWindow alive when destroyed.">
       <created>1541699924146</created>
@@ -444,7 +440,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -471,8 +467,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed landscape mode with navbar on left" />
-    <MESSAGE value="changed title of the activity to the custom title" />
     <MESSAGE value="auto-capitalized each word" />
     <MESSAGE value="cleanup" />
     <MESSAGE value="removed toast on IsPro = true" />
@@ -496,7 +490,10 @@
     <MESSAGE value="Add Dark Mode, update to target sdk 29" />
     <MESSAGE value="Fixed auto-sort" />
     <MESSAGE value="can now query packages in android R" />
-    <option name="LAST_COMMIT_MESSAGE" value="can now query packages in android R" />
+    <MESSAGE value="refactored RHS and LHS to use 1 single method." />
+    <MESSAGE value="major code cleanup &amp; variable renaming" />
+    <option name="LAST_COMMIT_MESSAGE" value="major code cleanup &amp; variable renaming" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="164" key="#PSD" timestamp="1600105693232">
@@ -523,6 +520,10 @@
       <screen x="0" y="0" width="1846" height="1080" />
     </state>
     <state x="702" y="399" width="445" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603396866796" />
+    <state x="314" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603426046079">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="314" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1462.864@0.0.1462.864" timestamp="1603426046079" />
     <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600102591744">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
@@ -531,10 +532,11 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="700" y="338" key="AndroidCreateXmlResourceDialog/0.0.1462.864@0.0.1462.864" timestamp="1601933667100" />
-    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1600223817143">
+    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1603428343072">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1600223817143" />
+    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1603428343072" />
+    <state x="420" y="33" key="CommitChangelistDialog2/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603405830452" />
     <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600226199424">
       <screen x="0" y="0" width="1462" height="864" />
     </state>

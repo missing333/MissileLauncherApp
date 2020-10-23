@@ -1,7 +1,6 @@
 package com.missilelauncher.missilelauncher;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,11 +18,6 @@ import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.JobIntentService;
-import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -38,6 +32,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.JobIntentService;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,64 +44,55 @@ import java.util.List;
 import static com.missilelauncher.missilelauncher.GroupIconPicker.PREFS_NAME;
 import static java.lang.Math.sqrt;
 
-/**
- * Created by mmissildine on 9/20/2018.
- */
 
-@SuppressWarnings({"unchecked", "ConstantConditions"})
+@SuppressWarnings({"unchecked", "ConstantConditions", "IntegerDivisionInFloatingPointContext", "deprecation"})
 public class FloatingWindow extends JobIntentService {
 
     private static final int JOB_ID = 0x01;
-    private WindowManager windowManager;
     private SharedPreferences settingsPrefs;
     private SharedPreferences.Editor editor;
     private boolean portrait = true;
-    private RelativeLayout.LayoutParams relativeParams;
-    private WindowManager.LayoutParams gparameters;
-    private WindowManager.LayoutParams rhsparameters;
-    private WindowManager.LayoutParams lhsparameters;
     private int numGroups;
     private int numAppRows;
     private int numAppCols;
     private int zoneXSize;
     private int zoneYSize;
 
-    //coordination
-    private int statusBarOffset;
+    //coordinate variables
     private int screenWidth;
     private int screenHeight;
-    private int offset;
     int x, y;
     float touchedX, touchedY;
+    private AppInfo[][] appPositions;
+    private int[] appRowAndCol;
+    private ArrayList<AppInfo>[] groupAppList;
 
     //views
+    private WindowManager windowManager;
+    private RelativeLayout.LayoutParams relativeParams;
+    private WindowManager.LayoutParams gParameters;
+    private WindowManager.LayoutParams rhsParameters;
+    private WindowManager.LayoutParams lhsParameters;
     private LinearLayout rhs;
     private LinearLayout lhs;
     private RelativeLayout groupLayout;
     private RelativeLayout appLayout;
     private TextView textView;
     private ImageView[] imageView;
-    private int lastGroup;
-    private int[] lastAppTouched;
-    private AppInfo[][] appPositions;
-    private int[] coords;
-    private ArrayList<AppInfo>[] groupAppList;
     private int viewAdded;
-    private boolean leftSideNavigationBar, rightSideNavigationBar;
 
     //misc
-    private final int distFingerTraveledTolerance = 50;
-    private final int disappearDelay = 2000;
+    private int lastGroup;
+    private int[] lastAppTouched;
+    private static final int disappearDelay = 2000;
     private static final boolean sideRHS = true;
     private static final boolean sideLHS = false;
+    private boolean leftSideNavigationBar, rightSideNavigationBar;
 
 
-    public FloatingWindow(Context applicationContext) {
-        super();
-        Log.i("HERE", "here I am!");
-    }
 
     public FloatingWindow() {
+        Log.i("HERE", "here I am!");
     }
 
     public static void enqueueWork(Context context, Intent work) {
@@ -113,7 +103,6 @@ public class FloatingWindow extends JobIntentService {
     protected void onHandleWork(@NonNull Intent intent) {
         onCreate();
     }
-
 
     @Nullable
     @Override
@@ -145,6 +134,7 @@ public class FloatingWindow extends JobIntentService {
         numAppRows = Integer.parseInt(settingsPrefs.getString("numAppRows", "10"));
         editor.putString("landscapeNumAppRows", numAppCols + "");
         editor.putString("landscapeNumAppCols", numAppRows + "");
+        editor.apply();
         Log.v("prefs", "numGroups = " + numGroups);
         Log.v("prefs", "numAppRows = " + numAppRows);
         Log.v("prefs", "numAppCols = " + numAppCols);
@@ -161,22 +151,22 @@ public class FloatingWindow extends JobIntentService {
         int activationWidth = (Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3)) / 100;
         int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45) / 100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
-        int ypos = settingsPrefs.getInt("lhsYPos", 50) - 50;
+        int yPos = settingsPrefs.getInt("lhsYPos", 50) - 50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         } else {
             overlayType = WindowManager.LayoutParams.TYPE_PHONE;
         }
-        rhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        lhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight * ypos / 100;
-        lhsparameters.gravity = Gravity.START;
+        rhsParameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsParameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsParameters.x = 0;
+        lhsParameters.y = -screenHeight * yPos / 100;
+        lhsParameters.gravity = Gravity.START;
         lhs.setBackgroundColor(Color.argb(transparency, 0, 200, 200));
 
-        windowManager.addView(rhs, rhsparameters);
-        windowManager.addView(lhs, lhsparameters);
+        windowManager.addView(rhs, rhsParameters);
+        windowManager.addView(lhs, lhsParameters);
 
         textView = new TextView(this);
         textView.setText("");
@@ -198,65 +188,50 @@ public class FloatingWindow extends JobIntentService {
         appLayout = new RelativeLayout(this);
         appLayout.setBackgroundColor(Color.argb(25, 0, 0, 0));
 
-        coords = new int[]{-1, -1};
+        appRowAndCol = new int[]{-1, -1};
         viewAdded = 0;
 
 
-        rhs.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-            public boolean onTouch(View arg0, MotionEvent event) {
+        rhs.setOnTouchListener((arg0, event) -> {
 
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        MotionDownMethod(event,sideRHS);
-                        break;
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    MotionDownMethod(event,sideRHS);
+                    break;
 
-                    case MotionEvent.ACTION_MOVE:
-                        MotionMoveMethod(event, sideRHS);
-                        break;
+                case MotionEvent.ACTION_MOVE:
+                    MotionMoveMethod(event, sideRHS);
+                    break;
 
-                    case MotionEvent.ACTION_UP:
-                        MotionUpMethod(event,sideRHS);
-                        break;
+                case MotionEvent.ACTION_UP:
+                    MotionUpMethod(event,sideRHS);
+                    break;
 
-                    default:
-                        break;
-                }
-                return false;
+                default:
+                    break;
             }
-
+            return false;
         });
 
-        lhs.setOnTouchListener(new View.OnTouchListener() {
+        lhs.setOnTouchListener((arg0, event) -> {
 
-            private final WindowManager.LayoutParams updatedParameters = rhsparameters;
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    MotionDownMethod(event,sideLHS);
+                    break;
 
+                case MotionEvent.ACTION_MOVE:
+                    MotionMoveMethod(event, sideLHS);
+                    break;
 
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-            public boolean onTouch(View arg0, MotionEvent event) {
+                case MotionEvent.ACTION_UP:
+                    MotionUpMethod(event,sideLHS);
+                    break;
 
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        MotionDownMethod(event,sideLHS);
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        MotionMoveMethod(event, sideLHS);
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        MotionUpMethod(event,sideLHS);
-                        break;
-
-                    default:
-                        break;
-                }
-                return false;
+                default:
+                    break;
             }
-
+            return false;
         });
 
     }
@@ -288,8 +263,8 @@ public class FloatingWindow extends JobIntentService {
             viewAdded = 0;
         }
 
-        if (coords[0] != -1 || coords[1] != -1) {
-            AppInfo a = appPositions[coords[0]][coords[1]];
+        if (appRowAndCol[0] != -1 || appRowAndCol[1] != -1) {
+            AppInfo a = appPositions[appRowAndCol[0]][appRowAndCol[1]];
 
             boolean isSafeToLaunch = false;
             if(isRHS){
@@ -338,13 +313,15 @@ public class FloatingWindow extends JobIntentService {
     }
 
     private void MotionMoveMethod(MotionEvent event, boolean isRHS) {
-        rhsparameters.x = (int) (x + (event.getRawX() - touchedX));
-        rhsparameters.y = (int) (y + (event.getRawY() - touchedY));
+        rhsParameters.x = (int) (x + (event.getRawX() - touchedX));
+        rhsParameters.y = (int) (y + (event.getRawY() - touchedY));
 
         int distFingerTraveled = (int) sqrt((event.getRawX() - touchedX) * (event.getRawX() - touchedX) + (event.getRawY() - touchedY) * (event.getRawY() - touchedY));
 
+        //misc
+        int distFingerTraveledTolerance = 50;
         if (distFingerTraveled > distFingerTraveledTolerance && viewAdded != 1) {
-            windowManager.addView(groupLayout, gparameters);
+            windowManager.addView(groupLayout, gParameters);
             viewAdded = 1;
         }
 
@@ -376,43 +353,43 @@ public class FloatingWindow extends JobIntentService {
                 case 1:
                     appLayout.removeAllViews();
                     textView.setText(settingsPrefs.getString("groupName1", "Group 1"));
-                    setContentsPositionGroup(1, isRHS);
+                    setContentsForSelectedGroup(1, isRHS);
                     break;
                 case 2:
                     appLayout.removeAllViews();
                     textView.setText(settingsPrefs.getString("groupName2", "Group 2"));
-                    setContentsPositionGroup(2, isRHS);
+                    setContentsForSelectedGroup(2, isRHS);
                     break;
                 case 3:
                     appLayout.removeAllViews();
                     textView.setText(settingsPrefs.getString("groupName3", "Group 3"));
-                    setContentsPositionGroup(3, isRHS);
+                    setContentsForSelectedGroup(3, isRHS);
                     break;
                 case 4:
                     appLayout.removeAllViews();
                     textView.setText(settingsPrefs.getString("groupName4", "Group 4"));
-                    setContentsPositionGroup(4, isRHS);
+                    setContentsForSelectedGroup(4, isRHS);
                     break;
                 case 5:
                     appLayout.removeAllViews();
                     textView.setText(settingsPrefs.getString("groupName5", "Group 5"));
-                    setContentsPositionGroup(5, isRHS);
+                    setContentsForSelectedGroup(5, isRHS);
                     break;
                 case 6:
                     appLayout.removeAllViews();
                     textView.setText(settingsPrefs.getString("groupName6", "Group 6"));
-                    setContentsPositionGroup(6, isRHS);
+                    setContentsForSelectedGroup(6, isRHS);
                     break;
                 case 7:
                     appLayout.removeAllViews();
                     textView.setText(settingsPrefs.getString("groupName7", "Group 7"));
-                    setContentsPositionGroup(7, isRHS);
+                    setContentsForSelectedGroup(7, isRHS);
                     break;
             }
         } else {
             //This is where I choose the app by position.
-            coords = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
-            textView.setText(appPositions[coords[0]][coords[1]].label);
+            appRowAndCol = checkWhichAppSelected((int) event.getRawX(), (int) event.getRawY());
+            textView.setText(appPositions[appRowAndCol[0]][appRowAndCol[1]].label);
 
         }
 
@@ -422,8 +399,8 @@ public class FloatingWindow extends JobIntentService {
     }
 
     private void MotionDownMethod(MotionEvent event, boolean isRHS){
-        x = rhsparameters.x;
-        y = rhsparameters.y;
+        x = rhsParameters.x;
+        y = rhsParameters.y;
         touchedX = event.getRawX();
         touchedY = event.getRawY();
         lastGroup = -99;
@@ -432,15 +409,16 @@ public class FloatingWindow extends JobIntentService {
 
         groupLayout.removeAllViews();
         initAppList();
+        int offset;
         if (!portrait) {
             offset = zoneXSize * 2;
         } else {
             offset = zoneXSize;
         }
         if(isRHS){
-            setIconSizePos(screenWidth - offset);
+            setGroupIconPositions(screenWidth - offset);
         }else{
-            setIconSizePos(0);
+            setGroupIconPositions(0);
         }
 
         //add all main group icons
@@ -454,6 +432,7 @@ public class FloatingWindow extends JobIntentService {
 
     }
 
+    @SuppressWarnings("rawtypes")
     private void init() {
 
         ////////set all previous app lists if available
@@ -536,11 +515,22 @@ public class FloatingWindow extends JobIntentService {
 
     private void getDimensions() {
 
-        statusBarOffset = getStatusBarHeight();
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        //coordination
+        int statusBarOffset = result;
 
+        //set screen size
+        Display display = windowManager.getDefaultDisplay();
+        Point screenSize = new Point();
+        display.getRealSize(screenSize);
+        screenWidth = screenSize.x;
+        screenHeight = screenSize.y - statusBarOffset;
 
-        setScreenSize();
-
+        //get orientation
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // In landscape
@@ -564,12 +554,12 @@ public class FloatingWindow extends JobIntentService {
         );
         zoneXSize = (int) px;
         zoneYSize = (int) ((int) px * 1.3);  //1.3 is for a little extra margin on top & bottom of icon
-        //if zoneYsize is too big to fit all icons on the screen, reduce their size.
+        //if zoneYSize is too big to fit all icons on the screen, reduce their size.
         if (zoneYSize * numGroups > screenHeight) {
             zoneYSize = screenHeight / numGroups;
         }
 
-        Log.d("screen", "Screen Height: " + screenHeight + ", zoneYSize: " + zoneYSize);
+        Log.d("dimensions", "Screen Height: " + screenHeight + ", zoneYSize: " + zoneYSize);
 
 
         int overlayType;
@@ -584,17 +574,17 @@ public class FloatingWindow extends JobIntentService {
         updateLHS();
 
         if (!portrait && hasNavBar(getResources())) {
-            gparameters = new WindowManager.LayoutParams(screenWidth - zoneXSize, screenHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+            gParameters = new WindowManager.LayoutParams(screenWidth - zoneXSize, screenHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         } else {
-            gparameters = new WindowManager.LayoutParams(screenWidth, screenHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+            gParameters = new WindowManager.LayoutParams(screenWidth, screenHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         }
 
         relativeParams = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
         relativeParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        initAppList();
+        //initAppList();
         appPositions = new AppInfo[numAppCols + numAppRows + 10][numAppCols + numAppRows + 10];
-        initAppArray();
+        clearAppArray();
 
         textView.setX((float) (screenWidth * .15));
         textView.setY((float) (screenHeight * .01));
@@ -602,17 +592,13 @@ public class FloatingWindow extends JobIntentService {
 
     }
 
-    private void initAppArray() {
+    private void clearAppArray() {
         for (int row = 0; row < numAppCols + numAppRows + 4; row++) {
             for (int col = 0; col < numAppCols + numAppRows + 4; col++) {
                 appPositions[row][col] = new AppInfo(
                         "",
                         col * screenWidth / (numAppCols + 2),
                         row * screenHeight / (numAppRows + 2));
-//                appPositions[row][col].label = "";
-//                appPositions[row][col].setX(col * screenWidth/(numAppCols+2));
-//                appPositions[row][col].setY(row * screenHeight/(numAppRows+2));
-//                appPositions[row][col].setLaunchIntent(null);
             }
         }
     }
@@ -630,12 +616,11 @@ public class FloatingWindow extends JobIntentService {
     }
 
     private void updateRHS() {
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3) / 100;
         int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45) / 100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
-        int ypos = settingsPrefs.getInt("lhsYPos", 50) - 50;
+        int yPos = settingsPrefs.getInt("lhsYPos", 50) - 50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -650,21 +635,20 @@ public class FloatingWindow extends JobIntentService {
             activationHeight = 0;
             transparency = 0;
         }
-        rhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        rhsparameters.x = 0;
-        rhsparameters.y = -screenHeight * ypos / 100;
-        rhsparameters.gravity = Gravity.END;
+        rhsParameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        rhsParameters.x = 0;
+        rhsParameters.y = -screenHeight * yPos / 100;
+        rhsParameters.gravity = Gravity.END;
         rhs.setBackgroundColor(Color.argb(transparency, 0, 200, 200));
-        wm.updateViewLayout(rhs, rhsparameters);
+        windowManager.updateViewLayout(rhs, rhsParameters);
     }
 
     private void updateLHS() {
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         int activationWidth = Math.round((screenWidth + screenHeight) / 2) * settingsPrefs.getInt("lhsWidth", 3) / 100;
         int activationHeight = Math.round(screenHeight * settingsPrefs.getInt("lhsHeight", 45) / 100);
         int transparency = settingsPrefs.getInt("lhsTransparency", 25);
-        int ypos = settingsPrefs.getInt("lhsYPos", 50) - 50;
+        int yPos = settingsPrefs.getInt("lhsYPos", 50) - 50;
         int overlayType;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             overlayType = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -680,22 +664,14 @@ public class FloatingWindow extends JobIntentService {
             activationHeight = 0;
             transparency = 0;
         }
-        lhsparameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
-        lhsparameters.x = 0;
-        lhsparameters.y = -screenHeight * ypos / 100;
-        lhsparameters.gravity = Gravity.START;
+        lhsParameters = new WindowManager.LayoutParams(activationWidth, activationHeight, overlayType, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+        lhsParameters.x = 0;
+        lhsParameters.y = -screenHeight * yPos / 100;
+        lhsParameters.gravity = Gravity.START;
         lhs.setBackgroundColor(Color.argb(transparency, 0, 200, 200));
-        wm.updateViewLayout(lhs, lhsparameters);
+        windowManager.updateViewLayout(lhs, lhsParameters);
     }
 
-    private int getStatusBarHeight() {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
 
     private void configImageButton(ImageButton b) {
         WindowManager.LayoutParams appIconParams = new WindowManager.LayoutParams();
@@ -708,18 +684,7 @@ public class FloatingWindow extends JobIntentService {
         b.setScaleType(ImageView.ScaleType.FIT_CENTER);
     }
 
-    private void setScreenSize() {
-        int x, y;
-        Display display = windowManager.getDefaultDisplay();
-        Point screenSize = new Point();
-        display.getRealSize(screenSize);
-        x = screenSize.x;
-        y = screenSize.y;
-        screenWidth = x;
-        screenHeight = y - statusBarOffset;
-    }
-
-    private void setIconSizePos(int marginLeft) {
+    private void setGroupIconPositions(int marginLeft) {
         RelativeLayout.LayoutParams groupIconParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         if (marginLeft > 0) {
             groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -727,12 +692,8 @@ public class FloatingWindow extends JobIntentService {
             groupIconParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
         numGroups = Integer.parseInt(settingsPrefs.getString("numZones", "3"));
-        int yOffset = 0;
         int ySizeNeeded = numGroups * zoneYSize;
         int marginTop = (screenHeight - ySizeNeeded) / 2;
-        if (portrait) {
-            yOffset = statusBarOffset;
-        }
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         for (int i = 0; i < numGroups; i++) {
@@ -743,7 +704,7 @@ public class FloatingWindow extends JobIntentService {
             imageView[i].setImageDrawable(d);
             imageView[i].setLayoutParams(groupIconParams);
             imageView[i].setY((float) (zoneYSize * i) + marginTop - zoneYSize/3);     // move down 1/2 of the unused space (marginTop),
-                                                                                // then 1/2 of the height of an icon to center it (zoneYsize/2),
+                                                                                // then 1/2 of the height of an icon to center it (zoneYSize/2),
                                                                                 // then mark that spot (zoneYSize * i)
         }
     }
@@ -753,13 +714,13 @@ public class FloatingWindow extends JobIntentService {
         int marginTop = (screenHeight - ySizeNeeded) / 2;
         for (int groupNum = 1; groupNum <= numGroups; groupNum++) {
             if ((y < ((zoneYSize * groupNum) + marginTop))) {
-                Log.v("group", "pointer coords are : " + x + ", " + y);
+                Log.v("group", "pointer coordinates are : " + x + ", " + y);
                 Log.v("group", "lastGroup is: " + lastGroup);
                 Log.v("group", "Group found is: " + groupNum);
                 if (groupNum != lastGroup) {
                     lastGroup = groupNum;
                     vibrate();
-                    initAppArray();
+                    clearAppArray();
                 }
                 return groupNum;
             }
@@ -767,7 +728,7 @@ public class FloatingWindow extends JobIntentService {
         return -99; //cant find any group
     }
 
-    private void setContentsPositionGroup(int group, boolean isRHS) {
+    private void setContentsForSelectedGroup(int group, boolean isRHS) {
 
         int index = 0;
         int rowOffset = 0;
@@ -859,7 +820,7 @@ public class FloatingWindow extends JobIntentService {
 
                         index++;
                         if (index > numAppsInGroup) {
-                            row = numAppRows + 11;
+                            row = numAppRows + 999;
                         }
                     }
 
@@ -926,8 +887,8 @@ public class FloatingWindow extends JobIntentService {
             }
 
         } catch (Exception e) {
-            //usual error setting applabel
-            Log.d("tag", "usual error with null Applabel");
+            //usual error setting appLabel
+            Log.d("tag", "usual error with null AppLabel");
             e.printStackTrace();
         }
     }
@@ -937,8 +898,8 @@ public class FloatingWindow extends JobIntentService {
         int x, y;
         int appXSize = (screenWidth / (numAppCols + 2));
         int appYSize = (screenHeight / (numAppRows + 2));
-        x = Math.round((rawX + (appXSize / 3)) / appXSize);
-        y = Math.round((rawY - (appYSize / 3)) / appYSize);
+        x = Math.round((rawX + (appXSize / 5)) / appXSize);     //
+        y = Math.round((rawY - (appYSize / 5)) / appYSize);
 
         if (!portrait && leftSideNavigationBar) {
             x--;
