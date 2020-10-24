@@ -935,7 +935,7 @@ public class FloatingWindow extends JobIntentService {
         Log.i("EXIT", "ondestroy!");
         windowManager.removeView(rhs);
         windowManager.removeView(lhs);
-        Intent broadcastIntent = new Intent(this, LauncherRestarterBroadcastReceiver.class);
+        Intent broadcastIntent = new Intent(this, ReceiverLauncherRestartBroadcast.class);
         sendBroadcast(broadcastIntent);
     }
 

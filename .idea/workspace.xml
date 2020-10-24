@@ -10,21 +10,44 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="missile" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="major code cleanup &amp; variable renaming">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/warning_exclamation.xml" afterDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="version update, disabled landscape mode">
+      <change afterPath="$PROJECT_DIR$/app/src/main/ic_missilelauncherv2-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_missilelauncher_v2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_missilelauncherv2_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_missilelauncherv2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_missilelauncherv2_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_missilelauncherv2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_missilelauncherv2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_missilelauncherv2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_missilelauncherv2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_missilelauncherv2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_missilelauncherv2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_missilelauncherv2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_missilelauncherv2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_missilelauncherv2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_missilelauncherv2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/ic_missilelauncherv2_background.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/ReceiverDeviceBoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/LauncherRestarterBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/ReceiverLauncherRestartBroadcast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/PlayStorePrompt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/ActivityPlayStorePrompt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/ActivitySettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/pref_headers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_headers.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +129,7 @@
     <property name="DEBUGGABLE_PROCESS" value="com.missilelauncher.missilelauncher" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3a_API_30" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-23T04:29:35.115Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-24T02:16:53.324Z" />
     <property name="ExportApk.ApkPath" value="C:\android\release\ML" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
@@ -117,7 +140,7 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
     <property name="last_opened_file_path" value="C:/android/NFPTracker/app" />
-    <property name="project.structure.last.edited" value="Suggestions" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.30710658" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -231,6 +254,9 @@
         <item itemvalue="Gradle.MissileLauncherApp:app [androidDependencies]" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -390,12 +416,12 @@
       <option name="project" value="LOCAL" />
       <updated>1603428494936</updated>
     </task>
-    <task id="LOCAL-00022" summary="fixed landscape mode with navbar on left">
-      <created>1541735061755</created>
+    <task id="LOCAL-00022" summary="version update, disabled landscape mode">
+      <created>1603478589015</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1541735061755</updated>
+      <updated>1603478589015</updated>
     </task>
     <task id="LOCAL-00023" summary="changed title of the activity to the custom title">
       <created>1541820693398</created>
@@ -446,7 +472,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -473,7 +499,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="auto-capitalized each word" />
     <MESSAGE value="cleanup" />
     <MESSAGE value="removed toast on IsPro = true" />
     <MESSAGE value="removed toast on IsPro = true, fixed crash when pro key not found." />
@@ -498,21 +523,27 @@
     <MESSAGE value="can now query packages in android R" />
     <MESSAGE value="refactored RHS and LHS to use 1 single method." />
     <MESSAGE value="major code cleanup &amp; variable renaming" />
-    <option name="LAST_COMMIT_MESSAGE" value="major code cleanup &amp; variable renaming" />
+    <MESSAGE value="version update, disabled landscape mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="version update, disabled landscape mode" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="249" y="164" key="#PSD" timestamp="1600105693232">
+    <state x="154" y="90" key="#Inspections" timestamp="1603507943969">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="249" y="164" key="#PSD/0.0.1462.864@0.0.1462.864" timestamp="1600105693232" />
+    <state x="154" y="90" key="#Inspections/0.0.1462.864@0.0.1462.864" timestamp="1603507943969" />
+    <state x="249" y="164" key="#PSD" timestamp="1603498696754">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="249" y="164" key="#PSD/0.0.1462.864@0.0.1462.864" timestamp="1603498696754" />
     <state x="452" y="77" key="#app" timestamp="1595461494319">
       <screen x="0" y="0" width="1449" height="864" />
     </state>
     <state x="452" y="77" key="#app/0.0.1449.864@0.0.1449.864" timestamp="1595461494319" />
-    <state x="728" y="255" key="#com.intellij.ide.util.MemberChooser" timestamp="1603404836997">
-      <screen x="0" y="0" width="1846" height="1080" />
+    <state x="577" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1603509412263">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
+    <state x="577" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1462.864@0.0.1462.864" timestamp="1603509412263" />
     <state x="728" y="255" key="#com.intellij.ide.util.MemberChooser/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603404836997" />
     <state x="575" y="321" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1595461751923">
       <screen x="0" y="0" width="1449" height="864" />
@@ -526,57 +557,57 @@
       <screen x="0" y="0" width="1846" height="1080" />
     </state>
     <state x="702" y="399" width="445" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603396866796" />
-    <state x="314" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603426046079">
+    <state x="314" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603509717268">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="314" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1462.864@0.0.1462.864" timestamp="1603426046079" />
+    <state x="314" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1462.864@0.0.1462.864" timestamp="1603509717268" />
     <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600102591744">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1600102591744" />
-    <state x="312" y="187" key="AndroidCreateResourceFileDialog" timestamp="1603429017769">
+    <state x="312" y="187" key="AndroidCreateResourceFileDialog" timestamp="1603481542916">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="312" y="187" key="AndroidCreateResourceFileDialog/0.0.1462.864@0.0.1462.864" timestamp="1603429017769" />
+    <state x="312" y="187" key="AndroidCreateResourceFileDialog/0.0.1462.864@0.0.1462.864" timestamp="1603481542916" />
     <state x="700" y="338" key="AndroidCreateXmlResourceDialog" timestamp="1601933667100">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="700" y="338" key="AndroidCreateXmlResourceDialog/0.0.1462.864@0.0.1462.864" timestamp="1601933667100" />
-    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1603478565078">
+    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1603478587686">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1603478565078" />
+    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1603478587686" />
     <state x="420" y="33" key="CommitChangelistDialog2/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603405830452" />
-    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600226199424">
+    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1603483236934">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="546" y="187" key="FileChooserDialogImpl/0.0.1449.864@0.0.1449.864" timestamp="1595472618891" />
-    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600226199424" />
-    <state width="1106" height="220" key="GridCell.Tab.0.bottom" timestamp="1603429676828">
+    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1603483236934" />
+    <state width="1062" height="265" key="GridCell.Tab.0.bottom" timestamp="1603507754143">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1106" height="220" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
-    <state width="1106" height="220" key="GridCell.Tab.0.center" timestamp="1603429676828">
+    <state width="1062" height="265" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1603507754143" />
+    <state width="1062" height="265" key="GridCell.Tab.0.center" timestamp="1603507754143">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1106" height="220" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
-    <state width="1106" height="220" key="GridCell.Tab.0.left" timestamp="1603429676828">
+    <state width="1062" height="265" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1603507754143" />
+    <state width="1062" height="265" key="GridCell.Tab.0.left" timestamp="1603507754143">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1106" height="220" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
-    <state width="1106" height="220" key="GridCell.Tab.0.right" timestamp="1603429676828">
+    <state width="1062" height="265" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1603507754143" />
+    <state width="1062" height="265" key="GridCell.Tab.0.right" timestamp="1603507754143">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state width="1106" height="220" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1603429676828" />
+    <state width="1062" height="265" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1603507754143" />
     <state x="236" y="74" key="SettingsEditor" timestamp="1600104230909">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="234" y="74" key="SettingsEditor/0.0.1449.864@0.0.1449.864" timestamp="1595460708243" />
     <state x="236" y="74" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1600104230909" />
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1600223830075">
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603478649526">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1600223830075" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1603478649526" />
     <state x="739" y="317" key="chooseDestDirectoryDialog" timestamp="1603396845096">
       <screen x="0" y="0" width="1846" height="1080" />
     </state>
@@ -586,11 +617,11 @@
     </state>
     <state x="93" y="93" width="1263" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461477037" />
     <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1462.864@0.0.1462.864" timestamp="1599836663171" />
-    <state x="537" y="320" key="com.intellij.ide.util.TipDialog" timestamp="1603390807628">
-      <screen x="0" y="0" width="1846" height="1080" />
+    <state x="425" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1603505659013">
+      <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="421" y="256" key="com.intellij.ide.util.TipDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461738521" />
-    <state x="425" y="256" key="com.intellij.ide.util.TipDialog/0.0.1462.864@0.0.1462.864" timestamp="1599798746454" />
+    <state x="425" y="256" key="com.intellij.ide.util.TipDialog/0.0.1462.864@0.0.1462.864" timestamp="1603505659013" />
     <state x="537" y="320" key="com.intellij.ide.util.TipDialog/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603390807628" />
     <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600192376214">
       <screen x="0" y="0" width="1462" height="864" />
@@ -600,10 +631,14 @@
       <screen x="0" y="0" width="1846" height="1080" />
     </state>
     <state x="653" y="309" key="extract.method.dialog/1920.13.1846.1080/0.0.1846.1080/-1920.464.1474.864@0.0.1846.1080" timestamp="1603401108895" />
-    <state x="426" y="30" width="611" height="804" key="find.popup" timestamp="1600223061673">
+    <state x="426" y="30" width="740" height="804" key="find.popup" timestamp="1603484003865">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="426" y="30" width="611" height="804" key="find.popup/0.0.1462.864@0.0.1462.864" timestamp="1600223061673" />
+    <state x="426" y="30" width="740" height="804" key="find.popup/0.0.1462.864@0.0.1462.864" timestamp="1603484003865" />
+    <state x="246" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1603492906656">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="246" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1462.864@0.0.1462.864" timestamp="1603492906656" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

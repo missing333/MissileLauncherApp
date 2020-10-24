@@ -13,27 +13,21 @@
 
 
     <application
-        android:icon="@mipmap/missile_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/missile_launcher_round"
+        android:icon="@mipmap/ic_missilelauncherv2"
+        android:roundIcon="@mipmap/ic_missilelauncherv2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:appCategory="productivity"
         android:allowBackup="true"
         android:fullBackupContent="false">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ActivitySettings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name=".GroupIconPicker" />
         <activity android:name=".G1SelectedItems" />
         <activity android:name=".G2SelectedItems" />
@@ -43,7 +37,7 @@
         <activity android:name=".G6SelectedItems" />
         <activity android:name=".G7SelectedItems" />
         <activity
-            android:name=".PlayStorePrompt"
+            android:name=".ActivityPlayStorePrompt"
             android:theme="@style/AppTheme.Modal.EasyRemove" />
         <activity
             android:name=".AutoSort"
@@ -54,7 +48,7 @@
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
 
-        <receiver android:name=".DeviceBootReceiver"
+        <receiver android:name=".ReceiverDeviceBoot"
             android:enabled="true"
             android:exported="true"
             >
@@ -65,7 +59,7 @@
         </receiver>
 
         <receiver
-            android:name=".LauncherRestarterBroadcastReceiver"
+            android:name=".ReceiverLauncherRestartBroadcast"
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped"

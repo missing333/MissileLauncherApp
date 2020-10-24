@@ -23,8 +23,8 @@ android {
         applicationId "com.missilelauncher.missilelauncher"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 35
-        versionName "1.0.35"
+        versionCode 36
+        versionName "2.0.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
     }
@@ -38,6 +38,7 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+    buildToolsVersion '30.0.2'
 }
 
 dependencies {
@@ -46,6 +47,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.preference:preference:1.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

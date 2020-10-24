@@ -3,47 +3,47 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$GeneralPreferenceFragment"
         android:icon="@drawable/sliders"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$AutoSortFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$AutoSortFragment"
         android:icon="@drawable/ic_auto_sort"
         android:title="Autosort" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group1PreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$Group1PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group1" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group2PreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$Group2PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group2" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group3PreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$Group3PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group3" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group4PreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$Group4PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group4" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group5PreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$Group5PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group5" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group6PreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$Group6PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group6" />
 
     <header
-        android:fragment="com.missilelauncher.missilelauncher.SettingsActivity$Group7PreferenceFragment"
+        android:fragment="com.missilelauncher.missilelauncher.ActivitySettings$Group7PreferenceFragment"
         android:icon="@drawable/gear"
         android:title="@string/pref_group7" />
 
