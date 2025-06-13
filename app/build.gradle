@@ -4,7 +4,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:8.1.1'
     }
 }
 
@@ -18,13 +18,13 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.missilelauncher.missilelauncher"
         minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 34
-        versionName "1.0.34"
+        targetSdkVersion 33
+        versionCode 35
+        versionName "1.0.35"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
     }
@@ -38,6 +38,7 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+    namespace 'com.missilelauncher.missilelauncher'
 }
 
 dependencies {

@@ -10,23 +10,41 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="missile" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="com." />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
   </component>
   <component name="CMakeSettings">
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="can now query packages in android R">
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="updated gradle to 8.1.1">
+      <change afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MissileLauncherApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MissileLauncherApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3a_API_30" />
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Marc\.android\avd\Medium_Phone.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -55,9 +73,6 @@
       </state>
     </system>
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="MissileLauncherApp" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -83,44 +98,49 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="WARN_ABOUT_CRLF" value="false" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="462c5f40-14b3-4652-9453-2c73c0852566" />
+        <option name="url" value="https://github.com/missing333/MissileLauncherApp.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="1f3t5LTpSMocHlzxKcWBg8S49gT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="BundleExportedModule" value="app" />
-    <property name="DEBUGGABLE_DEVICE" value="emulator-5554" />
-    <property name="DEBUGGABLE_PROCESS" value="com.missilelauncher.missilelauncher" />
-    <property name="DEBUGGER_ID" value="Auto" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="8XV5T15A28002046" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-15T18:41:03.261Z" />
-    <property name="ExportApk.ApkPath" value="C:\android\release\ML" />
-    <property name="ExportApk.BuildType" value="release" />
-    <property name="ExportApk.BuildVariants" value="release" />
-    <property name="ExportApk.Flavors" value="" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="device.picker.selection" value="Pixel_2_XL_API_28" />
-    <property name="last_opened_file_path" value="C:/android/release/ML" />
-    <property name="project.structure.last.edited" value="Suggestions" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.30710658" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="ics" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/DeviceBootReceiver.java" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Upgrade Gradle wrapper.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
+  }
+}</component>
   <component name="RunManager" selected="Android App.app">
-    <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-    </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -128,21 +148,27 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="app" />
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="MissileLauncherApp.app" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -152,6 +178,8 @@
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Auto>
       <Hybrid>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -159,22 +187,35 @@
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Hybrid>
-      <Java />
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
       <Native>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
         <option name="SHOW_STATIC_VARS" value="true" />
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -201,8 +242,18 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
@@ -219,6 +270,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -451,16 +503,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed landscape mode with navbar on left" />
     <MESSAGE value="changed title of the activity to the custom title" />
     <MESSAGE value="auto-capitalized each word" />
     <MESSAGE value="cleanup" />
@@ -485,92 +534,8 @@
     <MESSAGE value="Add Dark Mode, update to target sdk 29" />
     <MESSAGE value="Fixed auto-sort" />
     <MESSAGE value="can now query packages in android R" />
-    <option name="LAST_COMMIT_MESSAGE" value="can now query packages in android R" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="249" y="164" key="#PSD" timestamp="1600105693232">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="249" y="164" key="#PSD/0.0.1462.864@0.0.1462.864" timestamp="1600105693232" />
-    <state x="452" y="77" key="#app" timestamp="1595461494319">
-      <screen x="0" y="0" width="1449" height="864" />
-    </state>
-    <state x="452" y="77" key="#app/0.0.1449.864@0.0.1449.864" timestamp="1595461494319" />
-    <state x="575" y="321" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1595461751923">
-      <screen x="0" y="0" width="1449" height="864" />
-    </state>
-    <state x="575" y="321" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461751923" />
-    <state x="412" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1599799199076">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="412" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1462.864@0.0.1462.864" timestamp="1599799199076" />
-    <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600102591744">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="467" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1600102591744" />
-    <state x="333" y="26" key="CommitChangelistDialog2" timestamp="1600223668472">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="333" y="26" key="CommitChangelistDialog2/0.0.1462.864@0.0.1462.864" timestamp="1600223668472" />
-    <state x="551" y="187" key="FileChooserDialogImpl" timestamp="1600194702938">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="546" y="187" key="FileChooserDialogImpl/0.0.1449.864@0.0.1449.864" timestamp="1595472618891" />
-    <state x="551" y="187" key="FileChooserDialogImpl/0.0.1462.864@0.0.1462.864" timestamp="1600194702938" />
-    <state width="1418" height="269" key="GridCell.Tab.0.bottom" timestamp="1600223007019">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state width="1418" height="269" key="GridCell.Tab.0.bottom/0.0.1462.864@0.0.1462.864" timestamp="1600223007019" />
-    <state width="1418" height="269" key="GridCell.Tab.0.center" timestamp="1600223007018">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state width="1418" height="269" key="GridCell.Tab.0.center/0.0.1462.864@0.0.1462.864" timestamp="1600223007018" />
-    <state width="1418" height="269" key="GridCell.Tab.0.left" timestamp="1600223007018">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state width="1418" height="269" key="GridCell.Tab.0.left/0.0.1462.864@0.0.1462.864" timestamp="1600223007018" />
-    <state width="1418" height="269" key="GridCell.Tab.0.right" timestamp="1600223007018">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state width="1418" height="269" key="GridCell.Tab.0.right/0.0.1462.864@0.0.1462.864" timestamp="1600223007018" />
-    <state x="236" y="74" key="SettingsEditor" timestamp="1600104230909">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="234" y="74" key="SettingsEditor/0.0.1449.864@0.0.1449.864" timestamp="1595460708243" />
-    <state x="236" y="74" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1600104230909" />
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1600223673193">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1600223673193" />
-    <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599836663171">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="93" y="93" width="1263" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461477037" />
-    <state x="94" y="93" width="1275" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1462.864@0.0.1462.864" timestamp="1599836663171" />
-    <state x="425" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1599798746454">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="421" y="256" key="com.intellij.ide.util.TipDialog/0.0.1449.864@0.0.1449.864" timestamp="1595461738521" />
-    <state x="425" y="256" key="com.intellij.ide.util.TipDialog/0.0.1462.864@0.0.1462.864" timestamp="1599798746454" />
-    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600192376214">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="542" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1462.864@0.0.1462.864" timestamp="1600192376214" />
-    <state x="426" y="30" width="611" height="804" key="find.popup" timestamp="1600223061673">
-      <screen x="0" y="0" width="1462" height="864" />
-    </state>
-    <state x="426" y="30" width="611" height="804" key="find.popup/0.0.1462.864@0.0.1462.864" timestamp="1600223061673" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/FloatingWindow.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="updated gradle to 8.1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated gradle to 8.1.1" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
