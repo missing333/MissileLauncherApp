@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.Settings;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     newInfo.setLabel(p.applicationInfo.loadLabel(getPackageManager()).toString());
                     newInfo.setPackageName(p.packageName);
                     newInfo.versionName = p.versionName;
-                    newInfo.versionCode = p.versionCode;
+                    //newInfo.versionCode = p.versionCode;
                     newInfo.icon = p.applicationInfo.loadIcon(getPackageManager());
                     newInfo.setLaunchIntent(getPackageManager().getLaunchIntentForPackage(p.packageName));
                     res.add(newInfo);
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 saveList = new ArrayList<>(0);
             }
             groupAppList[g] = new ArrayList<>(0);
-            if(res.size() > 0 ){
+            if(!res.isEmpty()){
                 for (int i=0;i<res.size();i++) {
                     //Log.v("Setting","appArray["+ i + "] " + appArray[i].packageName);
                     for (int f=0;f<saveList.size();f++) {
@@ -132,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView imgHow = findViewById(R.id.imgHow);
         Button config = findViewById(R.id.config);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(MainActivity.this)) {
+        if (!Settings.canDrawOverlays(MainActivity.this)) {
             setPermissionBtn.setVisibility(View.VISIBLE);
             imgHow.setVisibility(View.VISIBLE);
             config.setVisibility(View.GONE);

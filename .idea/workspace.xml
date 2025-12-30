@@ -27,10 +27,8 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="update for 2026">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="resolve minor version warnings on dependencies">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,18 +125,24 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Android App.app.executor": "Run",
+    "BundleExportedModule": "MissileLauncherApp.app",
+    "ExportBundle.BundlePathForMissileLauncherApp.app": "C:\\git\\android\\MissileLauncherApp\\app",
     "Gradle.MissileLauncherApp:app [androidDependencies].executor": "Debug",
     "Gradle.Upgrade Gradle wrapper.executor": "Run",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "android.gradle.sync.needed": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/git/android/MissileLauncherApp",
     "settings.editor.selected.configurable": "configurable.group.language"
+  },
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="Android App.app">
@@ -411,12 +415,13 @@
       <option name="project" value="LOCAL" />
       <updated>1767112181893</updated>
     </task>
-    <task id="LOCAL-00019" summary="fixed error with notification not showing in android O+">
-      <created>1541613793130</created>
+    <task id="LOCAL-00019" summary="resolve minor version warnings on dependencies">
+      <option name="closed" value="true" />
+      <created>1767112354617</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1541613793130</updated>
+      <updated>1767112354617</updated>
     </task>
     <task id="LOCAL-00020" summary="implemented Broadcast Reciever to keep FloatingWindow alive when destroyed.">
       <created>1541699924146</created>
@@ -488,7 +493,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -513,7 +518,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="auto-capitalized each word" />
     <MESSAGE value="cleanup" />
     <MESSAGE value="removed toast on IsPro = true" />
     <MESSAGE value="removed toast on IsPro = true, fixed crash when pro key not found." />
@@ -538,7 +542,8 @@
     <MESSAGE value="can now query packages in android R" />
     <MESSAGE value="updated gradle to 8.1.1" />
     <MESSAGE value="update for 2026" />
-    <option name="LAST_COMMIT_MESSAGE" value="update for 2026" />
+    <MESSAGE value="resolve minor version warnings on dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="resolve minor version warnings on dependencies" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
