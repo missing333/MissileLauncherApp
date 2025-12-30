@@ -27,8 +27,9 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="resolve minor version warnings on dependencies">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/MainActivity.java" afterDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="resolve minor MainActivity.java warnings">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,8 +76,7 @@
     </option>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="EXPORT_PRIVATE_KEY" value="false" />
-    <option name="KEY_STORE_PATH" value="C:\android\keys\MLKey" />
+    <option name="KEY_STORE_PATH" value="C:\git\android\keys\MLKey2026" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
@@ -423,12 +423,13 @@
       <option name="project" value="LOCAL" />
       <updated>1767112354617</updated>
     </task>
-    <task id="LOCAL-00020" summary="implemented Broadcast Reciever to keep FloatingWindow alive when destroyed.">
-      <created>1541699924146</created>
+    <task id="LOCAL-00020" summary="resolve minor MainActivity.java warnings">
+      <option name="closed" value="true" />
+      <created>1767113011155</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1541699924146</updated>
+      <updated>1767113011155</updated>
     </task>
     <task id="LOCAL-00021" summary="Saving Group icons properly now">
       <created>1541733191205</created>
@@ -493,7 +494,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -518,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cleanup" />
     <MESSAGE value="removed toast on IsPro = true" />
     <MESSAGE value="removed toast on IsPro = true, fixed crash when pro key not found." />
     <MESSAGE value="link to pro version on Play Prompt now." />
@@ -543,7 +543,8 @@
     <MESSAGE value="updated gradle to 8.1.1" />
     <MESSAGE value="update for 2026" />
     <MESSAGE value="resolve minor version warnings on dependencies" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolve minor version warnings on dependencies" />
+    <MESSAGE value="resolve minor MainActivity.java warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="resolve minor MainActivity.java warnings" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
