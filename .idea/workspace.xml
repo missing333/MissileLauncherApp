@@ -9,7 +9,53 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_auto_sort.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_grid_pick.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+        <config>
+          <state>portrait</state>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_grid.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/launcher_layout.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/list_text_view.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/play_store_prompt.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/xml/auto_sort.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/xml/pref_group1.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -27,9 +73,15 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="resolve minor MainActivity.java warnings">
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="update java version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/missilelauncher/missilelauncher/SettingsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/group_picking.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_text_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_text_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +91,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Marc\.android\avd\Medium_Phone.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Marc\.android\avd\Pixel_9_Pro_XL.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -76,7 +128,7 @@
     </option>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="C:\git\android\keys\MLKey2026" />
+    <option name="KEY_STORE_PATH" value="C:\git\android\keys\MLKey" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
@@ -99,12 +151,12 @@
     &quot;state&quot;: &quot;OPEN&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/missing333/MissileLauncherApp.git",
-    "accountId": "462c5f40-14b3-4652-9453-2c73c0852566"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/missing333/MissileLauncherApp.git&quot;,
+    &quot;accountId&quot;: &quot;462c5f40-14b3-4652-9453-2c73c0852566&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -137,7 +189,10 @@
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/git/android/MissileLauncherApp",
-    "settings.editor.selected.configurable": "configurable.group.language"
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "memory.settings"
   },
   "keyToStringList": {
     "ExportApk.BuildVariants": [
@@ -431,19 +486,21 @@
       <option name="project" value="LOCAL" />
       <updated>1767113011155</updated>
     </task>
-    <task id="LOCAL-00021" summary="Saving Group icons properly now">
-      <created>1541733191205</created>
+    <task id="LOCAL-00021" summary="update version number">
+      <option name="closed" value="true" />
+      <created>1767113733714</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1541733191205</updated>
+      <updated>1767113733714</updated>
     </task>
-    <task id="LOCAL-00022" summary="fixed landscape mode with navbar on left">
-      <created>1541735061755</created>
+    <task id="LOCAL-00022" summary="update java version">
+      <option name="closed" value="true" />
+      <created>1767113944999</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1541735061755</updated>
+      <updated>1767113944999</updated>
     </task>
     <task id="LOCAL-00023" summary="changed title of the activity to the custom title">
       <created>1541820693398</created>
@@ -494,7 +551,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -519,8 +576,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed toast on IsPro = true" />
-    <MESSAGE value="removed toast on IsPro = true, fixed crash when pro key not found." />
     <MESSAGE value="link to pro version on Play Prompt now." />
     <MESSAGE value="moved autosort, minor enhancements to dialogs" />
     <MESSAGE value="Streamlined AutoSort, added progressbar" />
@@ -544,7 +599,9 @@
     <MESSAGE value="update for 2026" />
     <MESSAGE value="resolve minor version warnings on dependencies" />
     <MESSAGE value="resolve minor MainActivity.java warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolve minor MainActivity.java warnings" />
+    <MESSAGE value="update version number" />
+    <MESSAGE value="update java version" />
+    <option name="LAST_COMMIT_MESSAGE" value="update java version" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

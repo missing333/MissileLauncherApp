@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="100dp"
     tools:context="com.missilelauncher.missilelauncher.MainActivity">
 
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/enableService"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="50dp"
         android:checked="true"
         android:text="@string/enable_missilelauncher"
@@ -27,11 +28,13 @@
         android:id="@+id/setPermissionBtn"
         style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
-        android:layout_height="119dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="112dp"
         android:backgroundTint="@color/colorAccent"
-        android:paddingLeft="50dp"
-        android:paddingRight="150px"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="20dp"
+        android:paddingStart="50dp"
+        android:paddingRight="150dp"
         android:text="@string/permissionPrompt"
         android:textColorLink="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"

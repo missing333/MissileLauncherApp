@@ -1,6 +1,6 @@
 <resources>
     <string name="version">MissileLauncher Version</string>
-    <string name="versionNum">1.0.35</string>
+    <string name="versionNum">2.0</string>
 
 
     <string name="app_name">MissileLauncher</string>
