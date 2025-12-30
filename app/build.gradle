@@ -22,8 +22,7 @@ android {
     defaultConfig {
         applicationId "com.missilelauncher.missilelauncher"
         minSdkVersion 30
-        //noinspection EditedTargetSdkVersion
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode 36
         versionName "1.0.36"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -46,26 +45,27 @@ android {
     }
 }
 
+
 dependencies {
-        constraints {
-            implementation('org.jetbrains.kotlin:kotlin-stdlib:1.8.22') {
-                because 'ensures all Kotlin standard libraries use the same version'
-            }
-            implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22') {
-                because 'ensures all Kotlin standard libraries use the same version'
-            }
-            implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22') {
-                because 'ensures all Kotlin standard libraries use the same version'
-            }
+    constraints {
+        implementation('org.jetbrains.kotlin:kotlin-stdlib:1.8.22') {
+            because 'ensures all Kotlin standard libraries use the same version'
         }
+        implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22') {
+            because 'ensures all Kotlin standard libraries use the same version'
+        }
+        implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22') {
+            because 'ensures all Kotlin standard libraries use the same version'
+        }
+    }
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.7.1' // Updated
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1' // Updated
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.2.0'
     testImplementation 'junit:junit:4.13.2' // Updated
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // Updated
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Updated
-    implementation 'com.google.code.gson:gson:2.8.5'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0' // Updated
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0' // Updated
+    implementation 'com.google.code.gson:gson:2.13.2'
 }

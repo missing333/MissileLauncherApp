@@ -8,6 +8,13 @@
     <shared>
       <config />
     </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="com." />
@@ -20,14 +27,10 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="updated gradle to 8.1.1">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="18829393-1934-4dc7-9526-c02203eeb0ac" name="Default" comment="update for 2026">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MissileLauncherApp.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +110,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -126,12 +132,13 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/git/android/MissileLauncherApp",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater"
+    "settings.editor.selected.configurable": "configurable.group.language"
   }
 }]]></component>
   <component name="RunManager" selected="Android App.app">
@@ -396,12 +403,13 @@
       <option name="project" value="LOCAL" />
       <updated>1749854042545</updated>
     </task>
-    <task id="LOCAL-00018" summary="fixed error with notification not showing in android O+">
-      <created>1541613321691</created>
+    <task id="LOCAL-00018" summary="update for 2026">
+      <option name="closed" value="true" />
+      <created>1767112181893</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1541613321691</updated>
+      <updated>1767112181893</updated>
     </task>
     <task id="LOCAL-00019" summary="fixed error with notification not showing in android O+">
       <created>1541613793130</created>
@@ -480,7 +488,7 @@
       <option name="project" value="LOCAL" />
       <updated>1542052662834</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -505,7 +513,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed title of the activity to the custom title" />
     <MESSAGE value="auto-capitalized each word" />
     <MESSAGE value="cleanup" />
     <MESSAGE value="removed toast on IsPro = true" />
@@ -530,7 +537,8 @@
     <MESSAGE value="Fixed auto-sort" />
     <MESSAGE value="can now query packages in android R" />
     <MESSAGE value="updated gradle to 8.1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated gradle to 8.1.1" />
+    <MESSAGE value="update for 2026" />
+    <option name="LAST_COMMIT_MESSAGE" value="update for 2026" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
