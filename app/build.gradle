@@ -1,16 +1,16 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.11.2'
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
 }
@@ -18,13 +18,14 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 36
     defaultConfig {
         applicationId "com.missilelauncher.missilelauncher"
-        minSdkVersion 26
-        targetSdkVersion 33
-        versionCode 35
-        versionName "1.0.35"
+        minSdkVersion 30
+        //noinspection EditedTargetSdkVersion
+        targetSdkVersion 35
+        versionCode 36
+        versionName "1.0.36"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
     }
@@ -35,21 +36,36 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     namespace 'com.missilelauncher.missilelauncher'
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
+        constraints {
+            implementation('org.jetbrains.kotlin:kotlin-stdlib:1.8.22') {
+                because 'ensures all Kotlin standard libraries use the same version'
+            }
+            implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22') {
+                because 'ensures all Kotlin standard libraries use the same version'
+            }
+            implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22') {
+                because 'ensures all Kotlin standard libraries use the same version'
+            }
+        }
 
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.7.1' // Updated
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1' // Updated
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    testImplementation 'junit:junit:4.13.2' // Updated
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // Updated
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Updated
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

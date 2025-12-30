@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MissileLauncherApp.iml" filepath="$PROJECT_DIR$/MissileLauncherApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MissileLauncherApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MissileLauncherApp.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MissileLauncherApp.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MissileLauncherApp.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MissileLauncherApp.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MissileLauncherApp.app.main.iml" />
